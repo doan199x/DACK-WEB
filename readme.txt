@@ -1,3 +1,0 @@
-Connect to mySQL
-1. Kiểm tra và đổi các giá trị trong utils/db.js ở con cho phù hợp với máy chủ của bạn
-2. Install handlebars, express, npm....
