@@ -32,6 +32,8 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 app.use(express.static(__dirname + '/public'));
+app.use('/', require('./routers/guest'));
+app.use('/login', require('./routers/login'));
 
 // app.use('/', require('./routers/home'));
 

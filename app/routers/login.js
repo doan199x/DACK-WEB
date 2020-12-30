@@ -7,8 +7,8 @@ router.get('/', async (req, res) => {
     res.render('home', {
         css: [''],
         js: [''],
-        contain: 'guest/guest',
-        title: 'Home',
+        contain: 'guest/login',
+        title: 'Login',
     });
 });
 
