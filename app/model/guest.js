@@ -1,4 +1,4 @@
-const db = require('../utils/db');
+const db = require('../../utils/db');
 
 //module.export = {
     //name: async (input) => {
@@ -6,4 +6,4 @@ const db = require('../utils/db');
         //const result = await db.load(sql);
         //return result;
     //},
-//};
+//}; 
