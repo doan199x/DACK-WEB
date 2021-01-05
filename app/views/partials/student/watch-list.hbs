@@ -2,43 +2,59 @@
     <br>
     {{>profile-header}}
     <br>
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="card" style="width: 18rem; margin:auto; border: 1px solid #5A6268">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-secondary">Go somewhere</a>
+    {{#each groupedWatchList}}
+    <div class="card-deck" style="margin-bottom:20px">
+        <div class="card card-custom">
+            <img class="card-img-top" src="{{this.0.imagePath}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{this.0.name}}</h5>
+                <p class="card-text">{{this.0.sortDescription}}</p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href="#" class="btn btn-secondary btn-block bold">Học ngay</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="#" class="btn btn-danger btn-block bold">Loại bỏ</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="card" style="width: 18rem; margin:auto; border: 1px solid #5A6268">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-secondary">Go somewhere</a>
+        <div class="card card-custom">
+            <img class="card-img-top" src="{{this.1.imagePath}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{this.1.name}}</h5>
+                <p class="card-text">{{this.1.sortDescription}}</p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href="#" class="btn btn-secondary btn-block bold">Học ngay</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="#" class="btn btn-danger btn-block bold">Loại bỏ</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="card" style="width: 18rem; margin:auto; border: 1px solid #5A6268">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <a href="#" class="btn btn-secondary">Go somewhere</a>
+        <div class="card card-custom">
+            <img class="card-img-top" src="{{this.2.imagePath}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{this.2.name}}</h5>
+                <p class="card-text">{{this.2.sortDescription}}</p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href="#" class="btn btn-secondary btn-block bold">Học ngay</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="#" class="btn btn-danger btn-block bold">Loại bỏ</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    {{/each}}
 </div>

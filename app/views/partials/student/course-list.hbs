@@ -2,7 +2,38 @@
     <br>
     {{>profile-header}}
     <br>
-    <div class="row">
-        
+    {{#each groupedRegisteredCourse}}
+    <div class="card-deck" style="margin-bottom:20px">
+        <div class="card card-custom">
+            <img class="card-img-top" src="{{this.0.imagePath}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{this.0.name}}</h5>
+                <p class="card-text">{{this.0.sortDescription}}</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-secondary bold">Học ngay</a>
+            </div>
+        </div>
+        <div class="card card-custom">
+            <img class="card-img-top" src="{{this.1.imagePath}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{this.1.name}}</h5>
+                <p class="card-text">{{this.1.sortDescription}}</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-secondary bold">Học ngay</a>
+            </div>
+        </div>
+        <div class="card card-custom">
+            <img class="card-img-top" src="{{this.2.imagePath}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{this.2.name}}</h5>
+                <p class="card-text">{{this.2.sortDescription}}</p>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-secondary bold">Học ngay</a>
+            </div>
+        </div>
     </div>
+    {{/each}}
 </div>

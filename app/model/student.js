@@ -16,5 +16,5 @@ module.exports = {
         const sql = `SELECT avatarPath FROM Student where studentID = ${studentID};` 
         const student = await db.load(sql);
         return student;
-    }
+    },
 }; 
