@@ -20,9 +20,13 @@ const hbs = exphbs.create({
         },
         partial: (name) => {
             return name;
+        },
+        money: (number) => {
+            var formattedValue = new Intl.NumberFormat({ maximumSignificantDigits: 3 }).format(number);
+            return formattedValue;
         }
     },
-    partialsDir  : [
+    partialsDir: [
 
         __dirname + '/views/partials',
     ]
@@ -33,16 +37,15 @@ app.set('view engine', 'hbs');
 
 app.use(express.static(__dirname + '/public'));
 app.use('/', require('./routers/guest'));
+app.use('/student', require('./routers/student'));
 app.use('/login', require('./routers/login'));
 
 // app.use('/', require('./routers/home'));
 
 app.use(function (req, res, next) {
-
     next(createError(404));
 });
 app.use(function (err, req, res, next) {
-
     res.status(err.status || 500);
     res.render('home', {
         layout: 'main',
