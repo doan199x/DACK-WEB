@@ -3,11 +3,11 @@ const mysql = require('mysql')
 exports.load = (sql) => {
     return new Promise((resolve, reject) => {
         const con = mysql.createConnection({
-            host: 'localhost',
-            port: '3306',
-            user: 'root',
-            password: '123456yugi',
-            database: 'onlinecourse'
+            host: process.env.HOST,
+            port: process.env.PORT,
+            user: process.env.USER,
+            password: process.env.PASSWORD,
+            database: process.env.DATABASE
         });
 
         con.connect((err) => {

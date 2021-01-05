@@ -1,6 +1,8 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 var createError = require('http-errors');
+require('dotenv').config()
+console.log(process.env.HOST);
 
 const app = express();
 const port = 3000;
