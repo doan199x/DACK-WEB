@@ -4,7 +4,7 @@
     <br>
     <div class="row">
         <div class="col-lg-4">
-            <img style="border: 2px solid black" src="/image/default.jpg" width="300" height="300">
+            <img class="img-profile" src="{{studentProfile.avatarPath}}" width="300" height="300">
         </div>
         <div class="col-lg-6">
             <fieldset>
@@ -40,7 +40,22 @@
                         <span>{{#money studentProfile.balance}}{{/money}} VND</span>
                     </div>
                 </div>
+                <br>
+                <div class="row">
+                    <a class="btn btn-secondary bold" style="margin-right:10px" href="/student/profile/edit">Chỉnh
+                        sửa</a>
+                    <a class="btn btn-secondary bold" href="#">Đổi mật khẩu</a>
+                </div>
+                {{#equal result 'success'}}
+                <hr>
+                <h3 style="color: green;">Cập nhật thông tin thành công</h3>
+                {{/equal}}
+                {{#equal result 'fail'}}
+                <hr>
+                <h3 style="color: red;">Cập nhật thông tin thất bại</h3>
+                {{/equal}}
             </fieldset>
+            <br>
         </div>
     </div>
 </div>

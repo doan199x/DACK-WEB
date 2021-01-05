@@ -2,7 +2,6 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 var createError = require('http-errors');
 require('dotenv').config()
-console.log(process.env.HOST);
 
 const app = express();
 const port = 3000;
@@ -36,8 +35,14 @@ const hbs = exphbs.create({
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
-
 app.use(express.static(__dirname + '/public'));
+
+//body-parser
+let bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 app.use('/', require('./routers/guest'));
 app.use('/student', require('./routers/student'));
 app.use('/login', require('./routers/login'));
