@@ -25,6 +25,16 @@
     margin-left:10px
 }
 .card-custom{
-    width: 18rem; 
     border: 1px solid #212121
+}
+@media (min-width:34em) {
+    .card-deck{
+        display: flex;
+    }
+    .card-deck > .card
+    {
+        width: 30.5%;
+        flex-wrap: wrap;
+        flex: initial; 
+    }
 }

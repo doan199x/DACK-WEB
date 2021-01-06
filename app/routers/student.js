@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const studentModel = require('../model/student.js');
 const courseModel = require('../model/course.js');
+const watchListModel = require('../model/watchList.js');
 const url = require('url');
 
 //multer
@@ -108,60 +109,44 @@ router.post('/profile/edit', upload.single('fileAvatar'), async (req, res, next)
 router.get('/watch-list', async (req, res, next) => {
     try {
         const studentID = 1;
-        const itemsPerRow = 3;
         var watchList = await courseModel.getWatchListbyStudentID(studentID);
-        var groupedWatchList = [];
-        var groupedCourse = [];
-        for (let i = 0; i < watchList.length; i++) {
-            if (i % itemsPerRow == 0) {
-                groupedCourse = []
-            }
-            groupedCourse.push(watchList[i]);
-            if (i % itemsPerRow == 2) {
-                groupedWatchList.push(groupedCourse);
-            }
-            if (i == watchList.length) {
-                groupedWatchList.push(groupedCourse)
-            }
-        }
         res.render('watch-list', {
             contain: 'student/watch-list',
             title: 'Home',
             page: 'watch-list',
-            groupedWatchList: groupedWatchList
+            courses: watchList,
+            js: ['watch-list']
         });
     } catch (err) {
         next(err);
     }
 })
 
-router.get('/course-list', async (req, res, next) => {
+router.get('/course-list', async (req, res) => {
     try {
         const studentID = 1;
         var registeredCourseID = await courseModel.getRegisteredCourseByStudentID(studentID);
-        const itemsPerRow = 3;
-        var groupedRegisteredCourse = [];
-        var groupedCourse = [];
-        for (let i = 0; i < registeredCourseID.length; i++) {
-            if (i % itemsPerRow == 0) {
-                groupedCourse = []
-            }
-            groupedCourse.push(registeredCourseID[i]);
-            if (i % itemsPerRow == 2) {
-                groupedRegisteredCourse.push(groupedCourse);
-            }
-            if (i == registeredCourseID.length) {
-                groupedRegisteredCourse.push(groupedCourse)
-            }
-        }
         res.render('course-list', {
             contain: 'student/course-list',
             title: 'Home',
             page: 'course-list',
-            groupedRegisteredCourse: groupedRegisteredCourse
+            courses: registeredCourseID
         });
     } catch (err) {
         next(err);
+    }
+})
+
+router.post('/remove-watch-list', async(req, res, next) => {
+    try {
+        const studentID = 1;
+        await watchListModel.removeWatchList(studentID, req.body.courseID);
+        res.json({
+            result: 'success',
+            courseID: req.body.courseID
+        })
+    } catch (err) {
+        next(err)
     }
 })
 

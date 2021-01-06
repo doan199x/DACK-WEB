@@ -2,38 +2,18 @@
     <br>
     {{>profile-header}}
     <br>
-    {{#each groupedRegisteredCourse}}
-    <div class="card-deck" style="margin-bottom:20px">
-        <div class="card card-custom">
-            <img class="card-img-top" src="{{this.0.imagePath}}" alt="Card image cap">
+    <div class="card-deck">
+        {{#each courses}}
+        <div class="card card-custom" style="margin-bottom:20px">
+            <img class="card-img-top" src="{{this.imagePath}}" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{this.0.name}}</h5>
-                <p class="card-text">{{this.0.sortDescription}}</p>
+                <h5 class="card-title">{{this.name}}</h5>
+                <p class="card-text">{{this.sortDescription}}</p>
             </div>
             <div class="card-footer">
                 <a href="#" class="btn btn-secondary bold">Học ngay</a>
             </div>
         </div>
-        <div class="card card-custom">
-            <img class="card-img-top" src="{{this.1.imagePath}}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{this.1.name}}</h5>
-                <p class="card-text">{{this.1.sortDescription}}</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="btn btn-secondary bold">Học ngay</a>
-            </div>
-        </div>
-        <div class="card card-custom">
-            <img class="card-img-top" src="{{this.2.imagePath}}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{this.2.name}}</h5>
-                <p class="card-text">{{this.2.sortDescription}}</p>
-            </div>
-            <div class="card-footer">
-                <a href="#" class="btn btn-secondary bold">Học ngay</a>
-            </div>
-        </div>
+        {{/each}}
     </div>
-    {{/each}}
 </div>

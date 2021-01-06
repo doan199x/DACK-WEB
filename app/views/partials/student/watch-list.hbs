@@ -2,13 +2,13 @@
     <br>
     {{>profile-header}}
     <br>
-    {{#each groupedWatchList}}
-    <div class="card-deck" style="margin-bottom:20px">
-        <div class="card card-custom">
-            <img class="card-img-top" src="{{this.0.imagePath}}" alt="Card image cap">
+    <div class="card-deck">
+        {{#each courses}}
+        <div class="card card-custom" style="margin-bottom:20px" id="card{{this.courseID}}">
+            <img class="card-img-top" src="{{this.imagePath}}" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{this.0.name}}</h5>
-                <p class="card-text">{{this.0.sortDescription}}</p>
+                <h5 class="card-title">{{this.name}}</h5>
+                <p class="card-text">{{this.sortDescription}}</p>
             </div>
             <div class="card-footer">
                 <div class="row">
@@ -16,45 +16,12 @@
                         <a href="#" class="btn btn-secondary btn-block bold">Học ngay</a>
                     </div>
                     <div class="col-lg-6">
-                        <a href="#" class="btn btn-danger btn-block bold">Loại bỏ</a>
+                        <a class="btn btn-danger btn-block bold removeButton" style="color:white"
+                            onclick="removeWatchList({{this.courseID}})">Loại bỏ</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card card-custom">
-            <img class="card-img-top" src="{{this.1.imagePath}}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{this.1.name}}</h5>
-                <p class="card-text">{{this.1.sortDescription}}</p>
-            </div>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <a href="#" class="btn btn-secondary btn-block bold">Học ngay</a>
-                    </div>
-                    <div class="col-lg-6">
-                        <a href="#" class="btn btn-danger btn-block bold">Loại bỏ</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card card-custom">
-            <img class="card-img-top" src="{{this.2.imagePath}}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{this.2.name}}</h5>
-                <p class="card-text">{{this.2.sortDescription}}</p>
-            </div>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <a href="#" class="btn btn-secondary btn-block bold">Học ngay</a>
-                    </div>
-                    <div class="col-lg-6">
-                        <a href="#" class="btn btn-danger btn-block bold">Loại bỏ</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
-    {{/each}}
 </div>
