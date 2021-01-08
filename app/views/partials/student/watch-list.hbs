@@ -1,0 +1,27 @@
+<div class="container">
+    <br>
+    {{>profile-header}}
+    <br>
+    <div class="card-deck">
+        {{#each courses}}
+        <div class="card card-custom" style="margin-bottom:20px" id="card{{this.courseID}}">
+            <img class="card-img-top" src="{{this.imagePath}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{this.name}}</h5>
+                <p class="card-text">{{this.sortDescription}}</p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href="#" class="btn btn-secondary btn-block bold">Học ngay</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <a class="btn btn-danger btn-block bold removeButton" style="color:white"
+                            onclick="removeWatchList({{this.courseID}})">Loại bỏ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

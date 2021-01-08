@@ -1,0 +1,55 @@
+<div class="container">
+    <br>
+    {{>profile-header}}
+    <br>
+    <form method="POST" action="/student/profile/edit" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-lg-4">
+                <img class="img-profile" src="{{studentProfile.avatarPath}}" width="300" height="300">
+                <input type="file" name="fileAvatar" id="fileAvatar" style="margin-top:5px">
+            </div>
+            <div class="col-lg-6">
+                <fieldset>
+                    <div class="form-group row">
+                        <label for="profileName" class="col-sm-3 col-form-label">Họ tên</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="profileName" name="profileName"
+                                value="{{studentProfile.name}}" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="profileEmail" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="profileEmail" name="profileEmail"
+                                value="{{studentProfile.email}}" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="profilePhone" class="col-sm-3 col-form-label">Số điện thoại</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="profilePhone" name="profilePhone"
+                                value="{{studentProfile.phone}}" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="profileDateOfBirth" class="col-sm-3 col-form-label">Ngày sinh</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="profileDateOfBirth" name="profileDateOfBirth"
+                                value="{{#time studentProfile.dateOfBirth 'YYYY-MM-DD'}}{{/time}}" required>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="btn-width-custom-small">
+                            <a class="btn btn-secondary btn-block bold" href="/student/profile">Thoát</a>
+                        </div>
+                        <div class="btn-width-custom-small">
+                            <button type="submit" class="btn btn-secondary btn-block bold">Thay đổi</button>
+                        </div>
+                    </div>
+                </fieldset>
+                <br>
+            </div>
+        </div>
+    </form>
+</div>

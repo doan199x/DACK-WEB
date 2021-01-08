@@ -1,0 +1,10 @@
+.btn-group.special {
+  display: flex;
+}
+.special .btn {
+  flex: 1
+}
+
+.bold{
+  font-weight:bold
+}

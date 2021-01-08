@@ -1,0 +1,65 @@
+<div class="container">
+    <br>
+    {{>profile-header}}
+    <br>
+    <div class="row">
+        <div class="col-lg-4">
+            <img class="img-profile" src="{{studentProfile.avatarPath}}" width="300" height="300">
+        </div>
+        <div class="col-lg-6">
+            <fieldset>
+                <legend>Học viên: {{studentProfile.name}}</legend>
+                <hr>
+                <div class="row">
+                    <label class="col-sm-3">Email:</label>
+                    <div class="col-sm-9">
+                        <span>{{studentProfile.email}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-3">Số điện thoại:</label>
+                    <div class="col-sm-9">
+                        <span>{{studentProfile.phone}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-3">Ngày sinh:</label>
+                    <div class="col-sm-9">
+                        <span>{{#time studentProfile.dateOfBirth 'DD/MM/YYYY'}}{{/time}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-3">Ngày tham gia:</label>
+                    <div class="col-sm-9">
+                        <span>{{#time studentProfile.dateJoin 'DD/MM/YYYY'}}{{/time}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-3">Số dư:</label>
+                    <div class="col-sm-9">
+                        <span>{{#money studentProfile.balance}}{{/money}} VND</span>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="btn-width-custom-medium">
+                        <a class="btn btn-block btn-secondary bold" style="margin-right:10px" href="/student/profile/edit">Chỉnh
+                            sửa</a>
+                    </div>
+                    <div class="btn-width-custom-medium">
+                        <a class="btn btn-block btn-secondary bold" href="#">Đổi mật khẩu</a>
+                    </div>
+                </div>
+                {{#equal result 'success'}}
+                <hr>
+                <h3 style="color: green;">Cập nhật thông tin thành công</h3>
+                {{/equal}}
+                {{#equal result 'fail'}}
+                <hr>
+                <h3 style="color: red;">Cập nhật thông tin thất bại</h3>
+                {{/equal}}
+            </fieldset>
+            <br>
+        </div>
+    </div>
+</div>
