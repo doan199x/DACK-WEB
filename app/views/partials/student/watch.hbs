@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <ul class="breadcrumb">
+            <li><a href="/user/user_course" title="Khóa học của tôi"><i class="fa fa-book"></i></a></li>
+            <li>&nbsp; > &nbsp;{{courseName}}&nbsp;>&nbsp;</a></li>
+            <li>Bài 1: abc</li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <video controls crossorigin playsinline poster="/img/thumbnail/video-thumbnail-default.jpg"
+                    width="730px" height="410px" id="player">
+                    <!-- Video files -->
+                    <source src="/uploads/video/default.mp4" type="video/mp4" size="1080">
+                </video>
+            </div>
+            <div class="row justify-content-center" style="margin-top:10px">
+                <a href="#" class="btn btn-secondary"><i class="fas fa-step-backward"></i></a>
+                <button type="button" id="js-rewind" class="btn btn-secondary" style="margin-left:3px"><i
+                        class="fas fa-redo"></i></button>
+                <a href="#" class="btn btn-secondary" style="margin-left:3px"><i class="fas fa-step-forward"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div style="height: 600px; overflow:auto">
+                <ul class="list-group">
+                    {{#each chapters}}
+                    <li class="list-group-item active active-chapter" id="li-main{{@index}}" onclick="HideLessons({{@index}})">{{this.chapterName}} <i class="fas fa-caret-down fa-lg" style="float:right" id="button-change{{@index}}"></i></li>
+                    <div id="lesson-chapter{{@index}}">
+                        {{#each lessonContent}}
+                        <li class="list-group-item">{{this.lessonName}}</li>
+                        {{/each}}
+                    </div>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>

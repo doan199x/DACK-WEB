@@ -3,6 +3,8 @@ const router = express.Router();
 const studentModel = require('../model/student.js');
 const courseModel = require('../model/course.js');
 const watchListModel = require('../model/watchList.js');
+const chapterModel = require('../model/chapter.js');
+const lessonModel = require('../model/lesson.js');
 const url = require('url');
 
 //multer
@@ -34,7 +36,8 @@ router.get('/profile', async (req, res, next) => {
             title: 'Hồ sơ',
             page: 'profile',
             studentProfile: studentProfile[0],
-            result: req.query.result
+            result: req.query.result,
+            js: 'profile'
         });
     } catch (err) {
         next(err);
@@ -50,7 +53,8 @@ router.get('/profile/edit', async (req, res, next) => {
             contain: 'student/profile-edit',
             title: 'Chỉnh sửa hồ sơ',
             page: 'profile',
-            studentProfile: studentProfile[0]
+            studentProfile: studentProfile[0],
+            js: 'profile'
         });
     } catch (err) {
         next(err);
@@ -115,7 +119,7 @@ router.get('/watch-list', async (req, res, next) => {
             title: 'Home',
             page: 'watch-list',
             courses: watchList,
-            js: ['watch-list']
+            js: ['profile', 'watch-list']
         });
     } catch (err) {
         next(err);
@@ -130,14 +134,15 @@ router.get('/course-list', async (req, res) => {
             contain: 'student/course-list',
             title: 'Home',
             page: 'course-list',
-            courses: registeredCourseID
+            courses: registeredCourseID,
+            js: 'profile'
         });
     } catch (err) {
         next(err);
     }
 })
 
-router.post('/remove-watch-list', async(req, res, next) => {
+router.post('/remove-watch-list', async (req, res, next) => {
     try {
         const studentID = 1;
         await watchListModel.removeWatchList(studentID, req.body.courseID);
@@ -147,6 +152,48 @@ router.post('/remove-watch-list', async(req, res, next) => {
         })
     } catch (err) {
         next(err)
+    }
+})
+
+router.get('/watch', async (req, res, next) => {
+    try {
+        const studentID = 1;
+        var courseID = req.query.courseID;
+        // check is course registred by studentid
+        var registeredCourses = await courseModel.getRegisteredCourseByStudentID(studentID);
+        var check = false;
+        for (var i = 0; i<registeredCourses.length;i++){
+            if (registeredCourses[i].courseID == courseID) {
+                check = true;
+                break;
+            }
+        }
+        // end checking
+        if (check == false) {
+            console.log("khoa hoc chua dc dang ki")
+        } else {
+            // Get contexn of course
+            //get course name:
+            var courseContent = await courseModel.getCourseByID(courseID);
+            var courseName = courseContent[0].name;
+            // get chapter:
+            var chaptersContent = await chapterModel.getChaptersByCourseID(courseID);
+            // get lesson:
+            for (var i =0;i<chaptersContent.length;i++){
+                var lessonsContent = await lessonModel.getLessonsByChapterID(chaptersContent[i].chapterID);
+                chaptersContent[i].lessonContent = lessonsContent;
+            }
+            res.render('course-list', {
+                contain: 'student/watch',
+                title: 'Home',
+                js: ['watch-video', 'watch'],
+                css: ['watch'],
+                courseName: courseName,
+                chapters: chaptersContent
+            });
+        }
+    } catch (err) {
+        next(err);
     }
 })
 
