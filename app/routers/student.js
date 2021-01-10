@@ -159,7 +159,7 @@ router.get('/watch', async (req, res, next) => {
     try {
         const studentID = 1;
         var courseID = req.query.courseID;
-        var lessonID = req.query.lessonID;
+
         // check is course registred by studentid
         var registeredCourses = await courseModel.getRegisteredCourseByStudentID(studentID);
         var check = false;
@@ -170,25 +170,53 @@ router.get('/watch', async (req, res, next) => {
             }
         }
         // end checking
-        if (check == false) {
-            console.log("khoa hoc chua dc dang ki")
-        } else {
-            // Get contexn of course
-            //get course name:
-            var courseContent = await courseModel.getCourseByID(courseID);
-            var courseName = courseContent[0].name;
-            // get chapter:
-            var chaptersContent = await chapterModel.getChaptersByCourseID(courseID);
-            // get lesson:
-            for (var i = 0; i < chaptersContent.length; i++) {
-                var lessonsContent = await lessonModel.getLessonsByChapterID(chaptersContent[i].chapterID);
-                chaptersContent[i].lessonContent = lessonsContent;
+        // Get contexn of course
+        //get course name:
+        var courseContent = await courseModel.getCourseByID(courseID);
+        var courseName = courseContent[0].name;
+        // get chapter:
+        var chaptersContent = await chapterModel.getChaptersByCourseID(courseID);
+        // get lesson:
+        for (var i = 0; i < chaptersContent.length; i++) {
+            var lessonsContent = await lessonModel.getLessonsByChapterID(chaptersContent[i].chapterID);
+            chaptersContent[i].lessonContent = lessonsContent;
+        }
+        //get lessonIDMin
+        var lessonIDMin = chaptersContent[0].lessonContent[0].lessonID;
+        //get lessonIDMax
+        var lessonIDMax = chaptersContent[chaptersContent.length - 1].lessonContent[chaptersContent[chaptersContent.length - 1].lessonContent.length - 1].lessonID;
+
+        // get chapter outline
+        var chaptersOulineContent = [];
+        for (var i = 0; i < chaptersContent.length; i++) {
+            if (chaptersContent[i].isOutline == true) {
+                chaptersOulineContent.push(chaptersContent[i]);
             }
-            //get lessonIDMin
-            var lessonIDMin = chaptersContent[0].lessonContent[0].lessonID;
-            //get lessonIDMax
-            var lessonIDMax = chaptersContent[chaptersContent.length-1].lessonContent[chaptersContent[chaptersContent.length-1].lessonContent.length-1].lessonID;
-            var videoPath = await lessonModel.getLessonVideoPathByID(lessonID);
+        }
+        // get lesonIDMin and Max of chapter outline
+        var lessonIDMinOutline = chaptersOulineContent[0].lessonContent[0].lessonID;
+        var lessonIDMaxOutline = chaptersOulineContent[chaptersOulineContent.length - 1].lessonContent[chaptersOulineContent[chaptersOulineContent.length - 1].lessonContent.length - 1].lessonID;
+        var lesson = await lessonModel.getLessonByID(lessonIDMinOutline);
+        var lessonOutline = await lessonModel.getLessonByID(lessonIDMinOutline);
+        if (check == false) {
+            res.render('course-list', {
+                contain: 'student/watch',
+                title: 'Home',
+                js: ['watch-video', 'watch'],
+                css: ['watch'],
+                check: false,
+                courseName: courseName,
+                chapters: chaptersOulineContent,
+                lessonID: lessonIDMinOutline,
+                courseID: courseID,
+                videoPath: lessonOutline[0].videoPath,
+                lessonIDMin: lessonIDMinOutline,
+                lessonIDMax: lessonIDMaxOutline,
+                lessonName: lessonOutline[0].lessonName,
+                notRegistered: 1
+            });
+        }
+        else {
             res.render('course-list', {
                 contain: 'student/watch',
                 title: 'Home',
@@ -196,11 +224,13 @@ router.get('/watch', async (req, res, next) => {
                 css: ['watch'],
                 courseName: courseName,
                 chapters: chaptersContent,
-                lessonID: lessonID,
+                lessonID: lessonIDMin,
                 courseID: courseID,
-                videoPath: videoPath[0].videoPath,
-                lessonIDMin : lessonIDMin,
-                lessonIDMax: lessonIDMax
+                videoPath: lesson[0].videoPath,
+                lessonIDMin: lessonIDMin,
+                lessonIDMax: lessonIDMax,
+                lessonName: lesson[0].lessonName,
+                notRegistered: 0
             });
         }
     } catch (err) {
@@ -212,10 +242,11 @@ router.post('/get-video', async (req, res, next) => {
     try {
         var lessonID = req.body.lessonID;
         //get video path
-        var videoPath = await lessonModel.getLessonVideoPathByID(lessonID);
+        var lesson = await lessonModel.getLessonByID(lessonID);
         res.json({
-            videoPath: videoPath[0].videoPath,
-            lessonID: lessonID
+            videoPath: lesson[0].videoPath,
+            lessonID: lessonID,
+            lessonName: lesson[0].lessonName
         })
 
     } catch (err) {

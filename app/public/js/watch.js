@@ -16,7 +16,7 @@ function changeLesson(lessonID) {
         url: '/student/get-video',
         method: 'POST',
         data: {
-            lessonID: lessonID
+            lessonID: lessonID,
         },
         success: function (result) {
             document.getElementById("video-source").innerHTML = `
@@ -31,30 +31,40 @@ function changeLesson(lessonID) {
                 player.rewind();
             });
             var postLessonID = document.getElementById('postLessonID').value;
-            document.getElementById(`li${postLessonID}`).setAttribute('class','list-group-item');
-            document.getElementById(`li${lessonID}`).setAttribute('class','list-group-item lesson-active');
+            document.getElementById(`li${postLessonID}`).setAttribute('class', 'list-group-item');
+            document.getElementById(`li${lessonID}`).setAttribute('class', 'list-group-item lesson-active');
             document.getElementById('postLessonID').value = lessonID;
-            
+
+            document.getElementById("lessonName").innerHTML = result.lessonName;
         }
     })
 }
 
-function fowardLesson(lessonIDMax){
+function fowardLesson(lessonIDMax) {
     var currentLessonID = document.getElementById('postLessonID').value;
-    if (currentLessonID==lessonIDMax){
+    if (currentLessonID == lessonIDMax) {
 
-    }else{
-        var newLessonID = parseInt(currentLessonID) +1;
+    } else {
+        var newLessonID = parseInt(currentLessonID) + 1;
         changeLesson(newLessonID);
     }
 }
 
-function backwardLesson(lessonIDMin){
+function backwardLesson(lessonIDMin) {
     var currentLessonID = document.getElementById('postLessonID').value;
-    if (currentLessonID==lessonIDMin){
+    if (currentLessonID == lessonIDMin) {
 
-    }else{
-        var newLessonID = parseInt(currentLessonID) -1;
+    } else {
+        var newLessonID = parseInt(currentLessonID) - 1;
         changeLesson(newLessonID);
+    }
+}
+
+window.onload = function showMessage() {
+    if (document.getElementById("registered").value == '1') {
+        Swal.fire({
+            title:'Bạn chưa đăng kí khóa học này, bạn chỉ có thể xem một số chương do giáo viên cung cấp miễn phí',
+            confirmButtonColor: '#212121'
+        })
     }
 }
