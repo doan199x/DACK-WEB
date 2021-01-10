@@ -6,4 +6,9 @@ module.exports = {
         const chapters = await db.load(sql);
         return chapters;
     },
+    getChaptersOutlineByCourseID:async (courseID) => {
+        const sql = `SELECT * from Chapter where courseID = ${courseID} and isOutline = true` ; 
+        const chapters = await db.load(sql);
+        return chapters;
+    },
 }; 
