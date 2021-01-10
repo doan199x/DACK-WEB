@@ -302,25 +302,25 @@ insert into Chapter (chapterName,courseID,isOutline) values('Chương 2. Data Bi
 insert into Chapter (chapterName,courseID,isOutline) values('Chương 3. Xây dựng ứng dụng',10,false);
 
 
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 1: Cài đặt môi trường','/public/video/test1.mp4',1);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 2: Tạo project','/public/video/test1.mp4',1);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 3: Giới thiệu android studio','/public/video/test1.mp4',1);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 4: Ôn tập Java phần 1','/public/video/test1.mp4',2);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 5: Ôn tập Java phần 2','/public/video/test1.mp4',2);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 6: Ôn tập Java phần 3','/public/video/test1.mp4',2);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 7: Lập trình hướng đối tượng - Giới thiệu','/public/video/test1.mp4',3);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 8: Lập trình hướng đối tượng - Public và Private','/public/video/test1.mp4',3);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 9: Lập trình hướng đối tượng - Constructor','/public/video/test1.mp4',3);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 10: Cuộc đua kì thú 1','/public/video/test1.mp4',4);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 11: Cuộc đua kì thú 2','/public/video/test1.mp4',4);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 12: Cuộc đua kì thú 3','/public/video/test1.mp4',4);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 1: Cài đặt môi trường','/uploads/video/default.mp4',1);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 2: Tạo project','/uploads/video/default2.mp4',1);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 3: Giới thiệu android studio','/uploads/video/default.mp4',1);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 4: Ôn tập Java phần 1','/uploads/video/default.mp4',2);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 5: Ôn tập Java phần 2','/uploads/video/default.mp4',2);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 6: Ôn tập Java phần 3','/uploads/video/default.mp4',2);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 7: Lập trình hướng đối tượng - Giới thiệu','/uploads/video/default.mp4',3);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 8: Lập trình hướng đối tượng - Public và Private','/uploads/video/default.mp4',3);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 9: Lập trình hướng đối tượng - Constructor','/uploads/video/default.mp4',3);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 10: Cuộc đua kì thú 1','/uploads/video/default.mp4',4);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 11: Cuộc đua kì thú 2','/uploads/video/default.mp4',4);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 12: Cuộc đua kì thú 3','/uploads/video/default.mp4',4);
 
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 1: Popup Menu','/public/video/test1.mp4',5);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 2: Context Menu','/public/video/test1.mp4',5);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 3: Alert Dialog','/public/video/test1.mp4',5);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 4: Animation Alpha','/public/video/test1.mp4',6);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 5: Animation Rotate','/public/video/test1.mp4',6);
-insert into Lesson (lessonName,videoPath,chapterID) values('Bài 6: Animation Scale','/public/video/test1.mp4',6);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 1: Popup Menu','/uploads/video/default.mp4',5);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 2: Context Menu','/uploads/video/default.mp4',5);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 3: Alert Dialog','/uploads/video/default.mp4',5);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 4: Animation Alpha','/uploads/video/default.mp4',6);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 5: Animation Rotate','/uploads/video/default.mp4',6);
+insert into Lesson (lessonName,videoPath,chapterID) values('Bài 6: Animation Scale','/uploads/video/default.mp4',6);
 
 insert into Lesson (lessonName,videoPath,chapterID) values('Bài 1: Câu lệnh if','/public/video/test1.mp4',7);
 insert into Lesson (lessonName,videoPath,chapterID) values('Bài 2: Vòng lặp for','/public/video/test1.mp4',7);
