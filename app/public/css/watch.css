@@ -10,3 +10,6 @@
 .center {
     margin:0 auto;
   }
+.lesson-active{
+    font-weight: bold;
+}

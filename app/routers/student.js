@@ -159,10 +159,11 @@ router.get('/watch', async (req, res, next) => {
     try {
         const studentID = 1;
         var courseID = req.query.courseID;
+        var lessonID = req.query.lessonID;
         // check is course registred by studentid
         var registeredCourses = await courseModel.getRegisteredCourseByStudentID(studentID);
         var check = false;
-        for (var i = 0; i<registeredCourses.length;i++){
+        for (var i = 0; i < registeredCourses.length; i++) {
             if (registeredCourses[i].courseID == courseID) {
                 check = true;
                 break;
@@ -179,19 +180,44 @@ router.get('/watch', async (req, res, next) => {
             // get chapter:
             var chaptersContent = await chapterModel.getChaptersByCourseID(courseID);
             // get lesson:
-            for (var i =0;i<chaptersContent.length;i++){
+            for (var i = 0; i < chaptersContent.length; i++) {
                 var lessonsContent = await lessonModel.getLessonsByChapterID(chaptersContent[i].chapterID);
                 chaptersContent[i].lessonContent = lessonsContent;
             }
+            //get lessonIDMin
+            var lessonIDMin = chaptersContent[0].lessonContent[0].lessonID;
+            //get lessonIDMax
+            var lessonIDMax = chaptersContent[chaptersContent.length-1].lessonContent[chaptersContent[chaptersContent.length-1].lessonContent.length-1].lessonID;
+            var videoPath = await lessonModel.getLessonVideoPathByID(lessonID);
             res.render('course-list', {
                 contain: 'student/watch',
                 title: 'Home',
                 js: ['watch-video', 'watch'],
                 css: ['watch'],
                 courseName: courseName,
-                chapters: chaptersContent
+                chapters: chaptersContent,
+                lessonID: lessonID,
+                courseID: courseID,
+                videoPath: videoPath[0].videoPath,
+                lessonIDMin : lessonIDMin,
+                lessonIDMax: lessonIDMax
             });
         }
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/get-video', async (req, res, next) => {
+    try {
+        var lessonID = req.body.lessonID;
+        //get video path
+        var videoPath = await lessonModel.getLessonVideoPathByID(lessonID);
+        res.json({
+            videoPath: videoPath[0].videoPath,
+            lessonID: lessonID
+        })
+
     } catch (err) {
         next(err);
     }

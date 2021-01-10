@@ -6,4 +6,9 @@ module.exports = {
         const lessons = await db.load(sql);
         return lessons;
     },
+    getLessonVideoPathByID: async(lessonID)=>{
+        const sql = `SELECT videoPath from Lesson where lessonID = ${lessonID}`; 
+        const lessonVideoPath = await db.load(sql);
+        return lessonVideoPath;
+    }
 }; 
