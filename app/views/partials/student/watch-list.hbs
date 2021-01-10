@@ -5,9 +5,9 @@
     <div class="card-deck">
         {{#each courses}}
         <div class="card card-custom" style="margin-bottom:20px" id="card{{this.courseID}}">
-            <img class="card-img-top" src="{{this.imagePath}}" alt="Card image cap">
+            <img height="230px" class="card-img-top" style="border-bottom:1px solid black;" src="{{this.imagePath}}" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{this.name}}</h5>
+                <h5 class="card-title" style="font-weight: bold;">{{this.name}}</h5>
                 <p class="card-text">{{this.sortDescription}}</p>
             </div>
             <div class="card-footer">

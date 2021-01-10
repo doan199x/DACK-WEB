@@ -1,0 +1,15 @@
+.course-chapter-hide{
+    display:none
+}
+.active-chapter{
+    cursor:pointer !important;
+    background-color:#212121 !important;
+    border-color: #212121 !important;
+    font-weight: bold;
+}
+.center {
+    margin:0 auto;
+  }
+.lesson-active{
+    font-weight: bold;
+}

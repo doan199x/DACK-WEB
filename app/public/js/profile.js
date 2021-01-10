@@ -6,7 +6,7 @@ function setActivePage() {
 function hoverActive(btnID){
     if(btnID == 'btn-profile'){
         document.getElementById(`btn-watch-list`).className = "btn btn-outline-secondary";
-        document.getElementById(`bbtn-course-list`).className = "btn btn-outline-secondary";
+        document.getElementById(`btn-course-list`).className = "btn btn-outline-secondary";
     } else if (btnID == 'btn-watch-list'){
         document.getElementById(`btn-profile`).className = "btn btn-outline-secondary";
         document.getElementById(`btn-course-list`).className = "btn btn-outline-secondary";
