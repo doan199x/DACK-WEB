@@ -179,7 +179,7 @@ insert into Bill values(2,now(),2,200000,'Đã xử lí');
 insert into Bill values(3,now(),3,300000,'Chờ xử lí');
 insert into Bill values(4,now(),4,400000,'Chờ xử lí');
 
-insert into Course values(1,'Lập trình Android căn bản','/img/course/course1.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',100,4.2,50000,now(),now(),2,'Đã hoàn tất',1,103);
+insert into Course values(1,'Lập trình Android căn bản','/img/course/course1.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',100,4.4,50000,now(),now(),2,'Đã hoàn tất',1,103);
 insert into Course values(2,'Lập trình Android nâng cao','/img/course/course2.jpg','Lập trình Android nâng cao','Khóa học này giúp bạn học về android nâng cao',200,4.6,50000,now(),now(),2,'Đã hoàn tất',1,104);
 insert into Course values(3,'Lập trình IOS căn bản','/img/course/course3.jpg','Làm quen với lập trình IOS','Giúp hiểu các khái niệm cơ bản về IOS',100,5,100000,now(),now(),2,'Đã hoàn tất',1,105);
 insert into Course values(4,'Lập trình IOS nâng cao','/img/course/course4.jpg','Học về IOS nâng cao','Tiếp cận các khái niệm nâng cao về ios',100,5,100000,now(),now(),2,'Đã hoàn tất',1,236);
@@ -222,9 +222,6 @@ insert into WatchList (studentID,courseID) values(4,3);
 insert into WatchList (studentID,courseID) values(4,4);
 insert into WatchList (studentID,courseID) values(5,1);
 
-insert into Rating (studentID,courseID,NoStars,Comment) values(1,1,5,'Tốt');
-insert into Rating (studentID,courseID,NoStars,Comment) values(1,2,5,'Tốt');
-insert into Rating (studentID,courseID,NoStars,Comment) values(1,3,5,'Tốt');
 insert into Rating (studentID,courseID,NoStars,Comment) values(1,4,5,'Tốt');
 insert into Rating (studentID,courseID,NoStars,Comment) values(2,1,5,'Tốt');
 insert into Rating (studentID,courseID,NoStars,Comment) values(2,2,5,'Tốt');
