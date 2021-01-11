@@ -46,6 +46,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', require('./routers/guest'));
 app.use('/student', require('./routers/student'));
 app.use('/login', require('./routers/login'));
+app.use('/admin', require('./routers/admin'));
 
 // app.use('/', require('./routers/home'));
 

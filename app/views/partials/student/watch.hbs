@@ -1,0 +1,56 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <nav aria-label="breadcrumb" style="float:left;">
+            <ol class="breadcrumb breadcrumb-custom">
+                <li><a href="/student/course-list" title="Khóa học của tôi"><i class="fas fa-book" style="color:black"></i></a></li>
+                <li>&nbsp; > &nbsp;{{courseName}}&nbsp;>&nbsp;</a></li>
+                <li><span id="lessonName">{{lessonName}}</span></li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row" id="video-source">
+                <video controls crossorigin playsinline poster="/img/thumbnail/video-thumbnail-default.jpg"
+                    width="730px" height="410px" id="player">
+                    <!-- Video files -->
+                    <source src="{{videoPath}}" type="video/mp4" size="1080">
+                </video>
+            </div>
+            <div class="row justify-content-center" style="margin-top:10px">
+                <a href="#" class="btn btn-secondary" onclick="backwardLesson({{lessonIDMin}})"><i
+                        class="fas fa-step-backward"></i></a>
+                <button type="button" id="js-rewind" class="btn btn-secondary" style="margin-left:3px"><i
+                        class="fas fa-redo"></i></button>
+                <a href="#" class="btn btn-secondary" style="margin-left:3px" onclick="fowardLesson({{lessonIDMax}})"><i
+                        class="fas fa-step-forward"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div style="height: 600px; overflow:auto">
+                <ul class="list-group">
+                    {{#each chapters}}
+                    <li class="list-group-item active active-chapter" id="li-main{{@index}}"
+                        onclick="HideLessons({{@index}})">{{this.chapterName}} <i class="fas fa-caret-down fa-lg"
+                            style="float:right" id="button-change{{@index}}"></i></li>
+                    <div id="lesson-chapter{{@index}}">
+                        {{#each lessonContent}}
+                        {{#equal this.lessonID ../../lessonID}}
+                        <li class="list-group-item lesson-active" id="li{{this.lessonID}}"
+                            onclick="changeLesson({{this.lessonID}})" style="cursor:pointer">{{this.lessonName}}</li>
+                        {{else}}
+                        <li class="list-group-item" id="li{{this.lessonID}}" onclick="changeLesson({{this.lessonID}})"
+                            style="cursor:pointer">{{this.lessonName}}</li>
+                        {{/equal}}
+                        {{/each}}
+                    </div>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        <input id="postLessonID" hidden type="text" value="{{lessonID}}">
+        <input id="registered" hidden type="text" value="{{notRegistered}}">
+    </div>
+
+</div>

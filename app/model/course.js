@@ -10,5 +10,15 @@ module.exports = {
         const sql = `SELECT a.* FROM Course as a, WatchList as b, student as c where  c.studentID = ${studentID} and c.studentID = b.studentID and b.courseID = a.courseID;` 
         const courses = await db.load(sql);
         return courses;
+    },
+    getCourseByID: async(courseID)=>{
+        const sql = `SELECT * from Course where courseID = ${courseID}`
+        const courses = await db.load(sql);
+        return courses;
+    },
+    updateAverageStar:async(courseID,stars)=>{
+        const sql = `UPDATE Course set averageStar = ${stars} where courseID = ${courseID}`; 
+        const courses = await db.load(sql);
+        return courses;
     }
 }; 
