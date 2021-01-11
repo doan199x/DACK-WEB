@@ -5,6 +5,7 @@ const courseModel = require('../model/course.js');
 const watchListModel = require('../model/watchList.js');
 const chapterModel = require('../model/chapter.js');
 const lessonModel = require('../model/lesson.js');
+const ratingModel = require('../model/rating.js');
 const url = require('url');
 
 //multer
@@ -254,4 +255,87 @@ router.post('/get-video', async (req, res, next) => {
     }
 })
 
+router.get('/rate', async (req, res, next) => {
+    try {
+        var courseID = req.query.courseID;
+        var studentID = 1;
+        // check registered course by student
+        var courses = await courseModel.getRegisteredCourseByStudentID(studentID);
+        var checkRegistered = false;
+        for (var i = 0; i < courses.length; i++) {
+            if (courses[i].courseID == courseID) {
+                checkRegistered = true;
+                break;
+            }
+        }
+        // end check
+        var courseInformation = await courseModel.getCourseByID(courseID);
+        var rateInformation = await ratingModel.getRatingByCourseID(courseID);
+        var widthStar = parseFloat(courseInformation[0].averageStar) / 5 * 100;
+        widthStar = widthStar + '%';
+        if (checkRegistered == false) {
+            console.log("ban chua dang ki khoa hoc");
+            // Chuyen den trang xem danh gia.
+        } else {
+            // check did user rate course
+            var checkRated = false;
+            var userRating;
+            var widthUserStar = 0;
+            var userComment = '';
+            var rates = await ratingModel.getRatingBystudentID(studentID);
+            for (var i = 0; i < rates.length; i++) {
+                if (courseID == rates[i].courseID) {
+                    checkRated = true;
+                    // if user rated, get their comment and NOStars
+                    userRating = { NoStars: rates[i].NoStars, comment: rates[i].comment };
+                    widthUserStar = parseInt(userRating.NoStars)/5*100;
+                    userComment = userRating.comment;
+                    break;
+                }
+            } 
+            res.render('rate', {
+                contain: 'student/rate',
+                title: 'Home',
+                js: ['rate'],
+                css: ['rate'],
+                course: courseInformation[0],
+                rateCount: rateInformation.length,
+                widthStar: widthStar,
+                studentID: studentID,
+                checkRated: checkRated,
+                userRating: userRating,
+                widthUserStar : widthUserStar + '%',
+                userComment : userComment
+            });
+        }
+
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/rate', async (req, res, next) => {
+    try {
+        var comment = req.body.comment;
+        var studentID = req.body.studentID;
+        var courseID = req.body.courseID;
+        var NoStars = req.body.NoStars;
+        // Add rating
+        await ratingModel.createRating(courseID, studentID, NoStars, comment);
+        // Change averageStar of course
+        var rates = await ratingModel.getRatingByCourseID(courseID);
+        sumOfStars = 0;
+        for (var i=0;i<rates.length;i++){
+            sumOfStars += rates[i].NoStars;
+        }
+        var averageStar = sumOfStars/rates.length;
+        await courseModel.updateAverageStar(courseID,averageStar);
+        res.json({
+            ok: true,
+        })
+
+    } catch (err) {
+        next(err);
+    }
+})
 module.exports = router;

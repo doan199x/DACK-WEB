@@ -5,13 +5,21 @@
     <div class="card-deck">
         {{#each courses}}
         <div class="card card-custom" style="margin-bottom:20px">
-            <img class="card-img-top" height="230px" src="{{this.imagePath}}" style="border-bottom:1px solid black;" alt="Card image cap">
+            <img class="card-img-top" height="230px" src="{{this.imagePath}}" style="border-bottom:1px solid black;"
+                alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">{{this.name}}</h5>
                 <p class="card-text">{{this.sortDescription}}</p>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn btn-secondary bold">Học ngay</a>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href="#" class="btn btn-secondary btn-block bold">Học ngay</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="#" class="btn btn-warning btn-block bold removeButton" style="color:white">Đánh giá</a>
+                    </div>
+                </div>
             </div>
         </div>
         {{/each}}
