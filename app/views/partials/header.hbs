@@ -1,35 +1,40 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient">   
   <div class="container">
-  <a class="navbar-brand" href="#">Online Courses</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a href="/">
+      <img src="https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg" alt="Udemy" width="110" height="32">
+    </a> 
+    <a class="navbar-brand" href="/">Online Courses</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-         <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="/category" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Categories
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="">Web programming</a>
-          <a class="dropdown-item" href="">Mobile programming</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="">Others</a>
-        </div>
-      </li>
-      <form class="form-inline my-4 my-lg-0 ">
-      <input class="form-control mr-sm-4 " type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-4 my-sm-0" type="submit">Search</button>
-    </form>
-      <li class="nav-item active">
-        <a class="nav-link" href="">Something <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="">Account</a>
-      </li>
-    </ul>
-    
-  </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/category" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="">Web programming</a>
+            <a class="dropdown-item" href="">Mobile programming</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="">Others</a>
+          </div>
+        </li>
+        <form class="form-inline my-4 my-lg-0 ">
+          <input class="form-control mr-sm-4 " type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-4 my-sm-0" type="submit" style="font-weight: bold">SEARCH
+          </button> 
+        </form>
+        <li class="nav-item active">
+          <a class="nav-link" href="/student/profile">
+            Account
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/> 
+            </svg>
+          </a>        
+        </li>
+      </ul>    
+    </div>
   </div>
 </nav>
