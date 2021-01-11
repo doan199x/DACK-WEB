@@ -1,5 +1,6 @@
 const mysql = require('mysql')
 
+
 exports.load = (sql) => {
     return new Promise((resolve, reject) => {
         const con = mysql.createConnection({
