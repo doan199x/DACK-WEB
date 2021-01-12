@@ -1,11 +1,3 @@
-function napTien() {
-    location.href = "/admin";
-}
-
-function quanLiDanhMuc() {
-    location.href = "/admin/category";
-}
-
 function themDanhMuc(postCategoryID) {
     var categoryID = 'categoryID' + postCategoryID;
     var categoryName = document.getElementById(categoryID).value;

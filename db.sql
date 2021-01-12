@@ -196,15 +196,15 @@ insert into Bill (timeCreated,studentID,sum,status) values(now(),3,300000,'Chờ
 insert into Bill (timeCreated,studentID,sum,status) values(now(),4,400000,'Chờ xử lí');
 
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình Android căn bản','/img/course/course1.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',100,5,50000,now(),now(),2,'Đã hoàn tất',1,103);
+values('Lập trình Android căn bản','/img/course/course1.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',100,3.6,50000,now(),now(),2,'Đã hoàn tất',1,103);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình Android nâng cao','/img/course/course2.jpg','Lập trình Android nâng cao','Lập trình Android nâng cao Lập trình Android nâng cao',200,5,50000,now(),now(),2,'Đã hoàn tất',1,104);
+values('Lập trình Android nâng cao','/img/course/course2.jpg','Lập trình Android nâng cao','Lập trình Android nâng cao Lập trình Android nâng cao',200,4.5,50000,now(),now(),2,'Đã hoàn tất',1,104);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình IOS căn bản','/img/course/course3.jpg','Làm quen với lập trình IOS','Giúp hiểu các khái niệm cơ bản về IOS',100,5,100000,now(),now(),2,'Đã hoàn tất',1,105);
+values('Lập trình IOS căn bản','/img/course/course3.jpg','Làm quen với lập trình IOS','Giúp hiểu các khái niệm cơ bản về IOS',100,3.6,100000,now(),now(),2,'Đã hoàn tất',1,105);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
 values('Lập trình IOS nâng cao','/img/course/course4.jpg','Học về IOS nâng cao','Tiếp cận các khái niệm nâng cao về ios',100,5,100000,now(),now(),2,'Đã hoàn tất',1,236);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình Nodejs cho người mới bắt đầu','/img/course1/course5.jpg','Khóa học làm quen với lập trình NodeJS','giúp hiểu các khái niệm cơ bản trong Nodejs',256,4.6,150000,now(),now(),1,'Đã hoàn tất',1,16);
+values('Lập trình Nodejs cho người mới bắt đầu','/img/course/course5.jpg','Khóa học làm quen với lập trình NodeJS','giúp hiểu các khái niệm cơ bản trong Nodejs',256,4.6,150000,now(),now(),1,'Đã hoàn tất',1,16);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
 values('Lập trình Nodejs nâng cao','/img/course/course6.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',512,3.8,150000,now(),now(),2,'Đã hoàn tất',1,921);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
