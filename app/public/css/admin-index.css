@@ -8,9 +8,6 @@ table, td, th {
     border: 1px solid black !important;
 }
 
-th{
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
