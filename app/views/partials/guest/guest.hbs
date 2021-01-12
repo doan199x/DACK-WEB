@@ -1,1 +1,56 @@
-<div class = "header">GUEST </div>
+<div class="container">
+    <div id="demo" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+             <li data-target="#demo" data-slide-to="3"></li>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="carousel-inner" style="text-align: center">
+            <div class="carousel-item active">
+                <img src="{{top.[0].imagePath}}" alt="" width="1000" height="400">
+                <div class="carousel-caption">
+                    <h4> {{top.[0].name}}</h4>
+                    <h5> {{top.[0].description}}
+                    </h5>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{top.[1].imagePath}}" alt="Chicago" width="1000" height="400">
+                <div class="carousel-caption">
+                    <h4> {{top.[1].name}}</h4>
+                    <h5> {{top.[1].description}}
+                    </h5>
+                </div>
+
+            </div>
+            <div class="carousel-item">
+                <img src="{{top.[2].imagePath}}" alt="New York" width="1000" height="400">
+                <div class="carousel-caption">
+                    <h4> {{top.[2].name}}</h4>
+                    <h5> {{top.[2].description}}
+                    </h5>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{top.[3].imagePath}}" alt="New York" width="1000" height="400">
+                <div class="carousel-caption">
+                    <h4> {{top.[3].name}}</h4>
+                    <h5> {{top.[3].description}}
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+</div>

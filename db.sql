@@ -137,6 +137,70 @@ create table RegisteredCourse(
 
 /*Data*/
 
+<<<<<<< HEAD
+insert into Teacher (name,email,password,avatarPath)values('Nguyễn Văn An','vanan123@gmail.com','123456','/public/images/avatar/teacher1.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Hoàng Thu Trang','thutrang2412@gmail.com','123456','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Trần Hoàng Hùng','hungtran124@gmail.com','123456','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Hoàng Hiệu','hieuhoang1111@gmail.com','123456','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Đỗ Thu Thủy','thuydo11122@gmail.com','123456','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Nguyễn Viết Hạ','vietha@gmail.com','123456','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Nguyễn Hoàng Anh','anhhoang156@gmail.com','123456','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Hoàng Phan Hoài An','yendan123@gmail.com','123456','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Trần Đình Trọng','trongtran@gmail.com','123456','/public/images/avatar/default.jpg');
+
+insert into Category (categoryName) values('Lập trình web');
+insert into Category (categoryName) values('Lập trình thiết bị di động');
+
+insert into Admin (name,email,password) values('Nguyễn Hồng Anh','anhnguyen115@gmail.com','123456');
+insert into Admin (name,email,password) values('Hà Văn Quản','quanha11234@gmail.com','123456');
+
+insert into Log (adminID,activity,time) values(1,'Đăng nhập','2021-01-01');
+insert into Log (adminID,activity,time) values(2,'Xóa thành viên vanan123@gmail.com','2021-01-01');
+
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Trần Hoàng Cường','0858343803','1999-01-01',now(),'cuonghoang1213@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Thị Hạ','0858343804','1999-01-02',now(),'hanguyen45451@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Hoàng Công Ẩn','0858343853','1999-01-03',now(),'anhoang11235@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đỗ Thị Liễu','0858343806','1999-01-04',now(),'nguyenlieu55151@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Lý Thị Mai','0858343873','1999-01-05',now(),'maily2545151@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Công Hưởng','0858343883','1999-01-06',now(),'huongcongnguyen@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Nhật Nam','0858343810','1999-01-07',now(),'namnhat124566@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đào Bá Quang','0858343811','1999-01-08',now(),'quangba54545@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Hà Huy Lợi','0858343812','1999-01-09',now(),'loaihuy124510@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Hoàng Tín','0858343813','1999-01-10',now(),'hoangtin1508@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Phạn Huy Ích','0858343814','1999-01-11',now(),'huyich@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Lý Thị Thủy','0858343815','1999-01-12',now(),'thuylty111213@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đào Bá Nhật','0858343816','1999-01-13',now(),'banhat1678@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đinh Lan Hương','0858343817','1999-01-14',now(),'huonglan@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Đình Cảnh','0858343818','1999-01-15',now(),'canhdinh55689@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Lã Văn Cà','0858343819','1999-01-16',now(),'cala121551@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đương Văn Hoàng','0858343820','1999-01-17',now(),'hoangduong5415151@gmail.com','123456','/img/avatar/default.jpg',100000);
+
+insert into Bill (timeCreated,studentID,sum,status) values(now(),1,100000,'Đã xử lí');
+insert into Bill (timeCreated,studentID,sum,status) values(now(),2,200000,'Đã xử lí');
+insert into Bill (timeCreated,studentID,sum,status) values(now(),3,300000,'Chờ xử lí');
+insert into Bill (timeCreated,studentID,sum,status) values(now(),4,400000,'Chờ xử lí');
+
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Lập trình Android căn bản','/img/course/default.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',100,5,50000,now(),now(),2,'Đã hoàn tất',1,103);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Lập trình Android nâng cao','/img/course/default.jpg','Lập trình Android nâng cao','Lập trình Android nâng cao Lập trình Android nâng cao',200,5,50000,now(),now(),2,'Đã hoàn tất',1,104);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Lập trình IOS căn bản','/img/course/default.jpg','Làm quen với lập trình IOS','Giúp hiểu các khái niệm cơ bản về IOS',100,5,100000,now(),now(),2,'Đã hoàn tất',1,105);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Lập trình IOS nâng cao','/img/course/default.jpg','Học về IOS nâng cao','Tiếp cận các khái niệm nâng cao về ios',100,5,100000,now(),now(),2,'Đã hoàn tất',1,236);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Lập trình Nodejs cho người mới bắt đầu','/img/course/default.jpg','Khóa học làm quen với lập trình NodeJS','giúp hiểu các khái niệm cơ bản trong Nodejs',256,4.6,150000,now(),now(),1,'Đã hoàn tất',1,16);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Lập trình Nodejs nâng cao','/img/course/default.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',512,3.8,150000,now(),now(),2,'Đã hoàn tất',1,921);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Cùng học Python','/img/course/default.jpg','Khóa học làm quen với lập trình Python căn bản','Giúp hiểu rõ các khái niệm căn bản trong python',631,2.1,200000,now(),now(),2,'Đã hoàn tất',1,716);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Python cho mọi người','/img/course/default.jpg','Lập trình python căn bản','Học cách lập trình python căn bản',521,4.8,200000,now(),now(),2,'Đã hoàn tất',1,908);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Lập trình ASP.NET','/img/course/default.jpg','Làm quen với ASP.NET','Khóa học dnahf cho người mới bắt đầu',215,4.5,250000,now(),now(),2,'Đã hoàn tất',1,301);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Lập trình Xamarin','/img/course/default.jpg','Giúp lập trình Xamarin','Khóa học ngắn hạn',5612,1.6,250000,now(),now(),1,'Đã hoàn tất',1, 207);
+=======
 insert into Teacher values(1,'Nguyễn Văn An','vanan123@gmail.com','123456','/public/images/avatar/default.jpg');
 insert into Teacher values(2,'Hoàng Thu Trang','thutrang2412@gmail.com','123456','/public/images/avatar/default.jpg');
 insert into Teacher values(3,'Trần Hoàng Hùng','hungtran124@gmail.com','123456','/public/images/avatar/default.jpg');
@@ -193,6 +257,7 @@ insert into Course values(11,'Lập trình Java','/img/course/course11.jpg','Tì
 insert into Course values(12,'Java và hướng đối tượng','/img/course/course12.jpg','Java và OOP','Tìm hiểu hướng đối tượng trong Java',254,3.6,300000,now(),now(),2,'Đã hoàn tất',2, 2120);
 insert into Course values(13,'Lập trình Java nâng cao','/img/course/course13.jpg','Lập trình java nâng cao','Khóa học giúp tìm hiểu sâu về Java',365,4.5,300000,now(),now(),2,'Đã hoàn tất',2, 1216);
 insert into Course values(14,'Java Spring','/img/course/course14.jpg','Java Spring căn bản','Tìm hiểu về Java Spring',365,4.5,500000,now(),now(),2,'Đã hoàn tất',2, 1251);
+>>>>>>> 706572c6547d147b822929f452896588f82fe741
 
 insert into BillDetail (billID, courseID,price) values(1,1,50000);
 insert into BillDetail (billID, courseID,price) values(1,2,50000);

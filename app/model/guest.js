@@ -12,7 +12,7 @@ module.exports = {
         return guest;
     },
     newest: async () => {
-        const sql = `SELECT * FROM Course ORDER BY created DESC`
+        const sql = `SELECT * FROM Course ORDER BY created DESC LIMIT 10;`
         const guest = await db.load(sql);
         return guest;
     },
