@@ -1,7 +1,7 @@
 drop database if exists onlineCourse;
 create database onlineCourse;
 use onlineCourse;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456yugi';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123abc';
 flush privileges;
 create table Teacher(
 	teacherID int not null auto_increment,
@@ -224,6 +224,13 @@ values('Java nâng cao','/img/course/course13.jpg','Các khái niệm nâng cao 
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
 values('Java spring','/img/course/course14.jpg','Lập trinh Java với Framework Spring','Khóa học giúp làm quen với Framework spring',5612,2.1,300000,now(),now(),1,'Đã hoàn tất',2, 2530);
 
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Nhập môn nấu ăn','/img/course/course14.jpg','Làm quen với việc nấu nướng','Khóa học giúp làm quen với việc nấu nướng',1982,4.9,300000,now(),now(),2,'Đã hoàn tất',2, 3333);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Kĩ thuật nấu ăn','/img/course/course14.jpg','Nâng cao kĩ thuật nấu nước','Giới thiệu nâng cao về nấu nướng',324,4.5,300000,now(),now(),2,'Đã hoàn tất',2, 130);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Thế giới nấu ăn','/img/course/course14.jpg','Làm quen các món ăn trên thế giới','Giới thiệu về các món ăn trên thế giới',3224,5.0,300000,now(),now(),2,'Đã hoàn tất',2, 8728);
+
 insert into BillDetail (billID, courseID,price) values(1,1,50000);
 insert into BillDetail (billID, courseID,price) values(1,2,50000);
 insert into BillDetail (billID, courseID,price) values(2,3,100000);
@@ -336,6 +343,16 @@ insert into Chapter (chapterID,chapterName,courseID,isOutline) values(39,'Chươ
 
 insert into Chapter (chapterID,chapterName,courseID,isOutline) values(40,'Chương 1. Làm quen với Java Spring',14,false);
 insert into Chapter (chapterID,chapterName,courseID,isOutline) values(41,'Chương 2. Java Spring MVC ',14,true);
+
+insert into Chapter (chapterID,chapterName,courseID,isOutline) values(42,'Chương 1. Các dụng cụ nấu nướng',15,false);
+insert into Chapter (chapterID,chapterName,courseID,isOutline) values(43,'Chương 2. Các nguyên liệu cơ bản',15,true);
+
+insert into Chapter (chapterID,chapterName,courseID,isOutline) values(44,'Chương 1. Các món ăn thông dụng',16,false);
+insert into Chapter (chapterID,chapterName,courseID,isOutline) values(45,'Chương 2. Các món ăn hảo hạng',16,true);
+
+insert into Chapter (chapterID,chapterName,courseID,isOutline) values(46,'Chương 1. Châu Á',17,false);
+insert into Chapter (chapterID,chapterName,courseID,isOutline) values(47,'Chương 2. Châu Âu',17,true);
+insert into Chapter (chapterID,chapterName,courseID,isOutline) values(48,'Chương 3. Châu Mỹ',17,false);
 
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(1,'Bài 1: Cài đặt môi trường','/uploads/video/lesson1.mp4',1);
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(2,'Bài 2: Tạo project','/uploads/video/lesson2.mp4',1);
@@ -474,3 +491,39 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(121,'Bài 7:
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(122,'Bài 8: @RequestParam trong Spring MVC','/uploads/video/lesson122.mp4',41);
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(123,'Bài 9: @PathVariable trong Spring MVC','/uploads/video/lesson123.mp4',41);
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(124,'Bài 10: Download files trong Spring MVC','/uploads/video/lesson124.mp4',41);
+
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(125,'Bài 1: Cách dùng vá','/uploads/video/default.mp4',42);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(126,'Bài 2: Cách dùng đũa','/uploads/video/default.mp4',42);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(127,'Bài 3: Cách dùng tô, chén','/uploads/video/default.mp4',42);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(128,'Bài 4: Các món ăn cần dùng dầu ăn','/uploads/video/default.mp4',43);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(129,'Bài 5: Các món ăn cần dùng muối','/uploads/video/default.mp4',43);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(130,'Bài 6: Các món ăn cần dùng ớt/tiêu','/uploads/video/default.mp4',43);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(131,'Bài 7: Các món ăn cần dùng bột ngọt/mì chính','/uploads/video/default.mp4',43);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(132,'Bài 8: Các món ăn cần dùng đường','/uploads/video/default.mp4',43);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(133,'Bài 9: Các món ăn không cần gia vị','/uploads/video/default.mp4',43);
+
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(134,'Bài 1: Trứng luộc','/uploads/video/default.mp4',44);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(135,'Bài 2: Rau luộc','/uploads/video/default.mp4',44);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(136,'Bài 3: Thịt luộc','/uploads/video/default.mp4',44);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(137,'Bài 4: Cơm chiên','/uploads/video/default.mp4',44);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(138,'Bài 5: Rau xào','/uploads/video/default.mp4',44);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(139,'Bài 6: Đậu hũ lướt ván','/uploads/video/default.mp4',45);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(140,'Bài 7: Cơm gà trùm mền','/uploads/video/default.mp4',45);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(141,'Bài 8: Phô mai sữa cừu lên men','/uploads/video/default.mp4',45);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(142,'Bài 9: Tiểu hắc cầu ẩn vũ trụ (chè đỗ đen)','/uploads/video/default.mp4',45);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(143,'Bài 10: Tổng kết môn học','/uploads/video/default.mp4',45); 
+
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(144,'Bài 1: Các món ăn Việt Nam','/uploads/video/default.mp4',46);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(145,'Bài 2: Các món ăn Nhật Bản','/uploads/video/default.mp4',46);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(146,'Bài 3: Các món ăn Lào','/uploads/video/default.mp4',46);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(147,'Bài 4: Các món ăn Campuchia','/uploads/video/default.mp4',46);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(148,'Bài 5: Các món ăn Bhutan','/uploads/video/default.mp4',46);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(149,'Bài 6: Các món ăn Pháp','/uploads/video/default.mp4',47);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(150,'Bài 7: Các món ăn Đức','/uploads/video/default.mp4',47);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(151,'Bài 8: Các món ăn Italia','/uploads/video/default.mp4',47);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(152,'Bài 9: Các món ăn Tây Ban Nha','/uploads/video/default.mp4',47);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(153,'Bài 10: Các món ăn Mỹ','/uploads/video/default.mp4',48); 
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(154,'Bài 11: Các món ăn Canada','/uploads/video/default.mp4',48);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(155,'Bài 12: Các món ăn Brazil','/uploads/video/default.mp4',48);
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(156,'Bài 13: Các món ăn Argentina','/uploads/video/default.mp4',48); 
+insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(157,'Bài 14: Các món ăn Chile','/uploads/video/default.mp4',48); 
