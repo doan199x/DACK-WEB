@@ -16,7 +16,7 @@ module.exports = {
         const guest = await db.load(sql);
         return guest;
     },
-    mostwatched: async () => {
+    hot: async () => {
         const sql = `(SELECT temp.categoryID, MAX(temp.totalviews) as totalviews, temp.categoryName as categoryName
         FROM (SELECT SUM(c1.NoStudents) as totalviews, c2.categoryID, c2.categoryName
         FROM Course as c1 JOIN Category as c2 ON c1.categoryID = c2.categoryID GROUP BY c2.categoryID) temp);`

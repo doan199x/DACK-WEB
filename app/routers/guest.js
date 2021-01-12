@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     console.log(top[0].name);
     const topview = await guestModel.topview();
     const newest = await guestModel.newest();
-    const mostwatched = await guestModel.mostwatched();
+    const hot = await guestModel.hot();
     res.render("home", {
       css: ["guest"],
       js: [""],
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
       top: top,
       topview: topview,
       newest: newest,
-      mostwatched: mostwatched,
+     hot:hot,
     });
   } catch (err) {
     console.log(err);
