@@ -8,57 +8,176 @@
         </div>
         <div class="col-lg-6">
             <h3>Danh sách danh mục</h3>
+            {{#each postCategories}}
             <table class="table table-bordered" style="margin-top:20px">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Tênh danh mục</th>
+                        <th scope="col">Cấp danh mục</th>
                         <th scope="col" style="text-align:center">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    <tr>
+                        <th class="counterCell">
+                        <td style="font-weight: bold;">{{postCategoryName}}</td>
+                        <td style="font-weight: bold;">Cha</td>
+                        <td style="text-align: center;"><i class="fas fa-edit fa-lg" style="cursor:pointer"
+                                data-toggle="modal" data-target="#suaDanhMucCha{{postCategoryID}}"></i>&nbsp;<i
+                                class="fas fa-trash fa-lg" style="cursor:pointer"
+                                onclick="xoaDanhMucLon({{postCategoryID}})"></i></td>
+                    </tr>
                     {{#each categories}}
                     <tr>
                         <th class="counterCell">
-                        <td><span id="spanCategoryName" class="">{{categoryName}}</span><input class="hide" id="editCategoryName"></td>
-                        <td style="text-align: center;"><i class="fas fa-edit fa-lg"></i>&nbsp;<i
-                                class="fas fa-trash fa-lg" style="cursor:pointer" onclick="xoaDanhMuc({{categoryID}})"></i></td>
+                        <td>{{categoryName}}</td>
+                        <td>Con</td>
+                        <td style="text-align: center;"><i class="fas fa-edit fa-lg" style="cursor:pointer"
+                                data-toggle="modal" data-target="#suaDanhMucCon{{categoryID}}"></i>&nbsp;<i
+                                class="fas fa-trash fa-lg" style="cursor:pointer"
+                                onclick="xoaDanhMuc({{categoryID}})"></i></td>
                     </tr>
-                    {{/each}}
-                    <tr>
-                        <td colspan="3" data-toggle="modal" data-target="#categoryModel"><i
-                                class="fas fa-plus-square fa-lg" style="cursor:pointer" onclick="suaDanhMuc({{categoryID}})"></i>&nbsp;&nbsp;Thêm Danh mục</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="categoryModel" tabindex="-1" role="dialog" aria-labelledby="categoryModelLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="categoryModelLabel">Thêm danh mục</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <span>Tên danh mục</span>
+                    <!-- modal Sửa danh mục con -->
+                    <div class="modal fade" id="suaDanhMucCon{{categoryID}}" tabindex="-1" role="dialog"
+                        aria-labelledby="categoryModelLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Sửa danh mục con {{categoryName}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div class="col-lg-8">
-                                    <input id="categoryName" style="width: 80%;">
+                                <div class="modal-body">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <span>Tên danh mục con</span>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input id="danhMucCon{{categoryID}}" style="width: 80%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal"
+                                        style="color: white;font-weight:bold">Đóng</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        onclick="suaDanhMucCon({{categoryID}});">Sửa</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal" style="color: white;font-weight:bold">Đóng</button>
-                        <button type="button" class="btn btn-secondary" onclick="themDanhMuc();">Thêm</button>
+                    {{/each}}
+                    <tr>
+                        <td style="cursor:pointer" colspan="4" data-toggle="modal"
+                            data-target="#categoryModel{{postCategoryID}}"><i
+                                class="fas fa-plus-square fa-lg"></i>&nbsp;&nbsp;Thêm Danh mục con</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- Modal thêm danh mục con -->
+            <div class="modal fade" id="categoryModel{{postCategoryID}}" tabindex="-1" role="dialog"
+                aria-labelledby="categoryModelLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="categoryModelLabel">Thêm danh mục con</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <span>Tên danh mục con</span>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input id="categoryID{{postCategoryID}}" style="width: 80%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal"
+                                style="color: white;font-weight:bold">Đóng</button>
+                            <button type="button" class="btn btn-secondary"
+                                onclick="themDanhMuc({{postCategoryID}});">Thêm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal Sửa danh mục cha -->
+            <div class="modal fade" id="suaDanhMucCha{{postCategoryID}}" tabindex="-1" role="dialog"
+                aria-labelledby="categoryModelLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Sửa danh mục cha {{postCategoryName}}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <span>Tên danh mục cha</span>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input id="danhMucCha{{postCategoryID}}" style="width: 80%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal"
+                                style="color: white;font-weight:bold">Đóng</button>
+                            <button type="button" class="btn btn-secondary"
+                                onclick="suaDanhMucCha({{postCategoryID}});">Sửa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4 style="cursor: pointer" data-toggle="modal" data-target="#modalDanhMucCha"><i
+                            class="fas fa-plus-square fa-1x"></i>&nbsp;Thêm danh mục cha</h4>
+                </div>
+                <!-- Modal thêm danh mục cha -->
+                <div class="modal fade" id="modalDanhMucCha" tabindex="-1" role="dialog"
+                    aria-labelledby="categoryModelLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thêm danh mục cha</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <span>Tên danh mục cha</span>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input id="postCategoryInput" style="width: 80%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning" data-dismiss="modal"
+                                    style="color: white;font-weight:bold">Đóng</button>
+                                <button type="button" class="btn btn-secondary"
+                                    onclick="themDanhMucCha();">Thêm</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
