@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
       top: top,
       topview: topview,
       newest: newest,
-     hot:hot,
+      hot: hot,
     });
   } catch (err) {
     console.log(err);

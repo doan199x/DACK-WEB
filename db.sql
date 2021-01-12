@@ -1,7 +1,7 @@
 drop database if exists onlineCourse;
 create database onlineCourse;
 use onlineCourse;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123abc';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123@';
 flush privileges;
 create table Teacher(
 	teacherID int not null auto_increment,
@@ -141,8 +141,19 @@ create table RegisteredCourse(
 	foreign key(studentID) references Student(studentID),
     foreign key(courseID) references Course(courseID)
 );
+create table account(
+	accountID int not null auto_increment primary key,
+    email varchar(30),
+    password varchar(50) not null,
+    position int
+);
+
+
 
 /*Data*/
+insert into account(email,password,position) values ('admin@admin.com','123',1);
+insert into account(email,password,position) values ('teacher@teacher.com','123',2);
+insert into account(email,password,position) values ('student@student.com','123',3);
 
 insert into Teacher (name,email,password,avatarPath)values('Nguyễn Văn An','vanan123@gmail.com','123456','/public/images/avatar/teacher1.jpg');
 insert into Teacher (name,email,password,avatarPath)values('Hoàng Thu Trang','thutrang2412@gmail.com','123456','/public/images/avatar/default.jpg');
