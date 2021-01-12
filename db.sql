@@ -137,7 +137,6 @@ create table RegisteredCourse(
 
 /*Data*/
 
-<<<<<<< HEAD
 insert into Teacher (name,email,password,avatarPath)values('Nguyễn Văn An','vanan123@gmail.com','123456','/public/images/avatar/teacher1.jpg');
 insert into Teacher (name,email,password,avatarPath)values('Hoàng Thu Trang','thutrang2412@gmail.com','123456','/public/images/avatar/default.jpg');
 insert into Teacher (name,email,password,avatarPath)values('Trần Hoàng Hùng','hungtran124@gmail.com','123456','/public/images/avatar/default.jpg');
@@ -200,64 +199,6 @@ insert into Course (name,imagePath,sortDescription,description,NoStudents,averag
 values('Lập trình ASP.NET','/img/course/default.jpg','Làm quen với ASP.NET','Khóa học dnahf cho người mới bắt đầu',215,4.5,250000,now(),now(),2,'Đã hoàn tất',1,301);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
 values('Lập trình Xamarin','/img/course/default.jpg','Giúp lập trình Xamarin','Khóa học ngắn hạn',5612,1.6,250000,now(),now(),1,'Đã hoàn tất',1, 207);
-=======
-insert into Teacher values(1,'Nguyễn Văn An','vanan123@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher values(2,'Hoàng Thu Trang','thutrang2412@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher values(3,'Trần Hoàng Hùng','hungtran124@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher values(4,'Hoàng Hiệu','hieuhoang1111@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher values(5,'Đỗ Thu Thủy','thuydo11122@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher values(6,'Nguyễn Viết Hạ','vietha@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher values(7,'Nguyễn Hoàng Anh','anhhoang156@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher values(8,'Hoàng Phan Hoài An','yendan123@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher values(9,'Trần Đình Trọng','trongtran@gmail.com','123456','/public/images/avatar/default.jpg');
-
-insert into Category values(1,'Lập trình web');
-insert into Category values(2,'Lập trình thiết bị di động');
-
-insert into Admin values(1,'Nguyễn Hồng Anh','anhnguyen115@gmail.com','123456');
-insert into Admin values(2,'Hà Văn Quản','quanha11234@gmail.com','123456');
-
-insert into Log values(1,1,'Đăng nhập','2021-01-01');
-insert into Log values(2,2,'Xóa thành viên vanan123@gmail.com','2021-01-01');
-
-insert into Student values(1,'Trần Hoàng Cường','0858343803','1999-01-01',now(),'cuonghoang1213@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(2,'Nguyễn Thị Hạ','0858343804','1999-01-02',now(),'hanguyen45451@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(3,'Hoàng Công Ẩn','0858343853','1999-01-03',now(),'anhoang11235@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(4,'Đỗ Thị Liễu','0858343806','1999-01-04',now(),'nguyenlieu55151@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(5,'Lý Thị Mai','0858343873','1999-01-05',now(),'maily2545151@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(6,'Nguyễn Công Hưởng','0858343883','1999-01-06',now(),'huongcongnguyen@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(7,'Nguyễn Nhật Nam','0858343810','1999-01-07',now(),'namnhat124566@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(8,'Đào Bá Quang','0858343811','1999-01-08',now(),'quangba54545@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(9,'Hà Huy Lợi','0858343812','1999-01-09',now(),'loaihuy124510@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(10,'Nguyễn Hoàng Tín','0858343813','1999-01-10',now(),'hoangtin1508@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(11,'Phạn Huy Ích','0858343814','1999-01-11',now(),'huyich@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(12,'Lý Thị Thủy','0858343815','1999-01-12',now(),'thuylty111213@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(13,'Đào Bá Nhật','0858343816','1999-01-13',now(),'banhat1678@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(14,'Đinh Lan Hương','0858343817','1999-01-14',now(),'huonglan@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(15,'Nguyễn Đình Cảnh','0858343818','1999-01-15',now(),'canhdinh55689@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(16,'Lã Văn Cà','0858343819','1999-01-16',now(),'cala121551@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student values(17,'Đương Văn Hoàng','0858343820','1999-01-17',now(),'hoangduong5415151@gmail.com','123456','/img/avatar/default.jpg',100000);
-
-insert into Bill values(1,now(),1,100000,'Đã xử lí');
-insert into Bill values(2,now(),2,200000,'Đã xử lí');
-insert into Bill values(3,now(),3,300000,'Chờ xử lí');
-insert into Bill values(4,now(),4,400000,'Chờ xử lí');
-
-insert into Course values(1,'Lập trình Android căn bản','/img/course/course1.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',100,4.4,50000,now(),now(),2,'Đã hoàn tất',1,103);
-insert into Course values(2,'Lập trình Android nâng cao','/img/course/course2.jpg','Lập trình Android nâng cao','Khóa học này giúp bạn học về android nâng cao',200,4.6,50000,now(),now(),2,'Đã hoàn tất',1,104);
-insert into Course values(3,'Lập trình IOS căn bản','/img/course/course3.jpg','Làm quen với lập trình IOS','Giúp hiểu các khái niệm cơ bản về IOS',100,5,100000,now(),now(),2,'Đã hoàn tất',1,105);
-insert into Course values(4,'Lập trình IOS nâng cao','/img/course/course4.jpg','Học về IOS nâng cao','Tiếp cận các khái niệm nâng cao về ios',100,5,100000,now(),now(),2,'Đã hoàn tất',1,236);
-insert into Course values(5,'Lập trình Nodejs cho người mới bắt đầu','/img/course/course5.jpg','Khóa học làm quen với lập trình NodeJS','giúp hiểu các khái niệm cơ bản trong Nodejs',256,4.6,150000,now(),now(),1,'Đã hoàn tất',1,16);
-insert into Course values(6,'Lập trình Nodejs nâng cao','/img/course/course6.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',512,3.8,150000,now(),now(),2,'Đã hoàn tất',1,921);
-insert into Course values(7,'Cùng học Python','/img/course/course7.jpg','Khóa học làm quen với lập trình Python căn bản','Giúp hiểu rõ các khái niệm căn bản trong python',631,2.1,200000,now(),now(),2,'Đã hoàn tất',1,716);
-insert into Course values(8,'Python cho mọi người','/img/course/course8.jpg','Lập trình python căn bản','Học cách lập trình python căn bản',521,4.8,200000,now(),now(),2,'Đã hoàn tất',1,908);
-insert into Course values(9,'Lập trình ASP.NET','/img/course/course9.jpg','Làm quen với ASP.NET','Khóa học dnahf cho người mới bắt đầu',215,4.5,250000,now(),now(),2,'Đã hoàn tất',1,301);
-insert into Course values(10,'Lập trình Xamarin','/img/course/course10.jpg','Giúp lập trình Xamarin','Khóa học ngắn hạn',5612,1.6,250000,now(),now(),1,'Đã hoàn tất',1, 207);
-insert into Course values(11,'Lập trình Java','/img/course/course11.jpg','Tìm hiểu về Java căn bản','Khóa học giúp làm quen với các khái niệm căn bản trong Java',125,2.5,300000,now(),now(),2,'Đã hoàn tất',2, 1521);
-insert into Course values(12,'Java và hướng đối tượng','/img/course/course12.jpg','Java và OOP','Tìm hiểu hướng đối tượng trong Java',254,3.6,300000,now(),now(),2,'Đã hoàn tất',2, 2120);
-insert into Course values(13,'Lập trình Java nâng cao','/img/course/course13.jpg','Lập trình java nâng cao','Khóa học giúp tìm hiểu sâu về Java',365,4.5,300000,now(),now(),2,'Đã hoàn tất',2, 1216);
-insert into Course values(14,'Java Spring','/img/course/course14.jpg','Java Spring căn bản','Tìm hiểu về Java Spring',365,4.5,500000,now(),now(),2,'Đã hoàn tất',2, 1251);
->>>>>>> 706572c6547d147b822929f452896588f82fe741
 
 insert into BillDetail (billID, courseID,price) values(1,1,50000);
 insert into BillDetail (billID, courseID,price) values(1,2,50000);
