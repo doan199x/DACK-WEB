@@ -5,10 +5,10 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     res.render('home', {
-        css: ['login'],
-        js: ['login'],
-        contain: 'guest/login/login',
-        title: 'Login',
+        css: ['signup'],
+        js: ['singup'],
+        contain: 'guest/signup/signup',
+        title: 'Sign Up',
     });
 });
 

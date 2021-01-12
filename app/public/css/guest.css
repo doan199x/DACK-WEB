@@ -15,9 +15,8 @@ opacity: 80%;
 .topview{
 padding-top:10px;
 display: grid;
-grid-column-gap: 20px;
 grid-template-columns: auto auto auto auto auto;
-padding-left: 20px;
+padding-left: 30px;
 }
 .card-custom{
     margin-bottom:20px; 
