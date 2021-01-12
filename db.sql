@@ -11,10 +11,17 @@ create table Teacher(
     avatarPath varchar(100),
     primary key(teacherID)
 );
+create table PostCategory(
+	postCategoryID int not null auto_increment,
+    postCategoryName varchar(30),
+    primary key(postCategoryID)
+);
 create table Category(
 	categoryID int not null auto_increment,
     categoryName varchar(30),
-    primary key(categoryID)
+    postCategoryID int,
+    primary key(categoryID),
+    foreign key(postCategoryID) references PostCategory(postCategoryID)
 );
 create table Admin(
 	adminID int not null auto_increment,
@@ -147,8 +154,17 @@ insert into Teacher (name,email,password,avatarPath)values('Nguyễn Hoàng Anh'
 insert into Teacher (name,email,password,avatarPath)values('Hoàng Phan Hoài An','yendan123@gmail.com','123456','/public/images/avatar/default.jpg');
 insert into Teacher (name,email,password,avatarPath)values('Trần Đình Trọng','trongtran@gmail.com','123456','/public/images/avatar/default.jpg');
 
-insert into Category (categoryName) values('Lập trình web');
-insert into Category (categoryName) values('Lập trình thiết bị di động');
+/*post-category*/
+insert into PostCategory (postCategoryName) values('IT');
+insert into PostCategory (postCategoryName) values('Nấu ăn');
+
+
+insert into Category (categoryName,postCategoryID) values('Lập trình web',1);
+insert into Category (categoryName,postCategoryID) values('Lập trình thiết bị di động',1);
+
+insert into Category (categoryName,postCategoryID) values('Nấu ăn căn bản',2);
+insert into Category (categoryName,postCategoryID) values('Nấu ăn chuyên nghiệp',2);
+
 
 insert into Admin (name,email,password) values('Nguyễn Hồng Anh','anhnguyen115@gmail.com','123456');
 insert into Admin (name,email,password) values('Hà Văn Quản','quanha11234@gmail.com','123456');
@@ -180,25 +196,33 @@ insert into Bill (timeCreated,studentID,sum,status) values(now(),3,300000,'Chờ
 insert into Bill (timeCreated,studentID,sum,status) values(now(),4,400000,'Chờ xử lí');
 
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình Android căn bản','/img/course/default.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',100,5,50000,now(),now(),2,'Đã hoàn tất',1,103);
+values('Lập trình Android căn bản','/img/course/course1.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',100,5,50000,now(),now(),2,'Đã hoàn tất',1,103);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình Android nâng cao','/img/course/default.jpg','Lập trình Android nâng cao','Lập trình Android nâng cao Lập trình Android nâng cao',200,5,50000,now(),now(),2,'Đã hoàn tất',1,104);
+values('Lập trình Android nâng cao','/img/course/course2.jpg','Lập trình Android nâng cao','Lập trình Android nâng cao Lập trình Android nâng cao',200,5,50000,now(),now(),2,'Đã hoàn tất',1,104);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình IOS căn bản','/img/course/default.jpg','Làm quen với lập trình IOS','Giúp hiểu các khái niệm cơ bản về IOS',100,5,100000,now(),now(),2,'Đã hoàn tất',1,105);
+values('Lập trình IOS căn bản','/img/course/course3.jpg','Làm quen với lập trình IOS','Giúp hiểu các khái niệm cơ bản về IOS',100,5,100000,now(),now(),2,'Đã hoàn tất',1,105);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình IOS nâng cao','/img/course/default.jpg','Học về IOS nâng cao','Tiếp cận các khái niệm nâng cao về ios',100,5,100000,now(),now(),2,'Đã hoàn tất',1,236);
+values('Lập trình IOS nâng cao','/img/course/course4.jpg','Học về IOS nâng cao','Tiếp cận các khái niệm nâng cao về ios',100,5,100000,now(),now(),2,'Đã hoàn tất',1,236);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình Nodejs cho người mới bắt đầu','/img/course/default.jpg','Khóa học làm quen với lập trình NodeJS','giúp hiểu các khái niệm cơ bản trong Nodejs',256,4.6,150000,now(),now(),1,'Đã hoàn tất',1,16);
+values('Lập trình Nodejs cho người mới bắt đầu','/img/course1/course5.jpg','Khóa học làm quen với lập trình NodeJS','giúp hiểu các khái niệm cơ bản trong Nodejs',256,4.6,150000,now(),now(),1,'Đã hoàn tất',1,16);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình Nodejs nâng cao','/img/course/default.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',512,3.8,150000,now(),now(),2,'Đã hoàn tất',1,921);
+values('Lập trình Nodejs nâng cao','/img/course/course6.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',512,3.8,150000,now(),now(),2,'Đã hoàn tất',1,921);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Cùng học Python','/img/course/default.jpg','Khóa học làm quen với lập trình Python căn bản','Giúp hiểu rõ các khái niệm căn bản trong python',631,2.1,200000,now(),now(),2,'Đã hoàn tất',1,716);
+values('Cùng học Python','/img/course/course7.jpg','Khóa học làm quen với lập trình Python căn bản','Giúp hiểu rõ các khái niệm căn bản trong python',631,2.1,200000,now(),now(),2,'Đã hoàn tất',1,716);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Python cho mọi người','/img/course/default.jpg','Lập trình python căn bản','Học cách lập trình python căn bản',521,4.8,200000,now(),now(),2,'Đã hoàn tất',1,908);
+values('Python cho mọi người','/img/course/course8.jpg','Lập trình python căn bản','Học cách lập trình python căn bản',521,4.8,200000,now(),now(),2,'Đã hoàn tất',1,908);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình ASP.NET','/img/course/default.jpg','Làm quen với ASP.NET','Khóa học dnahf cho người mới bắt đầu',215,4.5,250000,now(),now(),2,'Đã hoàn tất',1,301);
+values('Lập trình ASP.NET','/img/course/course9.jpg','Làm quen với ASP.NET','Khóa học dnahf cho người mới bắt đầu',215,4.5,250000,now(),now(),2,'Đã hoàn tất',1,301);
 insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
-values('Lập trình Xamarin','/img/course/default.jpg','Giúp lập trình Xamarin','Khóa học ngắn hạn',5612,1.6,250000,now(),now(),1,'Đã hoàn tất',1, 207);
+values('Lập trình Xamarin','/img/course/course10.jpg','Giúp lập trình Xamarin','Khóa học ngắn hạn',5612,1.6,250000,now(),now(),1,'Đã hoàn tất',1, 1050);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Lập trình Java căn bản','/img/course/course11.jpg','Java căn bản','Khóa học ngắn hạn',5612,3.5,300000,now(),now(),1,'Đã hoàn tất',2, 1253);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Java và OOP','/img/course/course12.jpg','OOP trong Java','Tìm hiểu OOP trong Java',5612,4.6,300000,now(),now(),1,'Đã hoàn tất',3, 1011);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Java nâng cao','/img/course/course13.jpg','Các khái niệm nâng cao trong java','Bổ sung kiến thức nâng cao trong Java',5612,4.7,300000,now(),now(),1,'Đã hoàn tất',3, 2500);
+insert into Course (name,imagePath,sortDescription,description,NoStudents,averageStar,price,created,lastUpdated,categoryID,status,teacherID,views) 
+values('Java spring','/img/course/course14.jpg','Lập trinh Java với Framework Spring','Khóa học giúp làm quen với Framework spring',5612,2.1,300000,now(),now(),1,'Đã hoàn tất',2, 2530);
 
 insert into BillDetail (billID, courseID,price) values(1,1,50000);
 insert into BillDetail (billID, courseID,price) values(1,2,50000);
@@ -450,4 +474,3 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(121,'Bài 7:
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(122,'Bài 8: @RequestParam trong Spring MVC','/uploads/video/lesson122.mp4',41);
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(123,'Bài 9: @PathVariable trong Spring MVC','/uploads/video/lesson123.mp4',41);
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(124,'Bài 10: Download files trong Spring MVC','/uploads/video/lesson124.mp4',41);
-
