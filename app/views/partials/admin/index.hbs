@@ -1,39 +1,30 @@
 <div class="container">
-    <br>
     <div class="row">
-        <div class="col-lg-8">
-            <button class="btn btn-secondary btn-block">Quản lí</button>
-            <h4 class="admin-action" style="margin-top:20px" onclick="categoryAdmin()">♦ Quản lí Category</h4>
-            <h4 class="admin-action">♦ Quản lí Khóa học</h4>
-            <h4 class="admin-action">♦ Quản lí Học sinh & giảng viên</h4>
-        </div>
         <div class="col-lg-4">
-            <div class="row">
-                <button class="btn btn-secondary btn-block">Nạp tiền</button>
-            </div>
+            {{>admin-nav}}
+        </div>
+        <div class="col-lg-1">
+
+        </div>
+        <div class="col-lg-6">
+            <h3>Nạp tiền</h3>
             <div class=" form-group row" style="margin-top:20px">
-                <div class="col-lg-5">
+                <div class="col-lg-4">
                     <label>Email tài khoản: </label>
                 </div>
-                <div class="col-lg-6">
-                    <input tyle="t">
+                <div class="col-lg-7">
+                    <input style="width:70%">
                 </div>
             </div>
             <div class=" form-group row" style="margin-top:20px">
-                <div class="col-lg-5">
+                <div class="col-lg-4">
                     <label>Số tiền: </label>
                 </div>
-                <div class="col-lg-6">
-                    <input type="text" class="money">
+                <div class="col-lg-7">
+                    <input style="width:70%" type="text" class="money">
                 </div>
             </div>
             <button class="btn btn-secondary">Nạp tiền</button>
-        </div>
-    </div>
-    <div class="row hide" id="categoryZone">
-        <hr>
-        <div class="col-lg-12">
-            Danh sách Category:
         </div>
     </div>
 </div>

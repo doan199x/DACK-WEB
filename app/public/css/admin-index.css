@@ -1,6 +1,29 @@
-h4.admin-action{
-    margin-top:10px
+.active{
+    background-color: #212121 !important;
+    border-color: #ffffff !important;
+    font-weight: bold;
+    cursor: pointer;
 }
+table, td, th {
+    border: 1px solid black !important;
+}
+
+th{
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table {
+    counter-reset: tableCount;     
+  }
+.counterCell:before {              
+    content: counter(tableCount); 
+    counter-increment: tableCount; 
+}
+
 .hide{
-    display: none
+    display: none;
 }

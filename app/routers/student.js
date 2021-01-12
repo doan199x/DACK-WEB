@@ -32,7 +32,7 @@ router.get('/profile', async (req, res, next) => {
         // studentID = 1;
         const studentID = 1;
         var studentProfile = await studentModel.getProfile(studentID);
-        res.render('profile', {
+        res.render('render', {
             contain: 'student/profile',
             title: 'Hồ sơ',
             page: 'profile',
@@ -50,7 +50,7 @@ router.get('/profile/edit', async (req, res, next) => {
         // studentID = 1;
         const studentID = 1;
         var studentProfile = await studentModel.getProfile(studentID);
-        res.render('profile', {
+        res.render('render', {
             contain: 'student/profile-edit',
             title: 'Chỉnh sửa hồ sơ',
             page: 'profile',
@@ -115,7 +115,7 @@ router.get('/watch-list', async (req, res, next) => {
     try {
         const studentID = 1;
         var watchList = await courseModel.getWatchListbyStudentID(studentID);
-        res.render('watch-list', {
+        res.render('render', {
             contain: 'student/watch-list',
             title: 'Home',
             page: 'watch-list',
@@ -131,7 +131,7 @@ router.get('/course-list', async (req, res) => {
     try {
         const studentID = 1;
         var registeredCourseID = await courseModel.getRegisteredCourseByStudentID(studentID);
-        res.render('course-list', {
+        res.render('render', {
             contain: 'student/course-list',
             title: 'Home',
             page: 'course-list',
@@ -200,7 +200,7 @@ router.get('/watch', async (req, res, next) => {
         var lesson = await lessonModel.getLessonByID(lessonIDMinOutline);
         var lessonOutline = await lessonModel.getLessonByID(lessonIDMinOutline);
         if (check == false) {
-            res.render('course-list', {
+            res.render('render', {
                 contain: 'student/watch',
                 title: 'Home',
                 js: ['watch-video', 'watch'],
@@ -218,7 +218,7 @@ router.get('/watch', async (req, res, next) => {
             });
         }
         else {
-            res.render('course-list', {
+            res.render('render', {
                 contain: 'student/watch',
                 title: 'Home',
                 js: ['watch-video', 'watch'],
@@ -293,7 +293,7 @@ router.get('/rate', async (req, res, next) => {
                     break;
                 }
             } 
-            res.render('rate', {
+            res.render('render', {
                 contain: 'student/rate',
                 title: 'Home',
                 js: ['rate'],
