@@ -539,3 +539,4 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(155,'Bài 12
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(156,'Bài 13: Các món ăn Argentina','/uploads/video/default.mp4',48); 
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(157,'Bài 14: Các món ăn Chile','/uploads/video/default.mp4',48); 
 
+select* from Course where name like 'Lập';

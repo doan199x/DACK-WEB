@@ -148,13 +148,18 @@ router.post('/post-category-create', async (req, res, next) => {
 
 router.get('/course', async (req, res, next) => {
     try {
+        var courses;
         if ((req.query.page == null) || (req.query.page.trim() == '')) {
             req.query.page = 1;
         }
         if ((req.query.perPage == null) || (req.query.perPage.trim() == '')) {
             req.query.perPage = 3;
         }
-        var courses = await courseModel.getAll();
+        if ((req.query.search == null) || (req.query.search.trim() == '')) {
+            courses = await courseModel.getAll();
+        }else{
+            courses = await courseModel.findLikeName(req.query.search);
+        }
         // add width star
         for (var i = 0; i < courses.length; i++) {
             courses[i].widthStar = courses[i].averageStar / 5 * 100;
@@ -166,7 +171,7 @@ router.get('/course', async (req, res, next) => {
         res.render('render', {
             contain: 'admin/admin-course',
             title: 'Quản lí khóa học',
-            js: ['admin','admin-course'],
+            js: ['admin', 'admin-course'],
             css: ['admin-index', 'rate'],
             courses: pagingInfo.objectOnPage,
             pagingInfo: pagingInfo,
@@ -178,23 +183,24 @@ router.get('/course', async (req, res, next) => {
     }
 })
 
-router.post('/delete-course',async(req,res,next)=>{
-    try{
+router.post('/delete-course', async (req, res, next) => {
+    try {
         courseID = req.body.courseID;
         chapters = await chapterModel.getChaptersByCourseID(courseID);
         lessonsID = [];
-        for (var i=0;i<chapters.length;i++){
+        for (var i = 0; i < chapters.length; i++) {
             lessons = await lessonModel.getLessonsByChapterID(chapters[i].chapterID);
-            for (var j=0;j<lessons.length;j++){
+            for (var j = 0; j < lessons.length; j++) {
                 lessonsID.push(lessons[j].lessonID);
             }
         }
-        await courseModel.delete(courseID,lessonsID);
+        await courseModel.delete(courseID, lessonsID);
         res.json({
             status: 'deleted'
         })
-    }catch(err){
+    } catch (err) {
         next(err);
     }
 })
+
 module.exports = router;
