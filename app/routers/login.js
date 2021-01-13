@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const loginModel = require("../model/login.js");
 const guestModel = require("../model/guest.js");
+const auth = require("../middleware/auth.mdw");
+const moment = require('moment');
 // const modelname = require('../models/modelname');
 
 router.get("/",async (req,res) => {
@@ -16,21 +18,9 @@ router.get("/",async (req,res) => {
 router.post("/", async (req, res) => {
   try {
     const login = await loginModel.result(req.body.email, req.body.password);
+    console.log(req.session);
     if (login) {
-      const top = await guestModel.top();
-      const topview = await guestModel.topview();
-      const newest = await guestModel.newest();
-      const hot = await guestModel.hot();
-      res.render("home", {
-        css: ["guest"],
-        js: [""],
-        contain: "guest/guest",
-        title: "Home",
-        top: top,
-        topview: topview,
-        newest: newest,
-        hot: hot,
-      });
+      res.redirect("/")
     } else {
       res.render("home", {
         css: ["login"],

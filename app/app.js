@@ -5,6 +5,17 @@ require('dotenv').config()
 
 const app = express();
 const port = 3000;
+//Middlewares
+require('./middleware/view.mdw');
+require('./middleware/session.mdw');
+require('./middleware/locals.mdw');
+require('./middleware/routes.mdw');
+require('./middleware/error.mdw');
+
+require('express-async-errors');
+app.use(express.urlencoded({
+  extended: true
+}));
 
 const hbs = exphbs.create({
     defaultLayout: 'main',
