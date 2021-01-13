@@ -104,12 +104,11 @@ router.post("/compare-otp", async (req, res) => {
       } else {
 
         //Insert vào db
-        console.log(otpArr);
+        //console.log(otpArr);
         const result = await signupModel.signup(
           otpArr[indexCheck].email,
           otpArr[indexCheck].password
         );
-        console.log(result);
         //Xóa trong mảng toàn cục
         if (result.affectedRows != 1) {
           res.json({

@@ -7,6 +7,7 @@ const moment = require('moment');
 const teacherModel = require('../model/teacher');
 const studentModel = require('../model/student');
 const adminModel = require('../model/admin');
+const bcrypt = require('bcrypt');
 // const modelname = require('../models/modelname');
 
 router.get("/",async (req,res) => {
@@ -21,22 +22,26 @@ router.get("/",async (req,res) => {
 router.post("/", async (req, res) => {
   try {
     // check is teacher
-    var checkTeacher = false;
-    var teachers = await teacherModel.checkLogin(req.body.email,req.body.password);
+    let checkTeacher = false;
+    
+    const teachers = await teacherModel.checkLogin(req.body.email,req.body.password);
     if (teachers.length > 0){
-      checkTeacher = true;
+      console.log(teachers);
+      if (bcrypt.compareSync(req.body.password,teachers[0].password)) checkTeacher = true;
     }
     // check is student
     var checkStudent = false;
+
     var students = await studentModel.checkLogin(req.body.email,req.body.password);
     if (students.length > 0){
-      checkStudent = true;
+      if (bcrypt.compareSync(req.body.password,students[0].password)) checkStudent = true;
     }
     // check is admin
     var checkAdmin = false;
+
     var admins = await adminModel.checkLogin(req.body.email,req.body.password);
     if (admins.length > 0){
-      checkAdmin = true;
+       if (bcrypt.compareSync(req.body.password,admins[0].password)) checkAdmin = true;
     }
     if (checkStudent == false && checkTeacher == false && checkAdmin == false){
       // ten dang nhap hoac mat khau khong dung
@@ -48,16 +53,17 @@ router.post("/", async (req, res) => {
         result: 0
       });
     }
-    else if (checkTeacher === true){
+    else if (checkTeacher == true){
       req.session.user = teachers[0];
       req.session.user.role = 'teacher';
+      res.redirect('/');
       // redirect teacher index
-    } else if (checkStudent === true){
+    } else if (checkStudent == true){
       req.session.user = students[0];
       req.session.user.role = 'student';
-      console.log(req.session.user);
+      //console.log(req.session.user);
       res.redirect('/');
-    } else if(checkAdmin === true){
+    } else if(checkAdmin == true){
       req.session.user = admins[0];
       req.session.user.role = 'admin';
       res.redirect('/admin');

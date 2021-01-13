@@ -18,7 +18,8 @@ module.exports = {
         return student;
     },
     checkLogin: async(email, password)=>{
-        const sql = `SELECT * FROM Student where email = '${email}' and password = '${password}'`;
+        //const sql = `SELECT * FROM Student where email = '${email}' and password = '${password}'`;
+        const sql = `SELECT password FROM Student where email = '${email}'`
         const student = await db.load(sql);
         return student;
     }
