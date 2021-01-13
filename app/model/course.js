@@ -25,5 +25,22 @@ module.exports = {
         const sql = `SELECT* from Course where categoryID = ${categoryID}`; 
         const result = await db.load(sql);
         return result;
+    },
+    getAll: async()=>{
+        const sql = `SELECT* from Course`; 
+        const result = await db.load(sql);
+        return result;
+    },
+    delete: async(courseID,lessonsID)=>{
+        await db.load(`DELETE from RegisteredCourse where courseID = ${courseID}`)
+        await db.load(`DELETE from Sale where courseID = ${courseID}`)
+        await db.load(`DELETE from BillDetail where courseID = ${courseID}`)
+        await db.load(`DELETE from WatchList where courseID = ${courseID}`)
+        await db.load(`DELETE from Rating where courseID = ${courseID}`)
+        for (var i=0;i<lessonsID.length;i++){
+            await db.load(`DELETE from Lesson where lessonID=${lessonsID[i]}`);
+        }
+        await db.load(`DELETE from Chapter where courseID=${courseID}`);
+        await db.load(`DELETE from Course where courseID = ${courseID}`);
     }
 }; 

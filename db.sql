@@ -1,7 +1,7 @@
 drop database if exists onlineCourse;
 create database onlineCourse;
 use onlineCourse;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123@';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456yugi';
 flush privileges;
 create table Teacher(
 	teacherID int not null auto_increment,
@@ -538,3 +538,4 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(154,'Bài 11
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(155,'Bài 12: Các món ăn Brazil','/uploads/video/default.mp4',48);
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(156,'Bài 13: Các món ăn Argentina','/uploads/video/default.mp4',48); 
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(157,'Bài 14: Các món ăn Chile','/uploads/video/default.mp4',48); 
+

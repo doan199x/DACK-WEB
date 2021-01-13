@@ -3,7 +3,10 @@ const router = express.Router();
 const categoryModel = require('../model/category.js');
 const postCategoryModel = require('../model/postCategory.js');
 const courseModel = require('../model/course.js');
+const chapterModel = require('../model/chapter.js')
+const lessonModel = require('../model/lesson.js')
 const auth = require('../middleware/auth.mdw');
+const helper = require('../helper/pagination');
 
 router.get('/', async (req, res, next) => {
     try {
@@ -19,7 +22,7 @@ router.get('/', async (req, res, next) => {
 })
 
 
-router.get('/category',auth.adminAuth, async (req, res, next) => {
+router.get('/category', async (req, res, next) => {
     try {
         // adminID = 1;
         var adminId = 1;
@@ -31,7 +34,7 @@ router.get('/category',auth.adminAuth, async (req, res, next) => {
         res.render('render', {
             contain: 'admin/admin-category',
             title: 'Quản lí danh mục',
-            js: ['admin','category'],
+            js: ['admin', 'admin-category'],
             css: ['admin-index'],
             postCategories: postCategories
         });
@@ -143,4 +146,55 @@ router.post('/post-category-create', async (req, res, next) => {
     }
 })
 
+router.get('/course', async (req, res, next) => {
+    try {
+        if ((req.query.page == null) || (req.query.page.trim() == '')) {
+            req.query.page = 1;
+        }
+        if ((req.query.perPage == null) || (req.query.perPage.trim() == '')) {
+            req.query.perPage = 3;
+        }
+        var courses = await courseModel.getAll();
+        // add width star
+        for (var i = 0; i < courses.length; i++) {
+            courses[i].widthStar = courses[i].averageStar / 5 * 100;
+            courses[i].widthStar += '%';
+        }
+        var page = req.query.page;
+        var perPage = req.query.perPage;
+        var pagingInfo = helper.pagination(courses, page, perPage, courses.length);
+        res.render('render', {
+            contain: 'admin/admin-course',
+            title: 'Quản lí khóa học',
+            js: ['admin','admin-course'],
+            css: ['admin-index', 'rate'],
+            courses: pagingInfo.objectOnPage,
+            pagingInfo: pagingInfo,
+            currentPage: page,
+            perPage: perPage
+        });
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/delete-course',async(req,res,next)=>{
+    try{
+        courseID = req.body.courseID;
+        chapters = await chapterModel.getChaptersByCourseID(courseID);
+        lessonsID = [];
+        for (var i=0;i<chapters.length;i++){
+            lessons = await lessonModel.getLessonsByChapterID(chapters[i].chapterID);
+            for (var j=0;j<lessons.length;j++){
+                lessonsID.push(lessons[j].lessonID);
+            }
+        }
+        await courseModel.delete(courseID,lessonsID);
+        res.json({
+            status: 'deleted'
+        })
+    }catch(err){
+        next(err);
+    }
+})
 module.exports = router;
