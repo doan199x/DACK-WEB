@@ -48,6 +48,15 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 
+//use session
+let session = require('express-session');
+app.use(session({
+    cookie: { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 },
+    secret: 's3cret',
+    resave: false,
+    saveUninitialized: false
+}));
+
 //body-parser
 let bodyParser = require('body-parser');
 app.use(bodyParser.json());

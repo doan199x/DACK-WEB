@@ -3,6 +3,7 @@ const router = express.Router();
 const categoryModel = require('../model/category.js');
 const postCategoryModel = require('../model/postCategory.js');
 const courseModel = require('../model/course.js');
+const auth = require('../middleware/auth.mdw');
 
 router.get('/', async (req, res, next) => {
     try {
@@ -18,7 +19,7 @@ router.get('/', async (req, res, next) => {
 })
 
 
-router.get('/category', async (req, res, next) => {
+router.get('/category',auth.adminAuth, async (req, res, next) => {
     try {
         // adminID = 1;
         var adminId = 1;
