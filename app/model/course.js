@@ -42,5 +42,10 @@ module.exports = {
         }
         await db.load(`DELETE from Chapter where courseID=${courseID}`);
         await db.load(`DELETE from Course where courseID = ${courseID}`);
+    },
+    findLikeName: async(input)=>{
+        const sql = `select* from Course where name like '%${input}%';`; 
+        const result = await db.load(sql);
+        return result;
     }
 }; 
