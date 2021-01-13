@@ -27,7 +27,7 @@ create table Admin(
 	adminID int not null auto_increment,
     name varchar(30),
     email varchar(30),
-    password varchar(50),
+    password varchar(100),
     primary key(adminID)
 );
 create table Log(
@@ -45,7 +45,7 @@ create table Student(
     dateOfBirth datetime,
     dateJoin datetime,
     email varchar(30),
-    password varchar(50),
+    password varchar(100),
     avatarPath varchar(100),
     balance int,
     primary key(studentID)
@@ -137,6 +137,7 @@ create table Rating(
 create table RegisteredCourse(
 	studentID int not null,
     courseID int not null,
+    
     primary key(studentId, courseID),
 	foreign key(studentID) references Student(studentID),
     foreign key(courseID) references Course(courseID)
@@ -149,21 +150,20 @@ create table account(
 );
 
 
-
 /*Data*/
 insert into account(email,password,position) values ('admin@admin.com','123',1);
 insert into account(email,password,position) values ('teacher@teacher.com','123',2);
 insert into account(email,password,position) values ('student@student.com','123',3);
 
-insert into Teacher (name,email,password,avatarPath)values('Nguyễn Văn An','vanan123@gmail.com','123456','/public/images/avatar/teacher1.jpg');
-insert into Teacher (name,email,password,avatarPath)values('Hoàng Thu Trang','thutrang2412@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher (name,email,password,avatarPath)values('Trần Hoàng Hùng','hungtran124@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher (name,email,password,avatarPath)values('Hoàng Hiệu','hieuhoang1111@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher (name,email,password,avatarPath)values('Đỗ Thu Thủy','thuydo11122@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher (name,email,password,avatarPath)values('Nguyễn Viết Hạ','vietha@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher (name,email,password,avatarPath)values('Nguyễn Hoàng Anh','anhhoang156@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher (name,email,password,avatarPath)values('Hoàng Phan Hoài An','yendan123@gmail.com','123456','/public/images/avatar/default.jpg');
-insert into Teacher (name,email,password,avatarPath)values('Trần Đình Trọng','trongtran@gmail.com','123456','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Nguyễn Văn An','vanan123@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/teacher1.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Hoàng Thu Trang','thutrang2412@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Trần Hoàng Hùng','hungtran124@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Hoàng Hiệu','hieuhoang1111@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Đỗ Thu Thủy','thuydo11122@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Nguyễn Viết Hạ','vietha@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Nguyễn Hoàng Anh','anhhoang156@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Hoàng Phan Hoài An','yendan123@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Trần Đình Trọng','trongtran@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
 
 /*post-category*/
 insert into PostCategory (postCategoryName) values('IT');
@@ -177,29 +177,29 @@ insert into Category (categoryName,postCategoryID) values('Nấu ăn căn bản'
 insert into Category (categoryName,postCategoryID) values('Nấu ăn chuyên nghiệp',2);
 
 
-insert into Admin (name,email,password) values('Nguyễn Hồng Anh','anhnguyen115@gmail.com','123456');
-insert into Admin (name,email,password) values('Hà Văn Quản','quanha11234@gmail.com','123456');
+insert into Admin (name,email,password) values('Nguyễn Hồng Anh','anhnguyen115@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK');
+insert into Admin (name,email,password) values('Hà Văn Quản','quanha11234@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK');
 
 insert into Log (adminID,activity,time) values(1,'Đăng nhập','2021-01-01');
 insert into Log (adminID,activity,time) values(2,'Xóa thành viên vanan123@gmail.com','2021-01-01');
 
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Trần Hoàng Cường','0858343803','1999-01-01',now(),'cuonghoang1213@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Thị Hạ','0858343804','1999-01-02',now(),'hanguyen45451@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Hoàng Công Ẩn','0858343853','1999-01-03',now(),'anhoang11235@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đỗ Thị Liễu','0858343806','1999-01-04',now(),'nguyenlieu55151@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Lý Thị Mai','0858343873','1999-01-05',now(),'maily2545151@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Công Hưởng','0858343883','1999-01-06',now(),'huongcongnguyen@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Nhật Nam','0858343810','1999-01-07',now(),'namnhat124566@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đào Bá Quang','0858343811','1999-01-08',now(),'quangba54545@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Hà Huy Lợi','0858343812','1999-01-09',now(),'loaihuy124510@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Hoàng Tín','0858343813','1999-01-10',now(),'hoangtin1508@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Trần Hoàng Cường','0858343803','1999-01-01',now(),'cuonghoang1213@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Thị Hạ','0858343804','1999-01-02',now(),'hanguyen45451@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Hoàng Công Ẩn','0858343853','1999-01-03',now(),'anhoang11235@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đỗ Thị Liễu','0858343806','1999-01-04',now(),'nguyenlieu55151@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Lý Thị Mai','0858343873','1999-01-05',now(),'maily2545151@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Công Hưởng','0858343883','1999-01-06',now(),'huongcongnguyen@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Nhật Nam','0858343810','1999-01-07',now(),'namnhat124566@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đào Bá Quang','0858343811','1999-01-08',now(),'quangba54545@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Hà Huy Lợi','0858343812','1999-01-09',now(),'loaihuy124510@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Hoàng Tín','0858343813','1999-01-10',now(),'hoangtin1508@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
 insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Phạn Huy Ích','0858343814','1999-01-11',now(),'huyich@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Lý Thị Thủy','0858343815','1999-01-12',now(),'thuylty111213@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đào Bá Nhật','0858343816','1999-01-13',now(),'banhat1678@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đinh Lan Hương','0858343817','1999-01-14',now(),'huonglan@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Đình Cảnh','0858343818','1999-01-15',now(),'canhdinh55689@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Lã Văn Cà','0858343819','1999-01-16',now(),'cala121551@gmail.com','123456','/img/avatar/default.jpg',100000);
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đương Văn Hoàng','0858343820','1999-01-17',now(),'hoangduong5415151@gmail.com','123456','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Lý Thị Thủy','0858343815','1999-01-12',now(),'thuylty111213@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đào Bá Nhật','0858343816','1999-01-13',now(),'banhat1678@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đinh Lan Hương','0858343817','1999-01-14',now(),'huonglan@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Nguyễn Đình Cảnh','0858343818','1999-01-15',now(),'canhdinh55689@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Lã Văn Cà','0858343819','1999-01-16',now(),'cala121551@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance) values('Đương Văn Hoàng','0858343820','1999-01-17',now(),'hoangduong5415151@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000);
 
 insert into Bill (timeCreated,studentID,sum,status) values(now(),1,100000,'Đã xử lí');
 insert into Bill (timeCreated,studentID,sum,status) values(now(),2,200000,'Đã xử lí');
