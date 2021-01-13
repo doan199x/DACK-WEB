@@ -1,0 +1,28 @@
+.container{
+    padding-top: 10px;
+}
+.card-custom{
+    margin-bottom:20px; 
+    width: 350px;
+    height: auto;
+}
+.card-title{
+    font-weight: bold;
+    text-align: center;
+}
+.card-img-top{
+    border-bottom:1px solid black;
+}
+.title{
+padding-top: 50px;
+padding-bottom: 50px;
+text-align: center;
+font-weight: bold;
+}
+.divider{
+border-top: 1px solid #bbb;
+}
+.course{
+    display:grid;
+    grid-template-columns: auto auto auto;
+}

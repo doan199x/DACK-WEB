@@ -1,6 +1,11 @@
 const db = require('../utils/db');
 
 module.exports = {
+    all: async () => {
+        const sql = `SELECT * FROM Course;` 
+        const result = await db.load(sql);
+        return result;
+    },
     getRegisteredCourseByStudentID: async (studentID) => {
         const sql = `SELECT a.* FROM Course as a, RegisteredCourse as b, student as c where  c.studentID = ${studentID} and c.studentID = b.studentID and b.courseID = a.courseID;` 
         const result = await db.load(sql);
