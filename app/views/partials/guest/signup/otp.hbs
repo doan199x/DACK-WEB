@@ -1,0 +1,19 @@
+<div class="signup">
+    <div class="image">
+        <img style=" height: 500px;" src="/img/form/form.svg" alt="">
+    </div>
+    {{!-- <form action="/otp" class="form" method="POST" onsubmit="otp(e)" name="otp_form"> --}}
+        <div class="otp_form">
+            <div class="form-group">
+                <h5>XÁC NHẬN EMAIL</h5>
+                <label for="exampleInputEmail1">Nhập mã OTP</label>
+                <input type="input" name="otp" class="form-control" id="otp" aria-describedby="emailHelp"
+                    placeholder="OTP">
+                <small id="emailHelp" class="form-text text-muted">Chúng tôi đã gửi mã OTP cho bạn!</small>
+                <div id="email2">{{email}}</div>
+            </div>
+            <button class="btn btn-primary" onclick="checkOTP('{{email}}')">Submit</button>
+        </div>
+        {{!--
+    </form> --}}
+</div>

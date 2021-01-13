@@ -48,16 +48,16 @@ router.post("/", async (req, res) => {
         result: 0
       });
     }
-    else if (checkTeacher == true){
+    else if (checkTeacher === true){
       req.session.user = teachers[0];
       req.session.user.role = 'teacher';
       // redirect teacher index
-    } else if (checkStudent == true){
+    } else if (checkStudent === true){
       req.session.user = students[0];
       req.session.user.role = 'student';
       console.log(req.session.user);
       res.redirect('/');
-    } else if(checkAdmin == true){
+    } else if(checkAdmin === true){
       req.session.user = admins[0];
       req.session.user.role = 'admin';
       res.redirect('/admin');

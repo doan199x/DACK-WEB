@@ -62,7 +62,6 @@ let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 app.use('/', require('./routers/guest'));
 app.use('/student', require('./routers/student'));
 app.use('/login', require('./routers/login'));

@@ -137,6 +137,7 @@ create table Rating(
 create table RegisteredCourse(
 	studentID int not null,
     courseID int not null,
+    
     primary key(studentId, courseID),
 	foreign key(studentID) references Student(studentID),
     foreign key(courseID) references Course(courseID)
@@ -147,7 +148,6 @@ create table account(
     password varchar(50) not null,
     position int
 );
-
 
 
 /*Data*/
