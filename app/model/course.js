@@ -25,5 +25,15 @@ module.exports = {
         const sql = `SELECT* from Course where categoryID = ${categoryID}`; 
         const result = await db.load(sql);
         return result;
+    },
+    getCourseByTeacherID: async (teacherID) => {
+        const sql = `SELECT* from Course where teacherID = ${teacherID}`;
+        const result = await db.load(sql);
+        return result;
+    },
+    findLikeNameByTeacherID:async(input,teacherID)=>{
+        const sql = `select* from Course where name like '%${input}%' and teacherID = teacherID`; 
+        const result = await db.load(sql);
+        return result;
     }
 }; 

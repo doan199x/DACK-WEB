@@ -47,6 +47,7 @@ app.use('/', require('./routers/guest'));
 app.use('/student', require('./routers/student'));
 app.use('/login', require('./routers/login'));
 app.use('/admin', require('./routers/admin'));
+app.use('/teacher', require('./routers/teacher'));
 
 // app.use('/', require('./routers/home'));
 
