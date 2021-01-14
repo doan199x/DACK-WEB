@@ -17,7 +17,10 @@
                 {{#each courses}}
                 <div class="row" style="margin-top: 10px;">
                     <div class="col-lg-5">
-                        <img src="{{imagePath}}" style="border: 1px solid black" height="200px" width="300px">
+                        <a href="/course/detail?courseID={{this.courseID}}">
+                            <img src="{{imagePath}}" style="border: 1px solid black" height="200px" width="300px">
+                        </a>
+
                     </div>
                     <div class="col-lg-7">
                         <div class="row">
