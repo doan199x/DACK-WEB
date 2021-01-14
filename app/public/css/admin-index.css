@@ -24,3 +24,11 @@ table {
 .hide{
     display: none;
 }
+
+.fa-right{
+    margin-right:5px
+}
+
+.fa-cursor{
+    cursor:pointer
+}

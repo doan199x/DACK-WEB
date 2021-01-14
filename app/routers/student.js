@@ -48,7 +48,7 @@ router.get('/profile', async (req, res, next) => {
 router.get('/profile/edit', async (req, res, next) => {
     try {
         // studentID = 1;
-        const studentID = 1;
+        var studentID = req.query.studentID;
         var studentProfile = await studentModel.getProfile(studentID);
         res.render('render', {
             contain: 'student/profile-edit',
@@ -64,8 +64,8 @@ router.get('/profile/edit', async (req, res, next) => {
 
 router.post('/profile/edit', upload.single('fileAvatar'), async (req, res, next) => {
     try {
+        var studentID = req.query.studentID;
         // studentID = 1;
-        const studentID = 1;
         var student = await studentModel.getAvatarPath(studentID);
         var avatarPath;
         if (req.file) {

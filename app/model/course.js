@@ -37,7 +37,7 @@ module.exports = {
         return result;
     },
     delete: async(courseID,lessonsID)=>{
-        await db.load(`DELETE from RegisteredCourse where courseID = ${courseID}`)
+        await db.load(`DELETE from RegisteredCourse where courseID = ${courseID};`)
         await db.load(`DELETE from Sale where courseID = ${courseID}`)
         await db.load(`DELETE from BillDetail where courseID = ${courseID}`)
         await db.load(`DELETE from WatchList where courseID = ${courseID}`)

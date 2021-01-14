@@ -39,6 +39,6 @@ function deleteCourse(courseID) {
 }
 
 function timKiemKhoaHoc(){
-    var search = document.getElementById(' inputTimKiem').value;
+    var search = document.getElementById('inputTimKiem').value;
     location.href=`/admin/course?search=${search}`;
 }

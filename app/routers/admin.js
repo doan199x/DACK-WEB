@@ -5,6 +5,7 @@ const postCategoryModel = require('../model/postCategory.js');
 const courseModel = require('../model/course.js');
 const chapterModel = require('../model/chapter.js')
 const lessonModel = require('../model/lesson.js')
+const studentModel = require('../model/student.js');
 const auth = require('../middleware/auth.mdw');
 const helper = require('../helper/pagination');
 
@@ -199,6 +200,52 @@ router.post('/delete-course', async (req, res, next) => {
             status: 'deleted'
         })
     } catch (err) {
+        next(err);
+    }
+})
+
+router.get('/student',async (req,res,next)=>{
+    try{
+        var students;
+        if ((req.query.page == null) || (req.query.page.trim() == '')) {
+            req.query.page = 1;
+        }
+        if ((req.query.perPage == null) || (req.query.perPage.trim() == '')) {
+            req.query.perPage = 6;
+        }
+        if ((req.query.search == null) || (req.query.search.trim() == '')) {
+            students = await studentModel.getAll();
+        }else{
+            students = await studentModel.findLikeName(req.query.search);
+        }
+        var page = req.query.page;
+        var perPage = req.query.perPage;
+        var pagingInfo = helper.pagination(students, page, perPage, students.length);
+        console.log(pagingInfo.objectOnPage);
+        res.render('render', {
+            contain: 'admin/admin-qlhocsinh',
+            title: 'Quản lí giáo viên',
+            js: ['admin','admin-qlhocsinh'],
+            css: ['admin-index'],
+            students: pagingInfo.objectOnPage,
+            pagingInfo: pagingInfo,
+            currentPage: page,
+            perPage: perPage
+        });
+    }catch(err){
+        next(err);
+    }
+})
+
+router.post('/delete-student',async(req,res,next)=>{
+    try{
+        // var studentID = req.body.studentID;
+        // await studentModel.delete(studentID);
+        //chua lam
+        res.json({
+            status:'ok'
+        })
+    }catch(err){
         next(err);
     }
 })

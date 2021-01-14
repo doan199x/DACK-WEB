@@ -9,3 +9,11 @@ function quanLiDanhMuc() {
 function quanLiKhoaHoc(){
     location.href="/admin/course"
 }
+
+function quanLiHocSinh(){
+    location.href="/admin/student"
+}
+
+function quanLiGiaoVien(){
+    location.href="/admin/teacher"
+}
