@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
   try {
     const top = await guestModel.top();
     const topview = await guestModel.topview();
+    console.log(topview);
     const newest = await guestModel.newest();
     const hot = await guestModel.hot();
     res.render("home", {

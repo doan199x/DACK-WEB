@@ -72,4 +72,16 @@ router.get("/find", async (req, res) => {
   }
 });
 
+router.get("/detail", async (req, res) => {
+  try {
+    res.render("home", {
+      css: ["course", "rate"],
+      js: ["course"],
+      contain: "course/course-detail",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;
