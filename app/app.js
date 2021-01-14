@@ -14,7 +14,7 @@ require('./middleware/error.mdw');
 
 require('express-async-errors');
 app.use(express.urlencoded({
-  extended: true
+    extended: true
 }));
 
 const hbs = exphbs.create({
@@ -61,6 +61,12 @@ app.use(session({
 let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+//global variable
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.session.user ? true : false;
+    res.locals.sesEmail = req.session.user ? req.session.user.email : '';
+    next();
+})
 
 app.use('/', require('./routers/guest'));
 app.use('/student', require('./routers/student'));
@@ -69,7 +75,8 @@ app.use('/admin', require('./routers/admin'));
 app.use('/teacher', require('./routers/teacher'));
 app.use('/login', require('./routers/login'));
 app.use('/signup', require('./routers/signup'));
-app.use('/course',require('./routers/course'));
+app.use('/course', require('./routers/course'));
+app.use('/logout', require('./routers/logout'));
 
 // app.use('/', require('./routers/home'));
 

@@ -6,5 +6,10 @@ module.exports = {
         const sql = `SELECT password FROM Admin where email = '${email}'`
         const admins = await db.load(sql);
         return admins;
-    }
+    },
+    findByEmail : async(email)=>{
+        const sql = `select* from Admin where email ='${email}'`; 
+        const result = await db.load(sql);
+        return result;
+    },
 }; 

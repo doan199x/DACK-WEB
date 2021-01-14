@@ -18,7 +18,7 @@ module.exports = {
         return result;
     },
     findByEmail : async(email)=>{
-        const sql = `select* from Teacher where email = ${email}`; 
+        const sql = `select* from Teacher where email = '${email}'`; 
         const result = await db.load(sql);
         return result;
     },

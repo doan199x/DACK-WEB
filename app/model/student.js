@@ -37,5 +37,10 @@ module.exports = {
         const sql = `DELETE from Student where studentID = ${studentID}`; 
         const result = await db.load(sql);
         return result;
-    }
+    },
+    findByEmail : async(email)=>{
+        const sql = `select* from Student where email = '${email}'`; 
+        const result = await db.load(sql);
+        return result;
+    },
 }; 
