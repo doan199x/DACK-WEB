@@ -155,7 +155,7 @@ insert into account(email,password,position) values ('admin@admin.com','123',1);
 insert into account(email,password,position) values ('teacher@teacher.com','123',2);
 insert into account(email,password,position) values ('student@student.com','123',3);
 
-insert into Teacher (name,email,password,avatarPath)values('Nguyễn Văn An','vanan123@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/teacher1.jpg');
+insert into Teacher (name,email,password,avatarPath)values('Nguyễn Văn An','vanan123@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
 insert into Teacher (name,email,password,avatarPath)values('Hoàng Thu Trang','thutrang2412@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
 insert into Teacher (name,email,password,avatarPath)values('Trần Hoàng Hùng','hungtran124@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
 insert into Teacher (name,email,password,avatarPath)values('Hoàng Hiệu','hieuhoang1111@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg');
@@ -539,4 +539,4 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(155,'Bài 12
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(156,'Bài 13: Các món ăn Argentina','/uploads/video/default.mp4',48); 
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(157,'Bài 14: Các món ăn Chile','/uploads/video/default.mp4',48); 
 
-select* from Course where name like 'Lập';
+

@@ -6,6 +6,7 @@ const courseModel = require('../model/course.js');
 const chapterModel = require('../model/chapter.js')
 const lessonModel = require('../model/lesson.js')
 const studentModel = require('../model/student.js');
+const teacherModel = require('../model/teacher.js');
 const auth = require('../middleware/auth.mdw');
 const helper = require('../helper/pagination');
 
@@ -158,7 +159,7 @@ router.get('/course', async (req, res, next) => {
         }
         if ((req.query.search == null) || (req.query.search.trim() == '')) {
             courses = await courseModel.getAll();
-        }else{
+        } else {
             courses = await courseModel.findLikeName(req.query.search);
         }
         // add width star
@@ -204,8 +205,8 @@ router.post('/delete-course', async (req, res, next) => {
     }
 })
 
-router.get('/student',async (req,res,next)=>{
-    try{
+router.get('/student', async (req, res, next) => {
+    try {
         var students;
         if ((req.query.page == null) || (req.query.page.trim() == '')) {
             req.query.page = 1;
@@ -215,7 +216,7 @@ router.get('/student',async (req,res,next)=>{
         }
         if ((req.query.search == null) || (req.query.search.trim() == '')) {
             students = await studentModel.getAll();
-        }else{
+        } else {
             students = await studentModel.findLikeName(req.query.search);
         }
         var page = req.query.page;
@@ -225,27 +226,103 @@ router.get('/student',async (req,res,next)=>{
         res.render('render', {
             contain: 'admin/admin-qlhocsinh',
             title: 'Quản lí giáo viên',
-            js: ['admin','admin-qlhocsinh'],
+            js: ['admin', 'admin-qlhocsinh'],
             css: ['admin-index'],
             students: pagingInfo.objectOnPage,
             pagingInfo: pagingInfo,
             currentPage: page,
             perPage: perPage
         });
-    }catch(err){
+    } catch (err) {
         next(err);
     }
 })
 
-router.post('/delete-student',async(req,res,next)=>{
-    try{
+router.post('/delete-student', async (req, res, next) => {
+    try {
         // var studentID = req.body.studentID;
         // await studentModel.delete(studentID);
         //chua lam
         res.json({
-            status:'ok'
+            status: 'ok'
         })
-    }catch(err){
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.get('/teacher', async (req, res, next) => {
+    try {
+        var teachers;
+        if ((req.query.page == null) || (req.query.page.trim() == '')) {
+            req.query.page = 1;
+        }
+        if ((req.query.perPage == null) || (req.query.perPage.trim() == '')) {
+            req.query.perPage = 6;
+        }
+        if ((req.query.search == null) || (req.query.search.trim() == '')) {
+            teachers = await teacherModel.getAll();
+        } else {
+            teachers = await teacherModel.findLikeName(req.query.search);
+        }
+        var page = req.query.page;
+        var perPage = req.query.perPage;
+        var pagingInfo = helper.pagination(teachers, page, perPage, teachers.length);
+        res.render('render', {
+            contain: 'admin/admin-qlgiaovien',
+            title: 'Quản lí giáo viên',
+            js: ['admin', 'admin-qlgiaovien'],
+            css: ['admin-index'],
+            teachers: pagingInfo.objectOnPage,
+            pagingInfo: pagingInfo,
+            currentPage: page,
+            perPage: perPage
+        });
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/add-teacher', async (req, res, next) => {
+    try {
+        var name = req.body.tenGiaoVien;
+        var email = req.body.emailGiaoVien;
+        var password = req.body.matKhau;
+        var confirmPassword = req.body.xacNhanMatKhau;
+        var teachers = teacherModel.findByEmail(email);
+        var avatarPath = '/img/avatar/default.jpg';
+        if (name == "" || email == "" || password == "" || confirmPassword == "") {
+            res.json({
+                status: 3
+                // mot trong cac o bi de trong
+            })
+        } else if (!helper.validateEmail(email)) {
+            res.json({
+                status: 4
+                // email nhap vao khong  hop le
+            })
+        }
+        else if (teachers.length > 0) {
+            res.json({
+                status: 1
+                // da ton tai email
+            })
+        } else if (password != confirmPassword) {
+            res.json({
+                status: 2
+                // mat khau khong khop
+            })
+        } else {
+            var bcrypt = require('bcrypt');
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync(password, salt);
+            await teacherModel.add(name, email, hash, avatarPath);
+            res.json({
+                status: 0
+                // dang ki thanh cong
+            })
+        }
+    } catch (err) {
         next(err);
     }
 })
