@@ -17,4 +17,25 @@ module.exports = {
         const student = await db.load(sql);
         return student;
     },
+    checkLogin: async(email, password)=>{
+        //const sql = `SELECT * FROM Student where email = '${email}' and password = '${password}'`;
+        const sql = `SELECT password FROM Student where email = '${email}'`
+        const student = await db.load(sql);
+        return student;
+    },
+    getAll:async()=>{
+        const sql = `SELECT * FROM Student;` 
+        const result = await db.load(sql);
+        return result;
+    },
+    findLikeName: async(input)=>{
+        const sql = `select* from Student where name like '%${input}%';`; 
+        const result = await db.load(sql);
+        return result;
+    },
+    delete: async(studentID)=>{
+        const sql = `DELETE from Student where studentID = ${studentID}`; 
+        const result = await db.load(sql);
+        return result;
+    }
 }; 

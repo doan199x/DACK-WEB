@@ -1,26 +1,9 @@
 .container{
     padding-top: 10px;
 }
-.top{
-   text-align: center;
-}
-.carousel-caption{
-background-color: black;
-opacity: 80%;
-}
-.intro{
-    text-align: center;
-    padding: 50px;
-}
-.topview{
-padding-top:10px;
-display: grid;
-grid-template-columns: auto auto auto auto auto;
-padding-left: 30px;
-}
 .card-custom{
     margin-bottom:20px; 
-    width: 250px;
+    width: 350px;
     height: auto;
 }
 .card-title{
@@ -38,4 +21,9 @@ font-weight: bold;
 }
 .divider{
 border-top: 1px solid #bbb;
+}
+.course{
+    display:grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
 }

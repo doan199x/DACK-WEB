@@ -5,6 +5,17 @@ require('dotenv').config()
 
 const app = express();
 const port = 3000;
+//Middlewares
+require('./middleware/view.mdw');
+require('./middleware/session.mdw');
+require('./middleware/locals.mdw');
+require('./middleware/routes.mdw');
+require('./middleware/error.mdw');
+
+require('express-async-errors');
+app.use(express.urlencoded({
+  extended: true
+}));
 
 const hbs = exphbs.create({
     defaultLayout: 'main',
@@ -37,17 +48,28 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 
+//use session
+let session = require('express-session');
+app.use(session({
+    cookie: { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 },
+    secret: 's3cret',
+    resave: false,
+    saveUninitialized: false
+}));
+
 //body-parser
 let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 
 app.use('/', require('./routers/guest'));
 app.use('/student', require('./routers/student'));
 app.use('/login', require('./routers/login'));
 app.use('/admin', require('./routers/admin'));
 app.use('/teacher', require('./routers/teacher'));
+app.use('/login', require('./routers/login'));
+app.use('/signup', require('./routers/signup'));
+app.use('/course',require('./routers/course'));
 
 // app.use('/', require('./routers/home'));
 

@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            {{>admin-nav}}
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Danh sách học sinh</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="float-right" style="margin-bottom:15px">
+                        <input id="inputTimKiem" style="margin-right:10px;" placeholder="Tìm kiếm"><i
+                            onclick="timKiemKhoaHoc()" class="fa fa-search" aria-hidden="true"
+                            style="cursor:pointer"></i>
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">email</th>
+                        <th scope="col" style="text-align:center">Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each students}}
+                    <tr>
+                        <th class="counterCell">
+                        <td>{{name}}</td>
+                        <td>{{email}}</td>
+                        <td style="text-align:center"><i onclick="xemHocSinh({{studentID}})" class="fa fa-eye fa-right fa-cursor fa-lg" aria-hidden="true"></i><i onclick="suaHocSinh({{studentID}})" class="fas fa-edit fa-lg fa-cursor"></i><i onclick="xoaHocSinh({{studentID}})" class="fa fa-trash fa-right fa-cursor fa-lg" aria-hidden="true"></i></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <div class="row justify-content-center" style="margin-top:20px">
+                <button class="btn btn-secondary" style="margin-right:2px"
+                    onclick="getPrevPage({{pagingInfo.preve_value}},{{perPage}})"><i class="fa fa-angle-left"
+                        aria-hidden="true"></i></button>
+                <button class="btn btn-secondary" style="margin-right:2px">{{currentPage}}</i></button>
+                <button class="btn btn-secondary"
+                    onclick="getNextPage({{pagingInfo.next_value}},{{perPage}})"><i class="fa fa-angle-right"
+                        aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
