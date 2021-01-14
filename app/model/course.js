@@ -55,4 +55,9 @@ module.exports = {
         const result = await db.load(sql);
         return result;
     },
+    findLikeName: async(input)=>{
+        const sql = `select* from Course where name like '%${input}%';`; 
+        const result = await db.load(sql);
+        return result;
+    },
 };
