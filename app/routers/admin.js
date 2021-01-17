@@ -157,19 +157,30 @@ router.get('/course', async (req, res, next) => {
         if ((req.query.perPage == null) || (req.query.perPage.trim() == '')) {
             req.query.perPage = 3;
         }
-        if ((req.query.search == null) || (req.query.search.trim() == '')) {
+        if ((req.query.postCategory == null) || (req.query.postCategory.trim() == '')) {
             courses = await courseModel.getAll();
-        } else {
-            courses = await courseModel.findLikeName(req.query.search);
+        } else if ((req.query.category == null) || (req.query.category.trim() == '')) {
+            categories = await categoryModel.getByPostCategoryID(req.query.postCategory);
+            var courses = [];
+            for (var i=0;i<categories.length;i++){
+                var getCourses = await courseModel.getCourseByCategoryID(categories.categoryName);
+                courses.push(getCourses);
+            }
+        } else{
+            categories = await categoryModel.getByPostCategoryID(req.query.postCategory);
+            courses = await courseModel.getCourseByCategoryID(categories[0].categoryID);
         }
+        console.log(courses);
         // add width star
         for (var i = 0; i < courses.length; i++) {
             courses[i].widthStar = courses[i].averageStar / 5 * 100;
             courses[i].widthStar += '%';
         }
+        // Load post category:
         var page = req.query.page;
         var perPage = req.query.perPage;
         var pagingInfo = helper.pagination(courses, page, perPage, courses.length);
+        var postCategory = await postCategoryModel.getAll();
         res.render('render', {
             contain: 'admin/admin-course',
             title: 'Quản lí khóa học',
@@ -178,7 +189,8 @@ router.get('/course', async (req, res, next) => {
             courses: pagingInfo.objectOnPage,
             pagingInfo: pagingInfo,
             currentPage: page,
-            perPage: perPage
+            perPage: perPage,
+            postCategory: postCategory
         });
     } catch (err) {
         next(err);
@@ -225,6 +237,7 @@ router.get('/student', async (req, res, next) => {
         } else {
             students = await studentModel.findLikeName(req.query.search);
         }
+
         var page = req.query.page;
         var perPage = req.query.perPage;
         var pagingInfo = helper.pagination(students, page, perPage, students.length);
@@ -379,6 +392,19 @@ router.post('/unban-student', async (req, res, next) => {
         res.json({
             status: 0,
             message: 'Cấm giáo viên thành công'
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/get-category', async (req, res, next) => {
+    try {
+        var postCategoryID = req.body.postCategoryID;
+        categories = await categoryModel.getByPostCategoryID(postCategoryID);
+        res.json({
+            status: 0,
+            categories: categories
         })
     } catch (err) {
         next(err);

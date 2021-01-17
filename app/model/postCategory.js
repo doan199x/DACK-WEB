@@ -21,4 +21,9 @@ module.exports = {
         const result = await db.load(sql);
         return result;
     },
+    geByName:async(postCategoryName)=>{
+        const sql = `SELECT* from postCategory where postCategoryName='${postCategoryName}'`; 
+        const result = await db.load(sql);
+        return result;
+    }
 }; 

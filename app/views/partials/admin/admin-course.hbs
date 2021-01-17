@@ -6,19 +6,16 @@
         <div class="col-lg-8">
             <div class="row">
                 <div class="col-lg-4">
-                    <select class="form-control">
-                        <option value="" disabled selected>Chọn danh mục cha</option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
+                    <select id="postCategory" class="form-control" onchange="loadCategory()">
+                        <option value="" style="font-weight: bold;" disabled selected>Chọn danh mục cha</option>
+                        {{#each postCategory}}
+                        <option value="{{postCategoryID}}">{{postCategoryName}}</option>
+                        {{/each}}
                     </select>
                 </div>
                 <div class="col-lg-4">
-                    <select class="form-control">
-                        <option value="" disabled selected>Chọn danh mục con</option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
+                    <select id="category" class="form-control">
+                        <option value="" style="font-weight: bold" disabled selected>Chọn danh mục con</option>
                     </select>
                 </div>
                 <div class="col-lg-3">

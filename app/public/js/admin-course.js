@@ -84,6 +84,33 @@ function unBanCourse(courseID) {
 }
 
 function timKiemKhoaHoc() {
-    var search = document.getElementById('inputTimKiem').value;
-    location.href = `/admin/course?search=${search}`;
+    var category = document.getElementById('category').value;
+    var postCategory = document.getElementById('postCategory').value;
+    location.href = `/admin/course?postCategory=${postCategory}&category=${category}`;
+}
+
+function loadCategory() {
+    var postCategoryID = document.getElementById('postCategory').value;
+    $.ajax({
+        url: '/admin/get-category',
+        type: 'POST',
+        data: {
+            postCategoryID: postCategoryID
+        },
+        success: function (result) {
+            if (result.status == 0) {
+                var select = document.getElementById('category');
+                for (i = select.options.length - 1; i >= 0; i--) {
+                    select.options[i] = null;
+                }
+                var category = document.getElementById('category');
+                for (var i = 0; i < result.categories.length; i++) {
+                    var newNode = document.createElement('option');
+                    newNode.appendChild(document.createTextNode(result.categories[i].categoryName));
+                    newNode.value = result.categories[i].categoryID;
+                    category.appendChild(newNode);
+                }
+            }
+        }
+    })
 }
