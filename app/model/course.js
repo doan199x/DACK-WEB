@@ -84,5 +84,11 @@ module.exports = {
         const sql = `UPDATE Course set ban=false where courseID = ${courseID}`;
         const result = await db.load(sql);
         return result;
+    },
+    create:async(teacherID,courseInfo)=>{ //courseName,courseSortDes,courseDes,coursePrice,postCategory,category
+        const sql = `INSERT into Course (name,imagePath,sortDescription,description,NoStudents,averageStar, NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views)
+        values('${courseInfo.courseName}','/','${courseInfo.courseSortDes}','${courseInfo.courseDes}',0,0,0,'${courseInfo.coursePrice}',now(),now(),${courseInfo.category},'Chưa hoàn tất',${teacherID},0)`;
+        const result = await db.load(sql);
+        return result;
     }
 };
