@@ -1,7 +1,7 @@
 drop database if exists onlineCourse;
 create database onlineCourse;
 use onlineCourse;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456yugi';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123@';
 flush privileges;
 create table Teacher(
 	teacherID int not null auto_increment,
@@ -320,11 +320,58 @@ insert into RegisteredCourse (studentID, courseID,registerTime) values(3,2,now()
 insert into RegisteredCourse (studentID, courseID,registerTime) values(3,3,now());
 insert into RegisteredCourse (studentID, courseID,registerTime) values(3,4,now());
 insert into RegisteredCourse (studentID, courseID,registerTime) values(4,1,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,2,now());
+
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,5,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,6,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,7,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,8,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,9,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,10,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,11,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,12,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,13,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,14,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,15,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,16,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,17,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,18,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,19,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,20,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,21,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,22,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,23,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,24,now());
+insert into RegisteredCourse (studentID, courseID,registerTime) values(4,25,now());
 
 insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(1,20,40000,'2021-01-01','2021-05-05','Giảm giá hè');
 insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(2,20,40000,'2021-01-01','2021-05-05','Giảm giá hè');
 insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(3,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(4,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(5,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(6,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(7,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(8,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(9,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(10,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(11,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(12,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(13,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(14,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(15,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(16,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(17,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(18,0,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(19,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(20,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(21,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(22,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(23,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(24,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(25,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(1,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(2,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(3,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
+insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(4,50,50000,'2021-01-01','2021-08-05','Khai giảng năm học mới');
 
 insert into Chapter (chapterID,chapterName,courseID,isOutline) values(1,'Chương 1. Thiết lập môi trường',1,true);
 insert into Chapter (chapterID,chapterName,courseID,isOutline) values(2,'Chương 2. Ôn tập Java',1,false);
@@ -668,5 +715,8 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(207,'Bài 11
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(208,'Bài 12: Kinh nghiệm viết bài','/uploads/video/default.mp4',65);
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(209,'Bài 13: Ôn tập','/uploads/video/default.mp4',65);
 
+/*Fulltext*/
 ALTER TABLE Course ADD FULLTEXT INDEX courseName (name);
+ALTER TABLE Category ADD FULLTEXT INDEX categoryName (categoryName);
+ALTER TABLE PostCategory ADD FULLTEXT INDEX postCategoryName (postCategoryName);
 

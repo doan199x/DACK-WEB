@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     req.query.page = 1;
   }
   if (req.query.perPage == null || req.query.perPage.trim() == "") {
-    req.query.perPage = 5;
+    req.query.perPage = 6;
   }
   const all = await courseModel.all();
   for (var i = 0; i < all.length; i++) {
@@ -52,17 +52,19 @@ router.get("/", async (req, res) => {
 router.get("/find", async (req, res) => {
   const category = await guestModel.category();
   try {
-    let courses;
+    var courses;
     if (req.query.page == null || req.query.page.trim() == "") {
       req.query.page = 1;
     }
     if (req.query.perPage == null || req.query.perPage.trim() == "") {
-      req.query.perPage = 3;
+      req.query.perPage = 6;
     }
     if (req.query.search === null || req.query.search.trim() === "") {
       courses = await courseModel.getAll();
     } else {
+      console.log(req.query.search);
       courses = await courseModel.fulltext(req.query.search);
+      console.log(courses);
     }
     // add width star
     for (let i = 0; i < courses.length; i++) {
@@ -90,7 +92,7 @@ router.get("/find", async (req, res) => {
       pagingInfo: pagingInfo,
       currentPage: page,
       perPage: perPage,
-      category:category
+      category:category,
     });
   } catch (err) {
     console.log(err);

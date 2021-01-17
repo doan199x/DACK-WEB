@@ -3,7 +3,7 @@
 }
 .card-custom{
     margin-bottom:20px; 
-    width: 350px;
+    width: 280px;
     height: auto;
 }
 .card-title{
@@ -12,6 +12,11 @@
 }
 .card-img-top{
     border-bottom:1px solid black;
+}
+.card__courseName{
+    padding-top: 5%;
+    background-color: #263238;
+    color: white;
 }
 .title{
 padding-top: 50px;
@@ -24,9 +29,30 @@ border-top: 1px solid #bbb;
 }
 .course{
     display:grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     justify-content: center;
+    column-gap: 10%;
 }
 a:link{
     text-decoration: none;
+}
+.page__button{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+.search__group{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.switch{
+    padding-top: 2%;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.form-check{
+   
 }
