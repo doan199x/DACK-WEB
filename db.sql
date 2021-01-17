@@ -533,5 +533,4 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(154,'Bài 11
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(155,'Bài 12: Các món ăn Brazil','/uploads/video/default.mp4',48);
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(156,'Bài 13: Các món ăn Argentina','/uploads/video/default.mp4',48); 
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(157,'Bài 14: Các món ăn Chile','/uploads/video/default.mp4',48); 
-
 ALTER TABLE Course ADD FULLTEXT INDEX courseName (name); 

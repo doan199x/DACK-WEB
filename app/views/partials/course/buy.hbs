@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-lg-5">
+                    <img src="{{course.imagePath}}" style="border: 1px solid black" height="200px" width="300px">
+                </div>
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h5>Khóa học:</h5>
+                        </div>
+                        <div class="col-lg-8">
+                            <h5>{{course.name}}</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <span>Giảng viên:</span>
+                        </div>
+                        <div class="col-lg-8">
+                            <span>Lập trình ABCXYZ Lập trình ABCXYZ</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <span>SL học viên:</span>
+                        </div>
+                        <div class="col-lg-8">
+                            <span>{{course.NoStudents}}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4" style="margin-top:5px">
+                            <span>Đánh giá:</span>
+                        </div>
+                        <div class="col-lg-8">
+                            <h4 style="display:inline">{{course.averageStar}}</h4>
+                            <div class="stars-outer">
+                                <div class="stars-inner" id="starWidth" style="width: {{course.widthStar}};"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4" style="border-left:1px solid black">
+            <div class="row">
+                <div class="col-lg-6">
+                    Tài khoản gốc:
+                </div>
+                <div class="col-lg-6" style="text-align: right">
+                    {{#money studentBalance}}{{/money}} VND
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    Giá sản phẩm:
+                </div>
+                <div class="col-lg-6" style="text-align: right">
+                    {{#money course.price}}{{/money}} VND
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-6">
+                    Số tiền còn lại:
+                </div>
+                <div class="col-lg-6" style="text-align: right">
+                    {{#money afterBalance}}{{/money}} VND
+                </div>
+            </div>
+            {{#if checkConditionToBuy}}
+            <div class="row justify-content-center" style="margin-top:25px">
+                <button class="btn btn-secondary" onclick="muaKhoaHoc({{studentID}},{{courseID}})">Mua ngay</button>
+            </div>
+            {{else}}
+            <div class="row justify-content-center" style="margin-top:25px">
+                <button class="btn btn-danger" style="font-weight: bold;">Bạn không đủ tiền để mua khóa học</button>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+    {{#if checkRegisteredCourse}}
+    <input id="checkRegisteredCourse" hidden value="da dang ki">
+    {{else}}
+    <input id="checkRegisteredCourse" hidden value="chua dang ki">
+    {{/if}}
+</div>
+</div>

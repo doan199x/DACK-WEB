@@ -43,4 +43,9 @@ module.exports = {
         const result = await db.load(sql);
         return result;
     },
+    updateBalance : async(studentID,newBalance)=>{
+        const sql=`UPDATE Student set balance = ${newBalance} where studentID = ${studentID}`;
+        const result = await db.load(sql);
+        return result;
+    }
 }; 

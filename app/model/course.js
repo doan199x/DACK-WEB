@@ -60,14 +60,19 @@ module.exports = {
         const result = await db.load(sql);
         return result;
     },
-    findLikeNameByTeacherID:async(input,teacherID)=>{
-        const sql = `select* from Course where name like '%${input}%' and teacherID = teacherID`; 
+    findLikeNameByTeacherID: async (input, teacherID) => {
+        const sql = `select* from Course where name like '%${input}%' and teacherID = teacherID`;
         const result = await db.load(sql);
         return result;
     },
-    findLikeName: async(input)=>{
-        const sql = `select* from Course where name like '%${input}%';`; 
+    findLikeName: async (input) => {
+        const sql = `select* from Course where name like '%${input}%';`;
         const result = await db.load(sql);
         return result;
     },
+    buy: async (studentID, courseID) => {
+        const sql = `INSERT into RegisteredCourse (studentId,courseID) values(${studentID},${courseID})`;
+        const result = await db.load(sql);
+        return result;
+    }
 };
