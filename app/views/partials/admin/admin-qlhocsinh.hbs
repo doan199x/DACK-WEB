@@ -33,7 +33,16 @@
                         <th class="counterCell">
                         <td>{{name}}</td>
                         <td>{{email}}</td>
-                        <td style="text-align:center"><i onclick="xemHocSinh({{studentID}})" class="fa fa-eye fa-right fa-cursor fa-lg" aria-hidden="true"></i><i onclick="suaHocSinh({{studentID}})" class="fas fa-edit fa-lg fa-cursor"></i><i onclick="xoaHocSinh({{studentID}})" class="fa fa-trash fa-right fa-cursor fa-lg" aria-hidden="true"></i></td>
+                        <td style="text-align:center"><i onclick="xemHocSinh({{studentID}})"
+                                class="fa fa-eye fa-right fa-cursor fa-lg" aria-hidden="true"></i>
+                            <i onclick="suaHocSinh({{studentID}})" class="fas fa-edit fa-lg fa-cursor"></i>
+                            {{#if ban}}
+                            <i onclick="moKhoaHocSinh({{studentID}})" class="fa fa-lock-open fa-right fa-cursor fa-lg"
+                                aria-hidden="true"></i>
+                            {{else}}
+                            <i onclick="khoaHocSinh({{studentID}})" class="fa fa-ban fa-right fa-cursor fa-lg"
+                                aria-hidden="true"></i>
+                            {{/if}}
                     </tr>
                     {{/each}}
                 </tbody>
@@ -43,9 +52,8 @@
                     onclick="getPrevPage({{pagingInfo.preve_value}},{{perPage}})"><i class="fa fa-angle-left"
                         aria-hidden="true"></i></button>
                 <button class="btn btn-secondary" style="margin-right:2px">{{currentPage}}</i></button>
-                <button class="btn btn-secondary"
-                    onclick="getNextPage({{pagingInfo.next_value}},{{perPage}})"><i class="fa fa-angle-right"
-                        aria-hidden="true"></i></button>
+                <button class="btn btn-secondary" onclick="getNextPage({{pagingInfo.next_value}},{{perPage}})"><i
+                        class="fa fa-angle-right" aria-hidden="true"></i></button>
             </div>
         </div>
     </div>

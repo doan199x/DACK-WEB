@@ -65,6 +65,56 @@ function timKiemGiaoVien() {
     location.href = `/admin/teacher?search=${search}`
 }
 
+function khoaGiaoVien(teacherID) {
+    $.ajax({
+        url:'/admin/ban-teacher',
+        type:'POST',
+        data:{
+            teacherID:teacherID
+        },
+        success: function(result){
+            if (result.status == 0){
+                Swal.fire({
+                    title: 'Cấm giáo viên thành công',
+                    confirmButtonColor: '#212121',
+                }).then(()=>{
+                    location.href="/admin/teacher"
+                })
+            } else{
+                Swal.fire({
+                    title: 'Lỗi không xác định',
+                    confirmButtonColor: '#212121',
+                })
+            }
+        }
+    })
+}
+
+function moKhoaGiaoVien(teacherID) {
+    $.ajax({
+        url:'/admin/unban-teacher',
+        type:'POST',
+        data:{
+            teacherID:teacherID
+        },
+        success: function(result){
+            if (result.status == 0){
+                Swal.fire({
+                    title: 'Mở tài khoản giáo viên thành công',
+                    confirmButtonColor: '#212121',
+                }).then(()=>{
+                    location.href="/admin/teacher"
+                })
+            } else{
+                Swal.fire({
+                    title: 'Lỗi không xác định',
+                    confirmButtonColor: '#212121',
+                })
+            }
+        }
+    })
+}
+
 // function xemGiaoVien(studentID) {
 //     location.href = `/student/profile?studentID=${studentID}`;
 // }

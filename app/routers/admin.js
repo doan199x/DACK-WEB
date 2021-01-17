@@ -327,4 +327,56 @@ router.post('/add-teacher', async (req, res, next) => {
     }
 })
 
+router.post('/ban-teacher', async (req, res, next) => {
+    try {
+        var teacherID = req.body.teacherID;
+        await teacherModel.ban(teacherID);
+        res.json({
+            status: 0,
+            message: 'Cấm giáo viên thành công'
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/unban-teacher', async (req, res, next) => {
+    try {
+        var teacherID = req.body.teacherID;
+        await teacherModel.unban(teacherID);
+        res.json({
+            status: 0,
+            message: 'Cấm giáo viên thành công'
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/ban-student', async (req, res, next) => {
+    try {
+        var studentID = req.body.studentID;
+        await studentModel.ban(studentID);
+        res.json({
+            status: 0,
+            message: 'Cấm giáo viên thành công'
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/unban-student', async (req, res, next) => {
+    try {
+        var studentID = req.body.studentID;
+        await studentModel.unban(studentID);
+        res.json({
+            status: 0,
+            message: 'Cấm giáo viên thành công'
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
 module.exports = router;

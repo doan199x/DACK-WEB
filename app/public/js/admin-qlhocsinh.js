@@ -28,3 +28,53 @@ function xoaHocSinh(studentID) {
         }
     })
 }
+
+function khoaHocSinh(studentID) {
+    $.ajax({
+        url:'/admin/ban-student',
+        type:'POST',
+        data:{
+            studentID:studentID
+        },
+        success: function(result){
+            if (result.status == 0){
+                Swal.fire({
+                    title: 'Cấm học sinh thành công',
+                    confirmButtonColor: '#212121',
+                }).then(()=>{
+                    location.href="/admin/student"
+                })
+            } else{
+                Swal.fire({
+                    title: 'Lỗi không xác định',
+                    confirmButtonColor: '#212121',
+                })
+            }
+        }
+    })
+}
+
+function moKhoaHocSinh(studentID) {
+    $.ajax({
+        url:'/admin/unban-student',
+        type:'POST',
+        data:{
+            studentID:studentID
+        },
+        success: function(result){
+            if (result.status == 0){
+                Swal.fire({
+                    title: 'Mở tài khoản học sinh thành công',
+                    confirmButtonColor: '#212121',
+                }).then(()=>{
+                    location.href="/admin/student"
+                })
+            } else{
+                Swal.fire({
+                    title: 'Lỗi không xác định',
+                    confirmButtonColor: '#212121',
+                })
+            }
+        }
+    })
+}
