@@ -53,14 +53,17 @@ module.exports = {
         return guest;
     },
     hot: async () => {
-        const sql = `SELECT DISTINCT Category.categoryID as id, Category.categoryName as categoryName,COUNT(RegisteredCourse.studentID) as NoReStudent
-        FROM ((Category
-        INNER JOIN Course ON Category.categoryID = Course.categoryID)
-        INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
-        WHERE DATEDIFF(now(),RegisteredCourse.registerTime) <= 7
-        GROUP BY Category.categoryID
-        ORDER BY COUNT(RegisteredCourse.studentID) DESC
-        LIMIT 5;`
+        const sql = `SELECT DISTINCT Category.categoryID as id, PostCategory.postCategoryName as postCategoryName,
+        PostCategory.postCategoryID as postCategoryID , Category.categoryName as categoryName,
+        COUNT(RegisteredCourse.studentID) as NoReStudent
+       FROM (((Category
+       INNER JOIN Course ON Category.categoryID = Course.categoryID)
+       INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
+       INNER JOIN PostCategory ON PostCategory.PostCategoryID = Category.PostCategoryID)
+       WHERE DATEDIFF(now(),RegisteredCourse.registerTime) <= 7
+       GROUP BY Category.categoryID
+       ORDER BY COUNT(RegisteredCourse.studentID) DESC
+       LIMIT 5;`
         const guest = await db.load(sql);
         return guest;
     },
