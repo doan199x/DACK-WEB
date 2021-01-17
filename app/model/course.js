@@ -74,5 +74,15 @@ module.exports = {
         const sql = `INSERT into RegisteredCourse (studentId,courseID) values(${studentID},${courseID})`;
         const result = await db.load(sql);
         return result;
+    },
+    ban:async(courseID)=>{
+        const sql = `UPDATE Course set ban=true where courseID = ${courseID}`;
+        const result = await db.load(sql);
+        return result;
+    },
+    unban:async(courseID)=>{
+        const sql = `UPDATE Course set ban=false where courseID = ${courseID}`;
+        const result = await db.load(sql);
+        return result;
     }
 };

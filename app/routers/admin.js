@@ -185,20 +185,26 @@ router.get('/course', async (req, res, next) => {
     }
 })
 
-router.post('/delete-course', async (req, res, next) => {
+router.post('/ban-course', async (req, res, next) => {
     try {
         courseID = req.body.courseID;
-        chapters = await chapterModel.getChaptersByCourseID(courseID);
-        lessonsID = [];
-        for (var i = 0; i < chapters.length; i++) {
-            lessons = await lessonModel.getLessonsByChapterID(chapters[i].chapterID);
-            for (var j = 0; j < lessons.length; j++) {
-                lessonsID.push(lessons[j].lessonID);
-            }
-        }
-        await courseModel.delete(courseID, lessonsID);
+        await courseModel.ban(courseID);
         res.json({
-            status: 'deleted'
+            status: 0,
+            message: 'Vô hiệu khóa học thành công'
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/unban-course', async (req, res, next) => {
+    try {
+        courseID = req.body.courseID;
+        await courseModel.unban(courseID);
+        res.json({
+            status: 0,
+            message: 'Mở lại khóa học thành công'
         })
     } catch (err) {
         next(err);
@@ -378,5 +384,4 @@ router.post('/unban-student', async (req, res, next) => {
         next(err);
     }
 })
-
 module.exports = router;

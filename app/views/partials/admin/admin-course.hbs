@@ -5,9 +5,31 @@
         </div>
         <div class="col-lg-8">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="float-right" style="margin-bottom:5px">
-                    <input id="inputTimKiem"style="margin-right:10px;" placeholder="Tìm kiếm"><i onclick="timKiemKhoaHoc()" class="fa fa-search" aria-hidden="true" style="cursor:pointer"></i>
+                <div class="col-lg-4">
+                    <select class="form-control">
+                        <option value="" disabled selected>Chọn danh mục cha</option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <select class="form-control">
+                        <option value="" disabled selected>Chọn danh mục con</option>
+                        <option></option>
+                        <option></option>
+                        <option></option>
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                    <div class="float-right">
+                        <input class="form-control" id="inputTimKiem" style="" placeholder="Tìm kiếm">
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <div class="float-right">
+                        <button class="btn btn-secondary"> <i onclick="timKiemKhoaHoc()" class="fa fa-search"
+                                aria-hidden="true" style="cursor:pointer"></i></button>
                     </div>
                 </div>
             </div>
@@ -54,9 +76,17 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12 float-right" style="margin-top: 20px;">
+                            {{#if ban}}
                             <div class="float-right" style="margin-right:50px">
-                                <button class="btn btn-danger" style="font-weight:bold" onclick='deleteCourse({{courseID}})'>Gỡ bỏ</button>
+                                <button class="btn btn-secondary" style="font-weight:bold"
+                                    onclick='unBanCourse({{courseID}})'>Mở lại khóa học</button>
                             </div>
+                            {{else}}
+                            <div class="float-right" style="margin-right:50px">
+                                <button class="btn btn-danger" style="font-weight:bold"
+                                    onclick='banCourse({{courseID}})'>Vô hiệu hóa</button>
+                            </div>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
@@ -65,11 +95,13 @@
             {{/each}}
 
             <div class="row justify-content-center" style="margin-top:20px">
-                <button class="btn btn-secondary" style="margin-right:2px" onclick="getPrevPage({{pagingInfo.preve_value}},{{perPage}})"><i
-                        class="fa fa-angle-left" aria-hidden="true"></i></button>
+                <button class="btn btn-secondary" style="margin-right:2px"
+                    onclick="getPrevPage({{pagingInfo.preve_value}},{{perPage}})"><i class="fa fa-angle-left"
+                        aria-hidden="true"></i></button>
                 <button class="btn btn-secondary">{{currentPage}}</i></button>
-                <button class="btn btn-secondary" style="margin-left:2px" onclick="getNextPage({{pagingInfo.next_value}},{{perPage}})"><i
-                        class="fa fa-angle-right" aria-hidden="true"></i></button>
+                <button class="btn btn-secondary" style="margin-left:2px"
+                    onclick="getNextPage({{pagingInfo.next_value}},{{perPage}})"><i class="fa fa-angle-right"
+                        aria-hidden="true"></i></button>
             </div>
         </div>
     </div>
