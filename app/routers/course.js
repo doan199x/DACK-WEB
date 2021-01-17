@@ -84,4 +84,22 @@ router.get("/detail", async (req, res) => {
   }
 });
 
+router.post('/buy', async (req, res, next) => {
+  try {
+    var studentID = 1;
+    courseID = req.body.courseID;
+    // check is course registered by this user;
+    var registeredCourses = await courseModel.getRegisteredCourseByStudentID(studentID);
+    if (registeredCourses.length <= 0){
+      res.json({
+        status: 1,
+        message: 'Bạn đã mua khóa học này'
+      })
+    }
+    await courseModel.buy(courseID);
+  } catch (err) {
+    next(err);
+  }
+})
+
 module.exports = router;
