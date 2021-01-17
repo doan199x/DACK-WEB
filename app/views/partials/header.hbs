@@ -11,25 +11,26 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="flex-grow:0; !important">
       <ul class="navbar-nav mr-auto">
-        {{!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/course" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="/course" id="navbarDropdown" role="button">
             Categories
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="">IT 🖥 Lập trình web </a>
-            <a class="dropdown-item" href="">IT 📱 Lập trình thiết bị di động </a>
+            {{#each category}}
+            <div class="dropdown-item" >
+              <a href="/course/postcategory/{{this.postCategoryID}}">
+                {{this.postCategoryName}} -
+              </a>
+              <a href="/course/category/{{this.categoryID}}">
+                {{this.categoryName}}
+              </a>
+            </div>
+            {{/each}}
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="">Nấu ăn 🥗 Nấu ăn căn bản</a>
-              <a class="dropdown-item" href="">Nấu ăn 🥘 Nấu ăn nâng cao</a>
+            <div class="dropdown-item">🎲 Chủ đề khác</div>
           </div>
-        </li> --}}
-        <form class="form-inline my-4 my-lg-0 ">
-          <input class="form-control mr-sm-4 " type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-4 my-sm-0" type="submit" style="font-weight: bold">SEARCH
-          </button>
-        </form>
+        </li>
+
         {{#if isLoggedIn}}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="/course" id="navbarDropdown" role="button" data-toggle="dropdown"

@@ -1,26 +1,28 @@
 .container{
     padding-top: 10px;
+    justify-items: center;
 }
 .top{
    text-align: center;
+}
+.carousel__img{
+    width: 100%;
+    padding-left: 1%;
 }
 .carousel-caption{
 background-color: black;
 opacity: 80%;
 }
+.carousel-item{
+    width:100%
+}
 .intro{
     text-align: center;
     padding: 50px;
 }
-.topview{
-padding-top:10px;
-display: grid;
-grid-template-columns: auto auto auto auto auto;
-padding-left: 30px;
-}
 .card-custom{
     margin-bottom:20px; 
-    width: 250px;
+    width: 280px;
     height: auto;
 }
 .card-title{
@@ -30,6 +32,11 @@ padding-left: 30px;
 .card-img-top{
     border-bottom:1px solid black;
 }
+.card__courseName{
+    padding-top: 5%;
+    background-color: #263238;
+    color: white;
+}
 .title{
 padding-top: 50px;
 padding-bottom: 50px;
@@ -38,4 +45,33 @@ font-weight: bold;
 }
 .divider{
 border-top: 1px solid #bbb;
+}
+.bar{
+   width: 100%;
+   padding-bottom: 2%;
+   display: grid;
+   grid-template-columns: 30% 70%;
+}
+.categoryName{
+    text-align: right;
+    padding-top: 0.7rem;
+    padding-right: 1rem;
+    font-weight: bold;
+}
+a:link{
+    text-decoration: none;
+}
+.star__div{
+    display: flex;
+    justify-content: center;
+    color: #263238;
+}
+.cards{
+    width: 89rem;
+    margin-left: -15%;
+}
+.card__detail{
+display: grid;
+grid-template-columns: auto auto auto auto auto;
+column-gap: 0.7rem;
 }

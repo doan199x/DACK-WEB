@@ -1,0 +1,80 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-lg-4">
+            {{>teacher-nav}}
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-12">
+                    <fieldset>
+                        <div class="form-group row">
+                            <label for="courseName" class="col-sm-3 col-form-label">Tên khóa học</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="courseName" name="courseName" value=""
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="courseImage" class="col-sm-3 col-form-label">Nhập imagePath khóa học</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="courseImage" name="courseImage" value=""
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="courseSortDes" class="col-sm-3 col-form-label">Nhập mô tả ngắn</label>
+                            <div class="col-sm-9">
+                                <textarea id="addSortDescription"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="courseDes" class="col-sm-3 col-form-label">Nhập mô tả chi tiết</label>
+                            <div class="col-sm-9">
+                                <textarea id="addDescription"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="courseCategoryID" class="col-sm-3 col-form-label">Chọn danh mục cha</label>
+                            <select id="postCategory" class="form-control" onchange="loadCategory()">
+                                <option value="" style="font-weight: bold;" disabled selected>Chọn danh mục cha
+                                </option>
+                                {{#each postCategory}}
+                                <option value="{{postCategoryID}}">{{postCategoryName}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label for="courseCategoryID" class="col-sm-3 col-form-label">Chọn danh mục con</label>
+                            <div class="col-lg-4">
+                                <select id="category" class="form-control">
+                                    <option value="" style="font-weight: bold" disabled selected>Chọn danh mục con
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="coursePrice" class="col-sm-3 col-form-label">Nhập giá</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control money" id="coursePrice" name="coursePrice"
+                                    value="">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="btn-width-custom-small">
+                                <a class="btn btn-secondary btn-block bold" href="/teacher">Thoát</a>
+                            </div>
+                            <div class="btn-width-custom-small">
+                                <button class="btn btn-secondary btn-block bold" onclick="themKhoaHoc()">THÊM KHÓA
+                                    HỌC</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>

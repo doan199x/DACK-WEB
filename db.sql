@@ -1,7 +1,7 @@
 drop database if exists onlineCourse;
 create database onlineCourse;
 use onlineCourse;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456yugi';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123abc';
 flush privileges;
 create table Teacher(
 	teacherID int not null auto_increment,
@@ -669,4 +669,3 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(208,'Bài 12
 insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(209,'Bài 13: Ôn tập','/uploads/video/default.mp4',65);
 
 ALTER TABLE Course ADD FULLTEXT INDEX courseName (name);
-
