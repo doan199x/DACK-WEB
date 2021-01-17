@@ -27,3 +27,6 @@ border-top: 1px solid #bbb;
     grid-template-columns: auto auto;
     justify-content: center;
 }
+a:link{
+    text-decoration: none;
+}

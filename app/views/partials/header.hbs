@@ -17,9 +17,17 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             {{#each category}}
-            <a class="dropdown-item" href="/course/category/{{this.categoryID}}">{{this.postCategoryName}} - {{this.categoryName}}</a>
+            <div class="dropdown-item" >
+              <a href="/course/postcategory/{{this.postCategoryID}}">
+                {{this.postCategoryName}} -
+              </a>
+              <a href="/course/category/{{this.categoryID}}">
+                {{this.categoryName}}
+              </a>
+            </div>
             {{/each}}
             <div class="dropdown-divider"></div>
+            <div class="dropdown-item">🎲 Chủ đề khác</div>
           </div>
         </li>
 

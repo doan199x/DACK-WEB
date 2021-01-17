@@ -3,10 +3,12 @@ const router = express.Router();
 const helper = require("../helper/pagination");
 const courseModel = require("../model/course.js");
 const studentModel = require("../model/student.js");
+const guestModel = require("../model/guest.js");
 
 router.get("/", async (req, res) => {
+  const category = await guestModel.category();
   if (req.query.page == null || req.query.page.trim() == "") {
-    req.query.page = 2;
+    req.query.page = 1;
   }
   if (req.query.perPage == null || req.query.perPage.trim() == "") {
     req.query.perPage = 5;
@@ -16,12 +18,21 @@ router.get("/", async (req, res) => {
     all[i].widthStar = (all[i].averageStar / 5) * 100;
     all[i].widthStar += "%";
   }
-  var page = req.query.page;
-  var perPage = req.query.perPage;
+  const page = req.query.page;
+  const perPage = req.query.perPage;
 
   const pagingInfo = helper.pagination(all, page, perPage, all.length);
   // add width star
-
+  for (let i = 0; i < category.length; i++) {
+    if (category[i].postCategoryID === 1)
+      category[i].postCategoryName = "💻 " + category[i].postCategoryName;
+    if (category[i].postCategoryID === 2)
+      category[i].postCategoryName = "🍜 " + category[i].postCategoryName;
+    if (category[i].postCategoryID === 3)
+      category[i].postCategoryName = "📓 " + category[i].postCategoryName;
+    if (category[i].postCategoryID === 4)
+      category[i].postCategoryName = "🔠 " + category[i].postCategoryName;
+  }
   try {
     res.render("home", {
       css: ["course", "rate"],
@@ -31,6 +42,7 @@ router.get("/", async (req, res) => {
       pagingInfo: pagingInfo,
       currentPage: page,
       perPage: perPage,
+      category:category
     });
   } catch (err) {
     console.log(err);
@@ -38,6 +50,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/find", async (req, res) => {
+  const category = await guestModel.category();
   try {
     let courses;
     if (req.query.page == null || req.query.page.trim() == "") {
@@ -52,13 +65,23 @@ router.get("/find", async (req, res) => {
       courses = await courseModel.fulltext(req.query.search);
     }
     // add width star
-    for (var i = 0; i < courses.length; i++) {
+    for (let i = 0; i < courses.length; i++) {
       courses[i].widthStar = (courses[i].averageStar / 5) * 100;
       courses[i].widthStar += "%";
     }
-    var page = req.query.page;
-    var perPage = req.query.perPage;
-    var pagingInfo = helper.pagination(courses, page, perPage, courses.length);
+    for (let i = 0; i < category.length; i++) {
+      if (category[i].postCategoryID === 1)
+        category[i].postCategoryName = "💻 " + category[i].postCategoryName;
+      if (category[i].postCategoryID === 2)
+        category[i].postCategoryName = "🍜 " + category[i].postCategoryName;
+      if (category[i].postCategoryID === 3)
+        category[i].postCategoryName = "📓 " + category[i].postCategoryName;
+      if (category[i].postCategoryID === 4)
+        category[i].postCategoryName = "🔠 " + category[i].postCategoryName;
+    }
+    const page = req.query.page;
+    const perPage = req.query.perPage;
+    const pagingInfo = helper.pagination(courses, page, perPage, courses.length);
     res.render("home", {
       css: ["course", "rate"],
       js: ["course"],
@@ -67,6 +90,7 @@ router.get("/find", async (req, res) => {
       pagingInfo: pagingInfo,
       currentPage: page,
       perPage: perPage,
+      category:category
     });
   } catch (err) {
     console.log(err);
@@ -74,11 +98,13 @@ router.get("/find", async (req, res) => {
 });
 
 router.get("/detail", async (req, res) => {
+  const category = await guestModel.category();
   try {
     res.render("home", {
       css: ["course", "rate"],
       js: ["course"],
       contain: "course/course-detail",
+      category:category
     });
   } catch (err) {
     console.log(err);

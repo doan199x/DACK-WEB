@@ -1,7 +1,14 @@
 <div class="container">
     <!-- 10 most wacthes -->
     <div class="all">
-        <h5 class="title"> ️Danh sách khóa học hiện có</h5>
+        <h3 class="title"> ️Danh sách khóa học hiện có</h3>
+        <div class="divider"></div>
+        <div class="search-bar">
+            <input id="search" style="margin-right:10px;" placeholder="Tìm kiếm">
+            <button type="submit" class="btn btn-primary" onclick="searchCourse()">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
         <div class="col-lg-8">
             <div class="row">
                 <div class="col-lg-12">
@@ -20,7 +27,6 @@
                         <a href="/course/detail?courseID={{this.courseID}}">
                             <img src="{{imagePath}}" style="border: 1px solid black" height="200px" width="300px">
                         </a>
-
                     </div>
                     <div class="col-lg-7">
                         <div class="row">
