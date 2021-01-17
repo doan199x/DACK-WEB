@@ -717,6 +717,9 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(209,'Bài 13
 
 /*Fulltext*/
 ALTER TABLE Course ADD FULLTEXT INDEX courseName (name);
+<<<<<<< HEAD
 ALTER TABLE Category ADD FULLTEXT INDEX categoryName (categoryName);
 ALTER TABLE PostCategory ADD FULLTEXT INDEX postCategoryName (postCategoryName);
 
+=======
+>>>>>>> 8b71da40335ef6ddce1362788d2cdba3da129e9b
