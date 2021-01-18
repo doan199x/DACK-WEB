@@ -79,3 +79,7 @@ a:link{
     border: solid 1px;
     border-radius: 10%;
 }
+.sale-title{
+    text-align: left;
+    font-weight: bold;
+}

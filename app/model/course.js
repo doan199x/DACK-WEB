@@ -12,7 +12,6 @@ module.exports = {
         INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
         INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
         INNER JOIN Sale ON Sale.courseID = Course.courseID)
-        WHERE DATEDIFF(now(),RegisteredCourse.registerTime) <= 7
         GROUP BY Course.courseID;`;
     const result = await db.load(sql);
     return result;
@@ -104,7 +103,7 @@ module.exports = {
   },
   detail: async (courseID) => {
     const sql = `SELECT Course.courseID as id, Course.name as courseName, Course.description as courseDes,
-        Course.sortDescription as CourseSortDes, Category.categoryName as categoryName,
+    Course.sortDescription as CourseSortDes, Course.categoryID as categoryID, Category.categoryName as categoryName,
         Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
         Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
         Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created,
@@ -116,6 +115,33 @@ module.exports = {
         INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
         INNER JOIN Sale ON Sale.courseID = Course.courseID)
         WHERE Course.courseID = ${courseID};`;
+    const result = await db.load(sql);
+    return result;
+  },
+  feedback: async (courseID) => {
+    const sql = ` SELECT *
+    FROM Rating
+    INNER JOIN Student
+    ON Rating.studentID = Student.studentID    
+    WHERE CourseID = ${courseID};`;
+    const result = await db.load(sql);
+    return result;
+  },
+  related: async (categoryID) => {
+    const sql = ` SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
+    Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
+    Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
+    Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
+    COUNT(RegisteredCourse.studentID) as NoReStudent
+    FROM ((((Category
+    INNER JOIN Course ON Category.categoryID = Course.categoryID)
+    INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
+    INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
+    INNER JOIN Sale ON Sale.courseID = Course.courseID)
+    WHERE Course.categoryID = ${categoryID}
+    GROUP BY Course.courseID
+    ORDER BY NoStudents DESC
+    LIMIT 5;`;
     const result = await db.load(sql);
     return result;
   },
