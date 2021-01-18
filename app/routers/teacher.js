@@ -159,7 +159,7 @@ router.get('/update-course-content', async (req, res, next) => {
         var courseInfo = await courseModel.getCourseByID(courseID);
         // chapter info
         var chapterInfo = await chapterModel.getChaptersByCourseID(courseInfo[0].courseID);
-        // course info
+        // lesson info
         for (var i = 0; i < chapterInfo.length; i++) {
             chapterInfo[i].lessons = await lessonModel.getLessonsByChapterID(chapterInfo[i].chapterID)
         }
@@ -169,7 +169,34 @@ router.get('/update-course-content', async (req, res, next) => {
             js: ['teacher-course', 'teacher', 'teacher-update-course-content', 'simpleFormatMoney'],
             css: ['admin-index'],
             course: courseInfo[0],
-            chapterInfo: chapterInfo
+            chapterInfo: chapterInfo,
+            courseID: courseID
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/delete-lesson', async (req, res, next) => {
+    try {
+        var lessonID = req.body.lessonID;
+        await lessonModel.delete(lessonID);
+        res.json({
+            status: 0,
+            message: 'Xóa thành công'
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/delete-chapter', async (req, res, next) => {
+    try {
+        var chapterID = req.body.chapterID;
+        await chapterModel.delete(chapterID);
+        res.json({
+            status: 0,
+            message: 'Xóa thành công'
         })
     } catch (err) {
         next(err);

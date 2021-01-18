@@ -112,7 +112,7 @@ create table Chapter(
     chapterName varchar(200),
     courseID int,
     isOutline boolean,
-    foreign key(courseID) references Course(courseID)
+    foreign key(courseID) references Course(courseID) ON DELETE CASCADE
 );
 
 create table Lesson(
@@ -121,7 +121,7 @@ create table Lesson(
     chapterID int,
     videoPath varchar(100),
     primary key(lessonID),
-    foreign key(chapterID) references Chapter(chapterID)
+    foreign key(chapterID) references Chapter(chapterID) ON DELETE CASCADE
 );
 
 create table WatchList(
@@ -721,4 +721,3 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(209,'Bài 13
 ALTER TABLE Course ADD FULLTEXT INDEX courseName (name);
 ALTER TABLE Category ADD FULLTEXT INDEX categoryName (categoryName);
 ALTER TABLE PostCategory ADD FULLTEXT INDEX postCategoryName (postCategoryName);
-
