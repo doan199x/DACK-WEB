@@ -45,7 +45,7 @@ router.get('/', async (req, res, next) => {
         if ((req.query.search == null) || (req.query.search.trim() == '')) {
             courses = await courseModel.getCourseByTeacherID(teacherID);
         } else {
-            courses = await courseModel.findLikeNameByTeacherID(req.query.search,teacherID);
+            courses = await courseModel.findLikeNameByTeacherID(req.query.search, teacherID);
         }
         // add width star
         for (var i = 0; i < courses.length; i++) {
@@ -70,17 +70,17 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/add-course',async (req,res,next)=>{
-    try{
+router.get('/add-course', async (req, res, next) => {
+    try {
         var postCategory = await postCategoryModel.getAll();
         res.render('render', {
             contain: 'teacher/add-course',
             title: 'Đăng khóa học',
-            js: ['teacher-course','simpleFormatMoney'],
+            js: ['teacher-course', 'simpleFormatMoney', 'teacher'],
             css: ['admin-index'],
             postCategory: postCategory
         });
-    }catch(err){
+    } catch (err) {
         next(err);
     }
 })
@@ -102,26 +102,29 @@ router.post('/post-course', async (req, res, next) => {
     try {
         var teacherID = 1;
         var price = req.body.coursePrice;
-        var coursePrice = price.replace(',','');
+        var coursePrice = price.replace(',', '');
         var courseInfo = {
-            courseName : req.body.courseName,
-            courseSortDes : req.body.courseSortDes,
-            courseDes : req.body.courseDes,
+            courseName: req.body.courseName,
+            courseSortDes: req.body.courseSortDes,
+            courseDes: req.body.courseDes,
             coursePrice: coursePrice,
-            postCategory : req.body.postCategory,
-            category : req.body.category,
+            postCategory: req.body.postCategory,
+            category: req.body.category,
+            htmlCourseDes: req.body.htmlCourseDes,
+            htmlCourseSortDes: req.body.htmlCourseSortDes,
+            courseImagePath : '/img/course/default.jpg'
         }
-        if (courseInfo.coursePrice<0) {
+        if (courseInfo.coursePrice < 0) {
             res.json({
                 status: 1,
             })
         }
-        await courseModel.create(teacherID,courseInfo);
+        await courseModel.create(teacherID, courseInfo);
         console.log(courseInfo);
         res.json({
             status: 0,
         })
-    
+
     } catch (err) {
         next(err);
     }

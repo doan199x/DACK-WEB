@@ -47,18 +47,6 @@ module.exports = {
         const result = await db.load(sql);
         return result;
     },
-    delete: async (courseID, lessonsID) => {
-        await db.load(`DELETE from RegisteredCourse where courseID = ${courseID}`);
-        await db.load(`DELETE from Sale where courseID = ${courseID}`);
-        await db.load(`DELETE from BillDetail where courseID = ${courseID}`);
-        await db.load(`DELETE from WatchList where courseID = ${courseID}`);
-        await db.load(`DELETE from Rating where courseID = ${courseID}`);
-        for (var i = 0; i < lessonsID.length; i++) {
-            await db.load(`DELETE from Lesson where lessonID=${lessonsID[i]}`);
-            await db.load(`DELETE from Chapter where courseID=${courseID}`);
-            await db.load(`DELETE from Course where courseID = ${courseID}`);
-        }
-    },
     fulltext: async (search) => {
         const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
         Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
@@ -106,8 +94,9 @@ module.exports = {
         return result;
     },
     create:async(teacherID,courseInfo)=>{ //courseName,courseSortDes,courseDes,coursePrice,postCategory,category
-        const sql = `INSERT into Course (name,imagePath,sortDescription,description,NoStudents,averageStar, NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views)
-        values('${courseInfo.courseName}','/','${courseInfo.courseSortDes}','${courseInfo.courseDes}',0,0,0,'${courseInfo.coursePrice}',now(),now(),${courseInfo.category},'Chưa hoàn tất',${teacherID},0)`;
+        const sql = `INSERT into Course (name,imagePath,sortDescription,description,NoStudents,averageStar, NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription)
+        values('${courseInfo.courseName}','${courseInfo.courseImagePath}','${courseInfo.courseSortDes}','${courseInfo.courseDes}',0,0,0,'${courseInfo.coursePrice}',now(),now(),${courseInfo.category},'Chưa hoàn tất',${teacherID},0,
+        '${courseInfo.htmlCourseSortDes}','${courseInfo.htmlCourseDes}')`;
         const result = await db.load(sql);
         return result;
     }

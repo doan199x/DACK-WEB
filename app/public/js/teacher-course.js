@@ -26,22 +26,25 @@ function loadCategory() {
 
 function themKhoaHoc(){
     var courseName = document.getElementById("courseName").value;
-    var courseSortDes = tinymce.get("addSortDescription").getContent();
-    var courseDes = tinymce.get("addDescription").getContent();
+    var courseSortDes = tinymce.get("addSortDescription").getContent({format:'text'});
+    var courseDes = tinymce.get("addDescription").getContent({format:'text'});
+    var htmlCourseSortDes = tinymce.get("addSortDescription").getContent();
+    var htmlCourseDes = tinymce.get("addDescription").getContent();
     var coursePrice = document.getElementById("coursePrice").value;
     var postCategory = document.getElementById("postCategory").value;
     var category = document.getElementById("category").value;
-    alert("asd");
     $.ajax({
         url: '/teacher/post-course',
         type: 'POST',
         data: {
             courseName: courseName,
-            courseSortDes:  courseSortDes,
+            courseSortDes: courseSortDes,
             courseDes: courseDes,
             coursePrice: coursePrice,
             postCategory: postCategory,
-            category: category
+            category: category,
+            htmlCourseSortDes:htmlCourseSortDes,
+            htmlCourseDes:htmlCourseDes
         },
         success: function (result) {
             if (result.status == 0) {
