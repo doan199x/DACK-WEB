@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
       if (top[i].views === null) top[i].views = 0;
     }
 
-    //toview
+    //topview
     for (var i = 0; i < topview.length; i++) {
       if (topview[i].stars === null) top[i].stars = 0;
       else {
@@ -31,6 +31,11 @@ router.get("/", async (req, res) => {
       }
       if (topview[i].NoRates === null) topview[i].NoRates = 0;
       if (topview[i].views === null) topview[i].views = 0;
+      if (topview[i].percent) 
+      {
+        topview[i].saleprice = topview[i].price - (topview[i].price)*(topview[i].percent)/100;
+        topview[i].saleColor = "#66bb6a"
+      }
     }
     //newest
     for (var i = 0; i < newest.length; i++) {
@@ -41,6 +46,11 @@ router.get("/", async (req, res) => {
       }
       if (newest[i].NoRates === null) newest[i].NoRates = 0;
       if (newest[i].views === null) newest[i].views = 0;
+      if (newest[i].percent) 
+      {
+        newest[i].saleprice = newest[i].price - (newest[i].price)*(newest[i].percent)/100;
+        newest[i].saleColor = "#66bb6a"
+      }
     }
 
     //hot

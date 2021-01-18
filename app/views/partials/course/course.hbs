@@ -13,14 +13,14 @@
             <div class="switch">
                 <div class="form-check">
                     <label class="form-check-label" for="check1">
-                        <input type="checkbox" class="form-check-input" id="rate_check" name="option1"
-                            value="something">Điểm đánh giá giảm dần
+                        <input type="checkbox" class="form-check-input" id="rate_check" name="option1" value="no"
+                            onclick="rateChecked()">Điểm đánh giá giảm dần
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label" for="check1">
-                        <input type="checkbox" class="form-check-input" id="price__check" name="option1"
-                            value="something">Giá tăng dần
+                        <input type="checkbox" class="form-check-input" id="price_check" name="option1" value="no"
+                            onclick="priceChecked()">Giá tăng dần
                     </label>
                 </div>
             </div>
@@ -35,7 +35,30 @@
                 <div class="card__courseName">
                     <h6 class="card-title">{{this.courseName}}</h6>
                 </div>
+                <div class="highlight">
+                    {{#if this.newColor}}
+                    <div class="new" style="background-color: {{this.newColor}}">
+                        Mới
+                    </div>
+                    {{/if}}
+
+                    {{#if this.topColor}}
+                    <div class="top" style="background-color: {{this.topColor}}">
+                        Nổi bật
+                    </div>
+                    {{/if}}
+
+                    {{#if this.saleColor}}
+                    <div class="sale" style="background-color: {{this.saleColor}}">
+                        Giảm giá
+                    </div>
+                    {{/if}}
+
+                </div>
                 <div class="card-body">
+                    <div>
+                        <small class="card-title">Thời gian mở khóa học: {{this.created}}</small>
+                    </div>
                     <div>
                         <small class="card-title">Giáo viên: {{this.teacherName}}</small>
                     </div>
@@ -48,20 +71,32 @@
                             <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
                         </div>
                     </div>
+                    {{#if this.percent}}
                     <div>
-                        <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
+                        <h5 class="card-title" style="text-decoration: line-through;">Giá gốc: {{this.price}}</h5>
+                    </div>
+                    {{else}}
+                     <div>
+                        <h5 class="card-title" >Giá gốc: {{this.price}}</h5>
+                    </div>
+                    {{/if}}
+
+                    {{#if this.percent}}
+                    <div>
+                        <h5 class="card-title">Giảm giá: {{this.percent}} %</h5>
                     </div>
                     <div>
-                        <small class="card-title">Giá: {{this.price}}</small>
+                        <h5 class="price">Giá khuyến mãi: {{this.saleprice}}</h5>
                     </div>
-                    <div>
-                        <small class="card-title">Giảm giá: {{this.percent}}</small>
-                    </div>
+                    {{/if}}
                     <div>
                         <small class="card-title">Lượt xem: {{this.views}}</small>
                     </div>
                     <div>
                         <small class="card-title">Số lượt đăng ký học: {{this.NoReStudent}}</small>
+                    </div>
+                    <div>
+                        <small class="card-title">Thời gian mở khóa học: {{this.created}}</small>
                     </div>
                     <div>
                         <small class="card-title">Thời gian mở khóa học: {{this.created}}</small>

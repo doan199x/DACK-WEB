@@ -10,6 +10,10 @@
     font-weight: bold;
     text-align: center;
 }
+.price{
+    text-align: center;
+    font-weight: bold;
+}
 .card-img-top{
     border-bottom:1px solid black;
 }
@@ -53,6 +57,25 @@ a:link{
     width: 100%;
     justify-content: space-evenly;
 }
-.form-check{
-   
+.highlight{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 10%;
+    padding-top: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: center;
+    color: white;
+}
+.new{
+    border: solid 1px;
+    border-radius: 10%;
+}
+.top{
+    border: solid 1px;
+    border-radius: 10%;
+}
+.sale{
+    border: solid 1px;
+    border-radius: 10%;
 }

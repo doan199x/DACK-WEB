@@ -1,1 +1,79 @@
-<div>Couse Detail</div>
+<div class="course__container">
+    <div class="course__detail">
+        <div class="detail__line">
+            <div class="detail__img">
+                <a href="">
+                    <img src="{{detail.[0].img}}" alt="" width="800rem" height="400rem">
+                </a>
+            </div>
+            <div class="detail__column">
+                <div class="detail__info">
+                    <h2 class="course__name">{{detail.[0].courseName}}</h2>
+                    <div class="info__column">
+                        <div>
+                            <div class="star__div">
+                                <h5 style="display:inline">Đánh giá: {{averageStar}}</h5>
+                                <div class="stars-outer">
+                                    <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="">Số lượt đánh giá: {{detail.[0].NoRates}}</h5>
+                            </div>
+                            <div>
+                                <h5 class="">Giá: {{detail.[0].price}}</h5>
+                            </div>
+                            <div>
+                                <h5 class="">Giảm giá: {{detail.[0].percent}} %</h5>
+                            </div>
+                            <div>
+                                <h5 class="">Số lượt đăng ký học: {{detail.[0].NoReStudent}}</h5>
+                            </div>
+                            <div>
+                                <h5 class="">Lượt xem: {{detail.[0].views}}</h5>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <h5 class="">Giáo viên: {{detail.[0].teacherName}}</h5>
+                            </div>
+                            <div>
+                                <h5 class="">Danh mục: {{detail.[0].categoryName}}</h5>
+                            </div>
+                            <div>
+                                <h5 class="">Mô tả: {{detail.[0].CourseSortDes}}</h5>
+                            </div>
+                            <div>
+                                <h5 class="">Mô tả chi tiết: {{detail.[0].courseDes}}</h5>
+                            </div>
+                            <div>
+                                <h5 class="">Cập nhật: {{detail.[0].updated}}</h5>
+                            </div>
+                            <div>
+                                <h5 class="">Thời gian mở: {{detail.[0].created}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <button class="btn course__button"> Học thử </button>
+            </div>
+
+        </div>
+
+        <div class="detail__line">
+            <div class="detail__chapter">
+                {{#each chapterInfo}}
+                <li class="list-group-item active active-chapter" id="li-main{{@index}}"
+                    onclick="HideLessons({{@index}})">
+                    {{chapterName}}<i class="fas fa-caret-down fa-lg" style="float:right"
+                        id="button-change{{@index}}"></i>
+                </li>
+                {{#each lessons}}
+                <li class="list-group-item lesson-active" style="width:100%" id="li{{lessonID}}"
+                    onclick="changeLesson({{lessonID}})" style="cursor:pointer">{{lessonName}}</li>
+                {{/each}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
