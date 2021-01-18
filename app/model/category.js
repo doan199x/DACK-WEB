@@ -25,5 +25,15 @@ module.exports = {
         const sql = `UPDATE Category set categoryName='${categoryName}' where categoryID=${categoryID}`;
         const result = await db.load(sql);
         return result;
-    }
+    },
+    getByPostCategoryName: async(postCategoryName)=>{
+        const sql = `SELECT * from Category where postCategoryName = ${postCategoryName} `; 
+        const result = await db.load(sql);
+        return result;
+    },
+    getByID: async (categoryID) => {
+        const sql = `SELECT * from Category where categoryID=${categoryID}`; 
+        const result = await db.load(sql);
+        return result;
+    },
 }; 

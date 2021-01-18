@@ -150,26 +150,62 @@ router.post('/post-category-create', async (req, res, next) => {
 
 router.get('/course', async (req, res, next) => {
     try {
-        var courses;
+        var courses = [];
         if ((req.query.page == null) || (req.query.page.trim() == '')) {
             req.query.page = 1;
         }
         if ((req.query.perPage == null) || (req.query.perPage.trim() == '')) {
             req.query.perPage = 3;
         }
-        if ((req.query.search == null) || (req.query.search.trim() == '')) {
+        if ((req.query.search != null) && (req.query.search.trim() != '')) {
+            let teachers = await teacherModel.findLikeName(req.query.search);
+            for (var i = 0; i < teachers.length; i++) {
+                gotCourses = await courseModel.getCourseByTeacherID(teachers[i].teacherID);
+                courses = courses.concat(gotCourses);
+            }
+        }
+        else if ((req.query.postCategoryID == null) || (req.query.postCategoryID.trim() == '') && (req.query.categoryID == null) || (req.query.categoryID.trim() == '')) {
             courses = await courseModel.getAll();
+        } else if ((req.query.categoryID == null) || (req.query.categoryID.trim() == '')) {
+            var categories = await categoryModel.getByPostCategoryID(req.query.postCategoryID);
+            for (var i = 0; i < categories.length; i++) {
+                var gotCourses = await courseModel.getCourseByCategoryID(categories[i].categoryID);
+                courses.push(gotCourses);
+            }
         } else {
-            courses = await courseModel.findLikeName(req.query.search);
+            courses = await courseModel.getCourseByCategoryID(req.query.categoryID);
         }
         // add width star
         for (var i = 0; i < courses.length; i++) {
             courses[i].widthStar = courses[i].averageStar / 5 * 100;
             courses[i].widthStar += '%';
         }
+        // Load post category:
         var page = req.query.page;
         var perPage = req.query.perPage;
         var pagingInfo = helper.pagination(courses, page, perPage, courses.length);
+        var curPostCategory;
+        var curCategory;
+        var allCategory;
+        if ((req.query.postCategoryID == null) || (req.query.postCategoryID.trim() == '')) {
+            curPostCategory = false
+        } else {
+            curPostCategory = await postCategoryModel.getByID(req.query.postCategoryID);
+            curPostCategory = curPostCategory[0];
+        }
+        if ((req.query.categoryID == null) || (req.query.categoryID.trim() == '')) {
+            curCategory = false
+        } else {
+            curCategory = await categoryModel.getByID(req.query.categoryID);
+            curCategory = curCategory[0];
+            allCategory = await categoryModel.getByPostCategoryID(req.query.postCategoryID);
+        }
+        var postCategory = await postCategoryModel.getAll();
+        // Hiển thị tên giảng viên.
+        for (var i = 0; i < courses.length; i++) {
+            let teachers = await teacherModel.getByID(courses[i].teacherID);
+            courses[i].teacherName = teachers[0].name;
+        }
         res.render('render', {
             contain: 'admin/admin-course',
             title: 'Quản lí khóa học',
@@ -178,7 +214,11 @@ router.get('/course', async (req, res, next) => {
             courses: pagingInfo.objectOnPage,
             pagingInfo: pagingInfo,
             currentPage: page,
-            perPage: perPage
+            perPage: perPage,
+            postCategory: postCategory,
+            curCategory: curCategory,
+            curPostCategory: curPostCategory,
+            allCategory: allCategory
         });
     } catch (err) {
         next(err);
@@ -225,10 +265,10 @@ router.get('/student', async (req, res, next) => {
         } else {
             students = await studentModel.findLikeName(req.query.search);
         }
+
         var page = req.query.page;
         var perPage = req.query.perPage;
         var pagingInfo = helper.pagination(students, page, perPage, students.length);
-        console.log(pagingInfo.objectOnPage);
         res.render('render', {
             contain: 'admin/admin-qlhocsinh',
             title: 'Quản lí giáo viên',
@@ -379,6 +419,19 @@ router.post('/unban-student', async (req, res, next) => {
         res.json({
             status: 0,
             message: 'Cấm giáo viên thành công'
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/get-category', async (req, res, next) => {
+    try {
+        var postCategoryID = req.body.postCategoryID;
+        categories = await categoryModel.getByPostCategoryID(postCategoryID);
+        res.json({
+            status: 0,
+            categories: categories
         })
     } catch (err) {
         next(err);

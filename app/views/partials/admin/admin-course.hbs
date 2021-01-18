@@ -5,30 +5,44 @@
         </div>
         <div class="col-lg-8">
             <div class="row">
-                <div class="col-lg-4">
-                    <select class="form-control">
-                        <option value="" disabled selected>Chọn danh mục cha</option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
+                <div class="col-lg-3" style="padding-right:1px">
+                    <select id="postCategory" class="form-control" onchange="loadCategory()">
+                        {{#equal curPostCategory false}}
+                        <option value="" style="font-weight: bold;" disabled selected>Danh mục cha</option>
+                        {{else}}
+                        <option value="{{curPostCategory.postCategoryID}}" style="font-weight: bold;" disabled selected>{{curPostCategory.postCategoryName}}</option>
+                        {{/equal}}
+                        {{#each postCategory}}
+                        <option value="{{postCategoryID}}">{{postCategoryName}}</option>
+                        {{/each}}
                     </select>
                 </div>
-                <div class="col-lg-4">
-                    <select class="form-control">
-                        <option value="" disabled selected>Chọn danh mục con</option>
-                        <option></option>
-                        <option></option>
-                        <option></option>
+                <div class="col-lg-4" style="padding:1px">
+                    <select id="category" class="form-control">
+                        {{#equal curCategory false}}
+                        <option value="" style="font-weight: bold;" disabled selected>Danh mục con</option>
+                        {{else}}
+                        <option value="{{curCategory.categoryID}}" style="font-weight: bold;" disabled selected>{{curCategory.categoryName}}</option>
+                        {{/equal}}
+                        {{#each allCategory}}
+                        <option value="{{categoryID}}">{{categoryName}}</option>
+                        {{/each}}
                     </select>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-1" style="padding:1px">
+                    <div>
+                        <button class="btn btn-secondary" onclick="timKiemTheoCategory()"> <i class="fa fa-search"
+                                aria-hidden="true" style="cursor:pointer"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-3" style="padding:1px">
                     <div class="float-right">
                         <input class="form-control" id="inputTimKiem" style="" placeholder="Tìm kiếm">
                     </div>
                 </div>
-                <div class="col-lg-1">
-                    <div class="float-right">
-                        <button class="btn btn-secondary"> <i onclick="timKiemKhoaHoc()" class="fa fa-search"
+                <div class="col-lg-1" style="padding:1px">
+                    <div>
+                        <button class="btn btn-secondary" onclick="timKiemTheoGiaoVien()"> <i class="fa fa-search"
                                 aria-hidden="true" style="cursor:pointer"></i></button>
                     </div>
                 </div>
@@ -52,7 +66,7 @@
                             <span>Giảng viên:</span>
                         </div>
                         <div class="col-lg-8">
-                            <span>Lập trình ABCXYZ Lập trình ABCXYZ</span>
+                            <span>{{teacherName}}</span>
                         </div>
                     </div>
                     <div class="row">
