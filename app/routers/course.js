@@ -4,6 +4,8 @@ const helper = require("../helper/pagination");
 const courseModel = require("../model/course.js");
 const studentModel = require("../model/student.js");
 const guestModel = require("../model/guest.js");
+const chapterModel = require("../model/chapter.js");
+const lessonModel = require("../model/lesson.js");
 
 router.get("/", async (req, res) => {
   const category = await guestModel.category();
@@ -42,7 +44,7 @@ router.get("/", async (req, res) => {
       pagingInfo: pagingInfo,
       currentPage: page,
       perPage: perPage,
-      category:category
+      category: category,
     });
   } catch (err) {
     console.log(err);
@@ -53,18 +55,16 @@ router.get("/find", async (req, res) => {
   const category = await guestModel.category();
   try {
     var courses;
-    if (req.query.page == null || req.query.page.trim() == "") {
+    if (req.query.page == null || req.query.page.trim() === "") {
       req.query.page = 1;
     }
-    if (req.query.perPage == null || req.query.perPage.trim() == "") {
+    if (req.query.perPage == null || req.query.perPage.trim() === "") {
       req.query.perPage = 6;
     }
     if (req.query.search === null || req.query.search.trim() === "") {
       courses = await courseModel.getAll();
     } else {
-      console.log(req.query.search);
       courses = await courseModel.fulltext(req.query.search);
-      console.log(courses);
     }
     // add width star
     for (let i = 0; i < courses.length; i++) {
@@ -83,7 +83,12 @@ router.get("/find", async (req, res) => {
     }
     const page = req.query.page;
     const perPage = req.query.perPage;
-    const pagingInfo = helper.pagination(courses, page, perPage, courses.length);
+    const pagingInfo = helper.pagination(
+      courses,
+      page,
+      perPage,
+      courses.length
+    );
     res.render("home", {
       css: ["course", "rate"],
       js: ["course"],
@@ -92,7 +97,7 @@ router.get("/find", async (req, res) => {
       pagingInfo: pagingInfo,
       currentPage: page,
       perPage: perPage,
-      category:category,
+      category: category,
     });
   } catch (err) {
     console.log(err);
@@ -101,26 +106,50 @@ router.get("/find", async (req, res) => {
 
 router.get("/detail", async (req, res) => {
   const category = await guestModel.category();
+  for (let i = 0; i < category.length; i++) {
+    if (category[i].postCategoryID === 1)
+      category[i].postCategoryName = "💻 " + category[i].postCategoryName;
+    if (category[i].postCategoryID === 2)
+      category[i].postCategoryName = "🍜 " + category[i].postCategoryName;
+    if (category[i].postCategoryID === 3)
+      category[i].postCategoryName = "📓 " + category[i].postCategoryName;
+    if (category[i].postCategoryID === 4)
+      category[i].postCategoryName = "🔠 " + category[i].postCategoryName;
+  }
+  const detail = await courseModel.detail(req.query.courseID);
+  var chapterInfo = await chapterModel.getChaptersByCourseID(detail[0].id);
+        // course info
+        for (let i = 0; i < chapterInfo.length; i++) {
+            chapterInfo[i].lessons = await lessonModel.getLessonsByChapterID(chapterInfo[i].chapterID)
+        }
+
   try {
     res.render("home", {
-      css: ["course", "rate"],
+      css: ["course", "rate", "course-detail"],
       js: ["course"],
       contain: "course/course-detail",
-      category:category
+      category: category,
+      detail: detail,
+      chapterInfo: chapterInfo
     });
   } catch (err) {
     console.log(err);
   }
 });
 
-router.get('/buy', async (req, res, next) => {
+router.get("/buy", async (req, res, next) => {
   try {
     var studentID = 1;
     var courseID = req.query.courseID;
-    registeredCourses = await courseModel.getRegisteredCourseByStudentID(studentID);
+    registeredCourses = await courseModel.getRegisteredCourseByStudentID(
+      studentID
+    );
     var checkRegisteredCourse = false;
     for (var i = 0; i < registeredCourses.length; i++) {
-      if (registeredCourses[i].studentID == studentID || registeredCourses[i].courseID == courseID) {
+      if (
+        registeredCourses[i].studentID == studentID ||
+        registeredCourses[i].courseID == courseID
+      ) {
         checkRegisteredCourse = true;
         break;
       }
@@ -130,33 +159,35 @@ router.get('/buy', async (req, res, next) => {
     var studentBalance = students[0].balance;
     // get course information
     var course = await courseModel.getCourseByID(courseID);
-    course[0].widthStar = course[0].averageStar / 5 * 100 + '%';
+    course[0].widthStar = (course[0].averageStar / 5) * 100 + "%";
     var checkConditionToBuy = course[0].price <= studentBalance ? true : false;
     console.log(checkConditionToBuy);
     afterBalance = studentBalance - course[0].price;
-    res.render('render', {
-      contain: 'course/buy',
+    res.render("render", {
+      contain: "course/buy",
       course: course[0],
-      css: ['rate'],
-      js: ['buy'],
+      css: ["rate"],
+      js: ["buy"],
       checkConditionToBuy: checkConditionToBuy,
       checkRegisteredCourse: checkRegisteredCourse,
       studentID: studentID,
       courseID: courseID,
       studentBalance: studentBalance,
-      afterBalance: afterBalance
-    })
+      afterBalance: afterBalance,
+    });
   } catch (err) {
     next(err);
   }
-})
+});
 
-router.post('/buy', async (req, res, next) => {
+router.post("/buy", async (req, res, next) => {
   try {
     studentID = req.body.studentID;
     courseID = req.body.courseID;
     // check is course registered by this user;
-    var registeredCourses = await courseModel.getRegisteredCourseByStudentID(studentID);
+    var registeredCourses = await courseModel.getRegisteredCourseByStudentID(
+      studentID
+    );
     checkRegisteredCourse = false;
     for (var i = 0; i < registeredCourses.length; i++) {
       if (registeredCourses[0].courseID == courseID) {
@@ -167,34 +198,32 @@ router.post('/buy', async (req, res, next) => {
     if (checkRegisteredCourse == true) {
       res.json({
         status: 1,
-        message: 'Bạn đã mua khóa học này'
-      })
+        message: "Bạn đã mua khóa học này",
+      });
     } else {
       // check do user have enough balance to buy
       var courses = await courseModel.getCourseByID(courseID);
       var students = await studentModel.getProfile(studentID);
       var checkBalance = students[0].balance < courses[0].price ? false : true;
       if (checkBalance == true) {
-
         await courseModel.buy(studentID, courseID, Date.now());
         var newBalance = students[0].balance - courses[0].price;
         await studentModel.updateBalance(studentID, newBalance);
         res.json({
           status: 0,
-          message: 'Mua khóa học thành công',
-          courseID: courseID
-        })
+          message: "Mua khóa học thành công",
+          courseID: courseID,
+        });
       } else {
         res.json({
           status: 2,
-          message: 'Không đủ tiền để mua khóa học'
-        })
+          message: "Không đủ tiền để mua khóa học",
+        });
       }
-
     }
   } catch (err) {
     next(err);
   }
-})
+});
 
 module.exports = router;

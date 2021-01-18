@@ -52,12 +52,13 @@ module.exports = {
         Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
         Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
         Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
-        COUNT(RegisteredCourse.studentID) as NoReStudent,  MATCH (Course.name) AGAINST ("${{search}}") AS score,
-        MATCH (Category.categoryName) AGAINST ("${{search}}") as score2, MATCH (PostCategory.postCategoryName) AGAINST ("${{search}}") as score3
+        COUNT(RegisteredCourse.studentID) as NoReStudent,  MATCH (Course.name) AGAINST ("${search}") AS score,
+        MATCH (Category.categoryName) AGAINST ("${search}") as score2, MATCH (PostCategory.postCategoryName) AGAINST ("${search}}") as score3
         FROM (((((Category INNER JOIN Course ON Category.categoryID = Course.categoryID) INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
         INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID) INNER JOIN Sale ON Sale.courseID = Course.courseID)
         INNER JOIN PostCategory ON PostCategory.postCategoryID = Category.categoryID)
-        WHERE (MATCH (Course.name) AGAINST ("${{search}}") > 0 || MATCH (Category.categoryName) AGAINST ("${{search}}") > 0 || MATCH (PostCategory.postCategoryName) AGAINST ("${{search}}") > 0)
+        WHERE (MATCH (Course.name) AGAINST ("${search}") > 0 || MATCH (Category.categoryName) AGAINST ("${search}") > 0 
+        || MATCH (PostCategory.postCategoryName) AGAINST ("${search}") > 0)
         GROUP BY Course.courseID
         ORDER BY (score+score2+score3) DESC;`;
         const result = await db.load(sql);
@@ -99,5 +100,23 @@ module.exports = {
         '${courseInfo.htmlCourseSortDes}','${courseInfo.htmlCourseDes}')`;
         const result = await db.load(sql);
         return result;
-    }
+    },
+    detail:async(courseID)=>{
+        const sql = `SELECT Course.courseID as id, Course.name as courseName, Course.description as courseDes,
+        Course.sortDescription as CourseSortDes, Category.categoryName as categoryName,
+        Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
+        Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
+        Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created,
+        DATE_FORMAT(Course.lastUpdated, "%d/%m/%Y") as updated, Course.views as views, 
+        COUNT(RegisteredCourse.studentID) as NoReStudent
+        FROM ((((Category
+        INNER JOIN Course ON Category.categoryID = Course.categoryID)
+        INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
+        INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
+        INNER JOIN Sale ON Sale.courseID = Course.courseID)
+        WHERE Course.courseID = ${courseID};`;
+        const result = await db.load(sql);
+        return result;
+    },
+
 };
