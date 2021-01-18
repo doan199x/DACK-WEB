@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
         all[i].newColor = "#0277bd";
       }
     }
-    all[i].widthStar = (all[i].averageStar / 5) * 100;
+    all[i].widthStar = (all[i].stars / 5) * 100;
     all[i].widthStar += "%";
     if (all[i].percent)
       all[i].saleprice = all[i].price - (all[i].price * all[i].percent) / 100;
@@ -80,12 +80,15 @@ router.get("/find", async (req, res) => {
       req.query.page = 1;
     }
     if (req.query.perPage == null || req.query.perPage.trim() === "") {
-      req.query.perPage = 6;
+      req.query.perPage = 3;
     }
     if (req.query.search === null || req.query.search.trim() === "") {
       courses = await courseModel.all();
     } else {
-      courses = await courseModel.fulltext(req.query.search);
+      if (req.query.sortOption === 1) courses = await courseModel.fulltext1(req.query.search);
+      else if (req.query.sortOption === 2) courses = await courseModel.fulltext2(req.query.search);
+      else if (req.query.sortOption === 3) courses = await courseModel.fulltext3(req.query.search);
+      else courses = await courseModel.fulltext(req.query.search);
     }
     // add width star
     for (let i = 0; i < courses.length; i++) {
@@ -99,7 +102,7 @@ router.get("/find", async (req, res) => {
           courses[i].newColor = "#0277bd";
         }
       }
-      courses[i].widthStar = (courses[i].averageStar / 5) * 100;
+      courses[i].widthStar = (courses[i].stars / 5) * 100;
       courses[i].widthStar += "%";
       if (courses[i].percent) {
         courses[i].saleprice =
