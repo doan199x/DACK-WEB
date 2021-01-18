@@ -154,3 +154,7 @@ window.onload = function checkVideo() {
         })
     }
 }
+
+function chuyenTrangXemVideo(courseID){
+    window.open(`/student/watch?courseID=${courseID}`)
+}
