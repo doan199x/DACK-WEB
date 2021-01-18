@@ -14,21 +14,18 @@
             <div class="row">
                 <div class="col-lg-12">
                     {{#each chapterInfo}}
-                    <li class="list-group-item active active-chapter" style="width:100%" id="li-main{{@index}}"
-                        onclick="HideLessons({{@index}})">{{chapterName}} <i class="far fa-edit fa-lg"
-                            style="float:right"></i></li>
+                    <li class="list-group-item active active-chapter" style="width:100%">{{chapterName}} <i style="float:right"
+                            class="fas fa-trash fa-lg" onclick="deleteChapter({{chapterID}})"></i><i class="far fa-edit fa-lg" style="float:right; margin-right:4px;cursor:pointer"></i></li>
                     {{#each lessons}}
-                    <li class="list-group-item lesson-active" style="width:100%" id="li{{lessonID}}"
-                        onclick="changeLesson({{lessonID}})" style="cursor:pointer">{{lessonName}}<i
-                            class="fas fa-edit fa-lg" style="float:right"></i></li>
+                    <li class="list-group-item lesson-active" style="width:100%" style="cursor:pointer">{{lessonName}}<i style="float:right;cursor:pointer"
+                            class="fas fa-trash fa-lg" onclick="deleteLesson({{lessonID}})"></i><i class="fas fa-edit fa-lg" style="float:right; margin-right:4px;cursor:pointer"></i></li>
                     {{/each}}
                     <li class="list-group-item lesson-active" style="width:100%;cursor:pointer"><i
                             style="margin-right:5px" class="fas fa-plus-square fa-lg"></i>Thêm bài học</li>
                     {{/each}}
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>
+<input type="text" hidden value ="{{courseID}}" id="inputCourseID">

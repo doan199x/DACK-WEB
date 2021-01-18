@@ -11,4 +11,9 @@ module.exports = {
         const chapters = await db.load(sql);
         return chapters;
     },
+    delete: async(chapterID)=>{
+        const sql=`DELETE from Chapter where chapterID = ${chapterID}`;
+        const result = await db.load(sql);
+        return result;
+    }
 }; 
