@@ -79,3 +79,46 @@ function deleteChapter(chapterID) {
         }
     })
 }
+
+function themChuongHoc(courseID) {
+    chapterName = document.getElementById('chapterName').value;
+    $.ajax({
+        url: '/teacher/add-chapter',
+        type: 'POST',
+        data: {
+            chapterName: chapterName,
+            courseID: courseID
+        },
+        success: function (result) {
+            if (result.status == 0) {
+                Swal.fire({
+                    title: 'Thêm chương học thành công'
+                }).then(() => {
+                    location.href = `/teacher/update-course-content?courseID=${courseID}`
+                })
+            } else{
+                Swal.fire({
+                    title: 'Lỗi không xác định'
+                }).then(() => {
+                    location.href = `/teacher/update-course-content?courseIdD=${courseID}`
+                })
+            }
+        }
+    })
+}
+
+window.onload = function checkVideo() {
+    var url = new URL(window.location.href);
+    var result = url.searchParams.get('result');
+    if (result == 'failed') {
+        Swal.fire({
+            title: 'Thêm lỗi',
+            confirmButtonColor: '#212121',
+        })
+    } else if (result == 'passed') {
+        Swal.fire({
+            title: 'Thêm thành công',
+            confirmButtonColor: '#212121',
+        })
+    }
+}

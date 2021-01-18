@@ -7,25 +7,114 @@
         <div class="col-lg-9">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Nội dung khóa học</h3>
+                    <h3>{{course.name}}</h3>
                     <hr>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     {{#each chapterInfo}}
-                    <li class="list-group-item active active-chapter" style="width:100%">{{chapterName}} <i style="float:right"
-                            class="fas fa-trash fa-lg" onclick="deleteChapter({{chapterID}})"></i><i class="far fa-edit fa-lg" style="float:right; margin-right:4px;cursor:pointer"></i></li>
+                    <li class="list-group-item active active-chapter" style="width:100%">{{chapterName}}
+                        {{#if isOutline}}(Đề cương){{/if}} <i style="float:right" class="fas fa-trash fa-lg"
+                            onclick="deleteChapter({{chapterID}})"></i><i class="far fa-edit fa-lg"
+                            style="float:right; margin-right:4px;cursor:pointer"></i></li>
                     {{#each lessons}}
-                    <li class="list-group-item lesson-active" style="width:100%" style="cursor:pointer">{{lessonName}}<i style="float:right;cursor:pointer"
-                            class="fas fa-trash fa-lg" onclick="deleteLesson({{lessonID}})"></i><i class="fas fa-edit fa-lg" style="float:right; margin-right:4px;cursor:pointer"></i></li>
+                    <li class="list-group-item lesson-active" style="width:100%" style="cursor:pointer">{{lessonName}}<i
+                            style="float:right;cursor:pointer" class="fas fa-trash fa-lg"
+                            onclick="deleteLesson({{lessonID}})"></i><i class="fas fa-edit fa-lg"
+                            style="float:right; margin-right:4px;cursor:pointer"></i></li>
                     {{/each}}
-                    <li class="list-group-item lesson-active" style="width:100%;cursor:pointer"><i
-                            style="margin-right:5px" class="fas fa-plus-square fa-lg"></i>Thêm bài học</li>
+                    <li data-toggle="modal" data-target="#themBaiHoc{{chapterID}}" class="list-group-item lesson-active"
+                        style="width:100%;cursor:pointer"><i style="margin-right:5px"
+                            class="fas fa-plus-square fa-lg"></i>Thêm bài học</li>
+                    {{!-- modal them bai hoc --}}
+                    <form method="POST" action="/teacher/add-lesson" enctype="multipart/form-data">
+                        <div class="modal fade" id="themBaiHoc{{chapterID}}" tabindex="-1" role="dialog"
+                            aria-labelledby="categoryModelLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Thêm bài học cho {{chapterName}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <span>Tên bài học</span>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <input id="lessonName" name="lessonName" style="width: 80%;"
+                                                        required>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top:10px">
+                                                <div class="col-lg-4">
+                                                    <span>Thêm video</span>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <input type="file" id="lessonVideo" name="lessonVideo"
+                                                        style="width: 80%;" required>
+                                                </div>
+                                                <input type="text" hidden value="{{courseID}}" id="inputModalCourseID"
+                                                    name="inputModalCourseID">
+                                                <input type="text" hidden value="{{chapterID}}" id="inputModalCourseID"
+                                                    name="inputModalchapterID">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" data-dismiss="modal"
+                                            style="color: white;font-weight:bold">Đóng</button>
+                                        <button type="submit" class="btn btn-secondary">Sửa</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    {{!-- modal them bai hoc --}}
                     {{/each}}
+                    <li data-toggle="modal" data-target="#themChuongHoc{{courseID}}"
+                        class="list-group-item active active-chapter" style="width:100%"><i style="margin-right:5px"
+                            class="fas fa-plus-square fa-lg"></i>Thêm chương học</li>
+                    {{!-- modal them chuong hoc --}}
+                    <div class="modal fade" id="themChuongHoc{{courseID}}" tabindex="-1" role="dialog"
+                        aria-labelledby="categoryModelLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Thêm chương học cho {{course.name}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <span>Tên chương học</span>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input id="chapterName" name="chapterName" style="width: 80%;" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal"
+                                        style="color: white;font-weight:bold">Đóng</button>
+                                    <button onclick="themChuongHoc({{courseID}})" type="submit"
+                                        class="btn btn-secondary">Thêm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- modal them bai hoc --}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-<input type="text" hidden value ="{{courseID}}" id="inputCourseID">
+<input type="text" hidden value="{{courseID}}" id="inputCourseID">

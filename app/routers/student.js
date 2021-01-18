@@ -45,7 +45,7 @@ router.get('/profile', async (req, res, next) => {
     }
 })
 
-router.get('/profile/edit', async (req, res, next) => {
+router.get('/profile-edit', async (req, res, next) => {
     try {
         // studentID = 1;
         var studentID = req.query.studentID;
@@ -62,10 +62,9 @@ router.get('/profile/edit', async (req, res, next) => {
     }
 })
 
-router.post('/profile/edit', upload.single('fileAvatar'), async (req, res, next) => {
+router.post('/profile-edit', upload.single('fileAvatar'), async (req, res, next) => {
     try {
-        var studentID = req.query.studentID;
-        // studentID = 1;
+        var studentID = 1;
         var student = await studentModel.getAvatarPath(studentID);
         var avatarPath;
         if (req.file) {

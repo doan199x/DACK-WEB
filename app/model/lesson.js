@@ -15,5 +15,10 @@ module.exports = {
         const sql = `DELETE from Lesson where lessonId=${lessonID}`;
         const result = await db.load(sql);
         return result;
+    },
+    add: async(lessonName,videoPath,chapterID)=>{
+        const sql = `INSERT into Lesson (lessonName,videoPath,chapterID) values('${lessonName}','${videoPath}','${chapterID}')`;
+        const result = await db.load(sql);
+        return result;
     }
 }; 

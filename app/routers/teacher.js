@@ -13,14 +13,13 @@ const url = require('url');
 
 //multer
 var multer = require('multer');
-const course = require('../model/course.js');
-var imageMimeTypes = ['image/jpeg', 'image/png'];
+var imageMimeTypes = ['video/mp4'];
 var storage = multer.diskStorage({
     destination: function (req, file, next) {
-        next(null, 'public/uploads/img/courseImage')
+        next(null, 'public/uploads/video')
     },
     filename: function (req, file, next) {
-        next(null, file.fieldname + '-' + Date.now() + '.jpg')
+        next(null, file.fieldname + '-' + Date.now() + '.mp4')
     }
 })
 
@@ -197,6 +196,77 @@ router.post('/delete-chapter', async (req, res, next) => {
         res.json({
             status: 0,
             message: 'Xóa thành công'
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/add-lesson', upload.single('lessonVideo'), async (req, res, next) => {
+    try {
+        var courseID = req.body.inputModalCourseID;
+        var lessonName = req.body.lessonName;
+        var chapterID = req.body.inputModalchapterID;
+        if (req.file) {
+            var videoPath = '/uploads/video/' + req.file.filename;
+            await lessonModel.add(lessonName, videoPath, chapterID);
+            res.redirect(url.format({
+                pathname: '/teacher/update-course-content',
+                query: {
+                    courseID: courseID,
+                    result: "passed"
+                }
+            }));
+        } else {
+            res.redirect(url.format({
+                pathname: '/teacher/update-course-content',
+                query: {
+                    courseID: courseID,
+                    result: "failed"
+                }
+            }));
+        }
+    } catch (err) {
+    }
+})
+
+router.post('/edit-lesson', upload.single('lessonVideo'), async (req, res, next) => {
+    try {
+        var courseID = req.body.inputModalCourseID;
+        var lessonName = req.body.lessonName;
+        var chapterID = req.body.inputModalchapterID;
+        if (req.file) {
+            var videoPath = '/uploads/video/' + req.file.filename;
+            await lessonModel.add(lessonName, videoPath, chapterID);
+            res.redirect(url.format({
+                pathname: '/teacher/update-course-content',
+                query: {
+                    courseID: courseID,
+                    result: "passed"
+                }
+            }));
+        } else {
+            res.redirect(url.format({
+                pathname: '/teacher/update-course-content',
+                query: {
+                    courseID: courseID,
+                    result: "failed"
+                }
+            }));
+        }
+    } catch (err) {
+    }
+})
+
+router.post('/add-chapter', async (req, res, next) => {
+    try {
+        var chapterName = req.body.chapterName;
+        var courseID = req.body.courseID;
+        var isOutline = false; // default
+        await chapterModel.add(chapterName, courseID, isOutline);
+        res.json({
+            status: 0,
+            message: 'Thêm dữ liệu thành công'
         })
     } catch (err) {
         next(err);
