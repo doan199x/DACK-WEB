@@ -21,4 +21,9 @@ module.exports = {
         const result = await db.load(sql);
         return result;
     },
+    update: async (chapterID, chapterName, isOutline) => { 
+        const sql = `UPDATE Chapter set chapterName ='${chapterName}',isOutline = ${isOutline} where chapterID = ${chapterID}`;
+        const result = await db.load(sql);
+        return result;
+    },
 }; 

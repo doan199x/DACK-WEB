@@ -273,4 +273,19 @@ router.post('/add-chapter', async (req, res, next) => {
     }
 })
 
+router.post('/edit-chapter', async (req, res, next) => {
+    try {
+        var chapterName = req.body.chapterName;
+        var isOutline = req.body.isOutline;
+        var chapterID = req.body.chapterID;
+        await chapterModel.update(chapterID, chapterName, isOutline);
+        res.json({
+            status: 0,
+            message: 'Sửa chương học thành công'
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
 module.exports = router;
