@@ -3,92 +3,84 @@
     <div class="all">
         <h3 class="title"> ️Danh sách khóa học hiện có</h3>
         <div class="divider"></div>
-        <div class="search-bar">
-            <input id="search" style="margin-right:10px;" placeholder="Tìm kiếm">
-            <button type="submit" class="btn btn-primary" onclick="searchCourse()">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
+        <div class="search__group">
+            <div class="search-bar">
+                <input id="search" style="margin-right:10px;" placeholder="Tìm kiếm">
+                <button type="submit" class="btn btn-primary" onclick="searchCourse()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="switch">
+                <div class="form-check">
+                    <label class="form-check-label" for="check1">
+                        <input type="checkbox" class="form-check-input" id="rate_check" name="option1"
+                            value="something">Điểm đánh giá giảm dần
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="check1">
+                        <input type="checkbox" class="form-check-input" id="price__check" name="option1"
+                            value="something">Giá tăng dần
+                    </label>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-8">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="float-right">
-                        <input id="search" style="margin-right:10px;" placeholder="Tìm kiếm">
-                        <button type="submit" class="btn btn-primary" onclick="searchCourse()">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="course">
-                {{#each courses}}
-                <div class="row" style="margin-top: 10px;">
-                    <div class="col-lg-5">
-                        <a href="/course/detail?courseID={{this.courseID}}">
-                            <img src="{{imagePath}}" style="border: 1px solid black" height="200px" width="300px">
-                        </a>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <h5>Khóa học:</h5>
-                            </div>
-                            <div class="col-lg-8">
-                                <h5>{{name}}</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <span>Giảng viên:</span>
-                            </div>
-                            <div class="col-lg-8">
-                                <span>Lập trình ABCXYZ Lập trình ABCXYZ</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <span>SL học viên:</span>
-                            </div>
-                            <div class="col-lg-8">
-                                <span>{{NoStudents}}</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4" style="margin-top:5px">
-                                <span>Đánh giá:</span>
-                            </div>
-                            <div class="col-lg-8">
-                                <h4 style="display:inline">{{averageStar}}</h4>
-                                <div class="stars-outer">
-                                    <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 float-right" style="margin-top: 20px;">
-                                <div class="float-right" style="margin-right:50px">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                {{/each}}
-            </div>
 
-            <div class="row justify-content-center" style="margin-top:20px">
-                <button class="btn btn-secondary" style="margin-right:2px"
-                    onclick="getPrevPage({{pagingInfo.preve_value}},{{perPage}})"><i class="fa fa-angle-left"
-                        aria-hidden="true"></i></button>
-                <button class="btn btn-secondary">{{currentPage}}</i></button>
-                <button class="btn btn-secondary" style="margin-left:2px"
-                    onclick="getNextPage({{pagingInfo.next_value}},{{perPage}})"><i class="fa fa-angle-right"
-                        aria-hidden="true"></i></button>
+        <div class="course">
+            {{#each courses}}
+            <div class="card card-custom" id="card{{this.id}}">
+                <a href="/course/detail?courseID={{this.id}}">
+                    <img height="200px" class="card-img-top" src="{{this.img}}" alt="Card image cap">
+                </a>
+                <div class="card__courseName">
+                    <h6 class="card-title">{{this.courseName}}</h6>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <small class="card-title">Giáo viên: {{this.teacherName}}</small>
+                    </div>
+                    <div>
+                        <small class="card-title">Danh mục: {{this.categoryName}}</small>
+                    </div>
+                    <div class="star__div">
+                        <h4 style="display:inline">{{averageStar}}</h4>
+                        <div class="stars-outer">
+                            <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
+                    </div>
+                    <div>
+                        <small class="card-title">Giá: {{this.price}}</small>
+                    </div>
+                    <div>
+                        <small class="card-title">Giảm giá: {{this.percent}}</small>
+                    </div>
+                    <div>
+                        <small class="card-title">Lượt xem: {{this.views}}</small>
+                    </div>
+                    <div>
+                        <small class="card-title">Số lượt đăng ký học: {{this.NoReStudent}}</small>
+                    </div>
+                    <div>
+                        <small class="card-title">Thời gian mở khóa học: {{this.created}}</small>
+                    </div>
+                </div>
             </div>
+            {{/each}}
         </div>
-        <div class="intro">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Cupiditate quae numquam quaerat fuga officiis veritatis delectus quia reiciendis neque.
-            Quidem enim iure molestias tenetur dolor nihil consectetur harum eveniet cumque.</div>
-        <div class="divider"></div>
+
+
+        <div class="page__button row justify-content-center" style="margin-top:20px">
+            <button class="btn btn-secondary" style="margin-right:2px"
+                onclick="getPrevPage({{pagingInfo.preve_value}},{{perPage}})"><i class="fa fa-angle-left"
+                    aria-hidden="true"></i></button>
+            <button class="btn btn-secondary">{{currentPage}}</i></button>
+            <button class="btn btn-secondary" style="margin-left:2px"
+                onclick="getNextPage({{pagingInfo.next_value}},{{perPage}})"><i class="fa fa-angle-right"
+                    aria-hidden="true"></i></button>
+        </div>
     </div>
+</div>
 </div>>
