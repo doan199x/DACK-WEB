@@ -1,8 +1,8 @@
-function getPrevPage(preve_value, perPage) {
+function getPrevPage(preve_value, perPage, categoryID, postCategoryID) {
     location.href = `/admin/course?page=${preve_value}&perPage=${perPage}`;
 }
 
-function getNextPage(next_value, perPage) {
+function getNextPage(next_value, perPage, categoryID, postCategoryID) {
     location.href = `/admin/course?page=${next_value}&perPage=${perPage}`;
 }
 
@@ -83,10 +83,12 @@ function unBanCourse(courseID) {
     })
 }
 
-function timKiemKhoaHoc() {
+function timKiemTheoCategory() {
     var category = document.getElementById('category').value;
     var postCategory = document.getElementById('postCategory').value;
-    location.href = `/admin/course?postCategory=${postCategory}&category=${category}`;
+    console.log(category);
+    console.log(postCategory);
+    location.href = `/admin/course?postCategoryID=${postCategory}&categoryID=${category}`;
 }
 
 function loadCategory() {

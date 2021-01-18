@@ -25,5 +25,10 @@ module.exports = {
         const sql = `SELECT* from postCategory where postCategoryName='${postCategoryName}'`; 
         const result = await db.load(sql);
         return result;
-    }
+    },
+    getByID:async(postCategoryID)=>{
+        const sql = `SELECT* from postCategory where postCategoryID='${postCategoryID}'`; 
+        const result = await db.load(sql);
+        return result;
+    },
 }; 

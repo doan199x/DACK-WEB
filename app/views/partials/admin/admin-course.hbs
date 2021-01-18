@@ -5,27 +5,44 @@
         </div>
         <div class="col-lg-8">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3" style="padding-right:1px">
                     <select id="postCategory" class="form-control" onchange="loadCategory()">
-                        <option value="" style="font-weight: bold;" disabled selected>Chọn danh mục cha</option>
+                        {{#equal curPostCategory false}}
+                        <option value="" style="font-weight: bold;" disabled selected>Danh mục cha</option>
+                        {{else}}
+                        <option value="{{curPostCategory.postCategoryID}}" style="font-weight: bold;" disabled selected>{{curPostCategory.postCategoryName}}</option>
+                        {{/equal}}
                         {{#each postCategory}}
                         <option value="{{postCategoryID}}">{{postCategoryName}}</option>
                         {{/each}}
                     </select>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4" style="padding:1px">
                     <select id="category" class="form-control">
-                        <option value="" style="font-weight: bold" disabled selected>Chọn danh mục con</option>
+                        {{#equal curCategory false}}
+                        <option value="" style="font-weight: bold;" disabled selected>Danh mục con</option>
+                        {{else}}
+                        <option value="{{curCategory.categoryID}}" style="font-weight: bold;" disabled selected>{{curCategory.categoryName}}</option>
+                        {{/equal}}
+                        {{#each allCategory}}
+                        <option value="{{categoryID}}">{{categoryName}}</option>
+                        {{/each}}
                     </select>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-1" style="padding:1px">
+                    <div>
+                        <button class="btn btn-secondary" onclick="timKiemTheoCategory()"> <i class="fa fa-search"
+                                aria-hidden="true" style="cursor:pointer"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-3" style="padding:1px">
                     <div class="float-right">
                         <input class="form-control" id="inputTimKiem" style="" placeholder="Tìm kiếm">
                     </div>
                 </div>
-                <div class="col-lg-1">
-                    <div class="float-right">
-                        <button class="btn btn-secondary"> <i onclick="timKiemKhoaHoc()" class="fa fa-search"
+                <div class="col-lg-1" style="padding:1px">
+                    <div>
+                        <button class="btn btn-secondary" onclick="timKiemTheoGiaoVien()"> <i class="fa fa-search"
                                 aria-hidden="true" style="cursor:pointer"></i></button>
                     </div>
                 </div>

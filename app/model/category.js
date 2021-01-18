@@ -31,4 +31,9 @@ module.exports = {
         const result = await db.load(sql);
         return result;
     },
+    getByID: async (categoryID) => {
+        const sql = `SELECT * from Category where categoryID=${categoryID}`; 
+        const result = await db.load(sql);
+        return result;
+    },
 }; 

@@ -150,27 +150,24 @@ router.post('/post-category-create', async (req, res, next) => {
 
 router.get('/course', async (req, res, next) => {
     try {
-        var courses;
+        var courses =[];
         if ((req.query.page == null) || (req.query.page.trim() == '')) {
             req.query.page = 1;
         }
         if ((req.query.perPage == null) || (req.query.perPage.trim() == '')) {
             req.query.perPage = 3;
         }
-        if ((req.query.postCategory == null) || (req.query.postCategory.trim() == '')) {
+        if ((req.query.postCategoryID == null) || (req.query.postCategoryID.trim() == '') && (req.query.categoryID == null) || (req.query.categoryID.trim() == '')) {
             courses = await courseModel.getAll();
-        } else if ((req.query.category == null) || (req.query.category.trim() == '')) {
-            categories = await categoryModel.getByPostCategoryID(req.query.postCategory);
-            var courses = [];
+        } else if ((req.query.categoryID == null) || (req.query.categoryID.trim() == '')){
+            var categories = await categoryModel.getByPostCategoryID(req.query.postCategoryID);
             for (var i=0;i<categories.length;i++){
-                var getCourses = await courseModel.getCourseByCategoryID(categories.categoryName);
+                var getCourses = await courseModel.getCourseByCategoryID(categories[i].categoryID);
                 courses.push(getCourses);
             }
         } else{
-            categories = await categoryModel.getByPostCategoryID(req.query.postCategory);
-            courses = await courseModel.getCourseByCategoryID(categories[0].categoryID);
+            courses = await courseModel.getCourseByCategoryID(req.query.categoryID);
         }
-        console.log(courses);
         // add width star
         for (var i = 0; i < courses.length; i++) {
             courses[i].widthStar = courses[i].averageStar / 5 * 100;
@@ -180,6 +177,22 @@ router.get('/course', async (req, res, next) => {
         var page = req.query.page;
         var perPage = req.query.perPage;
         var pagingInfo = helper.pagination(courses, page, perPage, courses.length);
+        var curPostCategory;
+        var curCategory;
+        var allCategory;
+        if ((req.query.postCategoryID == null) || (req.query.postCategoryID.trim() == '')){
+            curPostCategory = false
+        }else{
+            curPostCategory = await postCategoryModel.getByID(req.query.postCategoryID);
+            curPostCategory = curPostCategory[0];
+        }
+        if ((req.query.categoryID == null) || (req.query.categoryID.trim() == '')){
+            curCategory = false
+        }else{
+            curCategory = await categoryModel.getByID(req.query.categoryID);
+            curCategory = curCategory[0];
+            allCategory = await categoryModel.getByPostCategoryID(req.query.postCategoryID);
+        }
         var postCategory = await postCategoryModel.getAll();
         res.render('render', {
             contain: 'admin/admin-course',
@@ -190,7 +203,10 @@ router.get('/course', async (req, res, next) => {
             pagingInfo: pagingInfo,
             currentPage: page,
             perPage: perPage,
-            postCategory: postCategory
+            postCategory: postCategory,
+            curCategory: curCategory,
+            curPostCategory: curPostCategory,
+            allCategory:allCategory
         });
     } catch (err) {
         next(err);
