@@ -36,5 +36,15 @@ module.exports = {
         const sql = `UPDATE Teacher set ban=false where teacherID =${teacherID}`;
         const result = await db.load(sql);
         return result;
+    },
+    getLikeName: async(name)=>{
+        const sql = `SELECT* from Teacher where name LIKE '%${name}%'`;
+        const result = await db.load(sql);
+        return result;
+    },
+    getByID:async(teacherID)=>{
+        const sql = `SELECT* from Teacher where teacherID = ${teacherID}`;
+        const result = await db.load(sql);
+        return result;
     }
 }; 

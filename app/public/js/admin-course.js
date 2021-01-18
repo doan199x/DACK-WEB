@@ -1,9 +1,29 @@
 function getPrevPage(preve_value, perPage, categoryID, postCategoryID) {
-    location.href = `/admin/course?page=${preve_value}&perPage=${perPage}`;
+    var url = new URL(window.location.href);
+    var search = url.searchParams.get("search");
+    var categoryID = url.searchParams.get("categoryID");
+    var postCategoryID = url.searchParams.get("postCategoryID");
+    if (!search && !categoryID && !postCategory){
+        location.href=`/admin/course?page=${preve_value}&perPage=${perPage}`;
+    }else if (!search){
+        location.href = `/admin/course?page=${preve_value}&perPage=${perPage}&categoryID=${categoryID}&postCategoryID=${postCategoryID}`
+    } else{
+        location.href = `/admin/course?page=${preve_value}&perPage=${perPage}&search=${search}`
+    }
 }
 
-function getNextPage(next_value, perPage, categoryID, postCategoryID) {
-    location.href = `/admin/course?page=${next_value}&perPage=${perPage}`;
+function getNextPage(next_value,perPage) {
+    var url = new URL(window.location.href);
+    var search = url.searchParams.get("search");
+    var categoryID = url.searchParams.get("categoryID");
+    var postCategoryID = url.searchParams.get("postCategoryID");
+    if (!search && !categoryID && !postCategory){
+        location.href=`/admin/course?page=${next_value}&perPage=${perPage}`;
+    }else if (!search){
+        location.href = `/admin/course?page=${next_value}&perPage=${perPage}&categoryID=${categoryID}&postCategoryID=${postCategoryID}`
+    } else{
+        location.href = `/admin/course?page=${next_value}&perPage=${perPage}&search=${search}`
+    }
 }
 
 function banCourse(courseID) {
@@ -86,9 +106,19 @@ function unBanCourse(courseID) {
 function timKiemTheoCategory() {
     var category = document.getElementById('category').value;
     var postCategory = document.getElementById('postCategory').value;
-    console.log(category);
-    console.log(postCategory);
     location.href = `/admin/course?postCategoryID=${postCategory}&categoryID=${category}`;
+}
+
+function timKiemTheoGiaoVien() {
+    var search = document.getElementById('inputTimKiem').value;
+    if (search == "") {
+        Swal.fire({
+            title: 'Nhập tên giáo viên để tìm kiếm',
+            confirmButtonColor: '#212121',
+        })
+    } else {
+        location.href = `/admin/course?search=${search}`;
+    }
 }
 
 function loadCategory() {
