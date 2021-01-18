@@ -45,11 +45,6 @@ router.get("/", async (req, res) => {
 
     //hot
     for (var i = 0; i < hot.length; i++) {
-      hot[0].chartColor = "#ff5722";
-      hot[1].chartColor = "#ffeb3b";
-      hot[2].chartColor = "#8bc34a";
-      hot[3].chartColor = "#80deea";
-      hot[4].chartColor = "#c5cae9";
       if (hot[i].stars === null) hot[i].stars = 0;
       else {
         hot[i].widthStar = (hot[i].stars / 5) * 100;
@@ -67,6 +62,11 @@ router.get("/", async (req, res) => {
         hot[i].postCategoryName = "📓 " + hot[i].postCategoryName;
       if (hot[i].postCategoryID === 4)
         hot[i].postCategoryName = "🔠 " + hot[i].postCategoryName;
+      if (i === 0) hot[i].chartColor = "#ff5722";
+      else if (i === 1) hot[i].chartColor = "#ffeb3b";
+      else if (i === 2) hot[i].chartColor = "#8bc34a";
+      else if (i === 3) hot[i].chartColor = "#80deea";
+      else if (i === 4) hot[i].chartColor = "#c5cae9";
     }
     //category
     for (var i = 0; i < category.length; i++) {
