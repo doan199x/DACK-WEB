@@ -16,8 +16,52 @@
                     {{#each chapterInfo}}
                     <li class="list-group-item active active-chapter" style="width:100%">{{chapterName}}
                         {{#if isOutline}}(Đề cương){{/if}} <i style="float:right" class="fas fa-trash fa-lg"
-                            onclick="deleteChapter({{chapterID}})"></i><i class="far fa-edit fa-lg"
+                            onclick="deleteChapter({{chapterID}})"></i>
+                        <i data-toggle="modal" data-target="#editChapter{{chapterID}}" class="far fa-edit fa-lg"
                             style="float:right; margin-right:4px;cursor:pointer"></i></li>
+                    {{!-- modal chỉnh sửa chương học --}}
+                    <div class="modal fade" id="editChapter{{chapterID}}" tabindex="-1" role="dialog"
+                        aria-labelledby="categoryModelLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Chỉnh sửa chương học {{chapterName}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <span>Tên chương học</span>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input id="chapterName{{chapterID}}" style="width: 80%;" required
+                                                    value="{{chapterName}}">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <span>Đề cương</span>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="checkbox" id="isOutline{{chapterID}}" {{#if isOutline}}
+                                                    checked {{/if}}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal"
+                                        style="color: white;font-weight:bold">Đóng</button>
+                                    <button onclick="editChapter({{chapterID}})" type="submit"
+                                        class="btn btn-secondary">Sửa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- modal them bai hoc --}}
                     {{#each lessons}}
                     <li class="list-group-item lesson-active" style="width:100%" style="cursor:pointer">{{lessonName}}<i
                             style="float:right;cursor:pointer" class="fas fa-trash fa-lg"

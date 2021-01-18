@@ -96,7 +96,39 @@ function themChuongHoc(courseID) {
                 }).then(() => {
                     location.href = `/teacher/update-course-content?courseID=${courseID}`
                 })
-            } else{
+            } else {
+                Swal.fire({
+                    title: 'Lỗi không xác định'
+                }).then(() => {
+                    location.href = `/teacher/update-course-content?courseIdD=${courseID}`
+                })
+            }
+        }
+    })
+}
+
+function editChapter(chapterID) {
+    var courseID = document.getElementById('inputCourseID').value;
+    var chapterName = 'chapterName' + chapterID;
+    var chapterName = document.getElementById(chapterName).value;
+    var isOutline = 'isOutline' + chapterID;
+    var isOutline = document.getElementById(isOutline).checked;
+    $.ajax({
+        url: '/teacher/edit-chapter',
+        type: 'POST',
+        data: {
+            chapterName: chapterName,
+            isOutline: isOutline,
+            chapterID: chapterID
+        },
+        success: function (result) {
+            if (result.status == 0) {
+                Swal.fire({
+                    title: 'Sửa chương học thành công'
+                }).then(() => {
+                    location.href = `/teacher/update-course-content?courseID=${courseID}`
+                })
+            } else {
                 Swal.fire({
                     title: 'Lỗi không xác định'
                 }).then(() => {
