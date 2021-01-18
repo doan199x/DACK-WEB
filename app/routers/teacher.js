@@ -112,7 +112,7 @@ router.post('/post-course', async (req, res, next) => {
             category: req.body.category,
             htmlCourseDes: req.body.htmlCourseDes,
             htmlCourseSortDes: req.body.htmlCourseSortDes,
-            courseImagePath : '/img/course/default.jpg'
+            courseImagePath: '/img/course/default.jpg'
         }
         if (courseInfo.coursePrice < 0) {
             res.json({
@@ -125,6 +125,52 @@ router.post('/post-course', async (req, res, next) => {
             status: 0,
         })
 
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.get('/update-course-info', async (req, res, next) => {
+    try {
+        var teacherID = 1;
+        var courseID = req.query.courseID;
+        var postCategory = await postCategoryModel.getAll();
+        var courseInfo = await courseModel.getCourseByID(courseID);
+        var categoryInfo = await categoryModel.getByID(courseInfo[0].categoryID);
+        var postCategoryInfo = await postCategoryModel.getByID(categoryInfo[0].postCategoryID);
+        res.render('render', {
+            contain: 'teacher/update-course-info',
+            title: 'Đăng khóa học',
+            js: ['teacher-course', 'teacher', 'teacher-update-course-info', 'simpleFormatMoney'],
+            css: ['admin-index'],
+            postCategory: postCategory,
+            course: courseInfo[0],
+            categoryInfo: categoryInfo[0],
+            postCategoryInfo: postCategoryInfo[0],
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.get('/update-course-content', async (req, res, next) => {
+    try {
+        var courseID = req.query.courseID;
+        var courseInfo = await courseModel.getCourseByID(courseID);
+        // chapter info
+        var chapterInfo = await chapterModel.getChaptersByCourseID(courseInfo[0].courseID);
+        // course info
+        for (var i = 0; i < chapterInfo.length; i++) {
+            chapterInfo[i].lessons = await lessonModel.getLessonsByChapterID(chapterInfo[i].chapterID)
+        }
+        res.render('render', {
+            contain: 'teacher/update-course-content',
+            title: 'Đăng khóa học',
+            js: ['teacher-course', 'teacher', 'teacher-update-course-content', 'simpleFormatMoney'],
+            css: ['admin-index'],
+            course: courseInfo[0],
+            chapterInfo: chapterInfo
+        })
     } catch (err) {
         next(err);
     }
