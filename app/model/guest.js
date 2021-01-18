@@ -11,7 +11,6 @@ module.exports = {
         INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
         INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
         INNER JOIN Sale ON Sale.courseID = Course.courseID)
-        WHERE DATEDIFF(now(),RegisteredCourse.registerTime) <= 7
         GROUP BY Course.courseID
         ORDER BY NoStudents DESC
         LIMIT 3;` 
@@ -28,7 +27,6 @@ module.exports = {
         INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
         INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
         INNER JOIN Sale ON Sale.courseID = Course.courseID)
-        WHERE DATEDIFF(now(),RegisteredCourse.registerTime) <= 7
         GROUP BY Course.courseID
         ORDER BY views DESC
         LIMIT 10;`
@@ -45,7 +43,6 @@ module.exports = {
         INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
         INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
         INNER JOIN Sale ON Sale.courseID = Course.courseID)
-        WHERE DATEDIFF(now(),RegisteredCourse.registerTime) <= 7
         GROUP BY Course.courseID
         ORDER BY created DESC
         LIMIT 10;`

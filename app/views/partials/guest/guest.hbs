@@ -150,12 +150,24 @@
                     <div>
                         <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
                     </div>
+                     {{#if this.percent}}
                     <div>
-                        <small class="card-title">Giá: {{this.price}}</small>
+                        <h5 class="card-title" style="text-decoration: line-through;">Giá gốc: {{this.price}}</h5>
+                    </div>
+                    {{else}}
+                     <div>
+                        <h5 class="card-title" >Giá gốc: {{this.price}}</h5>
+                    </div>
+                    {{/if}}
+
+                    {{#if this.percent}}
+                    <div>
+                        <h5 class="card-title">Giảm giá: {{this.percent}} %</h5>
                     </div>
                     <div>
-                        <small class="card-title">Giảm giá: {{this.percent}}</small>
+                        <h5 class="price">Giá khuyến mãi: {{this.saleprice}}</h5>
                     </div>
+                    {{/if}}
                     <div>
                         <small class="card-title">Lượt xem: {{this.views}}</small>
                     </div>

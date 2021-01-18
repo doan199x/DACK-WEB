@@ -9,6 +9,8 @@ const lessonModel = require("../model/lesson.js");
 
 router.get("/", async (req, res) => {
   const category = await guestModel.category();
+  const top = await guestModel.top();
+  const newest = await guestModel.newest();
   if (req.query.page == null || req.query.page.trim() == "") {
     req.query.page = 1;
   }
@@ -17,8 +19,26 @@ router.get("/", async (req, res) => {
   }
   const all = await courseModel.all();
   for (var i = 0; i < all.length; i++) {
+    for (let i2 = 0; i2 < top.length; i2++)
+    {
+      if (all[i].id === top[i2].id){
+        all[i].topColor = "#ff5722";
+      }
+    }
+    for (let i3 = 0; i3 < newest.length; i3++)
+    {
+      if (all[i].id === newest[i3].id){
+        all[i].newColor = "#0277bd";
+      }
+    }
     all[i].widthStar = (all[i].averageStar / 5) * 100;
     all[i].widthStar += "%";
+    if (all[i].percent) all[i].saleprice = all[i].price - (all[i].price)*(all[i].percent)/100;
+    if (all[i].percent) 
+    {
+      all[i].saleprice = all[i].price - (all[i].price)*(all[i].percent)/100;
+      all[i].saleColor = "#66bb6a"
+    }
   }
   const page = req.query.page;
   const perPage = req.query.perPage;
@@ -53,6 +73,9 @@ router.get("/", async (req, res) => {
 
 router.get("/find", async (req, res) => {
   const category = await guestModel.category();
+  //noi bat: top, moi: viet, giam gia
+  const top = await guestModel.top();
+  const newest = await guestModel.newest();
   try {
     var courses;
     if (req.query.page == null || req.query.page.trim() === "") {
@@ -62,14 +85,31 @@ router.get("/find", async (req, res) => {
       req.query.perPage = 6;
     }
     if (req.query.search === null || req.query.search.trim() === "") {
-      courses = await courseModel.getAll();
+      courses = await courseModel.all();
     } else {
       courses = await courseModel.fulltext(req.query.search);
     }
     // add width star
     for (let i = 0; i < courses.length; i++) {
+      for (let i2 = 0; i2 < top.length; i2++)
+      {
+        if (courses[i].id === top[i2].id){
+          courses[i].topColor = "#ff5722";
+        }
+      }
+      for (let i3 = 0; i3 < newest.length; i3++)
+      {
+        if (courses[i].id === newest[i3].id){
+          courses[i].newColor = "#0277bd";
+        }
+      }
       courses[i].widthStar = (courses[i].averageStar / 5) * 100;
       courses[i].widthStar += "%";
+      if (courses[i].percent) 
+      {
+        courses[i].saleprice = courses[i].price - (courses[i].price)*(courses[i].percent)/100;
+        courses[i].saleColor = "#66bb6a"
+      }
     }
     for (let i = 0; i < category.length; i++) {
       if (category[i].postCategoryID === 1)
