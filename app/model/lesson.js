@@ -16,9 +16,14 @@ module.exports = {
         const result = await db.load(sql);
         return result;
     },
-    add: async(lessonName,videoPath,chapterID)=>{
+    add: async (lessonName, videoPath, chapterID) => {
         const sql = `INSERT into Lesson (lessonName,videoPath,chapterID) values('${lessonName}','${videoPath}','${chapterID}')`;
         const result = await db.load(sql);
         return result;
-    }
+    },
+    update: async (lessonName, videoPath, lessonID) => {
+        const sql = `UPDATE Lesson set lessonName = '${lessonName}',videoPath = '${videoPath}' where lessonID=${lessonID}`;
+        const result = await db.load(sql);
+        return result;
+    },
 }; 

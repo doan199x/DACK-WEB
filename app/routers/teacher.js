@@ -230,34 +230,6 @@ router.post('/add-lesson', upload.single('lessonVideo'), async (req, res, next) 
     }
 })
 
-router.post('/edit-lesson', upload.single('lessonVideo'), async (req, res, next) => {
-    try {
-        var courseID = req.body.inputModalCourseID;
-        var lessonName = req.body.lessonName;
-        var chapterID = req.body.inputModalchapterID;
-        if (req.file) {
-            var videoPath = '/uploads/video/' + req.file.filename;
-            await lessonModel.add(lessonName, videoPath, chapterID);
-            res.redirect(url.format({
-                pathname: '/teacher/update-course-content',
-                query: {
-                    courseID: courseID,
-                    result: "passed"
-                }
-            }));
-        } else {
-            res.redirect(url.format({
-                pathname: '/teacher/update-course-content',
-                query: {
-                    courseID: courseID,
-                    result: "failed"
-                }
-            }));
-        }
-    } catch (err) {
-    }
-})
-
 router.post('/add-chapter', async (req, res, next) => {
     try {
         var chapterName = req.body.chapterName;
@@ -285,6 +257,44 @@ router.post('/edit-chapter', async (req, res, next) => {
         })
     } catch (err) {
         next(err);
+    }
+})
+
+router.post('/edit-lesson', upload.single('lessonVideo'), async (req, res, next) => {
+    try {
+        var lessonID = req.body.inputModalLessonID;
+        var courseID = req.body.inputModalCourseID;
+        var lessonName = req.body.lessonName;
+        if (req.file) {
+            var videoPath = '/uploads/video/' + req.file.filename;
+            var lessons = await lessonModel.getLessonByID(lessonID);
+            const fs = require('fs');
+            var oldVideoPath = './public' + lessons[0].videoPath;
+            if (oldVideoPath != './public/uploads/video/default.mp4') {
+                fs.unlink(oldVideoPath, function (err) {
+                    if (err) {
+                        next(err);
+                    }
+                });
+            }
+            await lessonModel.update(lessonName, videoPath, lessonID);
+            res.redirect(url.format({
+                pathname: '/teacher/update-course-content',
+                query: {
+                    courseID: courseID,
+                    result: "passed"
+                }
+            }));
+        } else {
+            res.redirect(url.format({
+                pathname: '/teacher/update-course-content',
+                query: {
+                    courseID: courseID,
+                    result: "failed"
+                }
+            }));
+        }
+    } catch (err) {
     }
 })
 
