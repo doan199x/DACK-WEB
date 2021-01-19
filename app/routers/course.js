@@ -104,7 +104,30 @@ router.get("/find", async (req, res) => {
       else if (req.query.sortOption === "2")  courses = await courseModel.all2();
       else if (req.query.sortOption === "3")  courses = await courseModel.all3();
       else courses = await courseModel.all();
-    } else {
+    }
+    //postcategory
+    else if (req.query.search === "IT" || req.query.search === "THPT" ||
+    req.query.search === "Nấu ăn" || req.query.search === "Tiếng Anh" ||
+    req.query.search === "Lập trình web" ||  req.query.search === "Lập trình thiết bị di động"
+    ||  req.query.search === "Nấu ăn căn bản"||  req.query.search === "Nấu ăn chuyên nghiệp"
+    ||  req.query.search === "Tiếng Anh Căn bản"||  req.query.search === "Tiếng Anh giao tiếp"
+    ||  req.query.search === "Toán" ||  req.query.search === "Lý" ||  req.query.search === "Hóa")
+    {
+      courses = await courseModel.relatedcatName(req.query.search);
+    } 
+    else if (req.query.search === "THPT" )
+    {
+
+    } 
+    else if (req.query.search === "Nấu ăn" )
+    {
+
+    } 
+    else if (req.query.search === "Tiếng Anh" )
+    {
+
+    } 
+    else {
        
       //Sort
       if (req.query.sortOption === "1")

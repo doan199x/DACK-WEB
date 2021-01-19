@@ -139,7 +139,7 @@ module.exports = {
       INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID) INNER JOIN Sale ON Sale.courseID = Course.courseID)
       INNER JOIN PostCategory ON PostCategory.postCategoryID = Category.categoryID)
       WHERE (MATCH (Course.name) AGAINST ("${search}") > 0 || MATCH (Category.categoryName) AGAINST ("${search}") > 0 
-      || MATCH (PostCategory.postCategoryName) AGAINST ("${search}") > 0)
+      || MATCH (PostCategory.postCategoryName) AGAINST ("${search}") > 0) 
       GROUP BY Course.courseID
       ORDER BY (Sale.postDiscountPrice - Sale.postDiscountPrice*Sale.percentDiscount/100) ASC;`;
     const result = await db.load(sql);
@@ -227,7 +227,7 @@ module.exports = {
     return result;
   },
   related: async (categoryID) => {
-    const sql = ` SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
+    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
     Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
     Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
     Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
@@ -241,6 +241,24 @@ module.exports = {
     GROUP BY Course.courseID
     ORDER BY NoStudents DESC
     LIMIT 5;`;
+    const result = await db.load(sql);
+    return result;
+  },
+  relatedcatName: async (categoryName) => {
+    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
+    Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
+    Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
+    Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
+    COUNT(RegisteredCourse.studentID) as NoReStudent
+    FROM (((((Category
+    INNER JOIN Course ON Category.categoryID = Course.categoryID)
+    INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
+    INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
+    INNER JOIN Sale ON Sale.courseID = Course.courseID)
+    INNER JOIN PostCategory ON PostCategory.PostCategoryID = Category.postCategoryID)
+    WHERE Category.categoryName = "${categoryName}" || PostCategory.postCategoryName = "${categoryName}"
+    GROUP BY Course.courseID
+    ORDER BY NoStudents DESC`;
     const result = await db.load(sql);
     return result;
   },

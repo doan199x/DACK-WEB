@@ -23,7 +23,7 @@ router.post("/", async (req, res, next) => {
       res.json({
         status: "email",
       });
-    else if (req.body.password !== req.body.confirmpassword) {
+    else if (req.body.password !== req.body.confirmpassword || req.body.password === "" || req.body.confirmpassword === "") {
       res.json({
         status: "password",
       });
