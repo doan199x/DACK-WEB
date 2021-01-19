@@ -10,6 +10,7 @@ const categoryModel = require('../model/category.js');
 const postCategoryModel = require('../model/postCategory.js');
 const helper = require('../helper/pagination');
 const url = require('url');
+const bcrypt = require('bcrypt');
 
 //multer
 var multer = require('multer');
@@ -119,7 +120,6 @@ router.post('/post-course', async (req, res, next) => {
             })
         }
         await courseModel.create(teacherID, courseInfo);
-        console.log(courseInfo);
         res.json({
             status: 0,
         })
@@ -302,11 +302,10 @@ router.get('/profile', async (req, res, next) => {
     try {
         var teacherID = 1;
         var teacher = await teacherModel.getByID(teacherID);
-        console.log(teacher);
         res.render('render', {
             contain: 'teacher/profile',
             title: 'Đăng khóa học',
-            js: ['teacher'],
+            js: ['teacher', 'teacher-profile'],
             css: ['admin-index'],
             teacher: teacher[0]
         })
@@ -376,7 +375,7 @@ router.post('/profile-edit', upload.single('fileAvatar'), async (req, res, next)
             res.render('render', {
                 contain: 'teacher/profile',
                 title: 'Đăng khóa học',
-                js: ['teacher'],
+                js: ['teacher', 'teacher-profile'],
                 css: ['admin-index'],
                 teacher: teacher[0],
                 result: 'passed'
@@ -385,7 +384,7 @@ router.post('/profile-edit', upload.single('fileAvatar'), async (req, res, next)
             res.render('render', {
                 contain: 'teacher/profile',
                 title: 'Đăng khóa học',
-                js: ['teacher'],
+                js: ['teacher', 'teacher-profile'],
                 css: ['admin-index'],
                 teacher: teacher[0],
                 result: 'failed'
@@ -394,6 +393,34 @@ router.post('/profile-edit', upload.single('fileAvatar'), async (req, res, next)
 
     } catch (err) {
 
+    }
+})
+
+router.post('/change-password', async (req, res, next) => {
+    try {
+        var teacherID = 11;
+        var oldPassword = req.body.oldPassword;
+        var newPassword = req.body.newPassword;
+        console.log(oldPassword);
+        console.log(newPassword);
+        const salt = bcrypt.genSaltSync(10);
+        const newPasswordHash = bcrypt.hashSync(newPassword, salt);
+        var teacher = await teacherModel.getByID(teacherID);
+        var checkPassword = await bcrypt.compare(oldPassword,teacher[0].password);
+        if (checkPassword == true) {
+            teacherModel.updatePassword(teacherID, newPasswordHash);
+            res.json({
+                status:0,
+                message:"đổi password thành công"
+            })
+        }else{
+            res.json({
+                status:1,
+                message: "password nhập vào không đúng"
+            })
+        }
+    } catch (err) {
+        next(err);
     }
 })
 

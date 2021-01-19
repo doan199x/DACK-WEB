@@ -7,6 +7,7 @@ const chapterModel = require('../model/chapter.js');
 const lessonModel = require('../model/lesson.js');
 const ratingModel = require('../model/rating.js');
 const url = require('url');
+const bcrypt = require('bcrypt')
 
 //multer
 var multer = require('multer');
@@ -333,6 +334,32 @@ router.post('/rate', async (req, res, next) => {
             ok: true,
         })
 
+    } catch (err) {
+        next(err);
+    }
+})
+
+router.post('/change-password', async (req, res, next) => {
+    try {
+        var studentID = 1;
+        var oldPassword = req.body.oldPassword;
+        var newPassword = req.body.newPassword;
+        const salt = bcrypt.genSaltSync(10);
+        const newPasswordHash = bcrypt.hashSync(newPassword, salt);
+        var student = await studentModel.getProfile(studentID);
+        var checkPassword = await bcrypt.compare(oldPassword,student[0].password);
+        if (checkPassword == true) {
+            studentModel.updatePassword(studentID, newPasswordHash);
+            res.json({
+                status:0,
+                message:"đổi password thành công"
+            })
+        }else{
+            res.json({
+                status:1,
+                message: "password nhập vào không đúng"
+            })
+        }
     } catch (err) {
         next(err);
     }

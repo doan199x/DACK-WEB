@@ -43,12 +43,67 @@
                 <br>
                 <div class="row">
                     <div class="btn-width-custom-medium">
-                        <a class="btn btn-block btn-secondary bold" style="margin-right:10px" href="/student/profile-edit">Chỉnh
+                        <a class="btn btn-block btn-secondary bold" style="margin-right:10px"
+                            href="/student/profile-edit">Chỉnh
                             sửa</a>
                     </div>
-                    <div class="btn-width-custom-medium">
-                        <a class="btn btn-block btn-secondary bold" href="#">Đổi mật khẩu</a>
+                    <div class="btn-width-custom-large">
+                        <button data-toggle="modal" data-target="#changePassword"
+                            class="btn btn-block btn-secondary">Đổi mật
+                            khẩu</button>
                     </div>
+                    {{!-- modal doi mat khau --}}
+                    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog"
+                        aria-labelledby="categoryModelLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Đổi mật khẩu</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <span>Mật khẩu cũ</span>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="password" class="form-control" id="oldPassword"
+                                                    style="width: 80%;">
+                                            </div>
+                                        </div>
+                                        <div class="row row-modal">
+                                            <div class="col-lg-4">
+                                                <span>Mật khẩu mới</span>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="password" class="form-control" id="newPassword"
+                                                    style="width: 80%;">
+                                            </div>
+                                        </div>
+                                        <div class="row row-modal">
+                                            <div class="col-lg-4">
+                                                <span>Xác nhận mật khẩu</span>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="password" class="form-control" id="confirmPassword"
+                                                    style="width: 80%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal"
+                                        style="color: white;font-weight:bold">Đóng</button>
+                                    <button onclick="hocSinhDoiMK()" type="submit"
+                                        class="btn btn-secondary">Đổi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- modal chinh sua chuong hoc --}}
                 </div>
                 {{#equal result 'success'}}
                 <hr>

@@ -57,5 +57,10 @@ module.exports = {
         const sql = `UPDATE Student set ban=false where studentID =${studentID}`;
         const result = await db.load(sql);
         return result;
+    },
+    updatePassword:async(studentID, newPassword)=>{
+        const sql = `UPDATE Student set password='${newPassword}' WHERE studentID = ${studentID}`;
+        const result = await db.load(sql);
+        return result;
     }
 }; 
