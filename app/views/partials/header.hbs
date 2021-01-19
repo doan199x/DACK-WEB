@@ -8,7 +8,7 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-<!--  -->
+    <!--  -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="flex-grow:0; !important">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
@@ -19,14 +19,14 @@
             {{#each postcategory}}
             <div class="dropdown-item header-item">
               <a href="/course/find?search={{this.postCategoryName}}">
-                <p class="post">📚 {{this.postCategoryName}}</p>  
+                <p class="post">📚 {{this.postCategoryName}}</p>
                 <!--khong biet no work khong nua-->
-                <div class="header-item-list" >
+                <div class="header-item-list">
                   {{#each this.children}}
-                    <a class="header-item-child" href="/course/find?search={{this}}">
-                      📘 {{this}}
-                    </a>
-                {{/each}}
+                  <a class="header-item-child" href="/course/find?search={{this}}">
+                    📘 {{this}}
+                  </a>
+                  {{/each}}
                 </div>
               </a>
             </div>
@@ -43,7 +43,15 @@
             {{sesEmail}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="--bs-position: end;right: 0;left: auto;">
+            {{#equal role 'student'}}
             <a class="dropdown-item" href="/student/profile">Thông tin cá nhân</a>
+            {{/equal}}
+            {{#equal role 'admin'}}
+            <a class="dropdown-item" href="/admin">Quản lí</a>
+            {{/equal}}
+            {{#equal role 'teacher'}}
+            <a class="dropdown-item" href="/teacher/profile">Thông tin cá nhân</a>
+            {{/equal}}
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/logout">Thoát</a>
           </div>
