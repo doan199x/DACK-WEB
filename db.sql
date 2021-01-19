@@ -10,6 +10,8 @@ create table Teacher(
     password varchar(100),
     avatarPath varchar(100),
     ban boolean default false,
+    phone varchar(30),
+    dateOfBirth datetime,
     primary key(teacherID)
 );
 create table PostCategory(
@@ -155,15 +157,15 @@ create table account(
     position int
 );
 
-insert into Teacher (name,email,password,avatarPath,ban)values('Nguyễn Văn An','vanan@gmail.com','$2b$10$0YGuiZJIRIXXk0.E.3lsu.N9A8X/9bxrKNQc3HMTGGgXS51ZZK9EC','/public/images/avatar/teacher1.jpg',false);
-insert into Teacher (name,email,password,avatarPath,ban)values('Hoàng Thu Trang','thutrang2412@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg',false);
-insert into Teacher (name,email,password,avatarPath,ban)values('Trần Hoàng Hùng','hungtran124@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg',false);
-insert into Teacher (name,email,password,avatarPath,ban)values('Hoàng Hiệu','hieuhoang1111@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg',false);
-insert into Teacher (name,email,password,avatarPath,ban)values('Đỗ Thu Thủy','thuydo11122@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg',false);
-insert into Teacher (name,email,password,avatarPath,ban)values('Nguyễn Viết Hạ','vietha@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg',false);
-insert into Teacher (name,email,password,avatarPath,ban)values('Nguyễn Hoàng Anh','anhhoang156@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg',false);
-insert into Teacher (name,email,password,avatarPath,ban)values('Hoàng Phan Hoài An','yendan123@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg',false);
-insert into Teacher (name,email,password,avatarPath,ban)values('Trần Đình Trọng','trongtran@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/public/images/avatar/default.jpg',false);
+insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Nguyễn Văn An','vanan@gmail.com','$2b$10$0YGuiZJIRIXXk0.E.3lsu.N9A8X/9bxrKNQc3HMTGGgXS51ZZK9EC','/img/avatar/default.jpg',false,'058691234','1993-06-15');
+insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Hoàng Thu Trang','thutrang2412@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'012569451','1993-06-15');
+insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Trần Hoàng Hùng','hungtran124@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'01254691','1996-12-15');
+insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Hoàng Hiệu','hieuhoang1111@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'058691234','1856-01-25');
+insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Đỗ Thu Thủy','thuydo11122@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'01251212','1993-02-14');
+insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Nguyễn Viết Hạ','vietha@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'09090909','1983-01-23');
+insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Nguyễn Hoàng Anh','anhhoang156@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'01256931','1992-05-14');
+insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Hoàng Phan Hoài An','yendan123@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'012541151','1991-03-20');
+insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Trần Đình Trọng','trongtran@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'0369112121','1989-02-15');
 
 /*post-category*/
 insert into PostCategory (postCategoryName) values('IT');

@@ -5,6 +5,10 @@ function toiThemKhoaHoc() {
     location.href = `/teacher/add-course`
 }
 
+function toiProfileGiaoVien(){
+    location.href = `/teacher/profile`
+}
+
 function getPrevPage(preve_value, perPage) {
     location.href = `/teacher?page=${preve_value}&perPage=${perPage}`;
 }
