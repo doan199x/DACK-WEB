@@ -158,7 +158,7 @@ create table account(
     position int
 );
 
-insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Nguyễn Văn An','vanan@gmail.com','$2b$10$0YGuiZJIRIXXk0.E.3lsu.N9A8X/9bxrKNQc3HMTGGgXS51ZZK9EC','/img/avatar/default.jpg',false,'058691234','1993-06-15');
+insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Nguyễn Văn An','teacher@gmail.com','$2b$10$0YGuiZJIRIXXk0.E.3lsu.N9A8X/9bxrKNQc3HMTGGgXS51ZZK9EC','/img/avatar/default.jpg',false,'058691234','1993-06-15');
 insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Hoàng Thu Trang','thutrang2412@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'012569451','1993-06-15');
 insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Trần Hoàng Hùng','hungtran124@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'01254691','1996-12-15');
 insert into Teacher (name,email,password,avatarPath,ban,phone,dateOfBirth)values('Hoàng Hiệu','hieuhoang1111@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',false,'058691234','1856-01-25');
@@ -189,13 +189,13 @@ insert into Category (categoryName,postCategoryID) values('Tiếng Anh Căn bả
 insert into Category (categoryName,postCategoryID) values('Tiếng Anh giao tiếp',4);
 
 
-insert into Admin (name,email,password) values('Nguyễn Hồng Anh','anhnguyen115@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK');
+insert into Admin (name,email,password) values('Nguyễn Hồng Anh','admin@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK');
 insert into Admin (name,email,password) values('Hà Văn Quản','quanha11234@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK');
 
 insert into Log (adminID,activity,time) values(1,'Đăng nhập','2021-01-01');
 insert into Log (adminID,activity,time) values(2,'Xóa thành viên vanan123@gmail.com','2021-01-01');
 
-insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance,ban) values('Trần Hoàng Cường','0858343803','1999-01-01',now(),'cuonghoang1213@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',500000,false);
+insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance,ban) values('Trần Hoàng Cường','0858343803','1999-01-01',now(),'student@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',500000,false);
 insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance,ban) values('Nguyễn Thị Hạ','0858343804','1999-01-02',now(),'hanguyen45451@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000,false);
 insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance,ban) values('Hoàng Công Ẩn','0858343853','1999-01-03',now(),'anhoang11235@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000,false);
 insert into Student (name,phone,dateOfBirth,dateJoin,email,password,avatarPath,balance,ban) values('Đỗ Thị Liễu','0858343806','1999-01-04',now(),'nguyenlieu55151@gmail.com','$2b$10$qSmIkRqqQ9eDIJoVBI0AOex1TZPAJTuoLJ8qgVK2/45ijrSCyZKCK','/img/avatar/default.jpg',100000,false);
@@ -248,25 +248,25 @@ insert into Course (courseID, name,imagePath,sortDescription,description,NoStude
 values(14,'Java spring','/img/course/course14.jpg','Lập trinh Java với Framework Spring','Khóa học giúp làm quen với Framework spring',5612,2.1,5,300000,now(),now(),1,'Đã hoàn tất',2, 2530,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(15,'Nhập môn nấu ăn','/img/course/course14.jpg','Làm quen với việc nấu nướng','Khóa học giúp làm quen với việc nấu nướng',1982,4.9,5,300000,now(),now(),3,'Đã hoàn tất',4, 3333,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(15,'Nhập môn nấu ăn','/img/course/course15.jpg','Làm quen với việc nấu nướng','Khóa học giúp làm quen với việc nấu nướng',1982,4.9,5,300000,now(),now(),3,'Đã hoàn tất',4, 3333,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(16,'Kĩ thuật nấu ăn','/img/course/course14.jpg','Nâng cao kĩ thuật nấu nước','Giới thiệu nâng cao về nấu nướng',324,4.5,5,300000,now(),now(),2,'Đã hoàn tất',3, 130,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(16,'Kĩ thuật nấu ăn','/img/course/course16.jpg','Nâng cao kĩ thuật nấu nước','Giới thiệu nâng cao về nấu nướng',324,4.5,5,300000,now(),now(),2,'Đã hoàn tất',3, 130,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(17,'Thế giới nấu ăn','/img/course/course14.jpg','Làm quen các món ăn trên thế giới','Giới thiệu về các món ăn trên thế giới',3224,5.0,5,300000,now(),now(),4,'Đã hoàn tất',5, 8728,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(17,'Thế giới nấu ăn','/img/course/course17.jpg','Làm quen các món ăn trên thế giới','Giới thiệu về các món ăn trên thế giới',3224,5.0,5,300000,now(),now(),4,'Đã hoàn tất',5, 8728,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(18,'Luyện thi Toán đại học','/img/course/course14.jpg','Luyện thi đại học 9 - 10 điểm','Khóa học giúp học sinh làm chủ kiến thức và đạt 9-10 điểm môn toán đại học',1982,4.9,15,50000,now(),now(),5,'Đã hoàn tất',5, 1256,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(18,'Luyện thi Toán đại học','/img/course/course18.jpg','Luyện thi đại học 9 - 10 điểm','Khóa học giúp học sinh làm chủ kiến thức và đạt 9-10 điểm môn toán đại học',1982,4.9,15,50000,now(),now(),5,'Đã hoàn tất',5, 1256,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(19,'7 Ngày 7 Điểm Toán','/img/course/course14.jpg','Dễ dàng đạt 7 điểm toán chỉ với 1 tuần','Khóa học giúp học sinh dễ dàng đạt được điểm 7 môn toán',5122,3.5,36,120000,now(),now(),5,'Đã hoàn tất',6, 3561,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(19,'7 Ngày 7 Điểm Toán','/img/course/course19.jpg','Dễ dàng đạt 7 điểm toán chỉ với 1 tuần','Khóa học giúp học sinh dễ dàng đạt được điểm 7 môn toán',5122,3.5,36,120000,now(),now(),5,'Đã hoàn tất',6, 3561,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(20,'Ôn tập vật lý 11','/img/course/course14.jpg','Làm chủ kiến thức lý 11','Khóa học giúp học sinh nắm vững kiến thức nền tảng lý 11',1414,1.2,15,100000,now(),now(),6,'Đã hoàn tất',7, 2158,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(20,'Ôn tập vật lý 11','/img/course/course20.jpg','Làm chủ kiến thức lý 11','Khóa học giúp học sinh nắm vững kiến thức nền tảng lý 11',1414,1.2,15,100000,now(),now(),6,'Đã hoàn tất',7, 2158,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(21,'Luyện thi hóa 12','/img/course/course14.jpg','Luyện thi hóa đại học 9 - 10 điểm','Dễ dàng đạt 9-10 điểm môn Hóa chỉ với khóa học này',2156,3.8,15,1500000,now(),now(),7,'Đã hoàn tất',7, 1968,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(21,'Luyện thi hóa 12','/img/course/course21.jpg','Luyện thi hóa đại học 9 - 10 điểm','Dễ dàng đạt 9-10 điểm môn Hóa chỉ với khóa học này',2156,3.8,15,1500000,now(),now(),7,'Đã hoàn tất',7, 1968,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(22,'Tiếng Anh cho người mất gốc','/img/course/course14.jpg','Xây dựng các nền tảng cơ bản để học tiếng anh','Khóa học giúp học sinh xây dựng các nền tảng cơ bản',1521,3.2,15,200000,now(),now(),8,'Đã hoàn tất',8, 145,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(22,'Tiếng Anh cho người mất gốc','/img/course/course22.jpg','Xây dựng các nền tảng cơ bản để học tiếng anh','Khóa học giúp học sinh xây dựng các nền tảng cơ bản',1521,3.2,15,200000,now(),now(),8,'Đã hoàn tất',8, 145,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(23,'Tiếng Anh căn bản','/img/course/course14.jpg','Nền tảng cơ bản','Dạy các nền tảng cơ bản',145,3.6,15,200000,now(),now(),8,'Đã hoàn tất',8, 251,'<p>Nền tảng cơ bản</p>','<b>Dạy các nền tảng cơ bản</b>');
+values(23,'Tiếng Anh căn bản','/img/course/course23.jpg','Nền tảng cơ bản','Dạy các nền tảng cơ bản',145,3.6,15,200000,now(),now(),8,'Đã hoàn tất',8, 251,'<p>Nền tảng cơ bản</p>','<b>Dạy các nền tảng cơ bản</b>');
 
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
 values(24,'Tiếng Anh giao tiếp','/img/course/course14.jpg','Giúp nắm vũng quy tắc giao tiếp','Dạy các kĩ năng giao tiếp cơ bản',125,3.1,21,200000,now(),now(),9,'Đã hoàn tất',9, 1512,'<p>Giúp nắm vũng quy tắc giao tiếp</p>','<b>Dạy các kĩ năng giao tiếp cơ bản</b>');
@@ -722,3 +722,5 @@ insert into Lesson (lessonID,lessonName,videoPath,chapterID) values(209,'Bài 13
 ALTER TABLE Course ADD FULLTEXT INDEX courseName (name);
 ALTER TABLE Category ADD FULLTEXT INDEX categoryName (categoryName);
 ALTER TABLE PostCategory ADD FULLTEXT INDEX postCategoryName (postCategoryName);
+
+select* from Course;
