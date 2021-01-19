@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const studentModel = require('../model/student.js');
+const teacherModel = require('../model/teacher.js');
 const courseModel = require('../model/course.js');
 const watchListModel = require('../model/watchList.js');
 const chapterModel = require('../model/chapter.js');
@@ -295,6 +295,105 @@ router.post('/edit-lesson', upload.single('lessonVideo'), async (req, res, next)
             }));
         }
     } catch (err) {
+    }
+})
+
+router.get('/profile', async (req, res, next) => {
+    try {
+        var teacherID = 1;
+        var teacher = await teacherModel.getByID(teacherID);
+        console.log(teacher);
+        res.render('render', {
+            contain: 'teacher/profile',
+            title: 'Đăng khóa học',
+            js: ['teacher'],
+            css: ['admin-index'],
+            teacher: teacher[0]
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+
+router.get('/profile-edit', async (req, res, next) => {
+    try {
+        var teacherID = 1;
+        var teacher = await teacherModel.getByID(teacherID);
+        res.render('render', {
+            contain: 'teacher/profile-edit',
+            title: 'Đăng khóa học',
+            js: ['teacher'],
+            css: ['admin-index'],
+            teacher: teacher[0]
+        })
+    } catch (err) {
+        next(err);
+    }
+})
+
+
+//multer
+var multer = require('multer');
+var imageMimeTypes = ['image/jpeg', 'image/png'];
+var storage = multer.diskStorage({
+    destination: function (req, file, next) {
+        next(null, 'public/uploads/img/avatar')
+    },
+    filename: function (req, file, next) {
+        next(null, file.fieldname + '-' + Date.now() + '.jpg')
+    }
+})
+var upload = multer({
+    storage: storage,
+    fileFilter: (req, file, next) => {
+        next(null, imageMimeTypes.includes(file.mimetype))
+    }
+})
+
+router.post('/profile-edit', upload.single('fileAvatar'), async (req, res, next) => {
+    try {
+        var teacherID = 1;
+        var teacher = await teacherModel.getByID(teacherID);
+        var name = req.body.teacherName;
+        var phone = req.body.teacherPhone;
+        var dateOfBirth = req.body.dateOfBirth;
+        var email = req.body.teacherEmail;
+        if (req.file) {
+            avatarPath = '/uploads/img/avatar/' + req.file.filename;
+            if (teacher[0].avatarPath != '/img/avatar/default.jpg') {
+                const fs = require('fs');
+                let oldAvatarPath = './public' + teacher[0].avatarPath;
+                console.log(oldAvatarPath);
+                fs.unlink(oldAvatarPath, function (err) {
+                    if (err) {
+                        next(err);
+                    }
+                });
+            }
+            await teacherModel.update(teacherID, name, phone, dateOfBirth, avatarPath, email);
+            teacher[0].avatarPath = avatarPath;
+            res.render('render', {
+                contain: 'teacher/profile',
+                title: 'Đăng khóa học',
+                js: ['teacher'],
+                css: ['admin-index'],
+                teacher: teacher[0],
+                result: 'passed'
+            })
+        } else {
+            res.render('render', {
+                contain: 'teacher/profile',
+                title: 'Đăng khóa học',
+                js: ['teacher'],
+                css: ['admin-index'],
+                teacher: teacher[0],
+                result: 'failed'
+            })
+        }
+
+    } catch (err) {
+
     }
 })
 
