@@ -12,6 +12,7 @@ const helper = require('../helper/pagination');
 const url = require('url');
 const bcrypt = require('bcrypt');
 const auth = require('../middleware/auth.mdw');
+const fs = require('fs');
 
 //multer
 var multer = require('multer');
@@ -212,7 +213,16 @@ router.get('/update-course-content', auth.teacherAuth, async (req, res, next) =>
 router.post('/delete-lesson', auth.teacherAuth, async (req, res, next) => {
     try {
         var lessonID = req.body.lessonID;
+        lesson = await lessonModel.getLessonByID(lessonID);
         await lessonModel.delete(lessonID);
+        videoPath = './public' + lesson[0].videoPath;
+        fs.unlink(videoPath, function (err) {
+            // res.json({
+            //     status: 1,
+            //     message: 'File không có'
+            // })
+            next(err);
+        });
         res.json({
             status: 0,
             message: 'Xóa thành công'
@@ -301,7 +311,6 @@ router.post('/edit-lesson', auth.teacherAuth, upload.single('lessonVideo'), asyn
         if (req.file) {
             var videoPath = '/uploads/video/' + req.file.filename;
             var lessons = await lessonModel.getLessonByID(lessonID);
-            const fs = require('fs');
             var oldVideoPath = './public' + lessons[0].videoPath;
             if (oldVideoPath != './public/uploads/video/default.mp4') {
                 fs.unlink(oldVideoPath, function (err) {
@@ -382,9 +391,9 @@ router.get('/profile-edit', auth.teacherAuth, async (req, res, next) => {
 
 
 //multer
-var multer = require('multer');
-var imageMimeTypes = ['image/jpeg', 'image/png'];
-var storage = multer.diskStorage({
+var multer2 = require('multer');
+var imageMimeTypes2 = ['image/jpeg', 'image/png'];
+var storage2 = multer.diskStorage({
     destination: function (req, file, next) {
         next(null, 'public/uploads/img/avatar')
     },
@@ -392,14 +401,14 @@ var storage = multer.diskStorage({
         next(null, file.fieldname + '-' + Date.now() + '.jpg')
     }
 })
-var upload = multer({
-    storage: storage,
+var upload2 = multer2({
+    storage: storage2,
     fileFilter: (req, file, next) => {
-        next(null, imageMimeTypes.includes(file.mimetype))
+        next(null, imageMimeTypes2.includes(file.mimetype))
     }
 })
 
-router.post('/profile-edit', auth.teacherAuth, upload.single('fileAvatar'), async (req, res, next) => {
+router.post('/profile-edit', auth.teacherAuth, upload2.single('fileAvatar'), async (req, res, next) => {
     try {
         if ((req.query.teacherID == null) || (req.query.teacherID.trim() == '')) {
             req.query.teacherID = 1;
@@ -483,7 +492,7 @@ router.post('/change-password', auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.post('/update-course',async(req,res,next)=>{
+router.post('/update-course', async (req, res, next) => {
 
 })
 
