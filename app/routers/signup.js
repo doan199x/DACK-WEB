@@ -105,22 +105,23 @@ router.post("/compare-otp", async (req, res) => {
 
         //Insert vào db
         //console.log(otpArr);
+        var avatarPath = '/img/avatar/default.jpg';
         const result = await signupModel.signup(
           otpArr[indexCheck].email,
-          otpArr[indexCheck].password
+          otpArr[indexCheck].password,
+          avatarPath
         );
         //Xóa trong mảng toàn cục
         if (result.affectedRows != 1) {
           res.json({
             status: "fail",
           });
-        } else
-        {
-          otpArr.splice(indexCheck,1);
+        } else {
+          otpArr.splice(indexCheck, 1);
           res.json({
             status: "done",
           });
-        }        
+        }
       }
     }
   } catch (err) {
