@@ -20,8 +20,8 @@ module.exports = {
         const check = await db.load(sql);
         return check;
     },
-    signup: async (email,password) => {
-        const sql = `INSERT INTO Student(email,password) VALUES ("${email}","${password}");` 
+    signup: async (email,password,avatarPath) => {
+        const sql = `INSERT INTO Student(email,password,avatarPath) VALUES ("${email}","${password}",'${avatarPath}');` 
         const signup = await db.load(sql);
         return signup;
     },
