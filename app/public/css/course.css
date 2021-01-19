@@ -3,7 +3,7 @@
 }
 .card-custom{
     margin-bottom:20px; 
-    width: 280px;
+    width: 250px;
     height: auto;
 }
 .card-title{
@@ -22,6 +22,9 @@
     background-color: #263238;
     color: white;
 }
+.card-body{
+    text-align: center;
+}
 .title{
 padding-top: 50px;
 padding-bottom: 50px;
@@ -32,10 +35,10 @@ font-weight: bold;
 border-top: 1px solid #bbb;
 }
 .course{
-    display:grid;
-    grid-template-columns: auto auto auto;
-    justify-content: center;
-    column-gap: 10%;
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: space-evenly;
+   row-gap: 10%;
 }
 a:link{
     text-decoration: none;
@@ -78,4 +81,8 @@ a:link{
 .sale{
     border: solid 1px;
     border-radius: 10%;
+}
+.sale-title{
+    text-align: left;
+    font-weight: bold;
 }

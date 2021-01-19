@@ -15,7 +15,7 @@
   column-gap: 2%;
 }
 .stars-div {
-justify-content: center;
+  justify-content: center;
 }
 .course__name {
   text-align: center;
@@ -24,15 +24,38 @@ justify-content: center;
 }
 .detail__column {
   width: 85%;
+}
+h5 {
+  text-decoration: bold;
+}
 
+.course__button {
+  background-color: black;
+  margin-top: 1%;
+  width: 10%;
+  margin-left: 40%;
+  color: white;
 }
-h5{
-    text-decoration:solid;
+.card__detail {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  column-gap: 0.7rem;
 }
-.course__button{
-    background-color: black;
-    margin-top: 1%;
-    width: 10%;
-    margin-left: 40%;
-    color: white;
+.feedback {
+  display: flex;
+  flex-direction: column;
+}
+.feedback__cards {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-evenly;
+}
+.feedback__email{
+color: #002171;
+text-decoration: bold;
+}
+.nofeedback{
+text-align:center;
+padding-bottom: 5%;
+padding-top: 5%;
 }

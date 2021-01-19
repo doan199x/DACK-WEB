@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-
+<div class="divider"></div>
         <div class="course">
             {{#each courses}}
             <div class="card card-custom" id="card{{this.id}}">
@@ -37,28 +37,25 @@
                 </div>
                 <div class="highlight">
                     {{#if this.newColor}}
-                    <div class="new" style="background-color: {{this.newColor}}">
+                    <small class="new" style="background-color: {{this.newColor}}">
                         Mới
-                    </div>
+                    </small>
                     {{/if}}
 
                     {{#if this.topColor}}
-                    <div class="top" style="background-color: {{this.topColor}}">
+                    <small class="top" style="background-color: {{this.topColor}}">
                         Nổi bật
-                    </div>
+                    </small>
                     {{/if}}
 
                     {{#if this.saleColor}}
-                    <div class="sale" style="background-color: {{this.saleColor}}">
+                    <small class="sale" style="background-color: {{this.saleColor}}">
                         Giảm giá
-                    </div>
+                    </small>
                     {{/if}}
 
                 </div>
                 <div class="card-body">
-                    <div>
-                        <small class="card-title">Thời gian mở khóa học: {{this.created}}</small>
-                    </div>
                     <div>
                         <small class="card-title">Giáo viên: {{this.teacherName}}</small>
                     </div>
@@ -66,27 +63,27 @@
                         <small class="card-title">Danh mục: {{this.categoryName}}</small>
                     </div>
                     <div class="star__div">
-                        <h4 style="display:inline">{{averageStar}}</h4>
+                        <h4 style="display:inline">{{this.stars}}</h4>
                         <div class="stars-outer">
-                            <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
+                            <div class="stars-inner" id="starWidth" style="width: {{this.widthStar}};"></div>
                         </div>
                     </div>
                     {{#if this.percent}}
                     <div>
-                        <h5 class="card-title" style="text-decoration: line-through;">Giá gốc: {{this.price}}</h5>
+                        <small class="card-title" style="text-decoration: line-through;">Giá gốc: {{this.price}}</small>
                     </div>
                     {{else}}
                      <div>
-                        <h5 class="card-title" >Giá gốc: {{this.price}}</h5>
+                        <small class="card-title" >Giá gốc: {{this.price}}</small>
                     </div>
                     {{/if}}
 
                     {{#if this.percent}}
                     <div>
-                        <h5 class="card-title">Giảm giá: {{this.percent}} %</h5>
+                        <small class="card-title">Giảm giá: {{this.percent}} %</small>
                     </div>
                     <div>
-                        <h5 class="price">Giá khuyến mãi: {{this.saleprice}}</h5>
+                        <small class="price">Giá khuyến mãi: {{this.saleprice}}</small>
                     </div>
                     {{/if}}
                     <div>
@@ -98,15 +95,12 @@
                     <div>
                         <small class="card-title">Thời gian mở khóa học: {{this.created}}</small>
                     </div>
-                    <div>
-                        <small class="card-title">Thời gian mở khóa học: {{this.created}}</small>
-                    </div>
                 </div>
             </div>
             {{/each}}
         </div>
 
-
+<div class="divider"></div>
         <div class="page__button row justify-content-center" style="margin-top:20px">
             <button class="btn btn-secondary" style="margin-right:2px"
                 onclick="getPrevPage({{pagingInfo.preve_value}},{{perPage}})"><i class="fa fa-angle-left"

@@ -19,25 +19,23 @@ router.get("/", async (req, res) => {
   }
   const all = await courseModel.all();
   for (var i = 0; i < all.length; i++) {
-    for (let i2 = 0; i2 < top.length; i2++)
-    {
-      if (all[i].id === top[i2].id){
+    for (let i2 = 0; i2 < top.length; i2++) {
+      if (all[i].id === top[i2].id) {
         all[i].topColor = "#ff5722";
       }
     }
-    for (let i3 = 0; i3 < newest.length; i3++)
-    {
-      if (all[i].id === newest[i3].id){
+    for (let i3 = 0; i3 < newest.length; i3++) {
+      if (all[i].id === newest[i3].id) {
         all[i].newColor = "#0277bd";
       }
     }
-    all[i].widthStar = (all[i].averageStar / 5) * 100;
+    all[i].widthStar = (all[i].stars / 5) * 100;
     all[i].widthStar += "%";
-    if (all[i].percent) all[i].saleprice = all[i].price - (all[i].price)*(all[i].percent)/100;
-    if (all[i].percent) 
-    {
-      all[i].saleprice = all[i].price - (all[i].price)*(all[i].percent)/100;
-      all[i].saleColor = "#66bb6a"
+    if (all[i].percent)
+      all[i].saleprice = all[i].price - (all[i].price * all[i].percent) / 100;
+    if (all[i].percent) {
+      all[i].saleprice = all[i].price - (all[i].price * all[i].percent) / 100;
+      all[i].saleColor = "#66bb6a";
     }
   }
   const page = req.query.page;
@@ -82,33 +80,34 @@ router.get("/find", async (req, res) => {
       req.query.page = 1;
     }
     if (req.query.perPage == null || req.query.perPage.trim() === "") {
-      req.query.perPage = 6;
+      req.query.perPage = 3;
     }
     if (req.query.search === null || req.query.search.trim() === "") {
       courses = await courseModel.all();
     } else {
-      courses = await courseModel.fulltext(req.query.search);
+      if (req.query.sortOption === 1) courses = await courseModel.fulltext1(req.query.search);
+      else if (req.query.sortOption === 2) courses = await courseModel.fulltext2(req.query.search);
+      else if (req.query.sortOption === 3) courses = await courseModel.fulltext3(req.query.search);
+      else courses = await courseModel.fulltext(req.query.search);
     }
     // add width star
     for (let i = 0; i < courses.length; i++) {
-      for (let i2 = 0; i2 < top.length; i2++)
-      {
-        if (courses[i].id === top[i2].id){
+      for (let i2 = 0; i2 < top.length; i2++) {
+        if (courses[i].id === top[i2].id) {
           courses[i].topColor = "#ff5722";
         }
       }
-      for (let i3 = 0; i3 < newest.length; i3++)
-      {
-        if (courses[i].id === newest[i3].id){
+      for (let i3 = 0; i3 < newest.length; i3++) {
+        if (courses[i].id === newest[i3].id) {
           courses[i].newColor = "#0277bd";
         }
       }
-      courses[i].widthStar = (courses[i].averageStar / 5) * 100;
+      courses[i].widthStar = (courses[i].stars / 5) * 100;
       courses[i].widthStar += "%";
-      if (courses[i].percent) 
-      {
-        courses[i].saleprice = courses[i].price - (courses[i].price)*(courses[i].percent)/100;
-        courses[i].saleColor = "#66bb6a"
+      if (courses[i].percent) {
+        courses[i].saleprice =
+          courses[i].price - (courses[i].price * courses[i].percent) / 100;
+        courses[i].saleColor = "#66bb6a";
       }
     }
     for (let i = 0; i < category.length; i++) {
@@ -158,10 +157,28 @@ router.get("/detail", async (req, res) => {
   }
   const detail = await courseModel.detail(req.query.courseID);
   var chapterInfo = await chapterModel.getChaptersByCourseID(detail[0].id);
-        // course info
-        for (let i = 0; i < chapterInfo.length; i++) {
-            chapterInfo[i].lessons = await lessonModel.getLessonsByChapterID(chapterInfo[i].chapterID)
-        }
+  // course info
+  for (let i = 0; i < chapterInfo.length; i++) {
+    chapterInfo[i].lessons = await lessonModel.getLessonsByChapterID(
+      chapterInfo[i].chapterID
+    );
+  }
+  // add width star
+  detail[0].widthStar = (detail[0].averageStar / 5) * 100;
+  detail[0].widthStar += "%";
+  if (detail[0].percent) {
+    detail[0].saleprice = detail[0].price - (detail[0].price * detail[0].percent) / 100;
+    detail[0].saleColor = "#66bb6a";
+  }
+  //feedback
+  const feedback = await courseModel.feedback(req.query.courseID);
+  //5 realed courses
+  const related = await courseModel.related(detail[0].categoryID);
+
+  for (let i = 0;i<feedback.length;i++){
+    feedback[i].widthStar = (feedback[i].NoStars / 5) * 100;
+    feedback[i].widthStar += "%";
+  }
 
   try {
     res.render("home", {
@@ -170,7 +187,9 @@ router.get("/detail", async (req, res) => {
       contain: "course/course-detail",
       category: category,
       detail: detail,
-      chapterInfo: chapterInfo
+      chapterInfo: chapterInfo,
+      feedback: feedback,
+      related: related
     });
   } catch (err) {
     console.log(err);
