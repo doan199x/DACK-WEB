@@ -6,6 +6,8 @@ const studentModel = require("../model/student.js");
 const guestModel = require("../model/guest.js");
 const chapterModel = require("../model/chapter.js");
 const lessonModel = require("../model/lesson.js");
+const teacherModel = require("../model/teacher");
+const registeredCourseModel = require("../model/registeredCourse");
 
 router.get("/", async (req, res) => {
   const category = await guestModel.category();
@@ -144,6 +146,7 @@ router.get("/find", async (req, res) => {
 });
 
 router.get("/detail", async (req, res) => {
+  var studentID = 1;
   const category = await guestModel.category();
   for (let i = 0; i < category.length; i++) {
     if (category[i].postCategoryID === 1)
@@ -155,7 +158,8 @@ router.get("/detail", async (req, res) => {
     if (category[i].postCategoryID === 4)
       category[i].postCategoryName = "🔠 " + category[i].postCategoryName;
   }
-  const detail = await courseModel.detail(req.query.courseID);
+  var courseID = req.query.courseID;
+  var detail = await courseModel.detail(courseID);
   var chapterInfo = await chapterModel.getChaptersByCourseID(detail[0].id);
   // course info
   for (let i = 0; i < chapterInfo.length; i++) {
@@ -164,22 +168,36 @@ router.get("/detail", async (req, res) => {
     );
   }
   // add width star
-  detail[0].widthStar = (detail[0].averageStar / 5) * 100;
+  detail[0].widthStar = (detail[0].stars / 5) * 100;
   detail[0].widthStar += "%";
   if (detail[0].percent) {
     detail[0].saleprice = detail[0].price - (detail[0].price * detail[0].percent) / 100;
     detail[0].saleColor = "#66bb6a";
   }
   //feedback
-  const feedback = await courseModel.feedback(req.query.courseID);
+  var feedback = await courseModel.feedback(req.query.courseID);
   //5 realed courses
-  const related = await courseModel.related(detail[0].categoryID);
+  var related = await courseModel.related(detail[0].categoryID);
 
   for (let i = 0; i < feedback.length; i++) {
     feedback[i].widthStar = (feedback[i].NoStars / 5) * 100;
     feedback[i].widthStar += "%";
   }
-
+  var checkFeedbackEmpty = false;
+  if (feedback.length == 0) {
+    checkFeedbackEmpty = true;
+  }
+  detail = detail[0];
+  // get teacher Info:
+  let teacher = await teacherModel.getByCourseID(courseID);
+  // get course Info:
+  let course = await courseModel.getCourseByID(courseID);
+  // check user registered course
+  let registered = await registeredCourseModel.getByStudentIDCourseID(studentID, courseID);
+  var checkRegistered = false;
+  if (registered.length > 0) {
+    checkRegistered = true;
+  }
   try {
     res.render("home", {
       css: ["course", "rate", "course-detail"],
@@ -189,10 +207,15 @@ router.get("/detail", async (req, res) => {
       detail: detail,
       chapterInfo: chapterInfo,
       feedback: feedback,
-      related: related
+      related: related,
+      teacher: teacher[0],
+      course: course[0],
+      checkFeedbackEmpty: checkFeedbackEmpty,
+      courseID: courseID,
+      checkRegistered: checkRegistered
     });
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 });
 

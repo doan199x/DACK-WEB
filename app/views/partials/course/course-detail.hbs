@@ -1,170 +1,163 @@
-<div class="course__container">
-    <div class="course__detail">
-        <div class="detail__line">
-            <div class="detail__img">
-                <a href="">
-                    <img src="{{detail.[0].img}}" alt="" width="800rem" height="400rem">
-                </a>
-            </div>
-            <div class="detail__column">
-                <div class="detail__info">
-                    <h2 class="course__name">{{detail.[0].courseName}}</h2>
-                    <div class="info__column">
-                        <div>
-                            <div class="star__div">
-                                <h5 style="display:inline">Đánh giá: {{detail.[0].averageStar}}</h5>
-                                <div class="stars-outer">
-                                    <div class="stars-inner" id="starWidth" style="width: {{detail.[0].widthStar}};">
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="">Số lượt đánh giá: {{detail.[0].NoRates}}</h5>
-                            </div>
-                            {{#if detail.[0].percent}}
-                            <div>
-                                <h5 class="sale-title" style="text-decoration: line-through; color: #ff6f60;">Giá gốc:
-                                    {{detail.[0].price}}</h5>
-                            </div>
-                            {{else}}
-                            <div>
-                                <h5 class="sale-title">Giá khóa học: {{detail.[0].price}}</h5>
-                            </div>
-                            {{/if}}
-
-                            {{#if detail.[0].percent}}
-                            <div>
-                                <h5 class="sale-title" style="color:#43a047">Giảm giá: {{detail.[0].percent}} %</h5>
-                            </div>
-                            <div>
-                                <h5 class="sale-title" style="color:#1565c0">Giá khuyến mãi: {{detail.[0].saleprice}}
-                                </h5>
-                            </div>
-                            {{/if}}
-                            <div>
-                                <h5 class="">Số lượt đăng ký học: {{detail.[0].NoReStudent}}</h5>
-                            </div>
-                            <div>
-                                <h5 class="">Lượt xem: {{detail.[0].views}}</h5>
-                            </div>
-                        </div>
-                        <div>
-
-                            <div style="padding-top: 3%;">
-                                <h5 class="">👤 Giáo viên: {{detail.[0].teacherName}}</h5>
-                            </div>
-                            <div>
-                                <h5 class="">Danh mục: {{detail.[0].categoryName}}</h5>
-                            </div>
-                            <div>
-                                <h5 class="">Mô tả: {{detail.[0].CourseSortDes}}</h5>
-                            </div>
-                            <div>
-                                <h5 class="">Mô tả chi tiết: {{detail.[0].courseDes}}</h5>
-                            </div>
-                            <div>
-                                <h5 class="">⏳ Cập nhật: {{detail.[0].updated}}</h5>
-                            </div>
-                            <div>
-                                <h5 class="">⏳ Thời gian mở: {{detail.[0].created}}</h5>
-                            </div>
-                        </div>
+<div class="container" style="width:300%">
+    <div class="row">
+        <div class="col-lg-9">
+            <img src="{{detail.img}}" alt="" width="100%" height="400rem">
+            <h2 class="course__name">{{detail.courseName}}</h2>
+        </div>
+        <div class="col-lg-3">
+            <h4 style="text-align: center;">GV: {{teacher.name}}</h4>
+            <img class="img-profile" src='{{teacher.avatarPath}}' width="100%">
+            <div style="margin-left:1em; margin-top:1em">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Email: {{teacher.email}}</p>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>SĐT: {{teacher.phone}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Ngày sinh: {{#time teacher.dateOfBirth 'DD/MM/YYYY'}}{{/time}}</p>
+                    </div>
+                </div>
             </div>
-            <a href = "/student/watch?courseID={{detail.[0].id}}" class="btn course__button"> Học thử </a>
         </div>
-        <div class="detail__line">
-            <div class="detail__chapter">
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-5">
+            <h2>Thông tin khóa học</h2>
+            <hr>
+            <h5 style="display:inline">Đánh giá: </h5>
+            <h5 style="display:inline">{{course.averageStar}}</h5>
+            <div class="stars-outer">
+                <div class="stars-inner" id="starWidth" style="width: {{detail.widthStar}};"></div>
+            </div>
+            <h5 style="display:inline">({{detail.NoRates}})</h5>
+            <br>
+            <h5 style="display:inline">Giá:</h5>
+            <h5 style="display:inline; {{#if detail.saleprice}} text-decoration: line-through {{/if}} ">
+                ₫{{#money detail.price}}{{/money}}</h5>
+            <h3 style="display:inline; font-weight:bold; color:#D0011B">₫{{#money detail.saleprice}}{{/money}}</h3>
+            <h5 style="display:inline; background-color:#ff6f60;color:white">{{detail.percent}}% GIẢM</h5>
+            <p style="margin-top:0.3em">Số học viên tham gia: {{course.NoStudents}}</p>
+            <p>Số lượt lượt xem: {{course.views}}</p>
+            <p>Danh mục: {{detail.categoryName}}</p>
+            <p>Thời gian bắt đầu: {{detail.created}}</p>
+
+        </div>
+        <div class="col-lg-7">
+            <h2>Mô tả khóa học</h2>
+            <hr>
+            <div>
+                {{{course.htmlSortDescription}}}
+            </div>
+            <br>
+            <h5 style=" text-decoration: underline">Chi tiết:</h5>
+            <div>
+                {{{course.htmlDescription}}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <h2>Đánh giá khóa học</h2>
+            <hr>
+            <div style="height: 600x; overflow:auto">
+                {{#if checkFeedbackEmpty}}
+                <p>Khóa học chưa được ai đánh giá</p>
+                {{else}}
+                {{#each feedback}}
+                <p>{{email}}</p>
+                <h5>{{comment}}</h5>
+                <div class="stars-outer">
+                    <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
+                </div>
+                <hr>
+                {{/each}}
+                {{/if}}
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Nội dung khóa học</h2>
+                </div>
+                <div class="col-lg-6">
+                    {{#if checkRegistered}}
+                    <a href="/student/watch?courseID={{courseID}}" class="btn btn-warning"
+                        style="color:white;font-weight:bold"><i class="fas fa-book-reader"
+                            style="margin-right:0.2em"></i>Học ngay</a>
+                    {{else}}
+                    <a href="/course/buy?courseID={{courseID}}" class="btn btn-secondary"
+                        style="color:white;font-weight:bold"><i class="fas fa-shopping-cart"
+                            style="margin-right:0.2em"></i>Mua ngay</a>
+                    <a href="/student/watch?courseID={{courseID}}" class="btn btn-warning"
+                        style="color:white;font-weight:bold"><i class="fas fa-book-reader"
+                            style="margin-right:0.2em"></i>Học thử</a>
+                    {{/if}}
+                </div>
+            </div>
+            <hr>
+            <div style="height: 600x; overflow:auto">
                 {{#each chapterInfo}}
-                <li class="list-group-item active active-chapter" id="li-main{{@index}}"
-                    onclick="HideLessons({{@index}})">
-                    {{chapterName}}<i class="fas fa-caret-down fa-lg" style="float:right"
-                        id="button-change{{@index}}"></i>
+                <li class="list-group-item active active-chapter"
+                    style="background-color:#212121; border:1px solid #212121; font-weight:bold">
+                    {{chapterName}}{{#if isOutline}} (Đề cương){{/if}}<i class="fas fa-caret-down fa-lg"
+                        style="float:right" id="button-change{{@index}}"></i>
                 </li>
                 {{#each lessons}}
-                <li class="list-group-item lesson-active" style="width:100%" id="li{{lessonID}}"
-                    onclick="changeLesson({{lessonID}})" style="cursor:pointer">{{lessonName}}</li>
+                <li class="list-group-item lesson-active" style="width:100%" style="cursor:pointer">{{lessonName}}</li>
                 {{/each}}
                 {{/each}}
             </div>
         </div>
     </div>
-
-    <div class="cards">
-        <h3 class="title"> 5 khóa học cùng lĩnh nổi bật nhất </h3>
-        <div class="card__detail">
-            {{#each related}}
-            <div class="card card-custom" id="card{{this.id}}">
-                <a href="/course/detail?courseID={{this.id}}">
-                    <img height="200px" class="card-img-top" src="{{this.img}}" alt="Card image cap">
-                </a>
-                <div class="card__courseName">
-                    <h5 class="card-title">{{this.courseName}}</h5>
-                </div>
-                <div class="card-body">
-                    <div>
-                        <small class="card-title">Giáo viên: {{this.teacherName}}</small>
-                    </div>
-                    <div>
-                        <small class="card-title">Danh mục: {{this.categoryName}}</small>
-                    </div>
-                    <div class="star__div">
-                        <h4 style="display:inline">{{averageStar}}</h4>
-                        <div class="stars-outer">
-                            <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
-                    </div>
-                    <div>
-                        <small class="card-title">Giá: {{this.price}}</small>
-                    </div>
-                    <div>
-                        <small class="card-title">Giảm giá: {{this.percent}}</small>
-                    </div>
-                    <div>
-                        <small class="card-title">Lượt xem: {{this.views}}</small>
-                    </div>
-                    <div>
-                        <small class="card-title">Số lượt đăng ký học: {{this.NoReStudent}}</small>
-                    </div>
-                </div>
+</div>
+<div class="cards">
+    <h3 class="title"> 5 khóa học cùng lĩnh nổi bật nhất </h3>
+    <div class="card__detail">
+        {{#each related}}
+        <div class="card card-custom" id="card{{this.id}}">
+            <a href="/course/detail?courseID={{this.id}}">
+                <img height="200px" class="card-img-top" src="{{this.img}}" alt="Card image cap">
+            </a>
+            <div class="card__courseName">
+                <h5 class="card-title">{{this.courseName}}</h5>
             </div>
-            {{/each}}
-        </div>
-    </div>
-
-    <div>
-        <h3 class="title"> Đánh giá của học viên </h3>
-        {{#if feedback}}
-        <div class="feedback__cards">
-        {{#each feedback}}
-        <div class="">
-             <div class="card card-custom" id="card{{this.id}}">
-                <div class="card-body feedback">
-                    <h6 class="feedback__email">
-                        {{this.email}}
-                    </h6>
-                    <div class="star__div">
-                        <h4 style="display:inline">{{averageStar}}</h4>
-                        <div class="stars-outer">
-                            <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
-                        </div>
+            <div class="card-body">
+                <div>
+                    <small class="card-title">Giáo viên: {{this.teacherName}}</small>
+                </div>
+                <div>
+                    <small class="card-title">Danh mục: {{this.categoryName}}</small>
+                </div>
+                <div class="star__div">
+                    <h4 style="display:inline">{{averageStar}}</h4>
+                    <div class="stars-outer">
+                        <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
                     </div>
-                    <div class="comment">
-                        {{this.comment}}
-                    </div>
+                </div>
+                <div>
+                    <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
+                </div>
+                <div>
+                    <small class="card-title">Giá: {{this.price}}</small>
+                </div>
+                <div>
+                    <small class="card-title">Giảm giá: {{this.percent}}</small>
+                </div>
+                <div>
+                    <small class="card-title">Lượt xem: {{this.views}}</small>
+                </div>
+                <div>
+                    <small class="card-title">Số lượt đăng ký học: {{this.NoReStudent}}</small>
                 </div>
             </div>
         </div>
         {{/each}}
-        </div>
-        {{else}}
-        <h4 class = "nofeedback"> ⭕🔺 Chưa có đánh giá nào 🔺⭕ </h4>
-        {{/if}}
     </div>
-
 </div>

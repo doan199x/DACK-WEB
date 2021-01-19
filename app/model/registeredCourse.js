@@ -10,5 +10,5 @@ module.exports = {
         const sql = `UPDATE registeredCourse set curLesson=${curLesson} where courseID = ${courseID} and studentID = ${studentID}`;
         const result = await db.load(sql);
         return result;
-    }
+    },
 }; 
