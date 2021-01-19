@@ -52,8 +52,8 @@ router.post("/", async (req, res) => {
           title: "Login",
           result: "banned"
         });
-        if (bcrypt.compareSync(req.body.password, students[0].password)) checkStudent = true;
       }
+      if (bcrypt.compareSync(req.body.password, students[0].password)) checkStudent = true;
     }
     // check is admin
     var checkAdmin = false;

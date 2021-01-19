@@ -99,6 +99,9 @@
                         style="color:white;font-weight:bold"><i class="fas fa-book-reader"
                             style="margin-right:0.2em"></i>Học thử</a>
                     {{/if}}
+                     {{#if isLoggedIn}}
+                    <button class="btn btn-danger"><i class="fas fa-heart" onclick="addWatchList({{courseID}})"></i></button>
+                    {{/if}}
                 </div>
             </div>
             <hr>

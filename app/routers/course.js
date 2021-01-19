@@ -267,7 +267,7 @@ router.get("/detail", async (req, res) => {
   try {
     res.render("home", {
       css: ["course", "rate", "course-detail"],
-      js: ["course"],
+      js: ["course", 'course-detail'],
       contain: "course/course-detail",
       category: category,
       fullcategory: fullcategory,
@@ -378,5 +378,27 @@ router.post("/buy", auth.studentAuth, async (req, res, next) => {
     next(err);
   }
 });
+
+router.post('/add-watchlist',auth.studentAuth, async (req, res, next) => {
+  try {
+    var courseID = req.body.courseID;
+    var studentID = req.session.user.studentID;
+    list = await studentModel.getWatchList(studentID, courseID);
+    if (list.length > 0) {
+      res.json({
+        status: 0,
+        message: 'Them thanh cong'
+      })
+    } else {
+      await studentModel.insertWatchList(studentID, courseID);
+      res.json({
+        status: 0,
+        message: 'Them thanh cong'
+      })
+    }
+  } catch (err) {
+    next(err);
+  }
+})
 
 module.exports = router;
