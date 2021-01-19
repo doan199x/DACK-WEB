@@ -118,51 +118,52 @@
     </div>
 </div>
 <div class="cards">
-     <h2 style=" text-decoration: none" class="related"> 5 khóa học cùng lĩnh nổi bật nhất </h2>
+    <h2 style=" text-decoration: none" class="related"> 5 khóa học cùng lĩnh nổi bật nhất </h2>
     <div class="card__detail">
         {{#each related}}
-        <div class="flex__card"  style = "margin-left:1%">
+        <div class="flex__card" style="margin-left:1%">
             <div class="card card-custom" id="card{{this.id}}">
-            <a href="/course/detail?courseID={{this.id}}">
-                <img height="200px" class="card-img-top" src="{{this.img}}" alt="Card image cap">
-            </a>
-            <div class="card__courseName">
-                <h5 class="card-title">{{this.courseName}}</h5>
-            </div>
-            <div class="card-body">
-                <div>
-                    <small class="card-title">Giáo viên: {{this.teacherName}}</small>
+                <a href="/course/detail?courseID={{this.id}}">
+                    <img height="200px" class="card-img-top" src="{{this.img}}" alt="Card image cap">
+                </a>
+                <div class="card__courseName">
+                    <h5 class="card-title">{{this.courseName}}</h5>
                 </div>
-                <div>
-                    <small class="card-title">Danh mục: {{this.categoryName}}</small>
-                </div>
-                <div class="star__div">
-                    <h4 style="display:inline">{{averageStar}}</h4>
-                    <div class="stars-outer">
-                        <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
+                <div class="card-body">
+                    <div>
+                        <small class="card-title">Giáo viên: {{this.teacherName}}</small>
                     </div>
-                </div>
-                <div>
-                    <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
-                </div>
-                <div>
+                    <div>
+                        <small class="card-title">Danh mục: {{this.categoryName}}</small>
+                    </div>
+                    <div class="star__div">
+                        <h4 style="display:inline">{{averageStar}}</h4>
+                        <div class="stars-outer">
+                            <div class="stars-inner" id="starWidth" style="width: {{widthStar}};"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
+                    </div>
+                    <div>
                         <h5 style="display:inline">Giá:</h5>
                         <h5 style="display:inline; {{#if this.saleprice}} text-decoration: line-through {{/if}} ">
                             ₫{{#money this.price}}{{/money}}</h5>
+                       {{#if this.saleprice}}
                         <h3 style="display:inline; font-weight:bold; color:#D0011B">₫{{#money this.saleprice}}{{/money}}
                         </h3>
+                        <h5 style=" text-align:center; background-color:#ff6f60;color:white">{{this.percent}}% GIẢM</h5>
+                        {{/if}}
+                    </div>
+
+                    <div>
+                        <small class="card-title">Lượt xem: {{this.views}}</small>
                     </div>
                     <div>
-                        <h5 style=" text-align:center; background-color:#ff6f60;color:white">{{this.percent}}% GIẢM</h5>
+                        <small class="card-title">Số lượt đăng ký học: {{this.NoReStudent}}</small>
                     </div>
-                <div>
-                    <small class="card-title">Lượt xem: {{this.views}}</small>
-                </div>
-                <div>
-                    <small class="card-title">Số lượt đăng ký học: {{this.NoReStudent}}</small>
                 </div>
             </div>
-        </div>
         </div>
         {{/each}}
     </div>

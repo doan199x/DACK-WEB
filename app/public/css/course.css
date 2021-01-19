@@ -60,10 +60,10 @@ a:link{
 }
 .highlight{
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
     column-gap: 10%;
     padding-top: 10%;
-    padding-left: 10%;
+    padding-left: 5%;
     padding-right: 10%;
     text-align: center;
     color: white;
@@ -71,10 +71,12 @@ a:link{
 .new{
     border: solid 1px;
     border-radius: 10%;
+    width: 100px;
 }
 .top{
     border: solid 1px;
     border-radius: 10%;
+    width: 100px;
 }
 .sale{
     border: solid 1px;

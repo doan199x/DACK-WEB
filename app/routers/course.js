@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
   for (var i = 0; i < all.length; i++) {
     for (let i2 = 0; i2 < top.length; i2++) {
       if (all[i].id === top[i2].id) {
-        all[i].topColor = "#ff5722";
+        all[i].topColor = "#66bb6a";
       }
     }
     for (let i3 = 0; i3 < newest.length; i3++) {
@@ -39,7 +39,6 @@ router.get("/", async (req, res) => {
       all[i].saleprice = all[i].price - (all[i].price * all[i].percent) / 100;
     if (all[i].percent) {
       all[i].saleprice = all[i].price - (all[i].price * all[i].percent) / 100;
-      all[i].saleColor = "#66bb6a";
     }
   }
   const page = req.query.page;
@@ -100,7 +99,7 @@ router.get("/find", async (req, res) => {
     if (req.query.perPage == null || req.query.perPage.trim() === "") {
       req.query.perPage = 3;
     }
-    if (req.query.search === null || req.query.search.trim() === "") {
+    if (req.query.search === null || (req.query.search.trim() === "")) {
       if (req.query.sortOption === "1")  courses = await courseModel.all1();
       else if (req.query.sortOption === "2")  courses = await courseModel.all2();
       else if (req.query.sortOption === "3")  courses = await courseModel.all3();
@@ -136,12 +135,11 @@ router.get("/find", async (req, res) => {
         courses = await courseModel.fulltext(req.query.search);
       }
     }
-    console.log(courses);
     // add width star
     for (let i = 0; i < courses.length; i++) {
       for (let i2 = 0; i2 < top.length; i2++) {
         if (courses[i].id === top[i2].id) {
-          courses[i].topColor = "#ff5722";
+          courses[i].topColor = "#66bb6a";
         }
       }
       for (let i3 = 0; i3 < newest.length; i3++) {
@@ -154,7 +152,6 @@ router.get("/find", async (req, res) => {
       if (courses[i].percent) {
         courses[i].saleprice =
           courses[i].price - (courses[i].price * courses[i].percent) / 100;
-        courses[i].saleColor = "#66bb6a";
       }
     }
     for (let i = 0; i < category.length; i++) {
@@ -241,12 +238,8 @@ router.get("/detail", async (req, res) => {
 for (var i = 0; i < related.length; i++) {
   related[i].widthStar = (related[i].stars / 5) * 100;
   related[i].widthStar += "%";
-  if (related[i].percent)
+  if (related[i].percent && related[i].percent!= 0)
   related[i].saleprice = related[i].price - (related[i].price * related[i].percent) / 100;
-  if (related[i].percent) {
-    related[i].saleprice = related[i].price - (related[i].price * related[i].percent) / 100;
-    related[i].saleColor = "#66bb6a";
-  }
 }
 
   for (let i = 0; i < feedback.length; i++) {
