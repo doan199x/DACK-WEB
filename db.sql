@@ -145,7 +145,8 @@ create table Rating(
 create table RegisteredCourse(
 	studentID int not null,
     courseID int not null,
-    registerTime datetime,
+    registerTime datetime default now(),
+    curLesson int not null,
     primary key(studentId, courseID),
 	foreign key(studentID) references Student(studentID),
     foreign key(courseID) references Course(courseID)
@@ -220,13 +221,13 @@ insert into Bill (timeCreated,studentID,sum,status) values(now(),4,400000,'Chờ
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar, NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
 values(1,'Lập trình Android căn bản','/img/course/course1.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',100,3.6,3,50000,now(),now(),2,'Đã hoàn tất',1,103,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar, NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(2,'Lập trình Android nâng cao','/img/course/course2.jpg','Lập trình Android nâng cao','Lập trình Android nâng cao Lập trình Android nâng cao',200,4.5,3,50000,now(),now(),2,'Đã hoàn tất',1,104,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(2,'Lập trình Android nâng cao','/img/course/course2.jpg','Lập trình Android nâng cao','Lập trình Android nâng cao Lập trình Android nâng cao',200,4.5,3,50000,now(),now(),2,'Chưa hoàn tất',1,104,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
 values(3,'Lập trình IOS căn bản','/img/course/course3.jpg','Làm quen với lập trình IOS','Giúp hiểu các khái niệm cơ bản về IOS',100,3.6,2,100000,now(),now(),2,'Đã hoàn tất',1,105,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
 values(4,'Lập trình IOS nâng cao','/img/course/course4.jpg','Học về IOS nâng cao','Tiếp cận các khái niệm nâng cao về ios',100,5,2,100000,now(),now(),2,'Đã hoàn tất',1,236,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(5,'Lập trình Nodejs cho người mới bắt đầu','/img/course/course5.jpg','Khóa học làm quen với lập trình NodeJS','giúp hiểu các khái niệm cơ bản trong Nodejs',256,4.6,3,150000,now(),now(),1,'Đã hoàn tất',1,16,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(5,'Lập trình Nodejs cho người mới bắt đầu','/img/course/course5.jpg','Khóa học làm quen với lập trình NodeJS','giúp hiểu các khái niệm cơ bản trong Nodejs',256,4.6,3,150000,now(),now(),1,'Chưa hoàn tất',1,16,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
 values(6,'Lập trình Nodejs nâng cao','/img/course/course6.jpg','Khóa học làm quen với lập trình Android','Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android',512,3.8,5,150000,now(),now(),2,'Đã hoàn tất',1,921,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
@@ -242,7 +243,7 @@ values(11,'Lập trình Java căn bản','/img/course/course11.jpg','Java căn b
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
 values(12,'Java và OOP','/img/course/course12.jpg','OOP trong Java','Tìm hiểu OOP trong Java',5612,4.6,5,300000,now(),now(),1,'Đã hoàn tất',3, 1011,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
-values(13,'Java nâng cao','/img/course/course13.jpg','Các khái niệm nâng cao trong java','Bổ sung kiến thức nâng cao trong Java',5612,4.7,5,300000,now(),now(),1,'Đã hoàn tất',3, 2500,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
+values(13,'Java nâng cao','/img/course/course13.jpg','Các khái niệm nâng cao trong java','Bổ sung kiến thức nâng cao trong Java',5612,4.7,5,300000,now(),now(),1,'Chưa hoàn tất',3, 2500,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 insert into Course (courseID, name,imagePath,sortDescription,description,NoStudents,averageStar,NoStudentRates,price,created,lastUpdated,categoryID,status,teacherID,views,htmlDescription,htmlSortDescription) 
 values(14,'Java spring','/img/course/course14.jpg','Lập trinh Java với Framework Spring','Khóa học giúp làm quen với Framework spring',5612,2.1,5,300000,now(),now(),1,'Đã hoàn tất',2, 2530,'<p>Khóa học làm quen với lập trình Android</p>','<b>Khóa học làm quen với lập trình Android Khóa học làm quen với lập trình Android</b>');
 
@@ -312,40 +313,38 @@ insert into Rating (studentID,courseID,NoStars,Comment) values(3,4,4,'Tốt');
 insert into Rating (studentID,courseID,NoStars,Comment) values(4,1,3,'Tốt');
 insert into Rating (studentID,courseID,NoStars,Comment) values(4,2,2,'Tốt');
 
-insert into RegisteredCourse (studentID, courseID, registerTime) values(1,1,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(1,2,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(1,3,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(1,4,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(2,1,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(2,2,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(2,3,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(3,1,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(3,2,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(3,3,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(3,4,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,1,now());
+insert into RegisteredCourse (studentID, courseID, registerTime, curLesson) values(1,1,now(),1);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(1,2,now(),13);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(1,3,now(),19);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(1,4,now(),26);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(2,1,now(),1);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(2,2,now(),13);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(2,3,now(),19);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(3,1,now(),1);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(3,2,now(),13);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(3,3,now(),19);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(3,4,now(),26);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,1,now(),1);
 
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,5,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,6,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,7,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,8,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,9,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,10,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,11,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,12,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,13,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,14,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,15,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,16,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,17,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,18,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,19,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,20,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,21,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,22,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,23,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,24,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,25,now());
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,5,now(),39);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,6,now(),47);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,7,now(),56);
+insert into RegisteredCourse (studentID, courseID,registerTime ,curLesson) values(4,8,now(),67);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,9,now(),76);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,10,now(),85);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(5,11,now(),93);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(5,12,now(),101);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(5,13,now(),108);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(5,14,now(),115);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(6,15,now(),125);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(6,16,now(),134);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(6,17,now(),144);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(7,18,now(),158);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(7,19,now(),166);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(7,20,now(),170);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(7,21,now(),174);
+insert into RegisteredCourse (studentID, courseID,registerTime ,curLesson) values(7,22,now(),178);
+insert into RegisteredCourse (studentID, courseID,registerTime ,curLesson) values(7,23,now(),186);
 
 insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(1,20,40000,'2021-01-01','2021-05-05','Giảm giá hè');
 insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(2,20,40000,'2021-01-01','2021-05-05','Giảm giá hè');

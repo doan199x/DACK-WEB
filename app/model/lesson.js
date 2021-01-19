@@ -26,4 +26,9 @@ module.exports = {
         const result = await db.load(sql);
         return result;
     },
+    getLessonsByCourseID: async(courseID)=>{
+        const sql = `Select a.* from Lesson as a, Chapter as b, Course as c where a.chapterID = b.chapterID and b.courseID = c.courseID and c.courseID = ${courseID}`;
+        const result = await db.load(sql);
+        return result;
+    }
 }; 

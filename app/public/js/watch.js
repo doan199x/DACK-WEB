@@ -12,11 +12,13 @@ function ShowLessons(chapterID) {
 
 function changeLesson(lessonID) {
     // location.href = `/student/watch?courseID=${courseID}&lessonID=${lessonID}`;
+    courseID = document.getElementById('courseID').value;
     $.ajax({
         url: '/student/get-video',
         method: 'POST',
         data: {
             lessonID: lessonID,
+            courseID: courseID
         },
         success: function (result) {
             document.getElementById("video-source").innerHTML = `
@@ -63,7 +65,7 @@ function backwardLesson(lessonIDMin) {
 window.onload = function showMessage() {
     if (document.getElementById("registered").value == '1') {
         Swal.fire({
-            title:'Bạn chưa đăng kí khóa học này, bạn chỉ có thể xem một số chương do giáo viên cung cấp miễn phí',
+            title: 'Bạn chưa đăng kí khóa học này, bạn chỉ có thể xem một số chương do giáo viên cung cấp miễn phí',
             confirmButtonColor: '#212121'
         })
     }

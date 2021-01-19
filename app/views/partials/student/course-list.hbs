@@ -10,14 +10,25 @@
             <div class="card-body">
                 <h5 class="card-title">{{this.name}}</h5>
                 <p class="card-text">{{this.sortDescription}}</p>
+                <b>Tiến độ học của bạn: {{percentComplete}}</b>
+                <br>
+                <p style="display:inline">Trạng thái khóa học:</p>
+                {{#equal status 'Chưa hoàn tất'}}
+                <button class="btn btn-danger" style="color:white; font-weight:bold;cursor:context-menu">Chưa hoàn tất</button>
+                {{/equal}}
+                {{#equal status 'Đã hoàn tất'}}
+                <button class="btn btn-success" style="color:white; font-weight:bold;cursor:context-menu">Đã hoàn tất</button>
+                {{/equal}}
             </div>
             <div class="card-footer">
                 <div class="row">
                     <div class="col-lg-6">
-                        <a href="/student/watch?courseID={{this.courseID}}" class="btn btn-secondary btn-block bold">Học ngay</a>
+                        <a href="/student/watch?courseID={{this.courseID}}" class="btn btn-secondary btn-block bold">Học
+                            ngay</a>
                     </div>
                     <div class="col-lg-6">
-                        <a href="/student/rate?courseID={{this.courseID}}" class="btn btn-warning btn-block bold removeButton" style="color:white">Đánh giá</a>
+                        <a href="/student/rate?courseID={{this.courseID}}"
+                            class="btn btn-warning btn-block bold removeButton" style="color:white">Đánh giá</a>
                     </div>
                 </div>
             </div>

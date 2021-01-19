@@ -65,7 +65,7 @@ module.exports = {
     return result;
   },
   getRegisteredCourseByStudentID: async (studentID) => {
-    const sql = `SELECT a.* FROM Course as a, RegisteredCourse as b, student as c where  c.studentID = ${studentID} and c.studentID = b.studentID and b.courseID = a.courseID;`;
+    const sql = `SELECT a.*, b.curLesson FROM Course as a, RegisteredCourse as b, student as c where  c.studentID = ${studentID} and c.studentID = b.studentID and b.courseID = a.courseID;`;
     const result = await db.load(sql);
     return result;
   },
@@ -177,8 +177,8 @@ module.exports = {
     const result = await db.load(sql);
     return result;
   },
-  buy: async (studentID, courseID) => {
-    const sql = `INSERT into RegisteredCourse (studentId,courseID) values(${studentID},${courseID})`;
+  buy: async (studentID, courseID,curLesson) => {
+    const sql = `INSERT into RegisteredCourse (studentID,courseID,curLesson) values(${studentID},${courseID},${curLesson})`;
     const result = await db.load(sql);
     return result;
   },
