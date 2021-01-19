@@ -177,7 +177,7 @@ module.exports = {
     const result = await db.load(sql);
     return result;
   },
-  buy: async (studentID, courseID,curLesson) => {
+  buy: async (studentID, courseID, curLesson) => {
     const sql = `INSERT into RegisteredCourse (studentID,courseID,curLesson) values(${studentID},${courseID},${curLesson})`;
     const result = await db.load(sql);
     return result;
@@ -262,4 +262,10 @@ module.exports = {
     const result = await db.load(sql);
     return result;
   },
+  update: async (courseName, courseDes, courseSortDes, htmlCourseDes, htmlCourseSortDes, imagePath, courseID) => {
+    const sql = `update Course set name = '${courseName}', imagePath='${imagePath}', sortDescription = '${courseSortDes}',description='${courseDes}',htmlDescription='${htmlCourseDes}'
+    ,htmlSortDescription='${htmlCourseSortDes}' where courseID = ${courseID}`;
+    const result = await db.load(sql);
+    return result;
+  }
 };

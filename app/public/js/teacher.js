@@ -40,6 +40,17 @@ function chinhSuaKhoaHoc(courseID) {
     })
 }
 
+window.onload = function sendMessage(){
+    var url = new URL(window.location.href);
+    var result = url.searchParams.get('result');
+    if (result == 'passed'){
+        Swal.fire({
+            title: 'Cập nhật thành công',
+            confirmButtonColor: `#212121`,
+        })
+    }
+}
+
 // function addLesson(chapterID){
 //     Swal.fire
 // }

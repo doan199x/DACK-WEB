@@ -13,92 +13,83 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <fieldset>
-                        <div class="form-group row">
-                            <label for="courseName" class="col-sm-3 col-form-label">Tên khóa học</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="courseName" name="courseName"
-                                    value="{{course.name}}">
+                    <form method="POST" action="/teacher/capnhat-course" enctype="multipart/form-data">
+                        <fieldset>
+                            <div class="form-group row">
+                                <label for="courseName" class="col-sm-3 col-form-label">Tên khóa học</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="courseName" name="courseName"
+                                        value="{{course.name}}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="courseSortDes" class="col-sm-3 col-form-label">Nhập mô tả ngắn</label>
-                            <div class="col-sm-9">
-                                <textarea id="addSortDescription"></textarea>
+                            <div class="form-group row">
+                                <label for="courseName" class="col-sm-3 col-form-label">Ảnh khóa học</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" id="courseImage" name="courseImage">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="courseDes" class="col-sm-3 col-form-label">Nhập mô tả chi tiết</label>
-                            <div class="col-sm-9">
-                                <textarea id="addDescription"></textarea>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Nhập mô tả ngắn</label>
+                                <div class="col-sm-9">
+                                    <textarea id="addSortDescription" name="htmlCourseSortDes"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="courseCategoryID" class="col-sm-3 col-form-label">Chọn danh mục cha</label>
-                            <div class='col-sm-9'>
-                                <select id="postCategory" class="form-control" onchange="loadCategory()">
-                                    <option value="{{postCategoryInfo.postCategoryID}}" style="font-weight: bold;"
-                                        disabled selected> {{postCategoryInfo.postCategoryName}}
-                                    </option>
-                                    {{#each postCategory}}
-                                    <option value="{{postCategoryID}}">{{postCategoryName}}</option>
-                                    {{/each}}
-                                </select>
+                            <div class="form-group row">
+                                <label for="courseDes" class="col-sm-3 col-form-label">Nhập mô tả chi tiết</label>
+                                <div class="col-sm-9">
+                                    <textarea id="addDescription" name="htmlCourseDes"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="courseCategoryID" class="col-sm-3 col-form-label">Chọn danh mục con</label>
-                            <div class="col-sm-9">
-                                <select id="category" class="form-control">
-                                    <option value="{{categoryInfo.categoryID}}" style="font-weight: bold" disabled
-                                        selected>{{categoryInfo.categoryName}}
-                                    </option>
-                                </select>
+                            <div class="form-group row">
+                                <label for="courseCategoryID" class="col-sm-3 col-form-label">Chọn danh mục cha</label>
+                                <div class='col-sm-9'>
+                                    <select id="postCategory" class="form-control" onchange="loadCategory()">
+                                        <option value="{{postCategoryInfo.postCategoryID}}" style="font-weight: bold;"
+                                            disabled selected> {{postCategoryInfo.postCategoryName}}
+                                        </option>
+                                        {{#each postCategory}}
+                                        <option value="{{postCategoryID}}">{{postCategoryName}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="coursePrice" class="col-sm-3 col-form-label">Nhập giá</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control money" id="coursePrice" name="coursePrice"
-                                    value="{{course.price}}">
+                            <div class="form-group row">
+                                <label for="courseCategoryID" class="col-sm-3 col-form-label">Chọn danh mục con</label>
+                                <div class="col-sm-9">
+                                    <select id="category" class="form-control">
+                                        <option value="{{categoryInfo.categoryID}}" style="font-weight: bold" disabled
+                                            selected>{{categoryInfo.categoryName}}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
-                            <label class="col-sm-1 col-form-label">VND</label>
-                        </div>
-                        <hr>
-                        <div class="row justify-content-center">
-                            <div class="btn-width-custom-small">
-                                <a class="btn btn-secondary btn-block bold" href="/teacher">Thoát</a>
+                            <div class="form-group row">
+                                <label for="coursePrice" class="col-sm-3 col-form-label">Nhập giá</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control money" id="coursePrice" name="coursePrice"
+                                        value="{{course.price}}">
+                                </div>
+                                <label class="col-sm-1 col-form-label">VND</label>
                             </div>
-                            <div class="btn-width-custom-small">
-                                <button class="btn btn-secondary btn-block bold" onclick="capNhatKhoaHoc()">Cập nhật</button>
+                            <input id="courseSortDes" name="courseSortDes" value="" hidden>
+                            <input id="courseDes" name="courseDes" value="" hidden>
+                            <input id="courseID" name="courseID" hidden value="{{courseID}}">
+                            <hr>
+                            <div class="row justify-content-center">
+                                <div class="btn-width-custom-small">
+                                    <a class="btn btn-secondary btn-block bold" href="/teacher">Thoát</a>
+                                </div>
+                                <div class="btn-width-custom-small">
+                                    <button type="submit" class="btn btn-secondary btn-block bold"
+                                        onmouseover="layHTMLDesciprtion()">Cập
+                                        nhật</button>
+                                </div>
                             </div>
-                        </div>
-                    </fieldset>
+                        </fieldset>
+                    </form>
                     <br>
                 </div>
             </div>
-            {{!-- <div class="row">
-                <div class="col-lg-12">
-                    <h3>Nội dung khóa học</h3>
-                    <hr>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    {{#each chapterInfo}}
-                    <li class="list-group-item active active-chapter" style="width:100%" id="li-main{{@index}}"
-                        onclick="HideLessons({{@index}})">{{chapterName}} <i class="far fa-edit fa-lg"
-                            style="float:right"></i></li>
-                    {{#each lessons}}
-                    <li class="list-group-item lesson-active" style="width:100%" id="li{{lessonID}}"
-                        onclick="changeLesson({{lessonID}})" style="cursor:pointer">{{lessonName}}<i
-                            class="fas fa-edit fa-lg" style="float:right"></i></li>
-                    {{/each}}
-                    <li class="list-group-item lesson-active" style="width:100%;cursor:pointer"><i
-                            style="margin-right:5px" class="fas fa-plus-square fa-lg"></i>Thêm bài học</li>
-                    {{/each}}
-                </div>
-            </div> --}}
 
         </div>
     </div>

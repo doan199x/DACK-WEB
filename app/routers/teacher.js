@@ -148,6 +148,7 @@ router.get('/update-course-info', auth.teacherAuth, async (req, res, next) => {
             course: courseInfo[0],
             categoryInfo: categoryInfo[0],
             postCategoryInfo: postCategoryInfo[0],
+            courseID: courseID
         })
     } catch (err) {
         next(err);
@@ -492,8 +493,38 @@ router.post('/change-password', auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.post('/update-course', async (req, res, next) => {
 
+router.post('/capnhat-course',auth.teacherAuth, upload2.single('courseImage'), async (req, res, next) => {
+    try {
+        var htmlCourseSortDes = req.body.htmlCourseSortDes;
+        var htmlCourseDes = req.body.htmlCourseDes;
+        var courseSortDes = req.body.courseSortDes;
+        var courseDes = req.body.courseDes;
+        var courseName = req.body.courseName;
+        var courseID = req.body.courseID;
+        courses = await courseModel.getCourseByID(courseID);
+        var imagePath
+        if (req.file) {
+            var imagePath = '/uploads/img/avatar/' + req.file.filename;
+            var oldImagePath = './public' + courses[0].imagePath;
+            fs.unlink(oldImagePath, function (err) {
+                if (err) {
+                    next(err);
+                }
+            });
+        } else {
+            imagePath = courses[0].imagePath;
+        }
+        await courseModel.update(courseName, courseDes, courseSortDes, htmlCourseDes, htmlCourseSortDes, imagePath, courseID);
+        res.redirect(url.format({
+            pathname: '/teacher',
+            query: {
+                result: "passed"
+            }
+        }));
+    } catch (err) {
+        next(err);
+    }
 })
 
 module.exports = router;
