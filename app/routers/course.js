@@ -6,6 +6,7 @@ const studentModel = require("../model/student.js");
 const guestModel = require("../model/guest.js");
 const chapterModel = require("../model/chapter.js");
 const lessonModel = require("../model/lesson.js");
+const course = require("../model/course.js");
 
 router.get("/", async (req, res) => {
   const category = await guestModel.category();
@@ -83,13 +84,32 @@ router.get("/find", async (req, res) => {
       req.query.perPage = 3;
     }
     if (req.query.search === null || req.query.search.trim() === "") {
-      courses = await courseModel.all();
+      if (req.query.sortOption === "1")  courses = await courseModel.all1();
+      else if (req.query.sortOption === "2")  courses = await courseModel.all2();
+      else if (req.query.sortOption === "3")  courses = await courseModel.all3();
+      else courses = await courseModel.all();
     } else {
-      if (req.query.sortOption === 1) courses = await courseModel.fulltext1(req.query.search);
-      else if (req.query.sortOption === 2) courses = await courseModel.fulltext2(req.query.search);
-      else if (req.query.sortOption === 3) courses = await courseModel.fulltext3(req.query.search);
-      else courses = await courseModel.fulltext(req.query.search);
+       
+      //Sort
+      if (req.query.sortOption === "1")
+      {
+       courses = await courseModel.fulltext1(req.query.search);
+      } 
+      else if (req.query.sortOption === "2") 
+      {
+        courses = await courseModel.fulltext2(req.query.search);
+      }
+      else if (req.query.sortOption === "3") 
+      {
+        courses = await courseModel.fulltext3(req.query.search);
+      }
+      else 
+      {
+        courses = await courseModel.fulltext(req.query.search);
+      }
     }
+    
+ 
     // add width star
     for (let i = 0; i < courses.length; i++) {
       for (let i2 = 0; i2 < top.length; i2++) {

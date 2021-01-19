@@ -16,6 +16,54 @@ module.exports = {
     const result = await db.load(sql);
     return result;
   },
+  all1: async () => {
+    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
+        Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
+        Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
+        Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
+        COUNT(RegisteredCourse.studentID) as NoReStudent
+        FROM ((((Category
+        INNER JOIN Course ON Category.categoryID = Course.categoryID)
+        INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
+        INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
+        INNER JOIN Sale ON Sale.courseID = Course.courseID)
+        GROUP BY Course.courseID
+        ORDER BY Course.averageStar DESC, (Sale.postDiscountPrice - Sale.postDiscountPrice*Sale.percentDiscount/100) ASC;`;
+    const result = await db.load(sql);
+    return result;
+  },
+  all2: async () => {
+    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
+        Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
+        Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
+        Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
+        COUNT(RegisteredCourse.studentID) as NoReStudent
+        FROM ((((Category
+        INNER JOIN Course ON Category.categoryID = Course.categoryID)
+        INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
+        INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
+        INNER JOIN Sale ON Sale.courseID = Course.courseID)
+        GROUP BY Course.courseID
+        ORDER BY Course.averageStar DESC`;
+    const result = await db.load(sql);
+    return result;
+  },
+  all3: async () => {
+    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
+        Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
+        Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
+        Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
+        COUNT(RegisteredCourse.studentID) as NoReStudent
+        FROM ((((Category
+        INNER JOIN Course ON Category.categoryID = Course.categoryID)
+        INNER JOIN Teacher ON Course.teacherID = Teacher.teacherID)
+        INNER JOIN RegisteredCourse ON RegisteredCourse.courseID = Course.courseID)
+        INNER JOIN Sale ON Sale.courseID = Course.courseID)
+        GROUP BY Course.courseID
+        ORDER BY (Sale.postDiscountPrice - Sale.postDiscountPrice*Sale.percentDiscount/100) ASC;`;
+    const result = await db.load(sql);
+    return result;
+  },
   getRegisteredCourseByStudentID: async (studentID) => {
     const sql = `SELECT a.*, b.curLesson FROM Course as a, RegisteredCourse as b, student as c where  c.studentID = ${studentID} and c.studentID = b.studentID and b.courseID = a.courseID;`;
     const result = await db.load(sql);
