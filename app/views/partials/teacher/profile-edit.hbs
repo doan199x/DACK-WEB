@@ -1,0 +1,58 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            {{>teacher-nav}}
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Thông tin cá nhân</h3>
+                    <hr>
+                </div>
+            </div>
+            <form method="POST" action="/teacher/profile-edit" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <img class="img-profile" src="{{teacher.avatarPath}}" width="260px" height="260px">
+                        <input type="file" name="fileAvatar" id="fileAvatar" style="margin-top:5px">
+                    </div>
+                    <div class="col-lg-7">
+                        <fieldset>
+                            <legend>Giảng viên: <input name="teacherName" id="teacherName" class="form-control"
+                                    value="{{teacher.name}}"></legend>
+                            <hr>
+                            <div class="row">
+                                <label class="col-sm-4">Email:</label>
+                                <div class="col-sm-8">
+                                    <input name="teacherEmail" id="teacherEmail" class="form-control"
+                                        value="{{teacher.email}}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:10px">
+                                <label class="col-sm-4">Số điện thoại:</label>
+                                <div class="col-sm-8">
+                                    <input name="teacherPhone" id="teacherPhone" class="form-control"
+                                        value="{{teacher.phone}}">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:10px">
+                                <label class="col-sm-4">Ngày sinh:</label>
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth"
+                                        value="{{#time teacher.dateOfBirth 'YYYY-MM-DD'}}{{/time}}" required>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="btn-width-custom-small">
+                                    <button class="btn btn-block btn-secondary">Lưu</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <br>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

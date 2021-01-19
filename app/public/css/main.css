@@ -26,6 +26,10 @@
     width: 25%; 
     margin-left:10px
 }
+.btn-width-custom-large{
+    width: 30%; 
+    margin-left:10px
+}
 .card-custom{
     border: 1px solid #212121
 }
@@ -50,3 +54,7 @@
     display: block;
     margin-top: 0;
  }
+
+.row-modal{
+    margin-top:10px
+}

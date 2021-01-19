@@ -41,5 +41,15 @@ module.exports = {
         const sql = `SELECT* from Teacher where teacherID = ${teacherID}`;
         const result = await db.load(sql);
         return result;
+    },
+    update:async(teacherID,name, phone, dateOfBirth, avatarPath, email)=>{
+        const sql = `UPDATE Teacher set name='${name}',phone='${phone}',dateOfBirth='${dateOfBirth}',avatarPath = '${avatarPath}',email='${email}' WHERE teacherID = ${teacherID}`;
+        const result = await db.load(sql);
+        return result;
+    },
+    updatePassword:async(teacherID, newPassword)=>{
+        const sql = `UPDATE Teacher set password='${newPassword}' WHERE teacherID = ${teacherID}`;
+        const result = await db.load(sql);
+        return result;
     }
 }; 
