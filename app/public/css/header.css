@@ -1,4 +1,37 @@
-.dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0;
+.header-item{
+    position: relative;
+}
+a:link{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.header-item:hover .header-item-list{
+    display: flex;
+}
+
+.header-item-list{
+    position: absolute;
+    top: 0;
+    display: none;
+    right: -120%;
+    width: 200px;
+    padding: 1rem;
+    background-color: white;
+    flex-direction: column;
+}
+.post:hover{
+    color: #1976d2;
  }
+.header-item-child:hover{
+   color: #1976d2;
+}
+.online__courses{
+    color: white;
+    margin-top: 7%;
+}
+.logo__intro{
+    margin-top: -1%;
+    display: flex;
+}

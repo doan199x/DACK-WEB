@@ -10,6 +10,8 @@ const teacherModel = require("../model/teacher");
 const registeredCourseModel = require("../model/registeredCourse");
 
 router.get("/", async (req, res) => {
+  const fullcategory = await guestModel.fullcategory();
+  const postcategory = await guestModel.postcategory();
   const category = await guestModel.category();
   const top = await guestModel.top();
   const newest = await guestModel.newest();
@@ -55,6 +57,16 @@ router.get("/", async (req, res) => {
     if (category[i].postCategoryID === 4)
       category[i].postCategoryName = "🔠 " + category[i].postCategoryName;
   }
+    //category
+    for (let i = 0; i < postcategory.length;i++){
+      postcategory[i].children = [];
+      for (let j = 0; j<fullcategory.length;j++){
+        if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName )
+        {
+          postcategory[i].children.push(fullcategory[j].categoryName);
+        }
+      }
+    }
   try {
     res.render("home", {
       css: ["course", "rate"],
@@ -65,6 +77,8 @@ router.get("/", async (req, res) => {
       currentPage: page,
       perPage: perPage,
       category: category,
+      fullcategory: fullcategory,
+      postcategory: postcategory
     });
   } catch (err) {
     console.log(err);
@@ -72,6 +86,8 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/find", async (req, res) => {
+  const fullcategory = await guestModel.fullcategory();
+  const postcategory = await guestModel.postcategory();
   const category = await guestModel.category();
   //noi bat: top, moi: viet, giam gia
   const top = await guestModel.top();
@@ -89,7 +105,30 @@ router.get("/find", async (req, res) => {
       else if (req.query.sortOption === "2")  courses = await courseModel.all2();
       else if (req.query.sortOption === "3")  courses = await courseModel.all3();
       else courses = await courseModel.all();
-    } else {
+    }
+    //postcategory
+    else if (req.query.search === "IT" || req.query.search === "THPT" ||
+    req.query.search === "Nấu ăn" || req.query.search === "Tiếng Anh" ||
+    req.query.search === "Lập trình web" ||  req.query.search === "Lập trình thiết bị di động"
+    ||  req.query.search === "Nấu ăn căn bản"||  req.query.search === "Nấu ăn chuyên nghiệp"
+    ||  req.query.search === "Tiếng Anh Căn bản"||  req.query.search === "Tiếng Anh giao tiếp"
+    ||  req.query.search === "Toán" ||  req.query.search === "Lý" ||  req.query.search === "Hóa")
+    {
+      courses = await courseModel.relatedcatName(req.query.search);
+    } 
+    else if (req.query.search === "THPT" )
+    {
+
+    } 
+    else if (req.query.search === "Nấu ăn" )
+    {
+
+    } 
+    else if (req.query.search === "Tiếng Anh" )
+    {
+
+    } 
+    else {
        
       //Sort
       if (req.query.sortOption === "1")
@@ -149,6 +188,16 @@ router.get("/find", async (req, res) => {
       perPage,
       courses.length
     );
+     //category
+     for (let i = 0; i < postcategory.length;i++){
+      postcategory[i].children = [];
+      for (let j = 0; j<fullcategory.length;j++){
+        if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName )
+        {
+          postcategory[i].children.push(fullcategory[j].categoryName);
+        }
+      }
+    }
     res.render("home", {
       css: ["course", "rate"],
       js: ["course"],
@@ -158,6 +207,8 @@ router.get("/find", async (req, res) => {
       currentPage: page,
       perPage: perPage,
       category: category,
+      fullcategory: fullcategory,
+      postcategory: postcategory
     });
   } catch (err) {
     console.log(err);
@@ -166,6 +217,8 @@ router.get("/find", async (req, res) => {
 
 router.get("/detail", async (req, res) => {
   var studentID = 1;
+  const fullcategory = await guestModel.fullcategory();
+  const postcategory = await guestModel.postcategory();
   const category = await guestModel.category();
   for (let i = 0; i < category.length; i++) {
     if (category[i].postCategoryID === 1)
@@ -217,12 +270,24 @@ router.get("/detail", async (req, res) => {
   if (registered.length > 0) {
     checkRegistered = true;
   }
+   //category
+   for (let i = 0; i < postcategory.length;i++){
+    postcategory[i].children = [];
+    for (let j = 0; j<fullcategory.length;j++){
+      if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName )
+      {
+        postcategory[i].children.push(fullcategory[j].categoryName);
+      }
+    }
+  }
   try {
     res.render("home", {
       css: ["course", "rate", "course-detail"],
       js: ["course"],
       contain: "course/course-detail",
       category: category,
+      fullcategory: fullcategory,
+      postcategory: postcategory,
       detail: detail,
       chapterInfo: chapterInfo,
       feedback: feedback,
