@@ -279,8 +279,11 @@ router.post('/get-video', auth.studentAuth, async (req, res, next) => {
         // get registeredcourse
         var regsiteredCourse = await registeredCourseModel.getByStudentIDCourseID(studentID, courseID);
         //update % compplete
-        if (lessonID > regsiteredCourse[0].curLesson) {
-            await registeredCourseModel.updateCurLesson(studentID, courseID, lessonID);
+        if (regsiteredCourse.length > 0) {
+            //update % compplete
+            if (lessonID > regsiteredCourse[0].curLesson) {
+                await registeredCourseModel.updateCurLesson(studentID, courseID, lessonID);
+            }
         }
         //get video path
         var lesson = await lessonModel.getLessonByID(lessonID);
