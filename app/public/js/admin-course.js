@@ -3,7 +3,7 @@ function getPrevPage(preve_value, perPage, categoryID, postCategoryID) {
     var search = url.searchParams.get("search");
     var categoryID = url.searchParams.get("categoryID");
     var postCategoryID = url.searchParams.get("postCategoryID");
-    if (!search && !categoryID && !postCategory){
+    if (!search && !categoryID && !postCategoryID){
         location.href=`/admin/course?page=${preve_value}&perPage=${perPage}`;
     }else if (!search){
         location.href = `/admin/course?page=${preve_value}&perPage=${perPage}&categoryID=${categoryID}&postCategoryID=${postCategoryID}`
@@ -17,7 +17,7 @@ function getNextPage(next_value,perPage) {
     var search = url.searchParams.get("search");
     var categoryID = url.searchParams.get("categoryID");
     var postCategoryID = url.searchParams.get("postCategoryID");
-    if (!search && !categoryID && !postCategory){
+    if (search==null && categoryID==null && postCategoryID==null){
         location.href=`/admin/course?page=${next_value}&perPage=${perPage}`;
     }else if (!search){
         location.href = `/admin/course?page=${next_value}&perPage=${perPage}&categoryID=${categoryID}&postCategoryID=${postCategoryID}`
