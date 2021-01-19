@@ -1,9 +1,8 @@
-function muaKhoaHoc(studentID,courseID) {
+function muaKhoaHoc(courseID) {
     $.ajax({
         url: '/course/buy',
         method: 'POST',
         data: {
-            studentID: studentID,
             courseID: courseID
         },
         success: function (result) {

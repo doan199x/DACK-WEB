@@ -175,7 +175,7 @@ router.get("/detail", async (req, res) => {
   //5 realed courses
   const related = await courseModel.related(detail[0].categoryID);
 
-  for (let i = 0;i<feedback.length;i++){
+  for (let i = 0; i < feedback.length; i++) {
     feedback[i].widthStar = (feedback[i].NoStars / 5) * 100;
     feedback[i].widthStar += "%";
   }
@@ -241,12 +241,10 @@ router.get("/buy", async (req, res, next) => {
 
 router.post("/buy", async (req, res, next) => {
   try {
-    studentID = req.body.studentID;
-    courseID = req.body.courseID;
+    var studentID = 1;
+    var courseID = req.body.courseID;
     // check is course registered by this user;
-    var registeredCourses = await courseModel.getRegisteredCourseByStudentID(
-      studentID
-    );
+    var registeredCourses = await courseModel.getRegisteredCourseByStudentID(studentID);
     checkRegisteredCourse = false;
     for (var i = 0; i < registeredCourses.length; i++) {
       if (registeredCourses[0].courseID == courseID) {
@@ -265,7 +263,12 @@ router.post("/buy", async (req, res, next) => {
       var students = await studentModel.getProfile(studentID);
       var checkBalance = students[0].balance < courses[0].price ? false : true;
       if (checkBalance == true) {
-        await courseModel.buy(studentID, courseID, Date.now());
+        // get min Lesson of course for displaying completed
+        //1. get first chapter of course
+        var chapters = await chapterModel.getChaptersByCourseID(courseID);
+        //2. get fist lesson of chapter
+        var lessons = await lessonModel.getLessonsByChapterID(chapters[0].chapterID);
+        await courseModel.buy(studentID, courseID, lessons[0].lessonID);
         var newBalance = students[0].balance - courses[0].price;
         await studentModel.updateBalance(studentID, newBalance);
         res.json({

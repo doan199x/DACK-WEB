@@ -6,6 +6,7 @@ const watchListModel = require('../model/watchList.js');
 const chapterModel = require('../model/chapter.js');
 const lessonModel = require('../model/lesson.js');
 const ratingModel = require('../model/rating.js');
+const registeredCourseModel = require('../model/registeredCourse.js');
 const url = require('url');
 const bcrypt = require('bcrypt')
 
@@ -127,15 +128,22 @@ router.get('/watch-list', async (req, res, next) => {
     }
 })
 
-router.get('/course-list', async (req, res) => {
+router.get('/course-list', async (req, res, next) => {
     try {
         const studentID = 1;
-        var registeredCourseID = await courseModel.getRegisteredCourseByStudentID(studentID);
+        var registeredCourses = await courseModel.getRegisteredCourseByStudentID(studentID);
+        for (var i = 0; i < registeredCourses.length; i++) {
+            // get lessons of course
+            var lessons = await lessonModel.getLessonsByCourseID(registeredCourses[i].courseID);
+            var percentComplete = (registeredCourses[i].curLesson - lessons[0].lessonID) / (lessons[lessons.length - 1].lessonID - lessons[0].lessonID)*100;
+            percentComplete = percentComplete.toFixed(2) + '%';
+            registeredCourses[i].percentComplete = percentComplete;
+        }
         res.render('render', {
             contain: 'student/course-list',
             title: 'Home',
             page: 'course-list',
-            courses: registeredCourseID,
+            courses: registeredCourses,
             js: 'profile'
         });
     } catch (err) {
@@ -199,6 +207,7 @@ router.get('/watch', async (req, res, next) => {
         var lessonIDMaxOutline = chaptersOulineContent[chaptersOulineContent.length - 1].lessonContent[chaptersOulineContent[chaptersOulineContent.length - 1].lessonContent.length - 1].lessonID;
         var lesson = await lessonModel.getLessonByID(lessonIDMinOutline);
         var lessonOutline = await lessonModel.getLessonByID(lessonIDMinOutline);
+
         if (check == false) {
             res.render('render', {
                 contain: 'student/watch',
@@ -241,7 +250,15 @@ router.get('/watch', async (req, res, next) => {
 
 router.post('/get-video', async (req, res, next) => {
     try {
+        var studentID = 1;
         var lessonID = req.body.lessonID;
+        var courseID = req.body.courseID;
+        // get registeredcourse
+        var regsiteredCourse = await registeredCourseModel.getByStudentIDCourseID(studentID, courseID);
+        //update % compplete
+        if (lessonID > regsiteredCourse[0].curLesson) {
+            await registeredCourseModel.updateCurLesson(studentID, courseID, lessonID);
+        }
         //get video path
         var lesson = await lessonModel.getLessonByID(lessonID);
         res.json({
@@ -288,11 +305,11 @@ router.get('/rate', async (req, res, next) => {
                     checkRated = true;
                     // if user rated, get their comment and NOStars
                     userRating = { NoStars: rates[i].NoStars, comment: rates[i].comment };
-                    widthUserStar = parseInt(userRating.NoStars)/5*100;
+                    widthUserStar = parseInt(userRating.NoStars) / 5 * 100;
                     userComment = userRating.comment;
                     break;
                 }
-            } 
+            }
             res.render('render', {
                 contain: 'student/rate',
                 title: 'Home',
@@ -304,8 +321,8 @@ router.get('/rate', async (req, res, next) => {
                 studentID: studentID,
                 checkRated: checkRated,
                 userRating: userRating,
-                widthUserStar : widthUserStar + '%',
-                userComment : userComment
+                widthUserStar: widthUserStar + '%',
+                userComment: userComment
             });
         }
 
@@ -325,11 +342,11 @@ router.post('/rate', async (req, res, next) => {
         // Change averageStar of course
         var rates = await ratingModel.getRatingByCourseID(courseID);
         sumOfStars = 0;
-        for (var i=0;i<rates.length;i++){
+        for (var i = 0; i < rates.length; i++) {
             sumOfStars += rates[i].NoStars;
         }
-        var averageStar = sumOfStars/rates.length;
-        await courseModel.updateAverageStar(courseID,averageStar);
+        var averageStar = sumOfStars / rates.length;
+        await courseModel.updateAverageStar(courseID, averageStar);
         res.json({
             ok: true,
         })
@@ -347,16 +364,16 @@ router.post('/change-password', async (req, res, next) => {
         const salt = bcrypt.genSaltSync(10);
         const newPasswordHash = bcrypt.hashSync(newPassword, salt);
         var student = await studentModel.getProfile(studentID);
-        var checkPassword = await bcrypt.compare(oldPassword,student[0].password);
+        var checkPassword = await bcrypt.compare(oldPassword, student[0].password);
         if (checkPassword == true) {
             studentModel.updatePassword(studentID, newPasswordHash);
             res.json({
-                status:0,
-                message:"đổi password thành công"
+                status: 0,
+                message: "đổi password thành công"
             })
-        }else{
+        } else {
             res.json({
-                status:1,
+                status: 1,
                 message: "password nhập vào không đúng"
             })
         }

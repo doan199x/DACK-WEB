@@ -145,7 +145,8 @@ create table Rating(
 create table RegisteredCourse(
 	studentID int not null,
     courseID int not null,
-    registerTime datetime,
+    registerTime datetime default now(),
+    curLesson int not null,
     primary key(studentId, courseID),
 	foreign key(studentID) references Student(studentID),
     foreign key(courseID) references Course(courseID)
@@ -312,40 +313,38 @@ insert into Rating (studentID,courseID,NoStars,Comment) values(3,4,4,'Tốt');
 insert into Rating (studentID,courseID,NoStars,Comment) values(4,1,3,'Tốt');
 insert into Rating (studentID,courseID,NoStars,Comment) values(4,2,2,'Tốt');
 
-insert into RegisteredCourse (studentID, courseID, registerTime) values(1,1,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(1,2,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(1,3,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(1,4,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(2,1,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(2,2,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(2,3,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(3,1,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(3,2,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(3,3,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(3,4,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,1,now());
+insert into RegisteredCourse (studentID, courseID, registerTime, curLesson) values(1,1,now(),1);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(1,2,now(),13);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(1,3,now(),19);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(1,4,now(),26);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(2,1,now(),1);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(2,2,now(),13);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(2,3,now(),19);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(3,1,now(),1);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(3,2,now(),13);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(3,3,now(),19);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(3,4,now(),26);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,1,now(),1);
 
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,5,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,6,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,7,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,8,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,9,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,10,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,11,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,12,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,13,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,14,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,15,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,16,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,17,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,18,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,19,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,20,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,21,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,22,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,23,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,24,now());
-insert into RegisteredCourse (studentID, courseID,registerTime) values(4,25,now());
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,5,now(),39);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,6,now(),47);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,7,now(),56);
+insert into RegisteredCourse (studentID, courseID,registerTime ,curLesson) values(4,8,now(),67);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,9,now(),76);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(4,10,now(),85);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(5,11,now(),93);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(5,12,now(),101);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(5,13,now(),108);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(5,14,now(),115);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(6,15,now(),125);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(6,16,now(),134);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(6,17,now(),144);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(7,18,now(),158);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(7,19,now(),166);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(7,20,now(),170);
+insert into RegisteredCourse (studentID, courseID,registerTime, curLesson) values(7,21,now(),174);
+insert into RegisteredCourse (studentID, courseID,registerTime ,curLesson) values(7,22,now(),178);
+insert into RegisteredCourse (studentID, courseID,registerTime ,curLesson) values(7,23,now(),186);
 
 insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(1,20,40000,'2021-01-01','2021-05-05','Giảm giá hè');
 insert into Sale (courseID,percentDiscount,postDiscountPrice,timeStart,timeEnd,description) values(2,20,40000,'2021-01-01','2021-05-05','Giảm giá hè');
