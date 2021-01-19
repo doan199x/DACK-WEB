@@ -8,7 +8,7 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <a href="/course/detail?courseID={{top.[0].id}}">
-                    <img class = "carousel__img" src="{{top.[0].img}}" alt="" width= "100%" height="400">
+                    <img class="carousel__img" src="{{top.[0].img}}" alt="" width="100%" height="400">
                 </a>
                 <div class="carousel-caption">
                     <h4> {{top.[0].courseName}}</h4>
@@ -18,7 +18,7 @@
             </div>
             <div class="carousel-item">
                 <a href="/course/detail?courseID={{top.[1].id}}">
-                    <img class = "carousel__img" src="{{top.[1].img}}" alt="" width="1000" height="400">
+                    <img class="carousel__img" src="{{top.[1].img}}" alt="" width="1000" height="400">
                 </a>
                 <div class="carousel-caption">
                     <h4> {{top.[1].courseName}}</h4>
@@ -28,7 +28,7 @@
             </div>
             <div class="carousel-item">
                 <a href="/course/detail?courseID={{top.[2].id}}">
-                    <img  class = "carousel__img" src="{{top.[2].img}}" alt="" width="1000" height="400">
+                    <img class="carousel__img" src="{{top.[2].img}}" alt="" width="1000" height="400">
                 </a>
                 <div class="carousel-caption">
                     <h4> {{top.[2].courseName}}</h4>
@@ -51,24 +51,24 @@
     <!-- Hot category -->
     <div class="newest">
         <h3 class="title">🔥 Lĩnh vực được đăng ký nhiều nhất trong tuần 🔥</h3>
-            <div class="newest">
-                {{#each hot}}
-                <div class="bar">
-                    <div class="categoryName">
-                        <a href="/course/find?search={{this.postCategoryName}}">
-                            {{this.postCategoryName}} -
-                        </a>
-                        <a href="/course/find?search={{this.categoryName}}">
-                            {{this.categoryName}}
-                        </a>
-                    </div>
-
-                    <div class="category"
-                        style=" width: {{this.widthChart}}; background-color: {{this.chartColor}}; height: 3rem">
-                    </div>
+        <div class="newest">
+            {{#each hot}}
+            <div class="bar">
+                <div class="categoryName">
+                    <a href="/course/find?search={{this.postCategoryName}}">
+                        {{this.postCategoryName}} -
+                    </a>
+                    <a href="/course/find?search={{this.categoryName}}">
+                        {{this.categoryName}}
+                    </a>
                 </div>
-                {{/each}}
+
+                <div class="category"
+                    style=" width: {{this.widthChart}}; background-color: {{this.chartColor}}; height: 3rem">
+                </div>
             </div>
+            {{/each}}
+        </div>
     </div>
     <div class="intro">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
         Cupiditate quae numquam quaerat fuga officiis veritatis delectus quia reiciendis neque.
@@ -102,10 +102,14 @@
                         <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
                     </div>
                     <div>
-                        <small class="card-title">Giá: {{this.price}}</small>
+                        <h5 style="display:inline">Giá:</h5>
+                        <h5 style="display:inline; {{#if this.saleprice}} text-decoration: line-through {{/if}} ">
+                            ₫{{#money this.price}}{{/money}}</h5>
+                        <h3 style="display:inline; font-weight:bold; color:#D0011B">₫{{#money this.saleprice}}{{/money}}
+                        </h3>
                     </div>
                     <div>
-                        <small class="card-title">Giảm giá: {{this.percent}}</small>
+                        <h5 style=" text-align:center; background-color:#ff6f60;color:white">{{this.percent}}% GIẢM</h5>
                     </div>
                     <div>
                         <small class="card-title">Lượt xem: {{this.views}}</small>
@@ -150,24 +154,16 @@
                     <div>
                         <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
                     </div>
-                     {{#if this.percent}}
-                    <div>
-                        <h5 class="card-title" style="text-decoration: line-through;">Giá gốc: {{this.price}}</h5>
-                    </div>
-                    {{else}}
-                     <div>
-                        <h5 class="card-title" >Giá gốc: {{this.price}}</h5>
-                    </div>
-                    {{/if}}
-
-                    {{#if this.percent}}
-                    <div>
-                        <h5 class="card-title">Giảm giá: {{this.percent}} %</h5>
+                      <div>
+                        <h5 style="display:inline">Giá:</h5>
+                        <h5 style="display:inline; {{#if this.saleprice}} text-decoration: line-through {{/if}} ">
+                            ₫{{#money this.price}}{{/money}}</h5>
+                        <h3 style="display:inline; font-weight:bold; color:#D0011B">₫{{#money this.saleprice}}{{/money}}
+                        </h3>
                     </div>
                     <div>
-                        <h5 class="price">Giá khuyến mãi: {{this.saleprice}}</h5>
+                        <h5 style=" text-align:center; background-color:#ff6f60;color:white">{{this.percent}}% GIẢM</h5>
                     </div>
-                    {{/if}}
                     <div>
                         <small class="card-title">Lượt xem: {{this.views}}</small>
                     </div>

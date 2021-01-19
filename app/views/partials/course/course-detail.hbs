@@ -118,10 +118,11 @@
     </div>
 </div>
 <div class="cards">
-    <h3 class="title"> 5 khóa học cùng lĩnh nổi bật nhất </h3>
+     <h2 style=" text-decoration: none" class="related"> 5 khóa học cùng lĩnh nổi bật nhất </h2>
     <div class="card__detail">
         {{#each related}}
-        <div class="card card-custom" id="card{{this.id}}">
+        <div class="flex__card"  style = "margin-left:1%">
+            <div class="card card-custom" id="card{{this.id}}">
             <a href="/course/detail?courseID={{this.id}}">
                 <img height="200px" class="card-img-top" src="{{this.img}}" alt="Card image cap">
             </a>
@@ -145,11 +146,15 @@
                     <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
                 </div>
                 <div>
-                    <small class="card-title">Giá: {{this.price}}</small>
-                </div>
-                <div>
-                    <small class="card-title">Giảm giá: {{this.percent}}</small>
-                </div>
+                        <h5 style="display:inline">Giá:</h5>
+                        <h5 style="display:inline; {{#if this.saleprice}} text-decoration: line-through {{/if}} ">
+                            ₫{{#money this.price}}{{/money}}</h5>
+                        <h3 style="display:inline; font-weight:bold; color:#D0011B">₫{{#money this.saleprice}}{{/money}}
+                        </h3>
+                    </div>
+                    <div>
+                        <h5 style=" text-align:center; background-color:#ff6f60;color:white">{{this.percent}}% GIẢM</h5>
+                    </div>
                 <div>
                     <small class="card-title">Lượt xem: {{this.views}}</small>
                 </div>
@@ -157,6 +162,7 @@
                     <small class="card-title">Số lượt đăng ký học: {{this.NoReStudent}}</small>
                 </div>
             </div>
+        </div>
         </div>
         {{/each}}
     </div>

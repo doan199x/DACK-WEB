@@ -1,5 +1,6 @@
 .container{
     padding-top: 10px;
+    align-items: center;
 }
 .card-custom{
     margin-bottom:20px; 
@@ -29,13 +30,11 @@
 padding-top: 50px;
 padding-bottom: 50px;
 text-align: center;
-font-weight: bold;
 }
 .divider{
 border-top: 1px solid #bbb;
 }
 .course{
-    padding-left: 10%;
    display: grid;
    grid-template-columns: auto auto auto;
 }
@@ -87,7 +86,8 @@ a:link{
 }
 .notify{
     position: absolute;
+    margin-left: 22%;
     font-weight: bold;
     text-align: center;
-    padding-left: 20%;
+    color: #01579b;
 }
