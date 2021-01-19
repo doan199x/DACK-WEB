@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
         js: ["login"],
         contain: "guest/login/login",
         title: "Login",
-        result: 0
+        result: "failed"
       });
     }
     else if (checkTeacher == true) {

@@ -18,5 +18,8 @@
             <label class="form-check-label" for="exampleCheck1">Remember password</label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        {{#if result}}
+            <div style="color:red; text-align: center; width: 200px">Tên đăng nhập hoặc mật khẩu chưa đúng!</div>
+        {{/if}}
     </form>
 </div>
