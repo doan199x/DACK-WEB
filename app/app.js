@@ -65,6 +65,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use((req, res, next) => {
     res.locals.isLoggedIn = req.session.user ? true : false;
     res.locals.sesEmail = req.session.user ? req.session.user.email : '';
+    res.locals.role = req.session.user ? req.session.user.role : '';
     next();
 })
 
