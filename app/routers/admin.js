@@ -10,7 +10,7 @@ const teacherModel = require('../model/teacher.js');
 const auth = require('../middleware/auth.mdw');
 const helper = require('../helper/pagination');
 
-router.get('/', async (req, res, next) => {
+router.get('/',auth.adminAuth, async (req, res, next) => {
     try {
         res.render('render', {
             contain: 'admin/index',
@@ -24,10 +24,8 @@ router.get('/', async (req, res, next) => {
 })
 
 
-router.get('/category', async (req, res, next) => {
+router.get('/category',auth.adminAuth, async (req, res, next) => {
     try {
-        // adminID = 1;
-        var adminId = 1;
         var postCategories = await postCategoryModel.getAll();
         for (var i = 0; i < postCategories.length; i++) {
             var categories = await categoryModel.getByPostCategoryID(postCategories[i].postCategoryID);
@@ -45,7 +43,7 @@ router.get('/category', async (req, res, next) => {
     }
 })
 
-router.post('/category-create', async (req, res, next) => {
+router.post('/category-create',auth.adminAuth, async (req, res, next) => {
     try {
         var categoryName = req.body.categoryName;
         var postCategoryID = req.body.postCategoryID
@@ -57,7 +55,7 @@ router.post('/category-create', async (req, res, next) => {
         next(err);
     }
 })
-router.post('/category-delete', async (req, res, next) => {
+router.post('/category-delete',auth.adminAuth, async (req, res, next) => {
     try {
         var categoryID = req.body.categoryID;
         // check do category has courses
@@ -79,7 +77,7 @@ router.post('/category-delete', async (req, res, next) => {
     }
 })
 
-router.post('/post-category-update', async (req, res, next) => {
+router.post('/post-category-update',auth.adminAuth, async (req, res, next) => {
     try {
         var postCategoryID = req.body.postCategoryID;
         var postCategoryName = req.body.postCategoryName;
@@ -92,7 +90,7 @@ router.post('/post-category-update', async (req, res, next) => {
     }
 })
 
-router.post('/category-update', async (req, res, next) => {
+router.post('/category-update',auth.adminAuth, async (req, res, next) => {
     try {
         var categoryID = req.body.categoryID;
         var categoryName = req.body.categoryName;
@@ -105,7 +103,7 @@ router.post('/category-update', async (req, res, next) => {
     }
 })
 
-router.post('/post-category-delete', async (req, res, next) => {
+router.post('/post-category-delete',auth.adminAuth, async (req, res, next) => {
     try {
         var postCategoryID = req.body.postCategoryID;
         // find category by post-category
@@ -136,7 +134,7 @@ router.post('/post-category-delete', async (req, res, next) => {
     }
 })
 
-router.post('/post-category-create', async (req, res, next) => {
+router.post('/post-category-create',auth.adminAuth, async (req, res, next) => {
     try {
         var postCategoryName = req.body.postCategoryName;
         await postCategoryModel.create(postCategoryName);
@@ -148,7 +146,7 @@ router.post('/post-category-create', async (req, res, next) => {
     }
 })
 
-router.get('/course', async (req, res, next) => {
+router.get('/course',auth.adminAuth, async (req, res, next) => {
     try {
         var courses = [];
         if ((req.query.page == null) || (req.query.page.trim() == '')) {
@@ -225,7 +223,7 @@ router.get('/course', async (req, res, next) => {
     }
 })
 
-router.post('/ban-course', async (req, res, next) => {
+router.post('/ban-course',auth.adminAuth, async (req, res, next) => {
     try {
         courseID = req.body.courseID;
         await courseModel.ban(courseID);
@@ -238,7 +236,7 @@ router.post('/ban-course', async (req, res, next) => {
     }
 })
 
-router.post('/unban-course', async (req, res, next) => {
+router.post('/unban-course',auth.adminAuth, async (req, res, next) => {
     try {
         courseID = req.body.courseID;
         await courseModel.unban(courseID);
@@ -251,7 +249,7 @@ router.post('/unban-course', async (req, res, next) => {
     }
 })
 
-router.get('/student', async (req, res, next) => {
+router.get('/student',auth.adminAuth, async (req, res, next) => {
     try {
         var students;
         if ((req.query.page == null) || (req.query.page.trim() == '')) {
@@ -284,7 +282,7 @@ router.get('/student', async (req, res, next) => {
     }
 })
 
-router.post('/delete-student', async (req, res, next) => {
+router.post('/delete-student',auth.adminAuth, async (req, res, next) => {
     try {
         // var studentID = req.body.studentID;
         // await studentModel.delete(studentID);
@@ -297,7 +295,7 @@ router.post('/delete-student', async (req, res, next) => {
     }
 })
 
-router.get('/teacher', async (req, res, next) => {
+router.get('/teacher',auth.adminAuth, async (req, res, next) => {
     try {
         var teachers;
         if ((req.query.page == null) || (req.query.page.trim() == '')) {
@@ -329,7 +327,7 @@ router.get('/teacher', async (req, res, next) => {
     }
 })
 
-router.post('/add-teacher', async (req, res, next) => {
+router.post('/add-teacher',auth.adminAuth, async (req, res, next) => {
     try {
         var name = req.body.tenGiaoVien;
         var email = req.body.emailGiaoVien;
@@ -373,7 +371,7 @@ router.post('/add-teacher', async (req, res, next) => {
     }
 })
 
-router.post('/ban-teacher', async (req, res, next) => {
+router.post('/ban-teacher',auth.adminAuth, async (req, res, next) => {
     try {
         var teacherID = req.body.teacherID;
         await teacherModel.ban(teacherID);
@@ -386,7 +384,7 @@ router.post('/ban-teacher', async (req, res, next) => {
     }
 })
 
-router.post('/unban-teacher', async (req, res, next) => {
+router.post('/unban-teacher',auth.adminAuth, async (req, res, next) => {
     try {
         var teacherID = req.body.teacherID;
         await teacherModel.unban(teacherID);
@@ -399,7 +397,7 @@ router.post('/unban-teacher', async (req, res, next) => {
     }
 })
 
-router.post('/ban-student', async (req, res, next) => {
+router.post('/ban-student',auth.adminAuth, async (req, res, next) => {
     try {
         var studentID = req.body.studentID;
         await studentModel.ban(studentID);
@@ -412,7 +410,7 @@ router.post('/ban-student', async (req, res, next) => {
     }
 })
 
-router.post('/unban-student', async (req, res, next) => {
+router.post('/unban-student',auth.adminAuth, async (req, res, next) => {
     try {
         var studentID = req.body.studentID;
         await studentModel.unban(studentID);
@@ -425,7 +423,7 @@ router.post('/unban-student', async (req, res, next) => {
     }
 })
 
-router.post('/get-category', async (req, res, next) => {
+router.post('/get-category',auth.adminAuth, async (req, res, next) => {
     try {
         var postCategoryID = req.body.postCategoryID;
         categories = await categoryModel.getByPostCategoryID(postCategoryID);

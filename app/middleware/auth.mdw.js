@@ -1,28 +1,52 @@
 module.exports = {
   adminAuth: (req, res, next) => {
     if (!req.session.user || req.session.user.role != "admin") {
-      res.render("404", {
-        layout: "error",
+      res.render("render", {
+        contain:"response/404"
       });
-      next();
     }
+    next();
   },
   studentAuth: (req, res, next) => {
     if (!req.session.user || req.session.user.role != "student") {
-      res.render("404", {
-        layout: "error",
+      res.render("render", {
+        contain:"response/404"
       });
-      next();
     }
     next();
   },
   teacherAuth: (req, res, next) => {
     if (!req.session.user || req.session.user.role != "teacher") {
-      res.render("404", {
-        layout: "error",
+      res.render("render", {
+        contain:"response/404"
       });
-      next();
     }
     next();
   },
+  adminStudentAuth: (req, res, next) => {
+    if (!req.session.user) {
+      res.render("render", {
+        contain:"response/404"
+      });
+    } else if (req.session.user.role == "admin" || req.session.user.role == "student") {
+      next();
+    } else {
+      res.render("render", {
+        contain:"response/404"
+      });
+    }
+  },
+  adminTeacherAuth: (req, res, next) => {
+    if (!req.session.user) {
+      res.render("render", {
+        contain:"response/404"
+      });
+    } else if (req.session.user.role == "admin" || req.session.user.role == "teacher") {
+      next();
+    } else {
+      res.render("render", {
+        contain:"response/404"
+      });
+    }
+  }
 };

@@ -11,6 +11,7 @@ const postCategoryModel = require('../model/postCategory.js');
 const helper = require('../helper/pagination');
 const url = require('url');
 const bcrypt = require('bcrypt');
+const auth = require('../middleware/auth.mdw');
 
 //multer
 var multer = require('multer');
@@ -32,10 +33,10 @@ var upload = multer({
 })
 
 
-router.get('/', async (req, res, next) => {
+router.get('/',auth.teacherAuth, async (req, res, next) => {
     try {
         var courses;
-        const teacherID = 1;
+        var teacherID = req.session.user.teacherID;
         if ((req.query.page == null) || (req.query.page.trim() == '')) {
             req.query.page = 1;
         }
@@ -70,7 +71,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/add-course', async (req, res, next) => {
+router.get('/add-course',auth.teacherAuth, async (req, res, next) => {
     try {
         var postCategory = await postCategoryModel.getAll();
         res.render('render', {
@@ -85,7 +86,7 @@ router.get('/add-course', async (req, res, next) => {
     }
 })
 
-router.post('/get-category', async (req, res, next) => {
+router.post('/get-category',auth.teacherAuth, async (req, res, next) => {
     try {
         var postCategoryID = req.body.postCategoryID;
         var categories = await categoryModel.getByPostCategoryID(postCategoryID);
@@ -98,7 +99,7 @@ router.post('/get-category', async (req, res, next) => {
     }
 })
 
-router.post('/post-course', async (req, res, next) => {
+router.post('/post-course',auth.teacherAuth, async (req, res, next) => {
     try {
         var teacherID = 1;
         var price = req.body.coursePrice;
@@ -129,7 +130,7 @@ router.post('/post-course', async (req, res, next) => {
     }
 })
 
-router.get('/update-course-info', async (req, res, next) => {
+router.get('/update-course-info',auth.teacherAuth, async (req, res, next) => {
     try {
         var teacherID = 1;
         var courseID = req.query.courseID;
@@ -152,7 +153,7 @@ router.get('/update-course-info', async (req, res, next) => {
     }
 })
 
-router.get('/update-course-content', async (req, res, next) => {
+router.get('/update-course-content',auth.teacherAuth, async (req, res, next) => {
     try {
         var courseID = req.query.courseID;
         var courseInfo = await courseModel.getCourseByID(courseID);
@@ -176,7 +177,7 @@ router.get('/update-course-content', async (req, res, next) => {
     }
 })
 
-router.post('/delete-lesson', async (req, res, next) => {
+router.post('/delete-lesson',auth.teacherAuth, async (req, res, next) => {
     try {
         var lessonID = req.body.lessonID;
         await lessonModel.delete(lessonID);
@@ -189,7 +190,7 @@ router.post('/delete-lesson', async (req, res, next) => {
     }
 })
 
-router.post('/delete-chapter', async (req, res, next) => {
+router.post('/delete-chapter',auth.teacherAuth, async (req, res, next) => {
     try {
         var chapterID = req.body.chapterID;
         await chapterModel.delete(chapterID);
@@ -202,7 +203,7 @@ router.post('/delete-chapter', async (req, res, next) => {
     }
 })
 
-router.post('/add-lesson', upload.single('lessonVideo'), async (req, res, next) => {
+router.post('/add-lesson',auth.teacherAuth, upload.single('lessonVideo'), async (req, res, next) => {
     try {
         var courseID = req.body.inputModalCourseID;
         var lessonName = req.body.lessonName;
@@ -230,7 +231,7 @@ router.post('/add-lesson', upload.single('lessonVideo'), async (req, res, next) 
     }
 })
 
-router.post('/add-chapter', async (req, res, next) => {
+router.post('/add-chapter',auth.teacherAuth, async (req, res, next) => {
     try {
         var chapterName = req.body.chapterName;
         var courseID = req.body.courseID;
@@ -245,7 +246,7 @@ router.post('/add-chapter', async (req, res, next) => {
     }
 })
 
-router.post('/edit-chapter', async (req, res, next) => {
+router.post('/edit-chapter',auth.teacherAuth, async (req, res, next) => {
     try {
         var chapterName = req.body.chapterName;
         var isOutline = req.body.isOutline;
@@ -260,7 +261,7 @@ router.post('/edit-chapter', async (req, res, next) => {
     }
 })
 
-router.post('/edit-lesson', upload.single('lessonVideo'), async (req, res, next) => {
+router.post('/edit-lesson',auth.teacherAuth, upload.single('lessonVideo'), async (req, res, next) => {
     try {
         var lessonID = req.body.inputModalLessonID;
         var courseID = req.body.inputModalCourseID;
@@ -298,9 +299,17 @@ router.post('/edit-lesson', upload.single('lessonVideo'), async (req, res, next)
     }
 })
 
-router.get('/profile', async (req, res, next) => {
+router.get('/profile',auth.adminTeacherAuth, async (req, res, next) => {
     try {
-        var teacherID = 1;
+        if ((req.query.teacherID == null) || (req.query.teacherID.trim() == '')) {
+            req.query.teacherID = 1;
+        }
+        var teacherID
+        if (req.session.user.role == 'admin') {
+            teacherID = req.query.teacherID;
+        } else {
+            var teacherID = req.session.user.teacherID;
+        }
         var teacher = await teacherModel.getByID(teacherID);
         res.render('render', {
             contain: 'teacher/profile',
@@ -315,9 +324,17 @@ router.get('/profile', async (req, res, next) => {
 })
 
 
-router.get('/profile-edit', async (req, res, next) => {
+router.get('/profile-edit',auth.teacherAuth, async (req, res, next) => {
     try {
-        var teacherID = 1;
+        if ((req.query.teacherID == null) || (req.query.teacherID.trim() == '')) {
+            req.query.teacherID = 1;
+        }
+        var teacherID
+        if (req.session.user.role == 'admin') {
+            teacherID = req.query.teacherID;
+        } else {
+            var teacherID = req.session.user.teacherID;
+        }
         var teacher = await teacherModel.getByID(teacherID);
         res.render('render', {
             contain: 'teacher/profile-edit',
@@ -350,9 +367,17 @@ var upload = multer({
     }
 })
 
-router.post('/profile-edit', upload.single('fileAvatar'), async (req, res, next) => {
+router.post('/profile-edit',auth.teacherAuth, upload.single('fileAvatar'), async (req, res, next) => {
     try {
-        var teacherID = 1;
+        if ((req.query.teacherID == null) || (req.query.teacherID.trim() == '')) {
+            req.query.teacherID = 1;
+        }
+        var teacherID
+        if (req.session.user.role == 'admin') {
+            teacherID = req.query.teacherID;
+        } else {
+            var teacherID = req.session.user.teacherID;
+        }
         var teacher = await teacherModel.getByID(teacherID);
         var name = req.body.teacherName;
         var phone = req.body.teacherPhone;
@@ -396,9 +421,17 @@ router.post('/profile-edit', upload.single('fileAvatar'), async (req, res, next)
     }
 })
 
-router.post('/change-password', async (req, res, next) => {
+router.post('/change-password',auth.teacherAuth, async (req, res, next) => {
     try {
-        var teacherID = 11;
+        if ((req.query.teacherID == null) || (req.query.teacherID.trim() == '')) {
+            req.query.teacherID = 1;
+        }
+        var teacherID
+        if (req.session.user.role == 'admin') {
+            teacherID = req.query.teacherID;
+        } else {
+            var teacherID = req.session.user.teacherID;
+        }
         var oldPassword = req.body.oldPassword;
         var newPassword = req.body.newPassword;
         console.log(oldPassword);

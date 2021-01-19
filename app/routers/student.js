@@ -9,6 +9,7 @@ const ratingModel = require('../model/rating.js');
 const registeredCourseModel = require('../model/registeredCourse.js');
 const url = require('url');
 const bcrypt = require('bcrypt')
+const auth = require('../middleware/auth.mdw');
 
 //multer
 var multer = require('multer');
@@ -29,10 +30,17 @@ var upload = multer({
     }
 })
 
-router.get('/profile', async (req, res, next) => {
+router.get('/profile', auth.adminStudentAuth, async (req, res, next) => {
     try {
-        // studentID = 1;
-        const studentID = 1;
+        if ((req.query.studentID == null) || (req.query.studentID.trim() == '')) {
+            req.query.studentID = 1;
+        }
+        var studentID
+        if (req.session.user.role == 'admin') {
+            studentID = req.query.studentID;
+        } else {
+            var studentID = req.session.user.studentID;
+        }
         var studentProfile = await studentModel.getProfile(studentID);
         res.render('render', {
             contain: 'student/profile',
@@ -47,10 +55,17 @@ router.get('/profile', async (req, res, next) => {
     }
 })
 
-router.get('/profile-edit', async (req, res, next) => {
+router.get('/profile-edit', auth.adminStudentAuth, async (req, res, next) => {
     try {
-        // studentID = 1;
-        var studentID = req.query.studentID;
+        if ((req.query.studentID == null) || (req.query.studentID.trim() == '')) {
+            req.query.studentID = 1;
+        }
+        var studentID
+        if (req.session.user.role == 'admin') {
+            studentID = req.query.studentID;
+        } else {
+            var studentID = req.session.user.studentID;
+        }
         var studentProfile = await studentModel.getProfile(studentID);
         res.render('render', {
             contain: 'student/profile-edit',
@@ -64,9 +79,17 @@ router.get('/profile-edit', async (req, res, next) => {
     }
 })
 
-router.post('/profile-edit', upload.single('fileAvatar'), async (req, res, next) => {
+router.post('/profile-edit', auth.adminStudentAuth, upload.single('fileAvatar'), async (req, res, next) => {
     try {
-        var studentID = 1;
+        if ((req.query.studentID == null) || (req.query.studentID.trim() == '')) {
+            req.query.studentID = 1;
+        }
+        var studentID
+        if (req.session.user.role == 'admin') {
+            studentID = req.query.studentID;
+        } else {
+            var studentID = req.session.user.studentID;
+        }
         var student = await studentModel.getAvatarPath(studentID);
         var avatarPath;
         if (req.file) {
@@ -112,9 +135,9 @@ router.post('/profile-edit', upload.single('fileAvatar'), async (req, res, next)
     }
 })
 
-router.get('/watch-list', async (req, res, next) => {
+router.get('/watch-list', auth.studentAuth, async (req, res, next) => {
     try {
-        const studentID = 1;
+        var studentID = req.session.user.studentID;
         var watchList = await courseModel.getWatchListbyStudentID(studentID);
         res.render('render', {
             contain: 'student/watch-list',
@@ -128,14 +151,14 @@ router.get('/watch-list', async (req, res, next) => {
     }
 })
 
-router.get('/course-list', async (req, res, next) => {
+router.get('/course-list', auth.studentAuth, async (req, res, next) => {
     try {
-        const studentID = 1;
+        var studentID = req.session.user.studentID;
         var registeredCourses = await courseModel.getRegisteredCourseByStudentID(studentID);
         for (var i = 0; i < registeredCourses.length; i++) {
             // get lessons of course
             var lessons = await lessonModel.getLessonsByCourseID(registeredCourses[i].courseID);
-            var percentComplete = (registeredCourses[i].curLesson - lessons[0].lessonID) / (lessons[lessons.length - 1].lessonID - lessons[0].lessonID)*100;
+            var percentComplete = (registeredCourses[i].curLesson - lessons[0].lessonID) / (lessons[lessons.length - 1].lessonID - lessons[0].lessonID) * 100;
             percentComplete = percentComplete.toFixed(2) + '%';
             registeredCourses[i].percentComplete = percentComplete;
         }
@@ -151,9 +174,9 @@ router.get('/course-list', async (req, res, next) => {
     }
 })
 
-router.post('/remove-watch-list', async (req, res, next) => {
+router.post('/remove-watch-list', auth.studentAuth, async (req, res, next) => {
     try {
-        const studentID = 1;
+        var studentID = req.session.user.studentID;
         await watchListModel.removeWatchList(studentID, req.body.courseID);
         res.json({
             result: 'success',
@@ -164,9 +187,9 @@ router.post('/remove-watch-list', async (req, res, next) => {
     }
 })
 
-router.get('/watch', async (req, res, next) => {
+router.get('/watch', auth.studentAuth, async (req, res, next) => {
     try {
-        const studentID = 1;
+        var studentID = req.session.user.studentID;
         var courseID = req.query.courseID;
 
         // check is course registred by studentid
@@ -248,9 +271,9 @@ router.get('/watch', async (req, res, next) => {
     }
 })
 
-router.post('/get-video', async (req, res, next) => {
+router.post('/get-video', auth.studentAuth, async (req, res, next) => {
     try {
-        var studentID = 1;
+        var studentID = req.session.user.studentID;
         var lessonID = req.body.lessonID;
         var courseID = req.body.courseID;
         // get registeredcourse
@@ -272,10 +295,10 @@ router.post('/get-video', async (req, res, next) => {
     }
 })
 
-router.get('/rate', async (req, res, next) => {
+router.get('/rate', auth.studentAuth, async (req, res, next) => {
     try {
         var courseID = req.query.courseID;
-        var studentID = 1;
+        var studentID = req.session.user.studentID;
         // check registered course by student
         var courses = await courseModel.getRegisteredCourseByStudentID(studentID);
         var checkRegistered = false;
@@ -331,10 +354,10 @@ router.get('/rate', async (req, res, next) => {
     }
 })
 
-router.post('/rate', async (req, res, next) => {
+router.post('/rate', auth.studentAuth, async (req, res, next) => {
     try {
         var comment = req.body.comment;
-        var studentID = req.body.studentID;
+        var studentID = req.session.user.studentID;
         var courseID = req.body.courseID;
         var NoStars = req.body.NoStars;
         // Add rating
@@ -356,9 +379,9 @@ router.post('/rate', async (req, res, next) => {
     }
 })
 
-router.post('/change-password', async (req, res, next) => {
+router.post('/change-password', auth.studentAuth, async (req, res, next) => {
     try {
-        var studentID = 1;
+        var studentID = req.session.user.studentID;
         var oldPassword = req.body.oldPassword;
         var newPassword = req.body.newPassword;
         const salt = bcrypt.genSaltSync(10);
