@@ -116,18 +116,6 @@ router.get("/find", async (req, res) => {
     {
       courses = await courseModel.relatedcatName(req.query.search);
     } 
-    else if (req.query.search === "THPT" )
-    {
-
-    } 
-    else if (req.query.search === "Nấu ăn" )
-    {
-
-    } 
-    else if (req.query.search === "Tiếng Anh" )
-    {
-
-    } 
     else {
        
       //Sort
@@ -148,8 +136,7 @@ router.get("/find", async (req, res) => {
         courses = await courseModel.fulltext(req.query.search);
       }
     }
-    
- 
+    console.log(courses);
     // add width star
     for (let i = 0; i < courses.length; i++) {
       for (let i2 = 0; i2 < top.length; i2++) {
@@ -239,6 +226,7 @@ router.get("/detail", async (req, res) => {
       chapterInfo[i].chapterID
     );
   }
+
   // add width star
   detail[0].widthStar = (detail[0].stars / 5) * 100;
   detail[0].widthStar += "%";
@@ -250,6 +238,16 @@ router.get("/detail", async (req, res) => {
   var feedback = await courseModel.feedback(req.query.courseID);
   //5 realed courses
   var related = await courseModel.related(detail[0].categoryID);
+for (var i = 0; i < related.length; i++) {
+  related[i].widthStar = (related[i].stars / 5) * 100;
+  related[i].widthStar += "%";
+  if (related[i].percent)
+  related[i].saleprice = related[i].price - (related[i].price * related[i].percent) / 100;
+  if (related[i].percent) {
+    related[i].saleprice = related[i].price - (related[i].price * related[i].percent) / 100;
+    related[i].saleColor = "#66bb6a";
+  }
+}
 
   for (let i = 0; i < feedback.length; i++) {
     feedback[i].widthStar = (feedback[i].NoStars / 5) * 100;
