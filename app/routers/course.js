@@ -9,6 +9,8 @@ const lessonModel = require("../model/lesson.js");
 const course = require("../model/course.js");
 
 router.get("/", async (req, res) => {
+  const fullcategory = await guestModel.fullcategory();
+  const postcategory = await guestModel.postcategory();
   const category = await guestModel.category();
   const top = await guestModel.top();
   const newest = await guestModel.newest();
@@ -54,6 +56,16 @@ router.get("/", async (req, res) => {
     if (category[i].postCategoryID === 4)
       category[i].postCategoryName = "🔠 " + category[i].postCategoryName;
   }
+    //category
+    for (let i = 0; i < postcategory.length;i++){
+      postcategory[i].children = [];
+      for (let j = 0; j<fullcategory.length;j++){
+        if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName )
+        {
+          postcategory[i].children.push(fullcategory[j].categoryName);
+        }
+      }
+    }
   try {
     res.render("home", {
       css: ["course", "rate"],
@@ -64,6 +76,8 @@ router.get("/", async (req, res) => {
       currentPage: page,
       perPage: perPage,
       category: category,
+      fullcategory: fullcategory,
+      postcategory: postcategory
     });
   } catch (err) {
     console.log(err);
@@ -71,6 +85,8 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/find", async (req, res) => {
+  const fullcategory = await guestModel.fullcategory();
+  const postcategory = await guestModel.postcategory();
   const category = await guestModel.category();
   //noi bat: top, moi: viet, giam gia
   const top = await guestModel.top();
@@ -148,6 +164,16 @@ router.get("/find", async (req, res) => {
       perPage,
       courses.length
     );
+     //category
+     for (let i = 0; i < postcategory.length;i++){
+      postcategory[i].children = [];
+      for (let j = 0; j<fullcategory.length;j++){
+        if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName )
+        {
+          postcategory[i].children.push(fullcategory[j].categoryName);
+        }
+      }
+    }
     res.render("home", {
       css: ["course", "rate"],
       js: ["course"],
@@ -157,6 +183,8 @@ router.get("/find", async (req, res) => {
       currentPage: page,
       perPage: perPage,
       category: category,
+      fullcategory: fullcategory,
+      postcategory: postcategory
     });
   } catch (err) {
     console.log(err);
@@ -164,6 +192,8 @@ router.get("/find", async (req, res) => {
 });
 
 router.get("/detail", async (req, res) => {
+  const fullcategory = await guestModel.fullcategory();
+  const postcategory = await guestModel.postcategory();
   const category = await guestModel.category();
   for (let i = 0; i < category.length; i++) {
     if (category[i].postCategoryID === 1)
@@ -199,13 +229,24 @@ router.get("/detail", async (req, res) => {
     feedback[i].widthStar = (feedback[i].NoStars / 5) * 100;
     feedback[i].widthStar += "%";
   }
-
+   //category
+   for (let i = 0; i < postcategory.length;i++){
+    postcategory[i].children = [];
+    for (let j = 0; j<fullcategory.length;j++){
+      if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName )
+      {
+        postcategory[i].children.push(fullcategory[j].categoryName);
+      }
+    }
+  }
   try {
     res.render("home", {
       css: ["course", "rate", "course-detail"],
       js: ["course"],
       contain: "course/course-detail",
       category: category,
+      fullcategory: fullcategory,
+      postcategory: postcategory,
       detail: detail,
       chapterInfo: chapterInfo,
       feedback: feedback,

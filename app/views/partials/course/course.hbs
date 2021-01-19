@@ -25,8 +25,8 @@
                 </div>
             </div>
         </div>
-<div class="divider"></div>
         <div class="course">
+            {{#if courses}}
             {{#each courses}}
             <div class="card card-custom" id="card{{this.id}}">
                 <a href="/course/detail?courseID={{this.id}}">
@@ -70,11 +70,12 @@
                     </div>
                     {{#if this.percent}}
                     <div>
-                        <small class="card-title" style="text-decoration: line-through;">Giá gốc: {{this.price}}</small>
+                        <small class="card-title" style="text-decoration: line-through;">Giá gốc:
+                            {{this.price}}</small>
                     </div>
                     {{else}}
-                     <div>
-                        <small class="card-title" >Giá gốc: {{this.price}}</small>
+                    <div>
+                        <small class="card-title">Giá gốc: {{this.price}}</small>
                     </div>
                     {{/if}}
 
@@ -98,9 +99,11 @@
                 </div>
             </div>
             {{/each}}
+            {{else}}
+                <h5 class="notify">Không có khóa học hay danh mục, danh mục con nào như trên!<br>Thử lại với từ khóa
+            khác</h5>
+            {{/if}}
         </div>
-
-<div class="divider"></div>
         <div class="page__button row justify-content-center" style="margin-top:20px">
             <button class="btn btn-secondary" style="margin-right:2px"
                 onclick="getPrevPage({{pagingInfo.preve_value}},{{perPage}})"><i class="fa fa-angle-left"

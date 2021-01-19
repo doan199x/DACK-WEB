@@ -1,14 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient sticky-top">
   <div class="container">
-    <a href="/">
-      <img src="https://www.udemy.com/staticx/udemy/images/v6/logo-coral.svg" alt="Udemy" width="110" height="32">
+    <a class="logo__intro" href="/">
+      <img src="/img/logo/study.svg" alt="Online Course" width="70" height="50">
+      <div class="online__courses">ONLINE COURSE</div>
     </a>
-
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
+<!--  -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent" style="flex-grow:0; !important">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
@@ -16,13 +16,18 @@
             Categories
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            {{#each category}}
-            <div class="dropdown-item" >
-              <a href="/course/postcategory/{{this.postCategoryID}}">
-                {{this.postCategoryName}} -
-              </a>
-              <a href="/course/category/{{this.categoryID}}">
-                {{this.categoryName}}
+            {{#each postcategory}}
+            <div class="dropdown-item header-item">
+              <a href="/course/find?search={{this.postCategoryName}}">
+                <p class="post">📚 {{this.postCategoryName}}</p>  
+                <!--khong biet no work khong nua-->
+                <div class="header-item-list" >
+                  {{#each this.children}}
+                    <a class="header-item-child" href="/course/find?search={{this}}">
+                      📘 {{this}}
+                    </a>
+                {{/each}}
+                </div>
               </a>
             </div>
             {{/each}}

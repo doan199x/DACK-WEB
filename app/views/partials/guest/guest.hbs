@@ -55,10 +55,10 @@
                 {{#each hot}}
                 <div class="bar">
                     <div class="categoryName">
-                        <a href="/course/postcategory/{{this.postCategoryID}}">
+                        <a href="/course/find?search={{this.postCategoryName}}">
                             {{this.postCategoryName}} -
                         </a>
-                        <a href="/course/category/{{this.categoryID}}">
+                        <a href="/course/find?search={{this.categoryName}}">
                             {{this.categoryName}}
                         </a>
                     </div>

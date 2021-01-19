@@ -84,3 +84,9 @@ a:link{
     text-align: left;
     font-weight: bold;
 }
+.notify{
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    padding-left: 20%;
+}

@@ -64,11 +64,23 @@ module.exports = {
         const guest = await db.load(sql);
         return guest;
     },
-    category: async () => {
+    fullcategory: async () => {
         const sql = `SELECT *
         FROM Category
         INNER JOIN PostCategory
-        ON Category.postCategoryID = PostCategory.PostCategoryID;;`
+        ON Category.postCategoryID = PostCategory.PostCategoryID;`
+        const guest = await db.load(sql);
+        return guest;
+    },
+    postcategory: async () => {
+        const sql = `SELECT *
+        FROM PostCategory;`
+        const guest = await db.load(sql);
+        return guest;
+    },
+    category: async () => {
+        const sql = `SELECT *
+        FROM Category;`
         const guest = await db.load(sql);
         return guest;
     }

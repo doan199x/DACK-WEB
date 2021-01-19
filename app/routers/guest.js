@@ -10,6 +10,8 @@ router.get("/", async (req, res) => {
     const topview = await guestModel.topview();
     const newest = await guestModel.newest();
     const hot = await guestModel.hot();
+    const fullcategory = await guestModel.fullcategory();
+    const postcategory = await guestModel.postcategory();
     const category = await guestModel.category();
     //top
     for (let i = 0; i < top.length; i++) {
@@ -64,14 +66,6 @@ router.get("/", async (req, res) => {
       }
       if (hot[i].NoRates === null) hot[i].NoRates = 0;
       if (hot[i].views === null) hot[i].views = 0;
-      if (hot[i].postCategoryID === 1)
-        hot[i].postCategoryName = "💻 " + hot[i].postCategoryName;
-      if (hot[i].postCategoryID === 2)
-        hot[i].postCategoryName = "🍜 " + hot[i].postCategoryName;
-      if (hot[i].postCategoryID === 3)
-        hot[i].postCategoryName = "📓 " + hot[i].postCategoryName;
-      if (hot[i].postCategoryID === 4)
-        hot[i].postCategoryName = "🔠 " + hot[i].postCategoryName;
       if (i === 0) hot[i].chartColor = "#ff5722";
       else if (i === 1) hot[i].chartColor = "#ffeb3b";
       else if (i === 2) hot[i].chartColor = "#8bc34a";
@@ -79,18 +73,18 @@ router.get("/", async (req, res) => {
       else if (i === 4) hot[i].chartColor = "#c5cae9";
     }
     //category
-    for (var i = 0; i < category.length; i++) {
-      if (category[i].postCategoryID === 1)
-        category[i].postCategoryName = "💻 " + category[i].postCategoryName;
-      if (category[i].postCategoryID === 2)
-        category[i].postCategoryName = "🍜 " + category[i].postCategoryName;
-      if (category[i].postCategoryID === 3)
-        category[i].postCategoryName = "📓 " + category[i].postCategoryName;
-      if (category[i].postCategoryID === 4)
-        category[i].postCategoryName = "🔠 " + category[i].postCategoryName;
+    for (let i = 0; i < postcategory.length;i++){
+      postcategory[i].children = [];
+      for (let j = 0; j<fullcategory.length;j++){
+        if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName )
+        {
+          postcategory[i].children.push(fullcategory[j].categoryName);
+        }
+      }
     }
+    
     res.render("home", {
-      css: ["guest", "rate"],
+      css: ["guest", "rate", "header"],
       contain: "guest/guest",
       title: "Home",
       top: top,
@@ -98,6 +92,8 @@ router.get("/", async (req, res) => {
       newest: newest,
       hot: hot,
       category: category,
+      fullcategory: fullcategory,
+      postcategory: postcategory
     });
   } catch (err) {
     console.log(err);
