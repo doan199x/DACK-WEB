@@ -3,7 +3,8 @@
     <div class="row">
         <nav aria-label="breadcrumb" style="float:left;">
             <ol class="breadcrumb breadcrumb-custom">
-                <li><a href="/student/course-list" title="Khóa học của tôi"><i class="fas fa-book" style="color:black"></i></a></li>
+                <li><a href="/student/course-list" title="Khóa học của tôi"><i class="fas fa-book"
+                            style="color:black"></i></a></li>
                 <li>&nbsp; > &nbsp;{{courseName}}&nbsp;>&nbsp;</a></li>
                 <li><span id="lessonName">{{lessonName}}</span></li>
             </ol>
@@ -19,12 +20,12 @@
                 </video>
             </div>
             <div class="row justify-content-center" style="margin-top:10px">
-                <a href="#" class="btn btn-secondary" onclick="backwardLesson({{lessonIDMin}})"><i
-                        class="fas fa-step-backward"></i></a>
+                <button class="btn btn-secondary" onclick="backwardLesson({{lessonIDMin}})"><i
+                    class="fas fa-step-backward"></i></button>
                 <button type="button" id="js-rewind" class="btn btn-secondary" style="margin-left:3px"><i
                         class="fas fa-redo"></i></button>
-                <a href="#" class="btn btn-secondary" style="margin-left:3px" onclick="fowardLesson({{lessonIDMax}})"><i
-                        class="fas fa-step-forward"></i></a>
+                <button href="#" class="btn btn-secondary" style="margin-left:3px"
+                    onclick="fowardLesson({{lessonIDMax}})"><i class="fas fa-step-forward"></i></button>
             </div>
         </div>
         <div class="col-lg-4">

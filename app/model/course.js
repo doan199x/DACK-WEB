@@ -4,7 +4,7 @@ module.exports = {
   all: async () => {
     const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
         Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
-        Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
+        Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent, Course.ban as ban,
         Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
         COUNT(RegisteredCourse.studentID) as NoReStudent
         FROM ((((Category
@@ -95,7 +95,7 @@ module.exports = {
     return result;
   },
   fulltext: async (search) => {
-    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
+    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName,Course.ban as ban, Category.categoryName as categoryName,
         Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
         Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
         Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
@@ -112,7 +112,7 @@ module.exports = {
     return result;
   },
   fulltext2: async (search) => {
-    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
+    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Course.ban as ban, Category.categoryName as categoryName,
       Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
       Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
       Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
@@ -129,7 +129,7 @@ module.exports = {
     return result;
   },
   fulltext3: async (search) => {
-    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
+    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Course.ban as ban, Category.categoryName as categoryName,
       Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
       Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
       Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
@@ -146,7 +146,7 @@ module.exports = {
     return result;
   },
   fulltext1: async (search) => {
-    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
+    const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Course.ban as ban, Category.categoryName as categoryName,
       Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
       Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
       Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
@@ -246,7 +246,7 @@ module.exports = {
   },
   relatedcatName: async (categoryName) => {
     const sql = `SELECT DISTINCT Course.courseID as id, Course.name as courseName, Category.categoryName as categoryName,
-    Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates,
+    Teacher.name as teacherName, Course.averageStar as stars, Course.NoStudentRates as NoRates, Course.ban as ban,
     Course.imagePath as img, Sale.postDiscountPrice as price, Sale.percentDiscount as percent,
     Course.views as views, DATE_FORMAT(Course.created, "%d/%m/%Y") as created, Course.views as views, 
     COUNT(RegisteredCourse.studentID) as NoReStudent

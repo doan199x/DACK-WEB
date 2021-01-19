@@ -22,7 +22,15 @@ router.get("/", async (req, res) => {
   if (req.query.perPage == null || req.query.perPage.trim() == "") {
     req.query.perPage = 6;
   }
-  const all = await courseModel.all();
+  let all = await courseModel.all();
+  // an khoa hoc bi vo ieu
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].ban == 1) {
+      all.splice(i, 1);
+      i--
+    }
+  }
+  console.log(all);
   for (var i = 0; i < all.length; i++) {
     for (let i2 = 0; i2 < top.length; i2++) {
       if (all[i].id === top[i2].id) {
@@ -158,6 +166,14 @@ router.get("/find", async (req, res) => {
         category[i].postCategoryName = "📓 " + category[i].postCategoryName;
       if (category[i].postCategoryID === 4)
         category[i].postCategoryName = "🔠 " + category[i].postCategoryName;
+    }
+    // an khoa hoc bi unactive
+    console.log(courses);
+    for (var i = 0; i < courses.length; i++) {
+      if (courses[i].ban == 1) {
+        courses.splice(i, 1);
+        i--
+      }
     }
     const page = req.query.page;
     const perPage = req.query.perPage;
@@ -379,7 +395,7 @@ router.post("/buy", auth.studentAuth, async (req, res, next) => {
   }
 });
 
-router.post('/add-watchlist',auth.studentAuth, async (req, res, next) => {
+router.post('/add-watchlist', auth.studentAuth, async (req, res, next) => {
   try {
     var courseID = req.body.courseID;
     var studentID = req.session.user.studentID;
