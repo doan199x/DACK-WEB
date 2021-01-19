@@ -21,7 +21,7 @@
     "handlebars": "^4.7.6"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
