@@ -52,7 +52,7 @@ function themKhoaHoc(){
                     title: 'Thêm danh khóa học thành công',
                     confirmButtonColor: '#212121',
                 }).then(() => {
-                    location.href = "/admin/category"
+                    location.href = "/teacher"
                 })
             }
         }

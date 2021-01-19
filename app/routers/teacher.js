@@ -101,7 +101,7 @@ router.post('/get-category', auth.teacherAuth, async (req, res, next) => {
 
 router.post('/post-course', auth.teacherAuth, async (req, res, next) => {
     try {
-        var teacherID = 1;
+        var teacherID = req.session.user.teacherID;
         var price = req.body.coursePrice;
         var coursePrice = price.replace(',', '');
         var courseInfo = {
@@ -132,7 +132,7 @@ router.post('/post-course', auth.teacherAuth, async (req, res, next) => {
 
 router.get('/update-course-info', auth.teacherAuth, async (req, res, next) => {
     try {
-        var teacherID = 1;
+        var teacherID = req.session.user.teacherID;
         var courseID = req.query.courseID;
         var postCategory = await postCategoryModel.getAll();
         var courseInfo = await courseModel.getCourseByID(courseID);
@@ -140,7 +140,7 @@ router.get('/update-course-info', auth.teacherAuth, async (req, res, next) => {
         var postCategoryInfo = await postCategoryModel.getByID(categoryInfo[0].postCategoryID);
         res.render('render', {
             contain: 'teacher/update-course-info',
-            title: 'Đăng khóa học',
+            title: 'Update course',
             js: ['teacher-course', 'teacher', 'teacher-update-course-info', 'simpleFormatMoney'],
             css: ['admin-index'],
             postCategory: postCategory,
@@ -152,6 +152,38 @@ router.get('/update-course-info', auth.teacherAuth, async (req, res, next) => {
         next(err);
     }
 })
+
+router.post('/update-course', auth.teacherAuth, async (req, res, next) => {
+    try {
+        var teacherID = req.session.user.teacherID;
+        var price = req.body.coursePrice;
+        var coursePrice = price.replace(',', '');
+        var courseInfo = {
+            courseName: req.body.courseName,
+            courseSortDes: req.body.courseSortDes,
+            courseDes: req.body.courseDes,
+            coursePrice: coursePrice,
+            postCategory: req.body.postCategory,
+            category: req.body.category,
+            htmlCourseDes: req.body.htmlCourseDes,
+            htmlCourseSortDes: req.body.htmlCourseSortDes,
+            courseImagePath: '/img/course/default.jpg'
+        }
+        if (courseInfo.coursePrice < 0) {
+            res.json({
+                status: 1,
+            })
+        }
+        await courseModel.update(teacherID, courseInfo);
+        res.json({
+            status: 0,
+        })
+
+    } catch (err) {
+        next(err);
+    }
+})
+
 
 router.get('/update-course-content', auth.teacherAuth, async (req, res, next) => {
     try {
@@ -449,6 +481,10 @@ router.post('/change-password', auth.teacherAuth, async (req, res, next) => {
     } catch (err) {
         next(err);
     }
+})
+
+router.post('/update-course',async(req,res,next)=>{
+
 })
 
 module.exports = router;
