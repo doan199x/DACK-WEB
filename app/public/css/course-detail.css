@@ -25,10 +25,10 @@
 .detail__column {
   width: 85%;
 }
-h5 {
-  text-decoration: bold;
+.related{
+text-align: center;
+padding: 2%;
 }
-
 .course__button {
   background-color: black;
   margin-top: 1%;
@@ -37,9 +37,12 @@ h5 {
   color: white;
 }
 .card__detail {
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  column-gap: 0.7rem;
+  /* column-gap: 0.7rem;
+  /display: grid;
+  grid-template-columns: auto auto auto auto auto; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 .feedback {
   display: flex;

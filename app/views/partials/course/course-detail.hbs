@@ -118,10 +118,11 @@
     </div>
 </div>
 <div class="cards">
-    <h3 class="title"> 5 khóa học cùng lĩnh nổi bật nhất </h3>
+     <h2 style=" text-decoration: none" class="related"> 5 khóa học cùng lĩnh nổi bật nhất </h2>
     <div class="card__detail">
         {{#each related}}
-        <div class="card card-custom" id="card{{this.id}}">
+        <div class="flex__card"  style = "margin-left:7%">
+            <div class="card card-custom" id="card{{this.id}}">
             <a href="/course/detail?courseID={{this.id}}">
                 <img height="200px" class="card-img-top" src="{{this.img}}" alt="Card image cap">
             </a>
@@ -157,6 +158,7 @@
                     <small class="card-title">Số lượt đăng ký học: {{this.NoReStudent}}</small>
                 </div>
             </div>
+        </div>
         </div>
         {{/each}}
     </div>
