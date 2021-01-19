@@ -1,9 +1,32 @@
 function getPrevPage(preve_value, perPage) {
     location.href = `/course?page=${preve_value}&perPage=${perPage}`;
+    var url = new URL(window.location.href);
+    var sortOption = url.searchParams.get('sortOption');
+    var search = url.searchParams.get('search');
+    var pathname = url.pathname;
+    if (search == null){
+        search="";
+    }
+    if(sortOption == null){
+        location.href = `${pathname}?page=${preve_value}&perPage=${perPage}&search=${search}`;
+    }else{
+        location.href = `${pathname}?page=${preve_value}&perPage=${perPage}&search=${search}&sortOption=${sortOption}`;
+    }
 }
 
 function getNextPage(next_value, perPage) {
-    location.href = `/course?page=${next_value}&perPage=${perPage}`;
+    var url = new URL(window.location.href);
+    var sortOption = url.searchParams.get('sortOption');
+    var search = url.searchParams.get('search');
+    var pathname = url.pathname;
+    if (search == null){
+        search="";
+    }
+    if(sortOption == null){
+        location.href = `${pathname}?page=${next_value}&perPage=${perPage}&search=${search}`;
+    }else{
+        location.href = `${pathname}?page=${next_value}&perPage=${perPage}&search=${search}&sortOption=${sortOption}`;
+    }
 }
 
 function searchCourse(){

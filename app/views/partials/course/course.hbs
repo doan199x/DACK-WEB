@@ -1,7 +1,7 @@
 <div class="container">
     <!-- 10 most wacthes -->
     <div class="all">
-        <h3 class="title"> ️Danh sách khóa học hiện có</h3>
+        <h3 class="title"> ️🔖 Danh sách khóa học hiện có </h3>
         <div class="divider"></div>
         <div class="search__group">
             <div class="search-bar">
@@ -28,8 +28,8 @@
         <div class="course">
             {{#if courses}}
             {{#each courses}}
-          <div class="flex__card">
-                <div class="card card-custom" id="card{{this.id}}">
+          <div class="flex__card" style="padding-left: 15%;">
+                <div class="card card-custom" style = "height:600px" id="card{{this.id}}">
                 <a href="/course/detail?courseID={{this.id}}">
                     <img height="200px" class="card-img-top" src="{{this.img}}" alt="Card image cap">
                 </a>
@@ -38,21 +38,15 @@
                 </div>
                 <div class="highlight">
                     {{#if this.newColor}}
-                    <small class="new" style="background-color: {{this.newColor}}">
+                    <h5 class="new" style="background-color: {{this.newColor}}">
                         Mới
-                    </small>
+                    </h5>
                     {{/if}}
 
                     {{#if this.topColor}}
-                    <small class="top" style="background-color: {{this.topColor}}">
+                    <h5 class="top" style="background-color: {{this.topColor}}">
                         Nổi bật
-                    </small>
-                    {{/if}}
-
-                    {{#if this.saleColor}}
-                    <small class="sale" style="background-color: {{this.saleColor}}">
-                        Giảm giá
-                    </small>
+                    </h5>
                     {{/if}}
 
                 </div>
@@ -69,25 +63,16 @@
                             <div class="stars-inner" id="starWidth" style="width: {{this.widthStar}};"></div>
                         </div>
                     </div>
-                    {{#if this.percent}}
-                    <div>
-                        <small class="card-title" style="text-decoration: line-through;">Giá gốc:
-                            {{this.price}}</small>
-                    </div>
-                    {{else}}
-                    <div>
-                        <small class="card-title">Giá gốc: {{this.price}}</small>
-                    </div>
-                    {{/if}}
-
-                    {{#if this.percent}}
-                    <div>
-                        <small class="card-title">Giảm giá: {{this.percent}} %</small>
-                    </div>
-                    <div>
-                        <small class="price">Giá khuyến mãi: {{this.saleprice}}</small>
-                    </div>
-                    {{/if}}
+                   <div>
+                         <h5 style="display:inline">Giá:</h5>
+                        <h5 style="display:inline; {{#if this.saleprice}} text-decoration: line-through {{/if}} ">
+                            ₫{{#money this.price}}{{/money}}</h5>
+                        {{#if this.saleprice}}
+                        <h3 style="display:inline; font-weight:bold; color:#D0011B">₫{{#money this.saleprice}}{{/money}}
+                        </h3>
+                        <h5 style=" text-align:center; background-color:#ff6f60;color:white">{{this.percent}}% GIẢM</h5>
+                        {{/if}}
+                   </div>
                     <div>
                         <small class="card-title">Lượt xem: {{this.views}}</small>
                     </div>
@@ -95,7 +80,7 @@
                         <small class="card-title">Số lượt đăng ký học: {{this.NoReStudent}}</small>
                     </div>
                     <div>
-                        <small class="card-title">Thời gian mở khóa học: {{this.created}}</small>
+                        <small class="card-title">Thời gian bắt đầu: {{this.created}}</small>
                     </div>
                 </div>
             </div>

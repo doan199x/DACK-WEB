@@ -105,12 +105,13 @@
                         <h5 style="display:inline">Giá:</h5>
                         <h5 style="display:inline; {{#if this.saleprice}} text-decoration: line-through {{/if}} ">
                             ₫{{#money this.price}}{{/money}}</h5>
+                            {{#if this.saleprice}}
                         <h3 style="display:inline; font-weight:bold; color:#D0011B">₫{{#money this.saleprice}}{{/money}}
                         </h3>
-                    </div>
-                    <div>
                         <h5 style=" text-align:center; background-color:#ff6f60;color:white">{{this.percent}}% GIẢM</h5>
+                        {{/if}}
                     </div>
+                    
                     <div>
                         <small class="card-title">Lượt xem: {{this.views}}</small>
                     </div>
@@ -154,15 +155,15 @@
                     <div>
                         <small class="card-title">Số lượt đánh giá: {{this.NoRates}}</small>
                     </div>
-                      <div>
+                    <div>
                         <h5 style="display:inline">Giá:</h5>
                         <h5 style="display:inline; {{#if this.saleprice}} text-decoration: line-through {{/if}} ">
                             ₫{{#money this.price}}{{/money}}</h5>
+                        {{#if this.saleprice}}
                         <h3 style="display:inline; font-weight:bold; color:#D0011B">₫{{#money this.saleprice}}{{/money}}
                         </h3>
-                    </div>
-                    <div>
                         <h5 style=" text-align:center; background-color:#ff6f60;color:white">{{this.percent}}% GIẢM</h5>
+                        {{/if}}
                     </div>
                     <div>
                         <small class="card-title">Lượt xem: {{this.views}}</small>
@@ -171,7 +172,7 @@
                         <small class="card-title">Số lượt đăng ký học: {{this.NoReStudent}}</small>
                     </div>
                     <div>
-                        <small class="card-title">Thời gian mở khóa học: {{this.created}}</small>
+                        <small class="card-title">Thời gian bắt đầu: {{this.created}}</small>
                     </div>
                 </div>
             </div>
