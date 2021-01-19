@@ -2,7 +2,7 @@
     <div class="image">
         <img style=" height: 500px;" src="/img/form/form.svg" alt="">
     </div>
-     <form action="/login" method="POST" onsubmit="login(event)" name="login_form" class="form">
+    <form action="/login" method="POST" onsubmit="login(event)" name="login_form" class="form">
         <div class="form-group">
             <h5>LOG IN</h5>
             <label for="exampleInputEmail1">Email address</label>
@@ -18,8 +18,11 @@
             <label class="form-check-label" for="exampleCheck1">Remember password</label>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        {{#if result}}
-            <div style="color:red; text-align: center; width: 200px">Tên đăng nhập hoặc mật khẩu chưa đúng!</div>
-        {{/if}}
+        {{#equal result 'failed'}}
+        <div style="color:red; text-align: center; width: 200px">Tên đăng nhập hoặc mật khẩu chưa đúng!</div>
+        {{/equal}}
+        {{#equal result 'banned'}}
+        <div style="color:red; text-align: center; width: 200px">Tài khoản của bạn đã bị cấm!</div>
+        {{/equal}}
     </form>
 </div>

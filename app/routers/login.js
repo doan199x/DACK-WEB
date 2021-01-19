@@ -21,12 +21,21 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    // check ban student
     // check is teacher
     let checkTeacher = false;
-
     const teachers = await teacherModel.checkLogin(req.body.email, req.body.password);
     if (teachers.length > 0) {
-      console.log(teachers);
+      let checkBan = await teacherModel.findByEmail(req.body.email);
+      if (checkBan[0].ban == true) {
+        res.render("home", {
+          css: ["login"],
+          js: ["login"],
+          contain: "guest/login/login",
+          title: "Login",
+          result: "banned"
+        });
+      }
       if (bcrypt.compareSync(req.body.password, teachers[0].password)) checkTeacher = true;
     }
     // check is student
@@ -34,7 +43,17 @@ router.post("/", async (req, res) => {
 
     var students = await studentModel.checkLogin(req.body.email, req.body.password);
     if (students.length > 0) {
-      if (bcrypt.compareSync(req.body.password, students[0].password)) checkStudent = true;
+      let checkBan = await studentModel.findByEmail(req.body.email);
+      if (checkBan[0].ban == true) {
+        res.render("home", {
+          css: ["login"],
+          js: ["login"],
+          contain: "guest/login/login",
+          title: "Login",
+          result: "banned"
+        });
+        if (bcrypt.compareSync(req.body.password, students[0].password)) checkStudent = true;
+      }
     }
     // check is admin
     var checkAdmin = false;
@@ -71,8 +90,10 @@ router.post("/", async (req, res) => {
       req.session.user.role = 'admin';
       res.redirect('/admin');
     }
-  } catch (error) {
-    console.log(error);
+  }
+  catch (error) {
+    next(error);
   }
 });
+
 module.exports = router;
