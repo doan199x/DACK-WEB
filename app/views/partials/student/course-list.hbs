@@ -8,16 +8,16 @@
             <img class="card-img-top" height="230px" src="{{this.imagePath}}" style="border-bottom:1px solid black;"
                 alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{this.name}}</h5>
+                <h5 style="font-weight: bold;" class="card-title"><a style="color: black;" href="/course/detail?courseID={{courseID}}">{{this.name}}</a></h5>
                 <p class="card-text">{{this.sortDescription}}</p>
                 <b>Tiến độ học của bạn: {{percentComplete}}</b>
                 <br>
                 <p style="display:inline">Trạng thái khóa học:</p>
                 {{#equal status 'Chưa hoàn tất'}}
-                <button class="btn btn-danger" style="color:white; font-weight:bold;cursor:context-menu">Chưa hoàn tất</button>
+                <b style="background-color: #FF6F60;">Chưa hoàn tất</b>
                 {{/equal}}
                 {{#equal status 'Đã hoàn tất'}}
-                <button class="btn btn-success" style="color:white; font-weight:bold;cursor:context-menu">Đã hoàn tất</button>
+                <b style="background-color:chartreuse">Đã hoàn tất</b>
                 {{/equal}}
             </div>
             <div class="card-footer">
