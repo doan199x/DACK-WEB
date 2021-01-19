@@ -8,6 +8,7 @@ const chapterModel = require("../model/chapter.js");
 const lessonModel = require("../model/lesson.js");
 const teacherModel = require("../model/teacher");
 const registeredCourseModel = require("../model/registeredCourse");
+const auth = require('../middleware/auth.mdw');
 
 router.get("/", async (req, res) => {
   const fullcategory = await guestModel.fullcategory();
@@ -56,16 +57,15 @@ router.get("/", async (req, res) => {
     if (category[i].postCategoryID === 4)
       category[i].postCategoryName = "🔠 " + category[i].postCategoryName;
   }
-    //category
-    for (let i = 0; i < postcategory.length;i++){
-      postcategory[i].children = [];
-      for (let j = 0; j<fullcategory.length;j++){
-        if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName )
-        {
-          postcategory[i].children.push(fullcategory[j].categoryName);
-        }
+  //category
+  for (let i = 0; i < postcategory.length; i++) {
+    postcategory[i].children = [];
+    for (let j = 0; j < fullcategory.length; j++) {
+      if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName) {
+        postcategory[i].children.push(fullcategory[j].categoryName);
       }
     }
+  }
   try {
     res.render("home", {
       css: ["course", "rate"],
@@ -100,38 +100,33 @@ router.get("/find", async (req, res) => {
       req.query.perPage = 3;
     }
     if (req.query.search === null || (req.query.search.trim() === "")) {
-      if (req.query.sortOption === "1")  courses = await courseModel.all1();
-      else if (req.query.sortOption === "2")  courses = await courseModel.all2();
-      else if (req.query.sortOption === "3")  courses = await courseModel.all3();
+      if (req.query.sortOption === "1") courses = await courseModel.all1();
+      else if (req.query.sortOption === "2") courses = await courseModel.all2();
+      else if (req.query.sortOption === "3") courses = await courseModel.all3();
       else courses = await courseModel.all();
     }
     //postcategory
     else if (req.query.search === "IT" || req.query.search === "THPT" ||
-    req.query.search === "Nấu ăn" || req.query.search === "Tiếng Anh" ||
-    req.query.search === "Lập trình web" ||  req.query.search === "Lập trình thiết bị di động"
-    ||  req.query.search === "Nấu ăn căn bản"||  req.query.search === "Nấu ăn chuyên nghiệp"
-    ||  req.query.search === "Tiếng Anh Căn bản"||  req.query.search === "Tiếng Anh giao tiếp"
-    ||  req.query.search === "Toán" ||  req.query.search === "Lý" ||  req.query.search === "Hóa")
-    {
+      req.query.search === "Nấu ăn" || req.query.search === "Tiếng Anh" ||
+      req.query.search === "Lập trình web" || req.query.search === "Lập trình thiết bị di động"
+      || req.query.search === "Nấu ăn căn bản" || req.query.search === "Nấu ăn chuyên nghiệp"
+      || req.query.search === "Tiếng Anh Căn bản" || req.query.search === "Tiếng Anh giao tiếp"
+      || req.query.search === "Toán" || req.query.search === "Lý" || req.query.search === "Hóa") {
       courses = await courseModel.relatedcatName(req.query.search);
-    } 
+    }
     else {
-       
+
       //Sort
-      if (req.query.sortOption === "1")
-      {
-       courses = await courseModel.fulltext1(req.query.search);
-      } 
-      else if (req.query.sortOption === "2") 
-      {
+      if (req.query.sortOption === "1") {
+        courses = await courseModel.fulltext1(req.query.search);
+      }
+      else if (req.query.sortOption === "2") {
         courses = await courseModel.fulltext2(req.query.search);
       }
-      else if (req.query.sortOption === "3") 
-      {
+      else if (req.query.sortOption === "3") {
         courses = await courseModel.fulltext3(req.query.search);
       }
-      else 
-      {
+      else {
         courses = await courseModel.fulltext(req.query.search);
       }
     }
@@ -172,12 +167,11 @@ router.get("/find", async (req, res) => {
       perPage,
       courses.length
     );
-     //category
-     for (let i = 0; i < postcategory.length;i++){
+    //category
+    for (let i = 0; i < postcategory.length; i++) {
       postcategory[i].children = [];
-      for (let j = 0; j<fullcategory.length;j++){
-        if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName )
-        {
+      for (let j = 0; j < fullcategory.length; j++) {
+        if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName) {
           postcategory[i].children.push(fullcategory[j].categoryName);
         }
       }
@@ -235,12 +229,12 @@ router.get("/detail", async (req, res) => {
   var feedback = await courseModel.feedback(req.query.courseID);
   //5 realed courses
   var related = await courseModel.related(detail[0].categoryID);
-for (var i = 0; i < related.length; i++) {
-  related[i].widthStar = (related[i].stars / 5) * 100;
-  related[i].widthStar += "%";
-  if (related[i].percent && related[i].percent!= 0)
-  related[i].saleprice = related[i].price - (related[i].price * related[i].percent) / 100;
-}
+  for (var i = 0; i < related.length; i++) {
+    related[i].widthStar = (related[i].stars / 5) * 100;
+    related[i].widthStar += "%";
+    if (related[i].percent && related[i].percent != 0)
+      related[i].saleprice = related[i].price - (related[i].price * related[i].percent) / 100;
+  }
 
   for (let i = 0; i < feedback.length; i++) {
     feedback[i].widthStar = (feedback[i].NoStars / 5) * 100;
@@ -261,12 +255,11 @@ for (var i = 0; i < related.length; i++) {
   if (registered.length > 0) {
     checkRegistered = true;
   }
-   //category
-   for (let i = 0; i < postcategory.length;i++){
+  //category
+  for (let i = 0; i < postcategory.length; i++) {
     postcategory[i].children = [];
-    for (let j = 0; j<fullcategory.length;j++){
-      if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName )
-      {
+    for (let j = 0; j < fullcategory.length; j++) {
+      if (postcategory[i].postCategoryName === fullcategory[j].postCategoryName) {
         postcategory[i].children.push(fullcategory[j].categoryName);
       }
     }
@@ -337,9 +330,9 @@ router.get("/buy", async (req, res, next) => {
   }
 });
 
-router.post("/buy", async (req, res, next) => {
+router.post("/buy", auth.studentAuth, async (req, res, next) => {
   try {
-    var studentID = 1;
+    var studentID = req.session.user.studentID;
     var courseID = req.body.courseID;
     // check is course registered by this user;
     var registeredCourses = await courseModel.getRegisteredCourseByStudentID(studentID);
