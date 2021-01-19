@@ -28,7 +28,8 @@
         <div class="course">
             {{#if courses}}
             {{#each courses}}
-            <div class="card card-custom" id="card{{this.id}}">
+          <div class="flex__card">
+                <div class="card card-custom" id="card{{this.id}}">
                 <a href="/course/detail?courseID={{this.id}}">
                     <img height="200px" class="card-img-top" src="{{this.img}}" alt="Card image cap">
                 </a>
@@ -98,13 +99,16 @@
                     </div>
                 </div>
             </div>
+          </div>
             {{/each}}
             {{else}}
-                <h5 class="notify">Không có khóa học hay danh mục, danh mục con nào như trên!<br>Thử lại với từ khóa
-            khác</h5>
+                <i class="notify">Không có khóa học hay danh mục, danh mục con nào như trên!<br>Thử lại với từ khóa
+            khác</i>
             {{/if}}
         </div>
-        <div class="page__button row justify-content-center" style="margin-top:20px">
+        
+    </div>
+    <div class="page__button row justify-content-center" style="margin-top:20px">
             <button class="btn btn-secondary" style="margin-right:2px"
                 onclick="getPrevPage({{pagingInfo.preve_value}},{{perPage}})"><i class="fa fa-angle-left"
                     aria-hidden="true"></i></button>
@@ -113,6 +117,5 @@
                 onclick="getNextPage({{pagingInfo.next_value}},{{perPage}})"><i class="fa fa-angle-right"
                     aria-hidden="true"></i></button>
         </div>
-    </div>
 </div>
-</div>>
+</div>
