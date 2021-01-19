@@ -33,7 +33,7 @@ var upload = multer({
 })
 
 
-router.get('/',auth.teacherAuth, async (req, res, next) => {
+router.get('/', auth.teacherAuth, async (req, res, next) => {
     try {
         var courses;
         var teacherID = req.session.user.teacherID;
@@ -71,7 +71,7 @@ router.get('/',auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.get('/add-course',auth.teacherAuth, async (req, res, next) => {
+router.get('/add-course', auth.teacherAuth, async (req, res, next) => {
     try {
         var postCategory = await postCategoryModel.getAll();
         res.render('render', {
@@ -86,7 +86,7 @@ router.get('/add-course',auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.post('/get-category',auth.teacherAuth, async (req, res, next) => {
+router.post('/get-category', auth.teacherAuth, async (req, res, next) => {
     try {
         var postCategoryID = req.body.postCategoryID;
         var categories = await categoryModel.getByPostCategoryID(postCategoryID);
@@ -99,7 +99,7 @@ router.post('/get-category',auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.post('/post-course',auth.teacherAuth, async (req, res, next) => {
+router.post('/post-course', auth.teacherAuth, async (req, res, next) => {
     try {
         var teacherID = 1;
         var price = req.body.coursePrice;
@@ -130,7 +130,7 @@ router.post('/post-course',auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.get('/update-course-info',auth.teacherAuth, async (req, res, next) => {
+router.get('/update-course-info', auth.teacherAuth, async (req, res, next) => {
     try {
         var teacherID = 1;
         var courseID = req.query.courseID;
@@ -153,7 +153,7 @@ router.get('/update-course-info',auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.get('/update-course-content',auth.teacherAuth, async (req, res, next) => {
+router.get('/update-course-content', auth.teacherAuth, async (req, res, next) => {
     try {
         var courseID = req.query.courseID;
         var courseInfo = await courseModel.getCourseByID(courseID);
@@ -177,7 +177,7 @@ router.get('/update-course-content',auth.teacherAuth, async (req, res, next) => 
     }
 })
 
-router.post('/delete-lesson',auth.teacherAuth, async (req, res, next) => {
+router.post('/delete-lesson', auth.teacherAuth, async (req, res, next) => {
     try {
         var lessonID = req.body.lessonID;
         await lessonModel.delete(lessonID);
@@ -190,7 +190,7 @@ router.post('/delete-lesson',auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.post('/delete-chapter',auth.teacherAuth, async (req, res, next) => {
+router.post('/delete-chapter', auth.teacherAuth, async (req, res, next) => {
     try {
         var chapterID = req.body.chapterID;
         await chapterModel.delete(chapterID);
@@ -203,7 +203,7 @@ router.post('/delete-chapter',auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.post('/add-lesson',auth.teacherAuth, upload.single('lessonVideo'), async (req, res, next) => {
+router.post('/add-lesson', auth.teacherAuth, upload.single('lessonVideo'), async (req, res, next) => {
     try {
         var courseID = req.body.inputModalCourseID;
         var lessonName = req.body.lessonName;
@@ -231,7 +231,7 @@ router.post('/add-lesson',auth.teacherAuth, upload.single('lessonVideo'), async 
     }
 })
 
-router.post('/add-chapter',auth.teacherAuth, async (req, res, next) => {
+router.post('/add-chapter', auth.teacherAuth, async (req, res, next) => {
     try {
         var chapterName = req.body.chapterName;
         var courseID = req.body.courseID;
@@ -246,7 +246,7 @@ router.post('/add-chapter',auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.post('/edit-chapter',auth.teacherAuth, async (req, res, next) => {
+router.post('/edit-chapter', auth.teacherAuth, async (req, res, next) => {
     try {
         var chapterName = req.body.chapterName;
         var isOutline = req.body.isOutline;
@@ -261,7 +261,7 @@ router.post('/edit-chapter',auth.teacherAuth, async (req, res, next) => {
     }
 })
 
-router.post('/edit-lesson',auth.teacherAuth, upload.single('lessonVideo'), async (req, res, next) => {
+router.post('/edit-lesson', auth.teacherAuth, upload.single('lessonVideo'), async (req, res, next) => {
     try {
         var lessonID = req.body.inputModalLessonID;
         var courseID = req.body.inputModalCourseID;
@@ -299,7 +299,7 @@ router.post('/edit-lesson',auth.teacherAuth, upload.single('lessonVideo'), async
     }
 })
 
-router.get('/profile',auth.adminTeacherAuth, async (req, res, next) => {
+router.get('/profile', auth.adminTeacherAuth, async (req, res, next) => {
     try {
         if ((req.query.teacherID == null) || (req.query.teacherID.trim() == '')) {
             req.query.teacherID = 1;
@@ -324,7 +324,7 @@ router.get('/profile',auth.adminTeacherAuth, async (req, res, next) => {
 })
 
 
-router.get('/profile-edit',auth.teacherAuth, async (req, res, next) => {
+router.get('/profile-edit', auth.teacherAuth, async (req, res, next) => {
     try {
         if ((req.query.teacherID == null) || (req.query.teacherID.trim() == '')) {
             req.query.teacherID = 1;
@@ -367,7 +367,7 @@ var upload = multer({
     }
 })
 
-router.post('/profile-edit',auth.teacherAuth, upload.single('fileAvatar'), async (req, res, next) => {
+router.post('/profile-edit', auth.teacherAuth, upload.single('fileAvatar'), async (req, res, next) => {
     try {
         if ((req.query.teacherID == null) || (req.query.teacherID.trim() == '')) {
             req.query.teacherID = 1;
@@ -395,33 +395,27 @@ router.post('/profile-edit',auth.teacherAuth, upload.single('fileAvatar'), async
                     }
                 });
             }
-            await teacherModel.update(teacherID, name, phone, dateOfBirth, avatarPath, email);
-            teacher[0].avatarPath = avatarPath;
-            res.render('render', {
-                contain: 'teacher/profile',
-                title: 'Đăng khóa học',
-                js: ['teacher', 'teacher-profile'],
-                css: ['admin-index'],
-                teacher: teacher[0],
-                result: 'passed'
-            })
         } else {
-            res.render('render', {
-                contain: 'teacher/profile',
-                title: 'Đăng khóa học',
-                js: ['teacher', 'teacher-profile'],
-                css: ['admin-index'],
-                teacher: teacher[0],
-                result: 'failed'
-            })
+            avatarPath = teacher[0].avatarPath;
         }
-
+        await teacherModel.update(teacherID, name, phone, dateOfBirth, avatarPath, email);
+        res.redirect(url.format({
+            pathname: '/teacher/profile',
+            query: {
+                result: "passed"
+            }
+        }));
     } catch (err) {
-
+        res.redirect(url.format({
+            pathname: '/teacher/profile',
+            query: {
+                result: "failed"
+            }
+        }));
     }
 })
 
-router.post('/change-password',auth.teacherAuth, async (req, res, next) => {
+router.post('/change-password', auth.teacherAuth, async (req, res, next) => {
     try {
         if ((req.query.teacherID == null) || (req.query.teacherID.trim() == '')) {
             req.query.teacherID = 1;
@@ -439,16 +433,16 @@ router.post('/change-password',auth.teacherAuth, async (req, res, next) => {
         const salt = bcrypt.genSaltSync(10);
         const newPasswordHash = bcrypt.hashSync(newPassword, salt);
         var teacher = await teacherModel.getByID(teacherID);
-        var checkPassword = await bcrypt.compare(oldPassword,teacher[0].password);
+        var checkPassword = await bcrypt.compare(oldPassword, teacher[0].password);
         if (checkPassword == true) {
             teacherModel.updatePassword(teacherID, newPasswordHash);
             res.json({
-                status:0,
-                message:"đổi password thành công"
+                status: 0,
+                message: "đổi password thành công"
             })
-        }else{
+        } else {
             res.json({
-                status:1,
+                status: 1,
                 message: "password nhập vào không đúng"
             })
         }
